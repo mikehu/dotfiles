@@ -1,0 +1,19 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Mike Hu
+	email = mike@baseten.co
+[alias]
+        p = push
+        r = pull --rebase
+        st = status -sb
+        ll = log --oneline
+        last = log -1 HEAD --stat
+        a = add
+        c = commit
+	ca = commit --amend
+	co = checkout
+	b = checkout -b
+	bd = branch -D
+	bl = branch --list
+[help]
+	autocorrect = 20
