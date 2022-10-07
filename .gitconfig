@@ -1,7 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
 	name = Mike Hu
-	email = mike@baseten.co
+	email = m@mikehu.com
 [alias]
         p = push
         r = pull --rebase
