@@ -10,10 +10,10 @@
         last = log -1 HEAD --stat
         a = add
         c = commit
-	ca = commit --amend
-	co = checkout
-	b = checkout -b
-	bd = branch -D
-	bl = branch --list
+        ca = commit --amend
+        co = checkout
+        b = checkout -b
+        bd = branch -D
+        bl = branch --list
 [help]
-	autocorrect = 20
+        autocorrect = 20
