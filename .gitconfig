@@ -1,7 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
-	name = Mike Hu
-	email = m@mikehu.com
+        name = Mike Hu
+        email = m@mikehu.com
 [alias]
         p = push
         r = pull --rebase
@@ -17,3 +17,6 @@
         bl = branch --list
 [help]
         autocorrect = 20
+[init]
+        defaultBranch = main
+
