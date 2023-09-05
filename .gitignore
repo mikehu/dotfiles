@@ -1,0 +1,35 @@
+*
+
+!.gitignore
+!.gitconfig
+!.zshrc
+!.zprofile
+!.ssh/
+!.config/
+
+# SSH
+!.ssh/config
+
+# Kitty
+!.config/kitty
+!.config/kitty/*.conf
+!.config/kitty/*.icns
+
+# Nvim
+!.config/nvim
+!.config/nvim/*.vim
+!.config/nvim/**/*.lua
+
+# kube
+!.config/kube
+!.config/kube/config
+
+# thefuck
+!.config/thefuck
+!.config/thefuck/*.py
+
+# copilot
+!.config/github-copilot
+
+# flipper
+!.config/flipperdevices.com
