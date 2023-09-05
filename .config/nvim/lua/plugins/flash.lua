@@ -10,14 +10,13 @@ return {
 			},
 		},
 	},
-	keys = function()
-		local flash = require("flash")
-		return {
+	keys = {
+		{
 			{
 				"s",
 				mode = { "n", "x" },
 				function()
-					flash.jump()
+					require("flash").jump()
 				end,
 				desc = "Flash",
 			},
@@ -25,7 +24,7 @@ return {
 				"S",
 				mode = { "n", "x" },
 				function()
-					flash.treesitter()
+					require("flash").treesitter()
 				end,
 				desc = "Flash Treesitter",
 			},
@@ -53,6 +52,6 @@ return {
 			-- 	end,
 			-- 	desc = "Toggle Flash Search",
 			-- },
-		}
-	end,
+		},
+	},
 }
