@@ -57,7 +57,7 @@ local wk = require("which-key")
 
 local function close_buffer()
 	local bufnr = vim.fn.bufnr("%")
-	vim.cmd("silent! bn | bd " .. bufnr .. " | silent! bp")
+	vim.cmd("silent! bp | bd " .. bufnr .. " | silent! bn")
 end
 
 -- Buffer management
@@ -79,6 +79,11 @@ wk.register({
 }, { prefix = "<leader>" })
 
 -- Terminal
+keymap.set("n", "<m-esc>", cmd([[terminal]]))
+keymap.set("t", "<m-esc>", close_buffer)
+keymap.set("t", "<m-tab>", cmd([[bnext]]))
+keymap.set("t", "<m-s-tab>", cmd([[bprev]]))
+keymap.set("t", "<c-n>", [[<c-\><c-n>]])
 wk.register({
 	z = {
 		name = "Terminal (zsh)",

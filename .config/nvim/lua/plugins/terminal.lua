@@ -13,13 +13,6 @@ return {
 		config = function()
 			require("bufterm").setup()
 
-			-- Terminal mappings
-			vim.keymap.set("n", "<m-esc>", [[<cmd>terminal<cr>]])
-			vim.keymap.set("t", "<m-esc>", [[<cmd>:bd!<cr>]])
-			vim.keymap.set("t", "<m-tab>", [[<cmd>:bnext<cr>]])
-			vim.keymap.set("t", "<m-s-tab>", [[<cmd>:bprev<cr>]])
-			vim.keymap.set("t", "<c-n>", [[<c-\><c-n>]])
-
 			-- Lazygit Terminal
 			local Terminal = require("bufterm.terminal").Terminal
 			local ui = require("bufterm.ui")
