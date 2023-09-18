@@ -15,6 +15,7 @@ return {
 			telescope.load_extension("noice")
 			telescope.load_extension("media_files")
 			telescope.load_extension("persisted")
+			telescope.load_extension("git_worktree")
 
 			local actions = require("telescope.actions")
 			telescope.setup({
@@ -82,6 +83,7 @@ return {
 			local with_dropdown = themes.get_dropdown()
 			local file_browser = telescope.extensions.file_browser
 			local media_files = telescope.extensions.media_files
+			local git_worktree = telescope.extensions.git_worktree
 
 			-- Find files from project root with fallback
 			function vim.find_files_from_project_git_root()
@@ -133,9 +135,15 @@ return {
 					},
 					m = {
 						function()
-							media_files.media_files({ layout_strategy = "vertical", winblend = 20 })
+							media_files.media_files({ layout_strategy = "vertical" })
 						end,
 						"Media files",
+					},
+					w = {
+						function()
+							git_worktree.git_worktrees(with_dropdown)
+						end,
+						"Git worktree",
 					},
 					j = {
 						function()

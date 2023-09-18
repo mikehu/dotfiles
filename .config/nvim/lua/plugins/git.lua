@@ -27,8 +27,10 @@ return {
 	},
 	{
 		"ThePrimeagen/git-worktree.nvim",
-		opt = {
-			change_directory_command = "tcd",
-		},
+		config = function()
+			require("git-worktree").setup({
+				change_directory_command = "tcd",
+			})
+		end,
 	},
 }

@@ -175,32 +175,31 @@ return {
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ "j-hui/fidget.nvim", tag = "legacy", opts = {} },
 
-			-- Additional lua configuration, makes nvim stuff amazing!
-			-- 'folke/neodev.nvim',
-
 			-- LSP ui
 			{
 				"dnlhc/glance.nvim",
-				opt = {
-					border = {
-						enable = true,
-					},
-					hooks = {
-						before_open = function(results, open, jump, method)
-							local uri = vim.uri_from_bufnr(0)
-							if #results == 1 then
-								local target_uri = results[1].uri or results[1].targetUri
-								if target_uri == uri then
-									jump(results[1])
+				config = function()
+					require("glance").setup({
+						border = {
+							enable = true,
+						},
+						hooks = {
+							before_open = function(results, open, jump, method)
+								local uri = vim.uri_from_bufnr(0)
+								if #results == 1 then
+									local target_uri = results[1].uri or results[1].targetUri
+									if target_uri == uri then
+										jump(results[1])
+									else
+										open(results)
+									end
 								else
 									open(results)
 								end
-							else
-								open(results)
-							end
-						end,
-					},
-				},
+							end,
+						},
+					})
+				end,
 			},
 		},
 		config = function()
@@ -247,11 +246,11 @@ return {
 				end, "List project folders")
 
 				-- Create a command `:Format` local to the LSP buffer
-				vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-					vim.lsp.buf.format()
-				end, { desc = "Format current buffer with LSP" })
-				-- and a key map
-				nmap("<leader>F", "<cmd>Format<cr>", "Format buffer")
+				-- vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+				-- 	vim.lsp.buf.format()
+				-- end, { desc = "Format current buffer with LSP" })
+				-- -- and a key map
+				-- nmap("<leader>F", "<cmd>Format<cr>", "Format buffer")
 
 				-- Telescope integration
 				nmap(

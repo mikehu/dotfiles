@@ -4,6 +4,7 @@ return {
 	config = function()
 		require("hlchunk").setup({
 			chunk = {
+				notify = false,
 				style = {
 					vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Structure")), "fg", "gui"),
 					vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Error")), "fg", "gui"),

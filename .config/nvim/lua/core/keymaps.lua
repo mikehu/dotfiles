@@ -37,7 +37,7 @@ keymap.set("v", "<m-k>", [[:m-2<cr>gv=gv]], { desc = "Move block up" })
 
 keymap.set({ "n", "i" }, "<c-y>", "<esc>Vyp<cr>k", { desc = "Duplicate line" })
 keymap.set("n", "<c-j>", "i<cr><esc>", { desc = "Split line" })
-keymap.set("n", "c.", "viwo<esc>ct.", { desc = "Change up to <dot>" })
+keymap.set("n", "c.", "viWo<esc>ct.", { desc = "Change up to <dot>" })
 keymap.set("n", "g,", "A,<esc>", { desc = "End with comma" })
 
 keymap.set("n", "go", [[:e ]], { desc = "Open path" })
@@ -80,7 +80,7 @@ wk.register({
 
 -- Terminal
 keymap.set("n", "<m-esc>", cmd([[terminal]]))
-keymap.set("t", "<m-esc>", close_buffer)
+keymap.set("t", "<m-esc>", cmd([[bd!]]))
 keymap.set("t", "<m-tab>", cmd([[bnext]]))
 keymap.set("t", "<m-s-tab>", cmd([[bprev]]))
 keymap.set("t", "<c-n>", [[<c-\><c-n>]])
@@ -98,7 +98,8 @@ wk.register({
 	G = {
 		name = "Git",
 		p = { cmd([[Gitsigns preview_hunk]]), "Preview hunk" },
-		f = { cmd([[Telescope git_files theme=dropdown winblend=20]]), "Find files" },
+		f = { cmd([[Telescope git_files theme=dropdown]]), "Find files" },
+		w = { cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), "Git worktree" },
 	},
 }, { prefix = "<leader>" })
 
