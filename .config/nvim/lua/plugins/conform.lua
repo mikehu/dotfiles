@@ -1,12 +1,13 @@
 return {
 	"stevearc/conform.nvim",
+	event = { "BufReadPre", "BufNewFile" },
 	opts = {},
 	config = function()
 		local conform = require("conform")
 		conform.setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { { "prettierd", "prettier" } },
+				javascript = { "prettier" },
 				json = { "jq" },
 				yaml = { "yamlfmt" },
 			},

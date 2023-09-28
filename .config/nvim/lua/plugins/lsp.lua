@@ -2,10 +2,17 @@ return {
 	{
 		-- Autocompletion
 		"hrsh7th/nvim-cmp",
+		version = false,
 		event = "InsertEnter",
 		dependencies = {
 			-- Snippet Engine & its associated nvim-cmp source
-			"L3MON4D3/LuaSnip",
+			{
+				"L3MON4D3/LuaSnip",
+				opts = {
+					history = true,
+					delete_check_events = "TextChanged",
+				},
+			},
 			"saadparwaiz1/cmp_luasnip",
 
 			-- Adds LSP completion capabilities
@@ -17,6 +24,25 @@ return {
 			-- Some additional helpers
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+
+			-- neogen
+			{
+				"danymat/neogen",
+				event = "VeryLazy",
+				dependencies = {
+					"nvim-treesitter/nvim-treesitter",
+				},
+				version = "*",
+				config = function()
+					require("neogen").setup({
+						enabled = true,
+						input_after_comment = true,
+						snippet_engine = "luasnip",
+					})
+
+					vim.keymap.set("n", "gcn", [[<cmd>Neogen<cr>]], { desc = "Neogen" })
+				end,
+			},
 
 			-- Icons
 			"onsails/lspkind.nvim",
@@ -78,7 +104,13 @@ return {
 								fallback()
 							end
 						end,
-						c = cmp.mapping.close(),
+						c = function(fallback)
+							if cmp.visible() then
+								cmp.close()
+							else
+								fallback()
+							end
+						end,
 					}),
 					["<tab>"] = cmp.mapping(function(fallback)
 						local copilot_keys = vim.fn["copilot#Accept"]("")
@@ -161,6 +193,7 @@ return {
 	{
 		-- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
 			{
@@ -170,6 +203,9 @@ return {
 			{
 				"williamboman/mason-lspconfig.nvim",
 			},
+			{
+				"hrsh7th/cmp-nvim-lsp",
+			},
 
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -178,10 +214,14 @@ return {
 			-- LSP ui
 			{
 				"dnlhc/glance.nvim",
+				event = "LspAttach",
 				config = function()
 					require("glance").setup({
 						border = {
 							enable = true,
+						},
+						list = {
+							position = "left",
 						},
 						hooks = {
 							before_open = function(results, open, jump, method)

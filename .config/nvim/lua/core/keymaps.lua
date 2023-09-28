@@ -47,6 +47,8 @@ keymap.set("n", "<m-s-tab>", cmd([[bprev]]), { desc = "Cycle prev buffer" })
 keymap.set("n", "<leader>h", cmd([[nohl]]), { desc = "Remove highlights" })
 
 keymap.set("i", "<c-c>", "<esc>")
+keymap.set("i", "jk", "<esc>")
+keymap.set("i", "kj", "<esc>")
 keymap.set("i", "<m-h>", "<left>")
 keymap.set("i", "<m-j>", "<down>")
 keymap.set("i", "<m-k>", "<up>")
@@ -57,7 +59,7 @@ local wk = require("which-key")
 
 local function close_buffer()
 	local bufnr = vim.fn.bufnr("%")
-	vim.cmd("silent! bp | bd " .. bufnr .. " | silent! bn")
+	vim.cmd("silent! bn | bd " .. bufnr .. " | silent! bp")
 end
 
 -- Buffer management
