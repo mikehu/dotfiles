@@ -1,6 +1,6 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "UIEnter" },
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 		"meuter/lualine-so-fancy.nvim",

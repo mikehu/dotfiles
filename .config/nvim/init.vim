@@ -14,6 +14,8 @@ set autoindent
 set smarttab
 set backspace=indent,eol,start
 set title
+set titlestring=%t%(\ %M%)\ \[nvim\]
+set titlelen=36
 set number
 set nrformats-=octal
 set formatoptions+=j

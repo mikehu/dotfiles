@@ -7,13 +7,4 @@ return {
 		opts = {},
 	},
 	"tpope/vim-repeat",
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		event = "VeryLazy",
-		-- See `:help indent_blankline.txt`
-		opts = {
-			char = "┊",
-			show_trailing_blankline_indent = false,
-		},
-	},
 }

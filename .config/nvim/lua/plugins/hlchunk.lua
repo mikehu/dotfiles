@@ -11,7 +11,10 @@ return {
 				},
 			},
 			indent = {
-				enable = false,
+				chars = { "┊" },
+				style = {
+					{ fg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("IndentBlanklineChar")), "fg", "gui") },
+				},
 			},
 			line_num = {
 				use_treesitter = true,
