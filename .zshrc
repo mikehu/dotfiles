@@ -70,7 +70,6 @@ ZSH_THEME="dracula"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   zsh-autosuggestions
-  dotenv
   encode64
   git
   kubectl
