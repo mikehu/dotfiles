@@ -25,6 +25,10 @@
 !.config/nvim/lua
 !.config/nvim/lua/**
 
+# Neovide
+!.config/neovide
+!.config/neovide/*.icns
+
 # kube
 !.config/kube
 !.config/kube/config
