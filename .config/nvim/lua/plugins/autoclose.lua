@@ -1,5 +1,8 @@
 return {
 	"m4xshen/autoclose.nvim",
 	event = "InsertEnter",
-	config = true,
+	opts = {
+		disable_when_touch = true,
+		disable_command_mode = true,
+	},
 }
