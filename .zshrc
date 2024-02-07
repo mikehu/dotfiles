@@ -109,6 +109,9 @@ fi
 
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
 
+# ZMV
+autoload -U zmv
+
 # Pure Prompt
 autoload -U promptinit; promptinit
 prompt pure
