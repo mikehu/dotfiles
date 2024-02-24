@@ -81,17 +81,20 @@ return {
 					["<cr>"] = cmp.mapping({
 						i = function(fallback)
 							if cmp.visible() then
-								if cmp.get_selected_entry() == nil and #cmp.get_entries() >= 1 then
+								local entry = cmp.get_selected_entry()
+								if entry == nil and #cmp.get_entries() >= 1 then
 									cmp.select_next_item()
 								end
-								if cmp.get_selected_entry() ~= nil or cmp.get_active_entry() then
-									cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-								else
-									fallback()
+								if entry ~= nil or cmp.get_active_entry() then
+									if entry ~= nil and entry:get_kind() == types.lsp.CompletionItemKind.Snippet then
+										fallback()
+									else
+										cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+									end
+									return
 								end
-							else
-								fallback()
 							end
+							fallback()
 						end,
 						s = cmp.mapping.confirm({ select = true }),
 						c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),

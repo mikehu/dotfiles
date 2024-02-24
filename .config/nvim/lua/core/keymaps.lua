@@ -99,6 +99,7 @@ wk.register({
 wk.register({
 	G = {
 		name = "Git",
+		b = { cmd([[Gitsigns toggle_current_line_blame]]), "Toggle blame" },
 		p = { cmd([[Gitsigns preview_hunk]]), "Preview hunk" },
 		f = { cmd([[Telescope git_files theme=dropdown]]), "Find files" },
 		w = { cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), "Git worktree" },
