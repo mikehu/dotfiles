@@ -3,16 +3,15 @@ if not dracula_status then
 	return
 end
 
-local function custom(c)
-	return {
-		CursorLine = { bg = c.bgdark },
-		CursorLineNr = { fg = c.fg },
-		IndentBlanklineSpaceChar = { fg = c.comment },
-	}
-end
-
 dracula.setup({
-	override = custom,
+	on_highlights = function(colors, color)
+		return {
+			CursorLine = { bg = colors.bgdark },
+			CursorLineNr = { fg = colors.fg },
+			IndentBlanklineSpaceChar = { fg = colors.comment },
+		}
+	end,
 })
 
 vim.cmd.colorscheme("dracula")
+-- vim.cmd.colorscheme("dracula-soft")
