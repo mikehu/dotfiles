@@ -3,7 +3,7 @@ return {
 		-- Autocompletion
 		"hrsh7th/nvim-cmp",
 		version = false,
-		event = "InsertEnter",
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
 			-- Snippet Engine & its associated nvim-cmp source
 			{
@@ -82,14 +82,19 @@ return {
 						i = function(fallback)
 							if cmp.visible() then
 								local entry = cmp.get_selected_entry()
-								if entry == nil and #cmp.get_entries() >= 1 then
-									cmp.select_next_item()
+								local ignore_snippet = false
+								if entry == nil then
+									if #cmp.get_entries() >= 1 then
+										cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+									end
+									entry = cmp.get_active_entry()
+									ignore_snippet = true
 								end
-								if entry ~= nil or cmp.get_active_entry() then
-									if entry ~= nil and entry:get_kind() == types.lsp.CompletionItemKind.Snippet then
+								if entry ~= nil then
+									if ignore_snippet and entry:get_kind() == types.lsp.CompletionItemKind.Snippet then
 										fallback()
 									else
-										cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+										cmp.confirm()
 									end
 									return
 								end
@@ -321,9 +326,9 @@ return {
 				-- clangd = {},
 				-- gopls = {},
 				-- denols = {},
-				-- emmet_ls = {},
+				emmet_ls = {},
 				eslint = {},
-				html = {},
+				-- html = {},
 				jsonls = {},
 				lua_ls = {
 					Lua = {

@@ -8,7 +8,6 @@ dracula.setup({
 		return {
 			CursorLine = { bg = colors.bgdark },
 			CursorLineNr = { fg = colors.fg },
-			IndentBlanklineSpaceChar = { fg = colors.comment },
 		}
 	end,
 })
