@@ -15,6 +15,7 @@ return {
 			telescope.load_extension("noice")
 			telescope.load_extension("media_files")
 			telescope.load_extension("persisted")
+			telescope.load_extension("grapple")
 			telescope.load_extension("git_worktree")
 
 			local actions = require("telescope.actions")

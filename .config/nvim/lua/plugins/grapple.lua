@@ -24,11 +24,11 @@ return {
 					"Cycle backward",
 				},
 				t = {
-					grapple.popup_tags,
-					"Popup menu",
+					[[<cmd>Telescope grapple tags theme=dropdown<cr>]],
+					"Tags menu",
 				},
 				s = {
-					grapple.popup_scopes,
+					grapple.toggle_scopes,
 					"Scopes menu",
 				},
 				R = {

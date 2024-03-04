@@ -37,7 +37,7 @@ return {
 					},
 					{
 						function()
-							local key = grapple.key()
+							local key = grapple.name_or_index()
 							return "[" .. key .. "]"
 						end,
 						cond = grapple.exists,
