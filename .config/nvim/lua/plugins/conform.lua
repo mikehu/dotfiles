@@ -8,6 +8,7 @@ return {
 			formatters_by_ft = {
 				css = { "prettierd" },
 				lua = { "stylua" },
+				handlebars = { "prettierd" },
 				javascript = { "prettierd" },
 				json = { "jq" },
 				yaml = { "yamlfmt" },

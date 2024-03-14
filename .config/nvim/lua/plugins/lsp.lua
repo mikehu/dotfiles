@@ -328,7 +328,7 @@ return {
 				-- denols = {},
 				emmet_ls = {},
 				eslint = {},
-				-- html = {},
+				html = {},
 				jsonls = {},
 				lua_ls = {
 					Lua = {

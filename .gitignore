@@ -10,7 +10,11 @@
 # SSH
 !.ssh/config
 
-# Fonts
+# Scripts
+!.config/scripts
+!.config/scripts/*.sh
+
+ Fonts
 !.config/fonts
 !.config/fonts/*.ttf
 
