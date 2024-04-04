@@ -106,14 +106,6 @@ wk.register({
 	},
 }, { prefix = "<leader>" })
 
--- Hardtime
-wk.register({
-	H = {
-		cmd([[Hardtime toggle]]),
-		"Toggle Hardtime",
-	},
-}, { prefix = "<leader>" })
-
 -- Prefix registrations
 wk.register({
 	["gl"] = { name = "LSP" },

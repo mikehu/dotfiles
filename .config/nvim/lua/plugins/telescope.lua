@@ -17,6 +17,7 @@ return {
 			telescope.load_extension("persisted")
 			telescope.load_extension("grapple")
 			telescope.load_extension("git_worktree")
+			telescope.load_extension("todo-comments")
 
 			local actions = require("telescope.actions")
 			telescope.setup({
@@ -85,6 +86,11 @@ return {
 			local file_browser = telescope.extensions.file_browser
 			local media_files = telescope.extensions.media_files
 			local git_worktree = telescope.extensions.git_worktree
+			local todo_comments = telescope.extensions["todo-comments"]
+
+			for i, v in pairs(todo_comments) do
+				print(i, v)
+			end
 
 			-- Find files from project root with fallback
 			function vim.find_files_from_project_git_root()
@@ -145,6 +151,12 @@ return {
 							git_worktree.git_worktrees(with_dropdown)
 						end,
 						"Git worktree",
+					},
+					t = {
+						function()
+							todo_comments.todo({ layout_strategy = "vertical" })
+						end,
+						"Todo comments",
 					},
 					j = {
 						function()
