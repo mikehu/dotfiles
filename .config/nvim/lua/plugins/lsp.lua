@@ -232,7 +232,7 @@ return {
 							position = "left",
 						},
 						hooks = {
-							before_open = function(results, open, jump, method)
+							before_open = function(results, open, jump)
 								local uri = vim.uri_from_bufnr(0)
 								if #results == 1 then
 									local target_uri = results[1].uri or results[1].targetUri
@@ -250,8 +250,12 @@ return {
 				end,
 			},
 		},
+		opts = {
+			inlay_hints = { enabled = true },
+		},
 		config = function()
 			local lspconfig = require("lspconfig")
+			local lsputil = require("lspconfig/util")
 			local mason_lspconfig = require("mason-lspconfig")
 
 			-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -331,24 +335,56 @@ return {
 				html = {},
 				jsonls = {},
 				lua_ls = {
-					Lua = {
-						-- make the language server recognize "vim" global
-						diagnostics = {
-							globals = { "vim" },
-						},
-						workspace = {
-							-- make language server aware of runtime files
-							library = {
-								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-								[vim.fn.stdpath("config") .. "/lua"] = true,
+					settings = {
+						Lua = {
+							-- make the language server recognize "vim" global
+							diagnostics = {
+								globals = { "vim" },
 							},
+							workspace = {
+								-- make language server aware of runtime files
+								library = {
+									[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+									[vim.fn.stdpath("config") .. "/lua"] = true,
+								},
+							},
+							hint = { enable = true },
 						},
 					},
 				},
 				marksman = {},
 				pyright = {},
 				-- rust_analyzer = {},
-				tsserver = {},
+				tsserver = {
+					root_dir = lsputil.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+					settings = {
+						typescript = {
+							inlayHints = {
+								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+								includeInlayVariableTypeHints = true,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayEnumMemberValueHints = true,
+							},
+						},
+						javascript = {
+							inlayHints = {
+								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+								includeInlayVariableTypeHints = true,
+
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayEnumMemberValueHints = true,
+							},
+						},
+					},
+				},
 				tailwindcss = {},
 				volar = {},
 				yamlls = {
@@ -364,8 +400,9 @@ return {
 						lspconfig[server_name].setup({
 							capabilities = capabilities,
 							on_attach = on_attach,
-							settings = servers[server_name],
+							settings = (servers[server_name] or {}).settings,
 							filetypes = (servers[server_name] or {}).filetypes,
+							root_dir = (servers[server_name] or {}).root_dir,
 							handlers = lsp_handlers,
 						})
 					end,

@@ -122,6 +122,12 @@ return {
 			wk.register({
 				f = {
 					name = "+Telescope",
+					f = {
+						function()
+							builtin.resume()
+						end,
+						"Resume last",
+					},
 					y = {
 						function()
 							builtin.oldfiles()

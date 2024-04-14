@@ -10,7 +10,7 @@ return {
 				lua = { "stylua" },
 				handlebars = { "prettierd" },
 				javascript = { "prettierd" },
-				json = { "jq" },
+				json = { "prettierd" },
 				yaml = { "yamlfmt" },
 				vue = { "prettierd" },
 			},
