@@ -6,9 +6,6 @@
 !.zprofile
 !.config/
 
-# Tmux
-!.tmux.conf
-
 # SSH
 !.ssh/
 !.ssh/config
@@ -17,9 +14,13 @@
 !.config/scripts
 !.config/scripts/*.sh
 
- Fonts
+# Fonts
 !.config/fonts
 !.config/fonts/*.ttf
+
+# Tmux
+!.config/tmux
+!.config/tmux/tmux.conf
 
 # Kitty
 !.config/kitty
