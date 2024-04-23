@@ -4,10 +4,14 @@
 !.gitconfig
 !.zshrc
 !.zprofile
-!.ssh/
 !.config/
 
+# Tmux
+!.tmux.config
+!.tmux/
+
 # SSH
+!.ssh/
 !.ssh/config
 
 # Scripts
