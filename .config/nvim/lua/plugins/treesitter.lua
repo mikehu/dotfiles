@@ -34,15 +34,15 @@ return {
 			indent = {
 				enable = true,
 			},
-			-- incremental_selection = {
-			-- 	enable = true,
-			-- 	keymaps = {
-			-- 		init_selection = "<c-space>",
-			-- 		scope_incremental = "<c-s>",
-			-- 		node_incremental = "<tab>",
-			-- 		node_decremental = "<s-tab>",
-			-- 	},
-			-- },
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "<leader>v",
+					scope_incremental = "<c-n>",
+					node_incremental = "<tab>",
+					node_decremental = "<s-tab>",
+				},
+			},
 			textobjects = {
 				select = {
 					enable = true,

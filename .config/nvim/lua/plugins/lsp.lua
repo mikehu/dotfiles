@@ -73,7 +73,7 @@ return {
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
-					["<c-space>"] = cmp.mapping.complete({}), -- manual "completion"
+					["<c-tab>"] = cmp.mapping.complete({}), -- manual "completion"
 					["<c-j>"] = cmp.mapping.select_next_item(),
 					["<c-k>"] = cmp.mapping.select_prev_item(),
 					["<c-u>"] = cmp.mapping.scroll_docs(-4),
@@ -400,7 +400,7 @@ return {
 						lspconfig[server_name].setup({
 							capabilities = capabilities,
 							on_attach = on_attach,
-							settings = (servers[server_name] or {}).settings,
+							settings = (servers[server_name] or {}).settings or {},
 							filetypes = (servers[server_name] or {}).filetypes,
 							root_dir = (servers[server_name] or {}).root_dir,
 							handlers = lsp_handlers,
