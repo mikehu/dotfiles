@@ -255,8 +255,8 @@ return {
 		},
 		config = function()
 			local lspconfig = require("lspconfig")
-			local lsputil = require("lspconfig/util")
 			local mason_lspconfig = require("mason-lspconfig")
+			local mason_registry = require("mason-registry")
 
 			-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -325,6 +325,8 @@ return {
 			--
 			--  If you want to override the default filetypes that your language server will attach to you can
 			--  define the property 'filetypes' to the map in question.
+			local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+				.. "/node_modules/@vue/language-server"
 			local servers = {
 				bashls = {},
 				-- clangd = {},
@@ -356,7 +358,15 @@ return {
 				pyright = {},
 				-- rust_analyzer = {},
 				tsserver = {
-					root_dir = lsputil.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+					init_options = {
+						plugins = {
+							{
+								name = "@vue/typescript-plugin",
+								location = vue_language_server_path,
+								languages = { "vue" },
+							},
+						},
+					},
 					settings = {
 						typescript = {
 							inlayHints = {
@@ -384,6 +394,7 @@ return {
 							},
 						},
 					},
+					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 				},
 				tailwindcss = {},
 				volar = {},
@@ -400,9 +411,9 @@ return {
 						lspconfig[server_name].setup({
 							capabilities = capabilities,
 							on_attach = on_attach,
+							init_options = (servers[server_name] or {}).init_options,
 							settings = (servers[server_name] or {}).settings or {},
 							filetypes = (servers[server_name] or {}).filetypes,
-							root_dir = (servers[server_name] or {}).root_dir,
 							handlers = lsp_handlers,
 						})
 					end,

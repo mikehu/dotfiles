@@ -2,7 +2,6 @@ return {
 	"nvim-lualine/lualine.nvim",
 	event = { "UIEnter" },
 	dependencies = {
-		"maxmx03/dracula.nvim",
 		"nvim-tree/nvim-web-devicons",
 		"meuter/lualine-so-fancy.nvim",
 		"cbochs/grapple.nvim",
@@ -10,18 +9,10 @@ return {
 	config = function()
 		local grapple = require("grapple")
 		local lazy_status = require("lazy.status")
-		local dracula_theme = require("lualine.themes.dracula")
-		local dracula_colors = require("dracula.palette")
-
-		local normal_color = dracula_theme.normal.a
-
-		dracula_theme.terminal = {
-			a = { fg = normal_color.fg, bg = dracula_colors.cyan, gui = "bold" },
-		}
 
 		require("lualine").setup({
 			options = {
-				theme = dracula_theme,
+				theme = vim.g.colors_name,
 				component_separators = "|",
 				section_separators = "",
 				refresh = {
