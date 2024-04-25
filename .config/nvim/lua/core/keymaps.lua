@@ -7,13 +7,6 @@ local keymap = vim.keymap
 keymap.set("n", "x", '"_x')
 keymap.set("n", "X", '"_X')
 
-keymap.set("n", "<m-h>", "_") -- Home
-keymap.set("n", "<m-l>", "$") -- End
-
-keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic message" })
-keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic message" })
-keymap.set("n", "<leader>L", vim.diagnostic.setloclist, { desc = "Open diagnostic list" })
-
 keymap.set("n", "<leader>s", cmd([[w]]), { desc = "Save" })
 keymap.set("n", "<leader>q", cmd([[q]]), { desc = "Quit" })
 keymap.set("n", "<leader>Q", cmd([[q!]]), { desc = "Force quit" })
@@ -46,6 +39,11 @@ keymap.set("n", "<m-s-tab>", cmd([[bprev]]), { desc = "Cycle prev buffer" })
 
 keymap.set("n", "<leader>h", cmd([[nohl]]), { desc = "Remove highlights" })
 
+keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic message" })
+keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic message" })
+
+keymap.set("n", "<c-q>", cmd([[cclose]]), { desc = "Close quickfix list" })
+
 keymap.set("i", "<c-c>", "<esc>")
 keymap.set("i", "jk", "<esc>")
 keymap.set("i", "kj", "<esc>")
@@ -69,27 +67,48 @@ wk.register({
 	N = { cmd([[enew]]), "New buffer" },
 }, { prefix = "<leader>" })
 
--- Tab management
+-- Lists
+local function toggle_list(type)
+	local windows = vim.fn.getwininfo()
+	local ll = type == "l" and 1 or 0
+	local wintype = ll == 1 and "loclist" or "quickfix"
+	local close_command = type .. "close"
+	local open_command = type .. "open"
+	for _, win in pairs(windows) do
+		print(wintype, win[wintype])
+		if win[wintype] == 1 then
+			vim.cmd[close_command]()
+			return
+		end
+	end
+	vim.cmd[open_command]()
+end
 wk.register({
-	t = {
-		name = "Tabs",
-		t = { cmd([[tabnext]]), "Cycle next tab" },
-		T = { cmd([[tabprevious]]), "Cycle previous tab" },
-		n = { cmd([[tabnew]]), "New tab" },
-		x = { cmd([[tabclose]]), "Close tab" },
+	l = {
+		-- d = { vim.diagnostic.setloclist, "Open diagnostic list" },
+		l = {
+			function()
+				toggle_list("l")
+			end,
+			"Toggle local list",
+		},
+		q = {
+			function()
+				toggle_list("c")
+			end,
+			"Toggle quickfix list",
+		},
 	},
 }, { prefix = "<leader>" })
 
 -- Terminal
-keymap.set("n", "<m-esc>", cmd([[terminal]]))
-keymap.set("t", "<m-esc>", cmd([[bd!]]))
 keymap.set("t", "<m-tab>", cmd([[bnext]]))
 keymap.set("t", "<m-s-tab>", cmd([[bprev]]))
 keymap.set("t", "<c-n>", [[<c-\><c-n>]])
 wk.register({
 	z = {
-		name = "Terminal (zsh)",
 		z = { cmd([[BufTermNext]]), "Cycle next terminal" },
+		name = "Terminal (zsh)",
 		Z = { cmd([[BufTermPrev]]), "Cycle prev terminal" },
 		n = { cmd([[terminal]]), "New terminal" },
 	},

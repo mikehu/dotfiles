@@ -88,10 +88,6 @@ return {
 			local git_worktree = telescope.extensions.git_worktree
 			local todo_comments = telescope.extensions["todo-comments"]
 
-			for i, v in pairs(todo_comments) do
-				print(i, v)
-			end
-
 			-- Find files from project root with fallback
 			function vim.find_files_from_project_git_root()
 				local function is_git_repo()

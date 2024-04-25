@@ -7,4 +7,5 @@ return {
 		opts = {},
 	},
 	"tpope/vim-repeat",
+	"tpope/vim-unimpaired",
 }

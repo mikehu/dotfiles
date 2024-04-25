@@ -14,7 +14,7 @@ set autoindent
 set smarttab
 set backspace=indent,eol,start
 set title
-set titlestring=%t%(\ %M%)\ \[nvim\]
+set titlestring=%t%(\ %M%)
 set titlelen=36
 set number
 set nrformats-=octal
@@ -46,9 +46,10 @@ set backupdir=~/.cache/vim
 set complete-=i
 set completeopt=menuone,noselect
 set updatetime=250
+set timeout
 set timeoutlen=300
 set ttimeout
-set ttimeoutlen=200
+set ttimeoutlen=10
 set autoread
 set history=1000
 set tabpagemax=50

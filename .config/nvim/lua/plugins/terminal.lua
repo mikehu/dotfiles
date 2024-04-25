@@ -22,7 +22,7 @@ return {
 				buflisted = false,
 				termlisted = false, -- set this option to false if you treat this terminal as single independent terminal
 			})
-			vim.keymap.set("n", "<leader>l", function()
+			vim.keymap.set("n", "<leader>L", function()
 				-- spawn terminal (terminal won't be spawned if self.jobid is valid)
 				lazygit:spawn()
 				-- open floating window
