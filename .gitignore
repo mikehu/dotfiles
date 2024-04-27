@@ -42,6 +42,10 @@
 !.config/kube
 !.config/kube/config
 
+# bat
+!.config/bat
+!.config/bat/config
+
 # thefuck
 !.config/thefuck
 !.config/thefuck/*.py
