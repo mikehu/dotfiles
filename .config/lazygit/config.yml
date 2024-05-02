@@ -1,3 +1,25 @@
+gui:
+  theme:
+    activeBorderColor:
+      - '#50FA7A'
+      - bold
+    inactiveBorderColor:
+      - '#F8F8F2'
+    searchingActiveBorderColor:
+      - '#8BE9FD'
+      - bold
+    optionsTextColor:
+      - '#BD93F9'
+    selectedLineBgColor:
+      - '#6272A4' # set to `default` to have no background colour
+    cherryPickedCommitBgColor:
+      - '#5E3E5A'
+    cherryPickedCommitFgColor:
+      - '#FF79C6'
+    unstagedChangesColor:
+      - '#FF5555'
+    defaultFgColor:
+      - default
 git:
   paging:
     externalDiffCommand: difft --color=always
