@@ -10,6 +10,9 @@
 !.ssh/
 !.ssh/config
 
+# Starship
+!.config/starship.toml
+
 # Scripts
 !.config/scripts
 !.config/scripts/*.sh
@@ -45,6 +48,10 @@
 # bat
 !.config/bat
 !.config/bat/config
+
+# atuin
+!.config/atuin
+!.config/atuin/config.toml
 
 # thefuck
 !.config/thefuck
