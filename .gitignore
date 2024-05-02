@@ -45,6 +45,10 @@
 !.config/kube
 !.config/kube/config
 
+# lazygit
+!.config/lazygit
+!.config/lazygit/config.yml
+
 # bat
 !.config/bat
 !.config/bat/config
