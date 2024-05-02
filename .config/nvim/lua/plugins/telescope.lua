@@ -18,6 +18,7 @@ return {
 			telescope.load_extension("grapple")
 			telescope.load_extension("git_worktree")
 			telescope.load_extension("todo-comments")
+			telescope.load_extension("undo")
 
 			local actions = require("telescope.actions")
 			telescope.setup({
@@ -87,6 +88,7 @@ return {
 			local media_files = telescope.extensions.media_files
 			local git_worktree = telescope.extensions.git_worktree
 			local todo_comments = telescope.extensions["todo-comments"]
+			local undo = telescope.extensions.undo
 
 			-- Find files from project root with fallback
 			function vim.find_files_from_project_git_root()
@@ -110,6 +112,9 @@ return {
 			vim.keymap.set("n", "<leader>b", function()
 				builtin.buffers()
 			end, { desc = "Recent files" })
+			vim.keymap.set("n", "<leader>u", function()
+				undo.undo({ layout_strategy = "vertical" })
+			end, { desc = "Undo tree" })
 			vim.keymap.set("n", "<leader>/", function()
 				builtin.current_buffer_fuzzy_find()
 			end, { desc = "Search current buffer" })
@@ -194,6 +199,11 @@ return {
 	},
 	{
 		"nvim-telescope/telescope-media-files.nvim",
+		lazy = true,
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+	},
+	{
+		"debugloop/telescope-undo.nvim",
 		lazy = true,
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},

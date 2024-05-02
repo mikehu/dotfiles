@@ -283,12 +283,17 @@ return {
 
 				local ts_builtin = require("telescope.builtin")
 				nmap("<leader>fr", ts_builtin.lsp_references, "Find references")
-				nmap("<leader>fs", ts_builtin.lsp_document_symbols, "Find symbols")
+				nmap("<leader>fs", function()
+					ts_builtin.lsp_document_symbols({
+						winblend = 20,
+						symbols = { "function", "constant", "variable", "class" },
+					})
+				end, "Find symbols")
 				nmap("<leader>fS", ts_builtin.lsp_dynamic_workspace_symbols, "Find workspace symbols")
 
 				-- See `:help K` for why this keymap
 				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-				nmap("<c-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+				nmap("gK", vim.lsp.buf.signature_help, "Signature Documentation")
 
 				-- Lesser used LSP functionality
 				nmap("<leader>pa", vim.lsp.buf.add_workspace_folder, "Add folder")
@@ -296,20 +301,6 @@ return {
 				nmap("<leader>pl", function()
 					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 				end, "List project folders")
-
-				-- Create a command `:Format` local to the LSP buffer
-				-- vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-				-- 	vim.lsp.buf.format()
-				-- end, { desc = "Format current buffer with LSP" })
-				-- -- and a key map
-				-- nmap("<leader>F", "<cmd>Format<cr>", "Format buffer")
-
-				-- Telescope integration
-				nmap(
-					"<leader>r",
-					"<cmd>Telescope lsp_document_symbols theme=dropdown winblend=20 symbols=function,constant,variable,class<cr>",
-					"Find symbols"
-				)
 			end
 
 			local lsp_handlers = {

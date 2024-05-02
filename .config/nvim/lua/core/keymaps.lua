@@ -29,7 +29,6 @@ keymap.set("v", "<m-j>", [[:m'>+<cr>gv=gv]], { desc = "Move block down" })
 keymap.set("v", "<m-k>", [[:m-2<cr>gv=gv]], { desc = "Move block up" })
 
 keymap.set({ "n", "i" }, "<c-y>", "<esc>Vyp<cr>k", { desc = "Duplicate line" })
-keymap.set("n", "<c-j>", "i<cr><esc>", { desc = "Split line" })
 keymap.set("n", "c.", "viWo<esc>ct.", { desc = "Change up to <dot>" })
 keymap.set("n", "g,", "A,<esc>", { desc = "End with comma" })
 
@@ -43,6 +42,7 @@ keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic me
 keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic message" })
 
 keymap.set("n", "<c-q>", cmd([[cclose]]), { desc = "Close quickfix list" })
+keymap.set("t", "<c-q>", cmd([[bd!]]), { desc = "Close terminal buffer" })
 
 keymap.set("i", "<c-c>", "<esc>")
 keymap.set("i", "jk", "<esc>")
