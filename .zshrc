@@ -75,7 +75,6 @@ plugins=(
   kubectl
   macos
   thefuck
-  vscode
   xcode
 )
 
@@ -92,7 +91,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -112,10 +111,6 @@ fpath+=("$(brew --prefix)/share/zsh/site-functions")
 # ZMV
 autoload -U zmv
 
-# Pure Prompt
-autoload -U promptinit; promptinit
-prompt pure
-
 # PyEnv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -124,5 +119,12 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
+# Starship
+eval "$(starship init zsh)"
+
+# atuin
+eval "$(atuin init zsh)"
+
 # fzf
 eval "$(fzf --zsh)"
+
