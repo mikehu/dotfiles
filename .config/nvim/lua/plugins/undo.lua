@@ -6,7 +6,7 @@ return {
 		{ -- lazy style key map
 			"<leader>u",
 			"<cmd>Telescope undo<cr>",
-			desc = "undo history",
+			desc = "Undo history",
 		},
 	},
 	config = function()
