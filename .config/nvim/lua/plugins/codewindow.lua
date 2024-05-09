@@ -4,7 +4,6 @@ return {
 		config = function()
 			local codewindow = require("codewindow")
 			codewindow.setup({
-				auto_enable = true,
 				exclude_filetypes = { "help", "oil" },
 				minimap_width = 10,
 				screen_bounds = "background",
