@@ -127,9 +127,6 @@ fi
 # Starship
 eval "$(starship init zsh)"
 
-# atuin
-eval "$(atuin init zsh)"
-
 # fzf
 eval "$(fzf --zsh)"
 

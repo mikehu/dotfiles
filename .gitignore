@@ -53,10 +53,6 @@
 !.config/bat
 !.config/bat/config
 
-# atuin
-!.config/atuin
-!.config/atuin/config.toml
-
 # thefuck
 !.config/thefuck
 !.config/thefuck/*.py
