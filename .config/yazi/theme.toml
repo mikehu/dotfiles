@@ -1,0 +1,11 @@
+[manager]
+cwd = { fg = "#F8F8F2" }
+
+hovered = { bg = "#44475A", bold = true }
+
+border_symbol = "║"
+border_style = { fg = "#44475A" }
+
+tab_active = { bg = "#BD93F9" }
+tab_width = 16
+

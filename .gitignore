@@ -57,6 +57,10 @@
 !.config/thefuck
 !.config/thefuck/*.py
 
+# yazi
+!.config/yazi
+!.config/yazi/*.toml
+
 # copilot
 !.config/github-copilot
 
