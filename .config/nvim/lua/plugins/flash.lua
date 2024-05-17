@@ -1,15 +1,6 @@
 return {
 	"folke/flash.nvim",
 	event = "VeryLazy",
-	opts = {
-		modes = {
-			-- options used when flash is activated through
-			-- a regular search with `/` or `?`
-			search = {
-				enabled = false,
-			},
-		},
-	},
 	keys = {
 		{
 			"s",
@@ -25,24 +16,24 @@ return {
 			function()
 				require("flash").treesitter()
 			end,
-			desc = "Flash Treesitter",
+			desc = "Flash treesitter",
 		},
-		-- {
-		-- 	"r",
-		-- 	mode = "o",
-		-- 	function()
-		-- 		flash.remote()
-		-- 	end,
-		-- 	desc = "Remote Flash",
-		-- },
-		-- {
-		-- 	"R",
-		-- 	mode = { "o", "x" },
-		-- 	function()
-		-- 		flash.treesitter_search()
-		-- 	end,
-		-- 	desc = "Treesitter Search",
-		-- },
+		{
+			"r",
+			mode = "o",
+			function()
+				require("flash").remote()
+			end,
+			desc = "Remote flash",
+		},
+		{
+			"R",
+			mode = { "o", "x" },
+			function()
+				require("flash").treesitter_search()
+			end,
+			desc = "Remote treesitter search",
+		},
 		-- {
 		-- 	"<c-s>",
 		-- 	mode = { "c" },

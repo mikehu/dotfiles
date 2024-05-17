@@ -72,6 +72,7 @@ plugins=(
   zsh-autosuggestions
   encode64
   git
+  tmux
   kubectl
   macos
   thefuck
@@ -130,3 +131,5 @@ eval "$(starship init zsh)"
 # fzf
 eval "$(fzf --zsh)"
 
+# zoxide
+eval "$(zoxide init zsh)"

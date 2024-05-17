@@ -38,9 +38,6 @@ keymap.set("n", "<m-s-tab>", cmd([[bprev]]), { desc = "Cycle prev buffer" })
 
 keymap.set("n", "<leader>h", cmd([[nohl]]), { desc = "Remove highlights" })
 
-keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic message" })
-keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic message" })
-
 keymap.set("n", "<c-q>", cmd([[cclose]]), { desc = "Close quickfix list" })
 keymap.set("t", "<c-q>", cmd([[bd!]]), { desc = "Close terminal buffer" })
 
@@ -100,6 +97,11 @@ wk.register({
 	},
 }, { prefix = "<leader>" })
 
+-- Diagnostics / Trouble
+
+keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic message" })
+keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic message" })
+
 -- Terminal
 keymap.set("t", "<m-tab>", cmd([[bnext]]))
 keymap.set("t", "<m-s-tab>", cmd([[bprev]]))
@@ -126,7 +128,12 @@ wk.register({
 
 -- Prefix registrations
 wk.register({
-	["gl"] = { name = "LSP" },
-	["<leader>D"] = { name = "Definitions" },
-	["<leader>p"] = { name = "Project" },
+	["g"] = {
+		l = { name = "+LSP" },
+	},
+	["<leader>"] = {
+		l = { name = "+Lists" },
+		p = { name = "+Projects" },
+		K = { name = "+Definitions" },
+	},
 })

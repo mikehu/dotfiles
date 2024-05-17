@@ -40,7 +40,7 @@ return {
 						snippet_engine = "luasnip",
 					})
 
-					vim.keymap.set("n", "gcn", [[<cmd>Neogen<cr>]], { desc = "Neogen" })
+					vim.keymap.set("n", "gC", [[<cmd>Neogen<cr>]], { desc = "Generate annotation" })
 				end,
 			},
 
