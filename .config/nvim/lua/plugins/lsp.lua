@@ -263,10 +263,10 @@ return {
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 			--  This function gets run when an LSP connects to a particular buffer.
-			local on_attach = function(_, bufnr)
+			local on_attach = function(client, bufnr)
 				local nmap = function(keys, func, desc)
 					if desc then
-						desc = desc .. " [LSP]"
+						desc = "✨LSP " .. desc
 					end
 
 					vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
@@ -301,6 +301,25 @@ return {
 				nmap("<leader>pl", function()
 					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 				end, "List project folders")
+
+				-- inlay hints
+				vim.g.inlay_hints_visible = false
+				local function toggle_inlay_hints()
+					if vim.g.inlay_hints_visible then
+						vim.g.inlay_hints_visible = false
+						vim.lsp.inlay_hint(bufnr, false)
+					else
+						if client.server_capabilities.inlayHintProvider then
+							vim.g.inlay_hints_visible = true
+							vim.lsp.inlay_hint(bufnr, true)
+						else
+							print("no inlay hints available")
+						end
+					end
+				end
+				nmap("glh", toggle_inlay_hints, "Toggle inlay hints")
+
+				client.server_capabilities.documentFormattingProvider = false
 			end
 
 			local lsp_handlers = {
@@ -361,25 +380,26 @@ return {
 					settings = {
 						typescript = {
 							inlayHints = {
-								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-								includeInlayVariableTypeHints = true,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-								includeInlayPropertyDeclarationTypeHints = true,
+								-- You can set this to 'all' or 'literals' to enable more hints
+								includeInlayParameterNameHints = "none", -- 'none' | 'literals' | 'all'
+								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+								includeInlayFunctionParameterTypeHints = false,
+								includeInlayVariableTypeHints = false,
+								includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+								includeInlayPropertyDeclarationTypeHints = false,
 								includeInlayFunctionLikeReturnTypeHints = true,
 								includeInlayEnumMemberValueHints = true,
 							},
 						},
 						javascript = {
 							inlayHints = {
-								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-								includeInlayVariableTypeHints = true,
-
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-								includeInlayPropertyDeclarationTypeHints = true,
+								-- You can set this to 'all' or 'literals' to enable more hints
+								includeInlayParameterNameHints = "none", -- 'none' | 'literals' | 'all'
+								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+								includeInlayVariableTypeHints = false,
+								includeInlayFunctionParameterTypeHints = false,
+								includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+								includeInlayPropertyDeclarationTypeHints = false,
 								includeInlayFunctionLikeReturnTypeHints = true,
 								includeInlayEnumMemberValueHints = true,
 							},
