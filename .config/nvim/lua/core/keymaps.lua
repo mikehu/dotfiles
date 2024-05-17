@@ -75,7 +75,6 @@ local function toggle_list(type)
 	local close_command = type .. "close"
 	local open_command = type .. "open"
 	for _, win in pairs(windows) do
-		print(wintype, win[wintype])
 		if win[wintype] == 1 then
 			vim.cmd[close_command]()
 			return
