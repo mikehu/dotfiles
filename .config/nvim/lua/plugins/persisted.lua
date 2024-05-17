@@ -2,6 +2,7 @@ return {
 	"olimorris/persisted.nvim",
 	config = function()
 		require("persisted").setup({
+			silent = true,
 			autosave = true,
 			autoload = true,
 			allowed_dirs = {

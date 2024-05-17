@@ -1,7 +1,6 @@
 return {
 	"folke/noice.nvim",
-	lazy = false,
-	-- event = "VeryLazy",
+	event = "VeryLazy",
 	opts = {
 		cmdline = {
 			format = {
