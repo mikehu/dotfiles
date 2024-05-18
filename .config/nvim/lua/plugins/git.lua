@@ -1,5 +1,13 @@
 return {
-	{ "tpope/vim-fugitive" },
+	{
+		"NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		config = true,
+	},
 	{
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
@@ -13,14 +21,25 @@ return {
 				ts_repeat_move.make_repeatable_move_pair(gitsigns.next_hunk, gitsigns.prev_hunk)
 
 			local wk = require("which-key")
-
 			wk.register({
 				["]h"] = {
-					next_hunk,
+					function()
+						if vim.wo.diff then
+							vim.cmd.normal({ "]h", bang = true })
+						else
+							next_hunk()
+						end
+					end,
 					"Next hunk",
 				},
 				["[h"] = {
-					prev_hunk,
+					function()
+						if vim.wo.diff then
+							vim.cmd.normal({ "[h", bang = true })
+						else
+							prev_hunk()
+						end
+					end,
 					"Prev hunk",
 				},
 			}, { mode = { "n", "x", "o" } })

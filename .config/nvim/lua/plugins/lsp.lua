@@ -24,6 +24,7 @@ return {
 			-- Some additional helpers
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+			-- "hrsh7th/cmp-cmdline",
 
 			-- neogen
 			{
@@ -64,6 +65,13 @@ return {
 				if entry2:get_kind() == types.lsp.CompletionItemKind.Snippet then
 					return true
 				end
+			end
+
+			local has_words_before = function()
+				unpack = unpack or table.unpack
+				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+				return col ~= 0
+					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 			end
 
 			cmp.setup({
@@ -125,11 +133,20 @@ return {
 						if copilot_keys ~= "" then
 							vim.api.nvim_feedkeys(copilot_keys, "i", true)
 						elseif cmp.visible() then
-							cmp.select_next_item()
+							if #cmp.get_entries() == 1 then
+								cmp.confirm({ select = true })
+							else
+								cmp.select_next_item()
+							end
 						elseif luasnip.expand_or_jumpable() then
 							luasnip.expand_or_jump()
 						elseif neogen.jumpable() then
 							neogen.jump_next()
+						elseif has_words_before() then
+							cmp.complete()
+							if #cmp.get_entries() == 1 then
+								cmp.confirm({ select = true })
+							end
 						else
 							fallback()
 						end
@@ -163,10 +180,15 @@ return {
 					},
 				},
 				sources = {
-					{ name = "nvim_lsp" }, -- lsp
-					{ name = "path" }, -- file system paths
-					{ name = "buffer", keyword_length = 3 }, -- text within current buffer
-					{ name = "luasnip", keyword_length = 2 }, -- snippets
+					{
+						{ name = "nvim_lsp" }, -- lsp
+						{ name = "luasnip", keyword_length = 2 }, -- snippets
+					},
+					{
+						{ name = "path" }, -- file system paths
+						{ name = "treesitter" },
+						{ name = "buffer", keyword_length = 4 }, -- text within current buffer
+					},
 				},
 				formatting = {
 					format = lspkind.cmp_format({
@@ -184,14 +206,19 @@ return {
 			-- 	},
 			-- })
 
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-				}, {
-					{ name = "cmdline" },
-				}),
-			})
+			-- cmp.setup.cmdline(":", {
+			-- 	mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = cmp.config.sources({
+			-- 		{ name = "path" },
+			-- 	}, {
+			-- 		{
+			-- 			name = "cmdline",
+			-- 			option = {
+			-- 				ignore_cmds = { "Man", "!" },
+			-- 			},
+			-- 		},
+			-- 	}),
+			-- })
 
 			-- autopairs
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -217,7 +244,7 @@ return {
 
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-			{ "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+			{ "j-hui/fidget.nvim", opts = {} },
 
 			-- LSP ui
 			{
@@ -250,6 +277,7 @@ return {
 				end,
 			},
 		},
+
 		opts = {
 			inlay_hints = { enabled = true },
 		},

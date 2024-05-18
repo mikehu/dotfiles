@@ -119,7 +119,9 @@ wk.register({
 wk.register({
 	G = {
 		name = "Git",
+		g = { cmd([[Neogit]]), "🚧 Neogit" },
 		b = { cmd([[Gitsigns toggle_current_line_blame]]), "Toggle blame" },
+		d = { cmd([[Gitsigns toggle_deleted]]), "Diff this" },
 		p = { cmd([[Gitsigns preview_hunk]]), "Preview hunk" },
 		f = { cmd([[Telescope git_files theme=dropdown]]), "Find files" },
 		w = { cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), "Git worktree" },

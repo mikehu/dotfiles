@@ -19,6 +19,7 @@ return {
 					statusline = 1000,
 				},
 			},
+			extensions = { "quickfix", "oil", "trouble" },
 			sections = {
 				lualine_c = {
 					{
