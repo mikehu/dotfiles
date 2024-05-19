@@ -15,9 +15,9 @@ return {
 			telescope.load_extension("noice")
 			telescope.load_extension("media_files")
 			telescope.load_extension("persisted")
-			telescope.load_extension("grapple")
 			telescope.load_extension("git_worktree")
 			telescope.load_extension("todo-comments")
+			telescope.load_extension("whop")
 
 			local actions = require("telescope.actions")
 			telescope.setup({
@@ -87,6 +87,7 @@ return {
 			local media_files = telescope.extensions.media_files
 			local git_worktree = telescope.extensions.git_worktree
 			local todo_comments = telescope.extensions["todo-comments"]
+			local whop = telescope.extensions.whop
 
 			-- Find files from project root with fallback
 			function vim.find_files_from_project_git_root()
@@ -160,9 +161,21 @@ return {
 						end,
 						"Todo comments",
 					},
+					c = {
+						function()
+							whop.whop(with_dropdown)
+						end,
+						"Buffer operations",
+					},
+					q = {
+						function()
+							builtin.quickfix(with_dropdown)
+						end,
+						"Quickfix list",
+					},
 					j = {
 						function()
-							builtin.jumplist()
+							builtin.jumplist({ layout_strategy = "vertical" })
 						end,
 						"Jumplist",
 					},

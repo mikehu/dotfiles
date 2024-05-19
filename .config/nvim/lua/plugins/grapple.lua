@@ -11,8 +11,10 @@ return {
 			},
 		})
 
-		local wk = require("which-key")
+		local telescope = require("telescope")
+		telescope.load_extension("grapple")
 
+		local wk = require("which-key")
 		wk.register({
 			["<leader>g"] = {
 				name = "Grapple",
