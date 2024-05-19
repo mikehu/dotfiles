@@ -19,6 +19,8 @@
         cw = clone-worktrees
 [help]
         autocorrect = 20
+[rerere]
+        enabled = true
 
 [init]
         defaultBranch = main
