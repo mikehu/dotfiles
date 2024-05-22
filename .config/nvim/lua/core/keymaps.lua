@@ -7,6 +7,7 @@ local keymap = vim.keymap
 keymap.set("n", "x", '"_x')
 keymap.set("n", "X", '"_X')
 
+keymap.set("n", "<D-s>", cmd([[w]]), { desc = "Save" })
 keymap.set("n", "<leader>s", cmd([[w]]), { desc = "Save" })
 keymap.set("n", "<leader>q", cmd([[q]]), { desc = "Quit" })
 keymap.set("n", "<leader>Q", cmd([[q!]]), { desc = "Force quit" })

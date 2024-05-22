@@ -1,5 +1,6 @@
 return {
 	"maxmx03/dracula.nvim",
+	name = "dracula",
 	lazy = false,
 	priority = 1000,
 	config = function()
@@ -55,6 +56,8 @@ return {
 					CursorLineNr = { fg = colors.fg },
 					lualine_a_terminal = { fg = colors.base04, bg = colors.cyan, bold = true },
 					CodewindowBorder = { fg = colors.base02 },
+					SatelliteCursor = { fg = colors.base0 },
+					SatelliteSearch = { fg = colors.orange },
 				}
 			end,
 			plugins = {
@@ -69,7 +72,6 @@ return {
 				["lazy.nvim"] = true,
 				["telescope.nvim"] = true,
 				["noice.nvim"] = true,
-				["hop.nvim"] = true,
 			},
 		})
 

@@ -5,12 +5,20 @@ return {
 		tag = "0.1.2",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				lazy = true,
+				build = "make",
+			},
+			{
+				"nvim-telescope/telescope-media-files.nvim",
+				lazy = true,
+			},
 		},
 		config = function()
 			local telescope = require("telescope")
 			local nonicons = require("nvim-nonicons")
-			telescope.load_extension("fzy_native")
-			telescope.load_extension("file_browser")
+			telescope.load_extension("fzf")
 			telescope.load_extension("notify")
 			telescope.load_extension("noice")
 			telescope.load_extension("media_files")
@@ -30,7 +38,7 @@ return {
 						i = {
 							["<C-j>"] = actions.move_selection_next, -- move to next result
 							["<C-k>"] = actions.move_selection_previous, -- move to prev result
-							-- ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
+							["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
 						},
 					},
 					vimgrep_arguments = {
@@ -83,11 +91,11 @@ return {
 			local builtin = require("telescope.builtin")
 			local themes = require("telescope.themes")
 			local with_dropdown = themes.get_dropdown()
-			local file_browser = telescope.extensions.file_browser
 			local media_files = telescope.extensions.media_files
 			local git_worktree = telescope.extensions.git_worktree
 			local todo_comments = telescope.extensions["todo-comments"]
 			local whop = telescope.extensions.whop
+			local notify = telescope.extensions.notify
 
 			-- Find files from project root with fallback
 			function vim.find_files_from_project_git_root()
@@ -131,12 +139,6 @@ return {
 						end,
 						"Recent files",
 					},
-					b = {
-						function()
-							file_browser.file_browser({ path = vim.fn.expand("%:p:h"), select_buffer = true })
-						end,
-						"File browser",
-					},
 					g = {
 						function()
 							builtin.live_grep()
@@ -179,6 +181,12 @@ return {
 						end,
 						"Jumplist",
 					},
+					N = {
+						function()
+							notify.notify({ layout_strategy = "vertical" })
+						end,
+						"Notifications",
+					},
 					h = {
 						function()
 							builtin.help_tags()
@@ -194,20 +202,5 @@ return {
 				},
 			}, { prefix = "<leader>" })
 		end,
-	},
-	{
-		"nvim-telescope/telescope-fzy-native.nvim",
-		lazy = true,
-		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-	},
-	{
-		"nvim-telescope/telescope-file-browser.nvim",
-		lazy = true,
-		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-	},
-	{
-		"nvim-telescope/telescope-media-files.nvim",
-		lazy = true,
-		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
 }

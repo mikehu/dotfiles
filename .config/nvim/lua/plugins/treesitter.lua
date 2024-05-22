@@ -35,13 +35,13 @@ return {
 				enable = true,
 			},
 			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<leader>v",
-					scope_incremental = "<c-n>",
-					node_incremental = "<tab>",
-					node_decremental = "<s-tab>",
-				},
+				enable = false,
+				-- keymaps = {
+				-- 	init_selection = "<leader>v",
+				-- 	scope_incremental = "<c-n>",
+				-- 	node_incremental = "<tab>",
+				-- 	node_decremental = "<s-tab>",
+				-- },
 			},
 			textobjects = {
 				select = {

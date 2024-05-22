@@ -5,7 +5,7 @@ return {
 	config = function()
 		require("wildfire").setup({
 			keymaps = {
-				init_selection = "gt",
+				init_selection = "<leader>v",
 				node_incremental = "<tab>",
 				node_decremental = "<s-tab>",
 			},
