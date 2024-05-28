@@ -66,3 +66,12 @@
 
 # flipper
 !.config/flipperdevices.com
+
+# yabai
+!.config/yabai
+!.config/yabai/yabairc
+
+# skhd
+!.config/skhd
+!.config/skhd/skhdrc
+!.config/skhd/scripts/**
