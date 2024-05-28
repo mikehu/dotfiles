@@ -7,6 +7,8 @@ ctrl + cmd - k: yabai -m window --focus north
 ctrl + cmd - h: yabai -m window --focus west
 ctrl + cmd - l: yabai -m window --focus east
 
+ctrl + cmd - g: yabai -m window --focus recent
+
 # Changing display focus
 ctrl + cmd - 0x29: yabai -m display --focus west
 ctrl + cmd - 0x27: yabai -m display --focus east
