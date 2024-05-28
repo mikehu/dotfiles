@@ -13,6 +13,10 @@ return {
 			["c++"] = true,
 			["go"] = true,
 			["python"] = true,
+			["vue"] = true,
+		}
+		vim.g.copilot_workspace_folders = {
+			"~/Code/shuttle",
 		}
 	end,
 }

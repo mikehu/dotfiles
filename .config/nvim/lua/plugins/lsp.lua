@@ -25,6 +25,7 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			-- "hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-emoji",
 
 			-- neogen
 			{
@@ -114,7 +115,7 @@ return {
 					}),
 					["<esc>"] = cmp.mapping({
 						i = function(fallback)
-							if cmp.visible() and #cmp.get_entries() > 0 then
+							if cmp.visible() and #cmp.get_entries() > 1 then
 								cmp.abort()
 							else
 								fallback()
@@ -180,20 +181,17 @@ return {
 					},
 				},
 				sources = {
-					{
-						{ name = "nvim_lsp" }, -- lsp
-						{ name = "luasnip", keyword_length = 2 }, -- snippets
-					},
-					{
-						{ name = "path" }, -- file system paths
-						{ name = "treesitter" },
-						{ name = "buffer", keyword_length = 4 }, -- text within current buffer
-					},
+					{ name = "nvim_lsp" }, -- lsp
+					{ name = "luasnip", keyword_length = 3 }, -- snippets
+					{ name = "path" }, -- file system paths
+					{ name = "treesitter" },
+					{ name = "buffer", keyword_length = 4 }, -- text within current buffer
+					{ name = "emoji" },
 				},
 				formatting = {
 					format = lspkind.cmp_format({
 						mode = "symbol",
-						maxwidth = 50,
+						maxwidth = 60,
 						ellipsis_char = "...",
 					}),
 				},

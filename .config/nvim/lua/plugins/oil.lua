@@ -10,16 +10,16 @@ return {
 				skip_confirm_for_simple_edits = true,
 			})
 
-			vim.keymap.set("n", "-", [[<cmd>Oil<cr>]], { desc = "Open parent directory" })
-			vim.keymap.set("n", "<leader>e", [[<cmd>Oil --float<cr>]], { desc = "File explorer [Oil]" })
-			vim.keymap.set("n", "<leader>c", function()
+			vim.keymap.set("n", "-", [[<cmd>Oil<cr>]], { desc = " Open parent directory" })
+			vim.keymap.set("n", "<leader>E", [[<cmd>Oil --float<cr>]], { desc = " File explorer" })
+			vim.keymap.set("n", "cd", function()
 				local oil_dir = oil.get_current_dir()
 				if oil_dir then
 					vim.cmd("lcd " .. oil_dir)
 				else
 					vim.cmd("lcd %:p:h")
 				end
-			end, { desc = "Change workdir" })
+			end, { desc = " Change workdir" })
 		end,
 	},
 }

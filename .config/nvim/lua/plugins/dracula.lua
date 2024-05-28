@@ -58,6 +58,7 @@ return {
 					CodewindowBorder = { fg = colors.base02 },
 					SatelliteCursor = { fg = colors.base0 },
 					SatelliteSearch = { fg = colors.orange },
+					CopilotSuggestion = { fg = colors.base01 },
 				}
 			end,
 			plugins = {

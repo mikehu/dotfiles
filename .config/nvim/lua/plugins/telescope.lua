@@ -66,7 +66,7 @@ return {
 						},
 					},
 					find_files = {
-						find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+						find_command = { "rg", "--color=never", "--files", "--hidden", "--glob", "!**/.git/*" },
 					},
 					oldfiles = {
 						theme = "dropdown",
@@ -77,6 +77,9 @@ return {
 					},
 				},
 				extensions = {
+					fzf = {
+						fuzzy = false,
+					},
 					media_files = {
 						-- filetypes whitelist
 						-- defaults to {"png", "jpg", "mp4", "webm", "pdf"}

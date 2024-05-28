@@ -31,13 +31,13 @@ keymap.set("v", "<m-k>", [[:m-2<cr>gv=gv]], { desc = "Move block up" })
 
 keymap.set({ "n", "i" }, "<c-y>", "<esc>Vyp<cr>k", { desc = "Duplicate line" })
 keymap.set("n", "c.", "viWo<esc>ct.", { desc = "Change up to <dot>" })
-keymap.set("n", "g,", "A,<esc>", { desc = "End with comma" })
 
 keymap.set("n", "go", [[:e ]], { desc = "Open path" })
 keymap.set("n", "<m-tab>", cmd([[bnext]]), { desc = "Cycle next buffer" })
 keymap.set("n", "<m-s-tab>", cmd([[bprev]]), { desc = "Cycle prev buffer" })
 
 keymap.set("n", "<leader>h", cmd([[nohl]]), { desc = "Remove highlights" })
+keymap.set("n", "<leader>,", "A,<esc>", { desc = "End with comma" })
 
 keymap.set("n", "<c-q>", cmd([[cclose]]), { desc = "Close quickfix list" })
 keymap.set("t", "<c-q>", cmd([[bd!]]), { desc = "Close terminal buffer" })
