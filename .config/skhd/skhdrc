@@ -36,8 +36,6 @@ shift + alt - z: yabai -m window --toggle zoom-fullscreen
 shift + alt - b: yabai -m space --balance
 
 # Move window to a space
-shift + alt - right: yabai -m window --space next
-shift + alt - left: yabai -m window --space prev
 shift + alt - 1: yabai -m window --space 1
 shift + alt - 2: yabai -m window --space 2
 shift + alt - 3: yabai -m window --space 3

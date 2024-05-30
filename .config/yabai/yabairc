@@ -28,6 +28,7 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Calendar$" manage=off
 yabai -m rule --add app="^ChatGPT$" manage=off
 yabai -m rule --add app="^Tandem$" manage=off
-yabai -m rule --add app="^Zoom$" manage=off
+yabai -m rule --add app="^zoom.us$" manage=off
+yabai -m rule --add app="^Zoom Meeting$" manage=off
 yabai -m rule --add app="^Transmission Remote GUI$" manage=off
 
