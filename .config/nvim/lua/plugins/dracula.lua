@@ -55,6 +55,7 @@ return {
 					CursorLine = { bg = colors.bgdark },
 					CursorLineNr = { fg = colors.fg },
 					lualine_a_terminal = { fg = colors.base04, bg = colors.cyan, bold = true },
+					lualine_c_normal = { fg = colors.base0, bg = colors.base02 },
 					CodewindowBorder = { fg = colors.base02 },
 					SatelliteCursor = { fg = colors.base0 },
 					SatelliteSearch = { fg = colors.orange },

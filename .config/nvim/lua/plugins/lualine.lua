@@ -5,10 +5,24 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		"meuter/lualine-so-fancy.nvim",
 		"cbochs/grapple.nvim",
+		"folke/trouble.nvim",
 	},
 	config = function()
 		local grapple = require("grapple")
+		local trouble = require("trouble")
 		local lazy_status = require("lazy.status")
+
+		local symbols = trouble.statusline({
+			mode = "lsp_document_symbols",
+			groups = {},
+			title = false,
+			filter = { range = true },
+			sep = "›",
+			format = "{kind_icon}{symbol.name:Normal}",
+			-- The following line is needed to fix the background color
+			-- Set it to the lualine section you want to use
+			hl_group = "lualine_c_normal",
+		})
 
 		require("lualine").setup({
 			options = {
@@ -19,7 +33,7 @@ return {
 					statusline = 1000,
 				},
 			},
-			extensions = { "quickfix", "oil", "trouble" },
+			extensions = { "quickfix", "oil", "trouble", "lazy" },
 			sections = {
 				lualine_c = {
 					{
@@ -28,12 +42,16 @@ return {
 						icon = "",
 					},
 					{
+						symbols.get,
+						cond = symbols.has,
+					},
+					{
 						function()
 							local key = grapple.name_or_index()
 							return "[" .. key .. "]"
 						end,
 						cond = grapple.exists,
-						icon = { "", align = "right" },
+						icon = { "󰛢" },
 					},
 				},
 				lualine_x = {

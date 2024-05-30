@@ -42,6 +42,14 @@ return {
 					end,
 					"Prev hunk",
 				},
+				["<leader>Gs"] = {
+					gitsigns.stage_hunk,
+					"Stage hunk",
+				},
+				["<leader>Gr"] = {
+					gitsigns.reset_hunk,
+					"Reset hunk",
+				},
 			}, { mode = { "n", "x", "o" } })
 		end,
 	},

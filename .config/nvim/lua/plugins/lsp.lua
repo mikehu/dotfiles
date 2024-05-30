@@ -359,7 +359,14 @@ return {
 				-- gopls = {},
 				-- denols = {},
 				emmet_ls = {},
-				eslint = {},
+				eslint = {
+					settings = {
+						useFlatConfig = false,
+						experimental = {
+							useFlatConfig = nil,
+						},
+					},
+				},
 				html = {},
 				jsonls = {},
 				lua_ls = {
