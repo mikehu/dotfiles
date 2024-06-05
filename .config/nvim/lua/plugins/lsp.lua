@@ -356,17 +356,21 @@ return {
 			local servers = {
 				bashls = {},
 				-- clangd = {},
-				-- gopls = {},
-				-- denols = {},
-				emmet_ls = {},
-				eslint = {
+				gopls = {
 					settings = {
-						useFlatConfig = false,
-						experimental = {
-							useFlatConfig = nil,
+						gopls = {
+							completeUnimported = true,
+							usePlaceholders = true,
+							analyses = {
+								unusedparams = true,
+							},
 						},
 					},
+					filetypes = { "go", "gomod", "gowork", "gotmpl" },
 				},
+				-- denols = {},
+				emmet_ls = {},
+				eslint = {},
 				html = {},
 				jsonls = {},
 				lua_ls = {

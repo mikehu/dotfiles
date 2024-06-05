@@ -9,20 +9,20 @@ return {
 	},
 	config = function()
 		local grapple = require("grapple")
-		local trouble = require("trouble")
+		-- local trouble = require("trouble")
 		local lazy_status = require("lazy.status")
 
-		local symbols = trouble.statusline({
-			mode = "lsp_document_symbols",
-			groups = {},
-			title = false,
-			filter = { range = true },
-			sep = "›",
-			format = "{kind_icon}{symbol.name:Normal}",
-			-- The following line is needed to fix the background color
-			-- Set it to the lualine section you want to use
-			hl_group = "lualine_c_normal",
-		})
+		-- local symbols = trouble.statusline({
+		-- 	mode = "lsp_document_symbols",
+		-- 	groups = {},
+		-- 	title = false,
+		-- 	filter = { range = true },
+		-- 	sep = "›",
+		-- 	format = "{kind_icon}{symbol.name:Normal}",
+		-- 	-- The following line is needed to fix the background color
+		-- 	-- Set it to the lualine section you want to use
+		-- 	hl_group = "lualine_c_normal",
+		-- })
 
 		require("lualine").setup({
 			options = {
@@ -42,9 +42,14 @@ return {
 						icon = "",
 					},
 					{
-						symbols.get,
-						cond = symbols.has,
+						"aerial",
 					},
+					-- {
+					-- 	symbols.get,
+					-- 	cond = symbols.has,
+					-- },
+				},
+				lualine_x = {
 					{
 						function()
 							local key = grapple.name_or_index()
@@ -53,8 +58,6 @@ return {
 						cond = grapple.exists,
 						icon = { "󰛢" },
 					},
-				},
-				lualine_x = {
 					{ "fancy_macro", icon = { "", color = { fg = "red" } } },
 					"filetype",
 				},

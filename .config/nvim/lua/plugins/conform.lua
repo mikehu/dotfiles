@@ -10,10 +10,12 @@ return {
 				lua = { "stylua" },
 				html = { "prettierd" },
 				handlebars = { "prettierd" },
-				javascript = { "prettierd" },
-				json = { "prettierd" },
+				javascript = { { "prettierd", "prettier" } },
+				json = { { "prettierd", "prettier" } },
 				yaml = { "yamlfmt" },
-				vue = { "prettierd" },
+				vue = { { "prettierd", "prettier" } },
+				go = { "goimports-reviser", "gofmt" },
+				["_"] = { "trim_whitespace" },
 			},
 			format_on_save = {
 				-- These options will be passed to conform.format()

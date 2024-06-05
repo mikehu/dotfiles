@@ -110,11 +110,11 @@ return {
 					local dot_git_path = vim.fn.finddir(".git", ".;")
 					return vim.fn.fnamemodify(dot_git_path, ":h")
 				end
-				local opts = with_dropdown
+				local opts = { wrap_results = true }
 				if is_git_repo() then
 					table.insert(opts, { cwd = get_git_root() })
 				end
-				builtin.find_files(opts)
+				builtin.find_files(themes.get_dropdown(opts))
 			end
 
 			-- Convenience keymaps
