@@ -2,7 +2,7 @@
 yabai -m config layout bsp
 yabai -m config --space 2 layout float
 
-yabai -m config split_ratio 0.62
+# yabai -m config split_ratio 0.62
 
 # decoration
 yabai -m config window_shadow float
@@ -15,7 +15,6 @@ yabai -m config right_padding 8
 yabai -m config window_gap 8
 
 # mouse settings
-yabai -m config mouse_modifier alt
 yabai -m config mouse_action1 move
 yabai -m config mouse_action2 resize
 yabai -m config mouse_drop_action swap
@@ -24,6 +23,8 @@ yabai -m config mouse_drop_action swap
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^1Password$" manage=off
+yabai -m rule --add app="^iTerm2$" manage=off
+yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Calendar$" manage=off
 yabai -m rule --add app="^ChatGPT$" manage=off
