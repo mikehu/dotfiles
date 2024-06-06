@@ -1,6 +1,7 @@
 # bsp, stack or float
 yabai -m config layout bsp
-yabai -m config --space 2 layout float
+yabai -m config --space 4 layout float
+yabai -m config --space 5 layout float
 
 # yabai -m config split_ratio 0.62
 
@@ -28,8 +29,12 @@ yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Calendar$" manage=off
 yabai -m rule --add app="^ChatGPT$" manage=off
-yabai -m rule --add app="^Tandem$" manage=off
 yabai -m rule --add app="^zoom.us$" manage=off
 yabai -m rule --add app="^Zoom Meeting$" manage=off
 yabai -m rule --add app="^Transmission Remote GUI$" manage=off
+yabai -m rule --add app="^Affinity" manage=off
+yabai -m rule --add app="^Insomnium$" grid=6:12:1:1:4:4 manage=off
+yabai -m rule --add app="^Redis Insight$" grid=6:12:1:1:4:4 manage=off
+yabai -m rule --add app="^MongoDB Compass$" grid=6:12:1:1:4:4 manage=off
+yabai -m rule --add app="^Tandem$" space=2 grid=2:6:5:0:1:1 manage=off
 
