@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.npm-pacakges/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -125,6 +125,10 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
+# Golang
+export GOPATH="$HOME/.go"
+export PATH="$GOPATH/bin:$PATH"
+
 # Starship
 eval "$(starship init zsh)"
 
@@ -134,3 +138,4 @@ eval "$(fzf --zsh)"
 
 # zoxide
 eval "$(zoxide init zsh)"
+
