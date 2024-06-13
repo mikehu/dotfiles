@@ -5,6 +5,7 @@ return {
 			silent = true,
 			autosave = true,
 			autoload = true,
+			use_git_branch = true,
 			allowed_dirs = {
 				"~/.dotfiles",
 				"~/Code",

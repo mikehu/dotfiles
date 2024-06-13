@@ -19,6 +19,22 @@ return {
 			desc = "Flash treesitter",
 		},
 		{
+			"gs",
+			mode = { "o" },
+			function()
+				require("flash").jump()
+			end,
+			desc = "Flash",
+		},
+		{
+			"gS",
+			mode = { "o" },
+			function()
+				require("flash").treesitter()
+			end,
+			desc = "Flash treesitter",
+		},
+		{
 			"r",
 			mode = "o",
 			function()

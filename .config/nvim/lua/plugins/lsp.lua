@@ -181,9 +181,9 @@ return {
 					},
 				},
 				sources = {
-					{ name = "nvim_lsp" }, -- lsp
+					{ name = "nvim_lsp", keyword_length = 2 }, -- lsp
 					{ name = "luasnip", keyword_length = 3 }, -- snippets
-					{ name = "path" }, -- file system paths
+					{ name = "path", keyword_length = 2 }, -- file system paths
 					{ name = "treesitter" },
 					{ name = "buffer", keyword_length = 4 }, -- text within current buffer
 					{ name = "emoji" },
