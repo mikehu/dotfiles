@@ -9,6 +9,8 @@ ctrl + cmd - l: yabai -m window --focus east
 
 ctrl + cmd - g: yabai -m window --focus recent
 
+ctrl + cmd - f: yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | reverse | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
+
 # Changing display focus
 ctrl + cmd - 0x29: yabai -m display --focus west
 ctrl + cmd - 0x27: yabai -m display --focus east
