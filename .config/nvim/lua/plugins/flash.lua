@@ -22,7 +22,9 @@ return {
 			"gs",
 			mode = { "o" },
 			function()
-				require("flash").jump()
+				require("flash").jump({ jump = {
+					inclusive = false,
+				} })
 			end,
 			desc = "Flash",
 		},
