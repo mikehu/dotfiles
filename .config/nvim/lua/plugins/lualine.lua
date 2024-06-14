@@ -6,9 +6,11 @@ return {
 		"meuter/lualine-so-fancy.nvim",
 		"cbochs/grapple.nvim",
 		"folke/trouble.nvim",
+		"folke/noice.nvim",
 	},
 	config = function()
 		local grapple = require("grapple")
+		local noice = require("noice")
 		-- local trouble = require("trouble")
 		local lazy_status = require("lazy.status")
 
@@ -33,7 +35,7 @@ return {
 					statusline = 1000,
 				},
 			},
-			extensions = { "quickfix", "oil", "trouble", "lazy" },
+			extensions = { "quickfix", "oil", "trouble", "lazy", "aerial" },
 			sections = {
 				lualine_c = {
 					{
@@ -56,14 +58,19 @@ return {
 							return "[" .. key .. "]"
 						end,
 						cond = grapple.exists,
-						icon = { "󰛢" },
+						icon = { "󰛢", color = { fg = "#8BE9FD" } },
 					},
 					{ "fancy_macro", icon = { "", color = { fg = "red" } } },
+					{ "searchcount", icon = { "", color = { fg = "#FFB86C" } } },
 					"filetype",
 				},
 				lualine_y = {
-					{ "searchcount", icon = "" },
-					"progress",
+					{
+						noice.api.status.command.get,
+						cond = noice.api.status.command.has,
+						color = { fg = "#F1FA8C" },
+						icon = { "" },
+					},
 				},
 				lualine_z = {
 					"location",
