@@ -192,6 +192,7 @@ return {
 					format = lspkind.cmp_format({
 						mode = "symbol",
 						maxwidth = 60,
+						symbol_map = {},
 						ellipsis_char = "...",
 					}),
 				},
