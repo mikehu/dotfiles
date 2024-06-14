@@ -29,7 +29,7 @@ return {
 		require("lualine").setup({
 			options = {
 				theme = vim.g.colors_name,
-				component_separators = "|",
+				component_separators = "⏐",
 				section_separators = "",
 				refresh = {
 					statusline = 1000,
@@ -47,9 +47,18 @@ return {
 				},
 				lualine_c = {
 					{
+						"filetype",
+						icon_only = true,
+						separator = "⟩",
+					},
+					{
 						"filename",
 						path = 1,
-						icon = "",
+						symbols = {
+							unnamed = "[??]",
+							newfile = "[N]",
+						},
+						separator = "⟩",
 					},
 					{
 						"aerial",
@@ -70,7 +79,6 @@ return {
 					},
 					{ "fancy_macro", icon = { "", color = { fg = "red" } } },
 					{ "searchcount", icon = { "", color = { fg = "#FFB86C" } } },
-					"filetype",
 				},
 				lualine_y = {
 					{

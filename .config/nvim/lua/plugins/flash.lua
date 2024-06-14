@@ -19,7 +19,7 @@ return {
 			desc = "Flash treesitter",
 		},
 		{
-			"gs",
+			"g/",
 			mode = { "o" },
 			function()
 				require("flash").jump({ jump = {
@@ -27,14 +27,6 @@ return {
 				} })
 			end,
 			desc = "Flash",
-		},
-		{
-			"gS",
-			mode = { "o" },
-			function()
-				require("flash").treesitter()
-			end,
-			desc = "Flash treesitter",
 		},
 		{
 			"r",
