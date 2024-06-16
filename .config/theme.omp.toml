@@ -52,18 +52,15 @@ overflow = "hidden"
 
 [[blocks]]
 alignment = "left"
-newline = true
 type = "prompt"
+newline = true
 
   [[blocks.segments]]
-  type = "status"
+  type = "text"
   style = "plain"
   foreground = "p:green"
   foreground_templates = [ "{{ if gt .Code 0 }}p:red{{ end }}" ]
-  template = "❯ "
-
-    [blocks.segments.properties]
-    always_enabled = true
+  template = "❯"
 
 [transient_prompt]
 foreground = "p:pink"
