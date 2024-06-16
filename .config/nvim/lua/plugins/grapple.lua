@@ -28,7 +28,7 @@ return {
 				},
 				t = {
 					[[<cmd>Telescope grapple tags theme=dropdown<cr>]],
-					"Tags menu",
+					"🔭 Tags menu",
 				},
 				s = {
 					grapple.toggle_scopes,

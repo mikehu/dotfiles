@@ -118,13 +118,13 @@ return {
 			end
 
 			-- Convenience keymaps
-			vim.keymap.set("n", "<leader>o", vim.find_files_from_project_git_root, { desc = "Open file" })
+			vim.keymap.set("n", "<leader>o", vim.find_files_from_project_git_root, { desc = "🔭 Open file" })
 			vim.keymap.set("n", "<leader>b", function()
 				builtin.buffers()
-			end, { desc = "Recent files" })
+			end, { desc = "🔭 Recent files" })
 			vim.keymap.set("n", "<leader>/", function()
 				builtin.current_buffer_fuzzy_find()
-			end, { desc = "Search current buffer" })
+			end, { desc = "🔭 Search current buffer" })
 
 			-- Telescope plugin
 			wk.register({
