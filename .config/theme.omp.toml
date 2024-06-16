@@ -24,7 +24,7 @@ newline = true
   style = "plain"
   foreground = "p:comment"
   background = "transparent"
-  template = "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<p:orange>*</>{{ .Working.String }}{{ end }} "
+  template = "{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<p:orange>*</>{{ .Working.String }}{{ end }} "
 
     [blocks.segments.properties]
     branch_ahead_icon = "<p:cyan>⇡ </>"
@@ -33,7 +33,6 @@ newline = true
     commit_icon = "@"
     fetch_status = true
     fetch_stash_count = true
-    fetch_upstream_icon = true
     github_icon = ""
 
 [[blocks]]
