@@ -4,11 +4,15 @@
 !.gitconfig
 !.zshrc
 !.zprofile
+!.zsh_plugins.txt
 !.config/
 
 # SSH
 !.ssh/
 !.ssh/config
+
+# oh my posh
+!.config/theme.omp.toml
 
 # Starship
 !.config/starship.toml

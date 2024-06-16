@@ -1,0 +1,11 @@
+# .zsh_plugins.txt
+
+zsh-users/zsh-completions
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting
+Aloxaf/fzf-tab
+z-shell/zsh-eza
+zshzoo/magic-enter
+
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/kubectl

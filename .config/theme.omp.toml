@@ -1,0 +1,88 @@
+#:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+version = 2
+final_space = true
+console_title_template = "{{ .Shell }} in {{ .Folder }}"
+
+[[blocks]]
+alignment = "left"
+type = "prompt"
+newline = true
+
+  [[blocks.segments]]
+  type = "path"
+  style = "plain"
+  foreground = "p:purple"
+  background = "transparent"
+  template = "{{ .Path }} "
+
+    [blocks.segments.properties]
+    style = "full"
+
+  [[blocks.segments]]
+  type = "git"
+  style = "plain"
+  foreground = "p:comment"
+  background = "transparent"
+  template = "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<p:orange>*</>{{ .Working.String }}{{ end }} "
+
+    [blocks.segments.properties]
+    branch_ahead_icon = "<p:cyan>⇡ </>"
+    branch_behind_icon = "<p:cyan>⇣ </>"
+    branch_icon = ""
+    commit_icon = "@"
+    fetch_status = true
+    fetch_stash_count = true
+    fetch_upstream_icon = true
+    github_icon = ""
+
+[[blocks]]
+type = "rprompt"
+overflow = "hidden"
+
+  [[blocks.segments]]
+  type = "executiontime"
+  style = "plain"
+  foreground = "p:yellow"
+  background = "transparent"
+  template = " {{ .FormattedMs }} "
+
+    [blocks.segments.properties]
+    style = "austin"
+    threshold = 5000
+
+[[blocks]]
+alignment = "left"
+newline = true
+type = "prompt"
+
+  [[blocks.segments]]
+  type = "status"
+  style = "plain"
+  foreground = "p:green"
+  foreground_templates = [ "{{ if gt .Code 0 }}p:red{{ end }}" ]
+  template = "❯ "
+
+    [blocks.segments.properties]
+    always_enabled = true
+
+[transient_prompt]
+foreground = "p:pink"
+foreground_templates = [ "{{ if gt .Code 0 }}p:red{{ end }}" ]
+background = "transparent"
+template = "❯ "
+
+[secondary_prompt]
+foreground = "p:pink"
+background = "transparent"
+template = "❯❯ "
+
+[palette]
+purple = "#BD93F9"
+green = "#50FA7B"
+red = "#FF5555"
+orange = "#FFB86C"
+pink = "#FF79C6"
+cyan = "#8BE9FD"
+yellow = "#F1FA8C"
+comment = "#6272A4"
