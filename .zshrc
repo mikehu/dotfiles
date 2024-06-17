@@ -22,14 +22,20 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 
 # Homebrew (site-functions for zsh)
-fpath+=("$(brew --prefix)/share/zsh/site-functions")
+if command -v brew 1>/dev/null 2>&1; then
+  fpath+=("$(brew --prefix)/share/zsh/site-functions")
+fi
 
 # ZSH Config
 autoload -U zmv
 autoload -Uz compinit && compinit
 
 # Antidote
-source "$(brew --prefix)/opt/antidote/share/antidote/antidote.zsh"
+if command -v brew 1>/dev/null 2>&1; then
+  source "$(brew --prefix)/opt/antidote/share/antidote/antidote.zsh"
+else
+  source "$HOME/.antidote/antidote.zsh"
+fi
 
 antidote load
 
