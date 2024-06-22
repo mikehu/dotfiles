@@ -71,7 +71,7 @@ template = "❯ "
 [secondary_prompt]
 foreground = "p:pink"
 background = "transparent"
-template = "❯❯ "
+template = "<p:shade_pink>❯</>❯ "
 
 [palette]
 purple = "#BD93F9"
@@ -79,6 +79,7 @@ green = "#50FA7B"
 red = "#FF5555"
 orange = "#FFB86C"
 pink = "#FF79C6"
+shade_pink = "#5E3E5A"
 cyan = "#8BE9FD"
 yellow = "#F1FA8C"
 comment = "#6272A4"
