@@ -59,6 +59,23 @@ setopt hist_ignore_dups
 setopt hist_save_no_dups
 setopt hist_find_no_dups
 
+# vi-mode cursor
+function zle-keymap-select {
+  if [[ $KEYMAP == vicmd ]]; then
+    echo -ne '\e[2 q'  # Block cursor
+  elif [[ $KEYMAP == main ]] || [[ $KEYMAP == viins ]]; then
+    echo -ne '\e[6 q'  # Line cursor
+  fi
+}
+function zle-line-init {
+  echo -ne '\e[6 q'  # Line cursor
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+# Set the cursor to line shape when starting Zsh
+echo -ne '\e[6 q'  # Line cursor
+
 # allow case-insensitive completions
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # disable sort when completing `git checkout`
