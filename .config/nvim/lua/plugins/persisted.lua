@@ -7,7 +7,7 @@ return {
 			autoload = true,
 			use_git_branch = true,
 			allowed_dirs = {
-				"~/.dotfiles",
+				"~/dotfiles",
 				"~/Code",
 				"/Volumes/Pebble",
 			},
