@@ -18,14 +18,12 @@ return {
 			-- Adds LSP completion capabilities
 			"hrsh7th/cmp-nvim-lsp",
 
-			-- Adds a number of user-friendly snippets
-			"rafamadriz/friendly-snippets",
-
 			-- Some additional helpers
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			-- "hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-emoji",
+			"hrsh7th/cmp-nvim-lua",
 
 			-- neogen
 			{
@@ -182,17 +180,19 @@ return {
 				},
 				sources = {
 					{ name = "nvim_lsp", keyword_length = 2 }, -- lsp
-					{ name = "luasnip", keyword_length = 3 }, -- snippets
-					{ name = "path", keyword_length = 2 }, -- file system paths
-					{ name = "treesitter" },
 					{ name = "buffer", keyword_length = 4 }, -- text within current buffer
+					{ name = "luasnip", keyword_length = 3 }, -- snippets
 					{ name = "emoji" },
+					{ name = "path", keyword_length = 2 }, -- file system paths
+					{ name = "nvim_lua" },
 				},
 				formatting = {
 					format = lspkind.cmp_format({
 						mode = "symbol",
 						maxwidth = 60,
-						symbol_map = {},
+						symbol_map = {
+							Codeium = "󰘦 ",
+						},
 						ellipsis_char = "...",
 					}),
 				},
