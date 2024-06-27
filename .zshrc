@@ -117,3 +117,7 @@ eval "$(fzf --zsh)"
 # zoxide
 eval "$(zoxide init zsh)"
 
+# pfetch
+if [ -f /usr/bin/pfetch ]; then
+  /usr/bin/pfetch
+fi
