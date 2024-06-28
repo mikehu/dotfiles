@@ -24,7 +24,7 @@ set mouse=a
 set cursorline
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
 set ruler
-set clipboard+=unnamedplus
+set clipboard^=unnamed,unnamedplus
 set ttyfast
 set termguicolors
 set t_Co=256
