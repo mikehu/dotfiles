@@ -26,7 +26,7 @@ configuration {
     font: "Montserrat 12";
 
     fg: #f8f8f2;
-    bg: #282a36;
+    bg: #282a3699;
 
     background-color: transparent;
     text-color: @fg;
@@ -54,6 +54,9 @@ configuration {
     padding:  10px;
     spacing:  10px;
     children: [ icon-search, entry ];
+    border:   0 0 1px;
+    border-color: @bg;
+    background-color:  @bg;
 }
 
 #icon-search {
@@ -71,9 +74,6 @@ configuration {
 }
 
 #message {
-    border:             2px 0 0;
-    border-color:       @bg;
-    background-color:   @bg;
 }
 
 #textbox {
@@ -84,16 +84,16 @@ configuration {
     lines:      10;
     columns:    1;
 
-    border:         1px 0 0;
+    border:         0 0 1px;
     border-color:   @bg;
     scrollbar:      false;
 }
 
 #listview box {
-  layout:       vertical;
-  dynamic:      true;
-  fixed-height: false;
-  spacing:      0px;
+    layout:       vertical;
+    dynamic:      true;
+    fixed-height: false;
+    spacing:      0px;
 }
 
 #element {

@@ -2,22 +2,20 @@
 
 @keyframes blink-warning {
   70% {
-    color: @light;
+    color: @foreground;
   }
-
   to {
-    color: @light;
+    color: @foreground;
     background-color: @warning;
   }
 }
 
 @keyframes blink-critical {
   70% {
-    color: @light;
+    color: @foreground;
   }
-
   to {
-    color: @light;
+    color: @foreground;
     background-color: @critical;
   }
 }
@@ -28,8 +26,6 @@
 
 /* COLORS */
 
-/* Nord */
-@define-color light #D8DEE9;
 /*@define-color dark @nord_dark_font;*/
 @define-color warning #ebcb8b;
 @define-color critical #BF616A;
@@ -58,18 +54,16 @@
 /* Reset all styles */
 * {
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
   min-height: 0;
-  margin: 0.2em 0.3em 0.2em 0.3em;
 }
 
-/* The whole bar */
-#waybar {
-  background: transparent;
-  color: @light;
-  font-family: "Fira Code Nerd Font";
+window#waybar {
+  font-family: "DroidSansM Nerd Font";
   font-size: 12px;
   font-weight: bold;
+  background: transparent;
+  color: @foreground;
 }
 
 /* Each module */
@@ -92,6 +86,7 @@
 #custom-cpugovernor {
   padding-left: 0.6em;
   padding-right: 0.6em;
+  margin: 3px 6px;
 }
 
 /* Each module that should blink */
@@ -141,7 +136,7 @@
 
 #mode {
   /* Shown current Sway mode (resize etc.) */
-  color: @light;
+  color: @foreground;
   background: @mode;
 }
 
@@ -153,8 +148,7 @@
 }
 
 #workspaces button {
-  font-weight: bold; /* Somewhy the bar-wide setting is ignored*/
-  padding: 0 0.5em;
+  padding: 0;
   background: @background;
   font-size: 1em;
 }
@@ -163,7 +157,6 @@
   background: @workspacesfocused;
   color: #d8dee9;
   opacity: 1;
-  padding: 0 0.4em;
 }
 
 #workspaces button.urgent {
@@ -289,5 +282,5 @@
   /* No styles */
 }
 #tray {
-  background: #434c5e;
+  background: #282a36;
 }
