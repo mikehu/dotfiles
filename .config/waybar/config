@@ -1,14 +1,37 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 24,
+    "spacing": 0,
 
     "include": [
         "~/.config/waybar/modules/config.jsonc"
     ],
 
-    "modules-left": [],
+    "modules-left": [ "group/start", "hyprland/window" ],
     "modules-center": [ "hyprland/workspaces" ],
-    "modules-right": [ "tray", "pulseaudio", "bluetooth", "network" ],
+    "modules-right": [ "tray", "group/hardware", "custom/updates", "pulseaudio", "clock" ],
+
+    "group/start": {
+      "orientation": "inherit",
+      "drawer": {
+        "transition-duration": 200,
+        "children-class": "group-start"
+      },
+      "modules": [
+        "custom/launcher",
+        "custom/power",
+        "idle_inhibitor"
+      ]
+    },
+
+    "group/hardware": {
+      "orientation": "inherit",
+      "modules": [
+        "cpu",
+        "memory",
+      ]
+    },
 
     "reload_style_on_change": true
 }
