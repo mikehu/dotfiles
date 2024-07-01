@@ -17,6 +17,11 @@
     },
     "tooltip": false
   },
+  "custom/wallpaper": {
+    "format": " ",
+    "tooltip": false,
+    "on-click": "~/.config/hypr/scripts/apply-desktop-experience.sh"
+  },
   "hyprland/window": {
     "separate-outputs": true,
     "icon": true,

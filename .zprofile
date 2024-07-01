@@ -5,7 +5,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "Running linux"
     if [[ "$(tty)" == "/dev/tty1" && -e ~/.config/hypr/scripts ]]; then
         if sh ~/.config/hypr/scripts/hyprland-startup.sh; then
-            echo "goodbye, now logging out"
             exit 0
         else
             echo "$? hyprland-startup.sh failed"

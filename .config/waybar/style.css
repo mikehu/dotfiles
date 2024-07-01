@@ -1,14 +1,7 @@
 @import url("./colors.css");
 
-/* Colors */
-@define-color selection #44475a;
-@define-color comment #6272a4;
-@define-color cyan #8be9fd;
-@define-color green #50fa7b;
-@define-color orange #ffb86c;
-@define-color pink #ff79c6;
-@define-color purple #bd93f9;
 @define-color red #ff5555;
+@define-color orange #ffb86c;
 @define-color yellow #f1fa8c;
 
 /* Reset all styles */
@@ -41,15 +34,18 @@ tooltip label {
 /* Group Start */
 #custom-launcher,
 #custom-power,
-#idle_inhibitor {
+#idle_inhibitor,
+#custom-wallpaper {
   margin: 8px 0 0 10px;
-  background: alpha(@foreground, 0.3);
+  font-size: 14px;
+  background: alpha(@background, 0.4);
 }
 
 #custom-launcher:hover,
 #custom-power:hover,
 #idle_inhibitor.activated:hover,
-#idle_inhibitor.deactivated:hover {
+#idle_inhibitor.deactivated:hover,
+#custom-wallpaper:hover {
   color: @foreground;
 }
 
@@ -58,22 +54,19 @@ tooltip label {
   margin-left: 20px;
   padding-top: 2px;
   padding-right: 3px;
-  font-size: 14px;
-  color: @purple;
+  color: @color8;
 }
 
 /* Custom Power */
 #custom-power {
   padding-top: 2px;
   padding-right: 3px;
-  font-size: 14px;
-  color: @green;
+  color: @color10;
 }
 
 /* Idle Inhibitor */
 #idle_inhibitor {
   padding: 2px 6px 0;
-  font-size: 14px;
 }
 
 #idle_inhibitor.activated {
@@ -81,14 +74,20 @@ tooltip label {
 }
 
 #idle_inhibitor.deactivated {
-  color: @yellow;
+  color: @color11;
+}
+
+/* Custom Wallpaper */
+#custom-wallpaper {
+  padding: 2px 6px 0;
+  color: @color12;
 }
 
 /* Window */
 #window {
   margin: 8px 10px 0;
   padding: 2px 8px;
-  background: alpha(@foreground, 0.3);
+  background: alpha(@background, 0.4);
 }
 
 /* Workspaces */
@@ -96,13 +95,13 @@ tooltip label {
   border-radius: 9999px;
   margin-top: 8px;
   padding: 3px 4px 4px;
-  background: alpha(@background, 0.5);
+  background: alpha(@background, 0.3);
 }
 
 #workspaces button {
   padding: 0;
   margin: 0 2px;
-  color: @comment;
+  color: alpha(@color7, 0.8);
   background: transparent;
 }
 
@@ -132,7 +131,7 @@ tooltip label {
   margin: 8px 5px 0;
   padding: 3px 6px 3px 12px;
   font-size: 12px;
-  background: alpha(@foreground, 0.3);
+  background: alpha(@background, 0.4);
   color: @foreground;
 }
 
@@ -142,12 +141,8 @@ tooltip label {
   margin: 8px 5px 0;
   padding: 3px 6px 3px 8px;
   font-size: 12px;
-  background: alpha(@foreground, 0.3);
+  background: alpha(@background, 0.4);
   color: @foreground;
-}
-
-#custom-updates.updated {
-  color: @green;
 }
 
 #custom-updates.pending-updates {
@@ -161,8 +156,8 @@ tooltip label {
   margin: 8px 0 0 5px;
   padding: 3px 6px 3px 8px;
   font-size: 12px;
-  background: alpha(@foreground, 0.3);
-  color: @pink;
+  background: alpha(@background, 0.4);
+  color: @color13;
 }
 
 /* Memory */
@@ -172,8 +167,8 @@ tooltip label {
   margin: 8px 5px 0 0;
   padding: 3px 8px 3px 6px;
   font-size: 12px;
-  background: alpha(@foreground, 0.3);
-  color: @cyan;
+  background: alpha(@background, 0.4);
+  color: @color14;
 }
 
 /* Tray */
@@ -181,6 +176,6 @@ tooltip label {
   border-radius: 9999px;
   margin: 8px 5px 0;
   padding: 3px 6px;
-  background: alpha(@foreground, 0.3);
-  color: @comment;
+  background: alpha(@background, 0.4);
+  color: @color15;
 }

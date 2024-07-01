@@ -21,7 +21,8 @@
       "modules": [
         "custom/launcher",
         "custom/power",
-        "idle_inhibitor"
+        "idle_inhibitor",
+        "custom/wallpaper"
       ]
     },
 

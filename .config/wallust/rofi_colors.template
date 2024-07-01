@@ -1,0 +1,9 @@
+* {
+  fg: {{foreground}};
+  bg: {{background}}8a;
+
+  active-background: {{color10}}8a;
+  urgent-background: #ff5555;
+  urgent-foreground: {{background}};
+}
+

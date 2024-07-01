@@ -21,19 +21,13 @@ configuration {
 }
 
 @theme "/dev/null"
+@import "colors.rasi"
 
 * {
     font: "Montserrat 12";
 
-    fg: #f8f8f2;
-    bg: #282a3699;
-
     background-color: transparent;
     text-color: @fg;
-
-    active-background: #6272a490;
-    urgent-background: #ff5555;
-    urgent-foreground: #282a36;
 
     selected-background: @active-background;
     selected-urgent-background: @urgent-background;
