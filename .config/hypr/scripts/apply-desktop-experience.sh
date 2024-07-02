@@ -9,7 +9,9 @@ set_wallpaper() {
 
 adopt_colors() {
     local filepath=$1
+    local filename=$(basename "$filepath")
     sleep 1 && wallust -q -s "$filepath" && makoctl reload
+    notify-send "Applied desktop experience:" "$filename"
 }
 
 # Check if a filepath is provided
