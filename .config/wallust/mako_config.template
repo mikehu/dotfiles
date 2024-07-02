@@ -1,0 +1,20 @@
+font=DroidSansM Nerd Font 10
+width=400
+height=120
+outer-margin=0,10
+margin=10,0
+padding=10,15
+border-size=1
+border-radius=10
+border-color={{foreground}}28
+background-color={{background}}cc
+progress-color={{color7}}cc
+text-color={{foreground}}
+default-timeout=5000
+ignore-timeout=1
+group-by=app-name,category
+
+[urgency=high]
+border-color=#ff555528
+default-timeout=0
+

@@ -9,7 +9,7 @@ set_wallpaper() {
 
 adopt_colors() {
     local filepath=$1
-    sleep 1 && wallust -q -s "$filepath"
+    sleep 1 && wallust -q -s "$filepath" && makoctl reload
 }
 
 # Check if a filepath is provided

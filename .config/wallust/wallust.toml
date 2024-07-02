@@ -103,3 +103,9 @@ new_engine = true
 template = "rofi_colors.template"
 target = "~/.config/rofi/colors.rasi"
 new_engine = true
+
+[[entry]]
+template = "mako_config.template"
+target = "~/.config/mako/config"
+new_engine = true
+

@@ -91,6 +91,12 @@ tooltip label {
   background: alpha(@background, 0.4);
 }
 
+window#waybar.empty #window {
+  min-width: 6px;
+  border: 1px dashed alpha(@foreground, 0.4);
+  background: transparent;
+}
+
 /* Custom Clipboard */
 #custom-clipboard {
   margin: 8px 10px 0 0;
