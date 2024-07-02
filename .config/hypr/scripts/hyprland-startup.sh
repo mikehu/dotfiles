@@ -24,3 +24,4 @@ while [ ! -f /run/udev/data/+drm:card0-DP-3 ] ; do echo "waiting for drm" && sle
  && echo "Hyprland needs drm, bailing out" && exit -1
 
 exec Hyprland > .hyprland.log.txt 2> .hyprland.err.txt
+
