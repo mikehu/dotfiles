@@ -1,5 +1,6 @@
 @import url("./colors.css");
 
+@define-color green #50fa7b;
 @define-color red #ff5555;
 @define-color orange #ffb86c;
 @define-color yellow #f1fa8c;
@@ -79,7 +80,7 @@ tooltip label {
 
 /* Custom Wallpaper */
 #custom-wallpaper {
-  padding: 2px 6px 0;
+  padding: 2px 4px 0 6px;
   color: @color12;
 }
 
@@ -88,6 +89,15 @@ tooltip label {
   margin: 8px 10px 0;
   padding: 2px 8px;
   background: alpha(@background, 0.4);
+}
+
+/* Custom Clipboard */
+#custom-clipboard {
+  margin: 8px 10px 0 0;
+  padding: 0 12px 0 10px;
+  font-size: 14px;
+  background: alpha(@background, 0.4);
+  color: @color14;
 }
 
 /* Workspaces */
@@ -143,6 +153,10 @@ tooltip label {
   font-size: 12px;
   background: alpha(@background, 0.4);
   color: @foreground;
+}
+
+#custom-updates.updated {
+  color: @green;
 }
 
 #custom-updates.pending-updates {

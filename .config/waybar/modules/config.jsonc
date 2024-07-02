@@ -22,6 +22,12 @@
     "tooltip": false,
     "on-click": "~/.config/hypr/scripts/apply-desktop-experience.sh"
   },
+  "custom/clipboard": {
+    "format": "",
+    "interval": 86400,
+    "tooltip": false,
+    "on-click": "cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+  },
   "hyprland/window": {
     "separate-outputs": true,
     "icon": true,
@@ -82,7 +88,8 @@
     },
     "return-type": "json",
     "exec-if": "which waybar-updates",
-    "exec": "waybar-updates"
+    "exec": "waybar-updates",
+    "on-click": "kitty --class=\"kitty-float\" -o remember_window_size=no -o initial_window_width=1200 -o initial_window_height=960 sh -c \"yay; read -n 1 -s -r -p 'Press any key to close...'\""
   },
   "cpu": {
     "format": "  {icon} {usage}%",
