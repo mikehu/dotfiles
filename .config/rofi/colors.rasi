@@ -1,9 +1,0 @@
-* {
-  fg: #DFDBE9;
-  bg: #0501068a;
-
-  active-background: #6E5BA78a;
-  urgent-background: #ff5555;
-  urgent-foreground: #050106;
-}
-
