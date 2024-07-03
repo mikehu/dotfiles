@@ -33,6 +33,7 @@ yabai -m rule --add app="^ChatGPT$" manage=off
 yabai -m rule --add app="^zoom.us$" manage=off
 yabai -m rule --add app="^Zoom Meeting$" manage=off
 yabai -m rule --add app="^Transmission Remote GUI$" manage=off
+yabai -m rule --add app="^The Unarchiver$" manage=off
 yabai -m rule --add app="^Affinity" manage=off
 yabai -m rule --add app="^Insomnium$" grid=6:12:1:1:4:4 manage=off
 yabai -m rule --add app="^Redis Insight$" grid=6:12:1:1:4:4 manage=off
