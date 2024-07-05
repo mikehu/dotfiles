@@ -15,7 +15,8 @@
       "activated": " ",
       "deactivated": " "
     },
-    "tooltip": false
+    "tooltip": false,
+    "on-click-right": "hyprlock"
   },
   "custom/wallpaper": {
     "format": " ",

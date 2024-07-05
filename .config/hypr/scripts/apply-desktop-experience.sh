@@ -1,16 +1,20 @@
 #!/bin/bash
 
-WALLPAPER_DIR=~/Pictures
+WALLPAPER_DIR=$HOME/Pictures
+CACHE_DIR=$HOME/.cache
 
 set_wallpaper() {
     local filepath=$1
     swww img "$filepath" --transition-type wipe --transition-step 30 --transition-fps 120
+    # now we need to save cached copies for hyprlock
+    magick convert "$filepath" -filter Gaussian -blur 0x40 "$CACHE_DIR/blurred_wallpaper.png"
+    magick convert "$filepath" -resize 600x600^ -gravity Center -extent 1:1 "$CACHE_DIR/cropped_center_wallpaper.png"
 }
 
 adopt_colors() {
     local filepath=$1
     local filename=$(basename "$filepath")
-    sleep 1 && wallust -q -s "$filepath" && makoctl reload
+    wallust -q -s "$filepath" && makoctl reload
     notify-send "Applied desktop experience:" "$filename"
 }
 
