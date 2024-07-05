@@ -1,4 +1,4 @@
-font=DroidSansM Nerd Font 10
+font=DroidSansM Nerd Font 10, FontAwesome 12, Noto Sans CJK 10
 width=400
 height=120
 outer-margin=0,10
@@ -13,6 +13,10 @@ text-color={{foreground}}
 default-timeout=5000
 ignore-timeout=1
 group-by=app-name,category
+format=<b>%s</b>\n\n%b
+
+[grouped]
+format=<b>%s</b> <i>(%g)</i>\n\n%b
 
 [urgency=high]
 border-color=#ff555528
