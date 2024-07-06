@@ -94,18 +94,9 @@ check_contrast = true
 #
 # Where `var` can be colors from `color0` to `color15`, `background`, `foreground` and `cursor`.
 
-[[entry]]
-template = "waybar_colors.template"
-target = "~/.config/waybar/colors.css"
-new_engine = true
-
-[[entry]]
-template = "rofi_colors.template"
-target = "~/.config/rofi/colors.rasi"
-new_engine = true
-
-[[entry]]
-template = "mako_config.template"
-target = "~/.config/mako/config"
-new_engine = true
+[templates]
+hypr = { template = "hypr_colors.template", target = "~/.config/hypr/colors.conf", new_engine = true }
+waybar = { template = "waybar_colors.template", target = "~/.config/waybar/colors.css", new_engine = true }
+rofi = { template = "rofi_colors.template", target = "~/.config/rofi/colors.rasi", new_engine = true }
+mako = { template = "mako_config.template", target = "~/.config/mako/config", new_engine = true }
 

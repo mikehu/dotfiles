@@ -1,0 +1,15 @@
+# generated from wallust
+general {
+    col.active_border = rgb({{color8.strip}}) rgb({{color10.strip}}) 90deg
+    col.inactive_border = rgba({{color8.strip}}aa)
+    col.nogroup_border = rgba({{background.strip}}dd)
+    col.nogroup_border_active = rgb({{color10.strip}}) rgb({{color8.strip}}) 90deg
+}
+
+group {
+    groupbar {
+        col.active = rgb({{color10.strip}}) rgb({{color8.strip}}) 90deg
+        col.inactive = rgba({{background.strip}}dd)
+    }
+}
+

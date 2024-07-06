@@ -1,6 +1,7 @@
 lazy-lock.json
 
 # ignore config generated from wallust
+.config/hypr/colors.conf
 .config/waybar/colors.css
 .config/rofi/colors.rasi
 .config/mako/config

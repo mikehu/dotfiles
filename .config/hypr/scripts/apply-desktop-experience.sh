@@ -5,17 +5,21 @@ CACHE_DIR=$HOME/.cache
 
 set_wallpaper() {
     local filepath=$1
+    # now transition the wallpaper
     swww img "$filepath" --transition-type wipe --transition-step 30 --transition-fps 120
-    # now we need to save cached copies for hyprlock
-    magick convert "$filepath" -filter Gaussian -blur 0x40 "$CACHE_DIR/blurred_wallpaper.png"
-    magick convert "$filepath" -resize 600x600^ -gravity Center -extent 1:1 "$CACHE_DIR/cropped_center_wallpaper.png"
 }
 
 adopt_colors() {
     local filepath=$1
     local filename=$(basename "$filepath")
-    wallust -q -s "$filepath" && makoctl reload
+    wallust run -q -s "$filepath" && makoctl reload
     notify-send "Applied desktop experience:" "$filename"
+}
+
+cache_wallpaper() {
+    # we need to cached wallpaper assets for hyprlock
+    magick convert "$filepath" -filter Gaussian -blur 0x40 "$CACHE_DIR/blurred_wallpaper.png"
+    magick convert "$filepath" -resize 600x600^ -gravity Center -extent 1:1 "$CACHE_DIR/cropped_center_wallpaper.png"
 }
 
 # Check if a filepath is provided
@@ -27,7 +31,7 @@ else
     random_file=$(rg --files --glob "*.jpg" "$WALLPAPER_DIR" | shuf -n 1)
 
     if [ -n "$random_file" ]; then
-        set_wallpaper "$random_file"
+        set_wallpaper "$random_file" & cache_wallpaper "$random_file"
         adopt_colors "$random_file"
     else
         echo "No .jpg files found in $WALLPAPER_DIR directory."
