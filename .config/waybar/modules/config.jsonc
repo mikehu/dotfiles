@@ -92,6 +92,15 @@
     "exec": "waybar-updates",
     "on-click": "kitty --class=\"kitty-float\" -o remember_window_size=no -o initial_window_width=1200 -o initial_window_height=960 sh -c \"yay; read -n 1 -s -r -p 'Press any key to close...'\""
   },
+  "network": {
+    "format":"   {bandwidthUpBytes}  {bandwidthDownBytes}",
+    "format-disconnected": "",
+    "tooltip-format": "{ipaddr}",
+    "tooltip-format-wifi": "<b>{ipaddr}</b> via {gwaddr} (  {essid}) [{signalStrength}%]",
+    "tooltip-format-ethernet": "<b>{ipaddr}</b> via {gwaddr} (  {ifname})",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 30
+  },
   "cpu": {
     "format": "  {icon} {usage}%",
     "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
@@ -106,16 +115,5 @@
   "tray": {
     "icon-size": 16,
     "spacing": 8
-  },
-  "network": {
-    // "interface": "wlan0", // (Optional) To force the use of this interface,
-    "format-wifi": "  {essid}",
-    "format-ethernet": "{ipaddr}/{cidr} ",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "family": "ipv4",
-    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\n {bandwidthUpBits}  {bandwidthDownBits}",
-    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n {bandwidthUpBits}  {bandwidthDownBits}"
   }
 }

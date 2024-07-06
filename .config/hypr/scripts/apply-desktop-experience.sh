@@ -5,7 +5,7 @@ CACHE_DIR=$HOME/.cache
 
 set_wallpaper() {
     local filepath=$1
-    # now transition the wallpaper
+    # transition the wallpaper
     swww img "$filepath" --transition-type wipe --transition-step 30 --transition-fps 120
 }
 

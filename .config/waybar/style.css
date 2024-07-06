@@ -191,6 +191,16 @@ window#waybar.empty #window {
   color: @color14;
 }
 
+/* Network */
+#network {
+  border-radius: 9999px;
+  margin: 8px 5px 0;
+  padding: 3px 8px 3px 10px;
+  font-size: 12px;
+  background: alpha(@background, 0.4);
+  color: @color12;
+}
+
 /* Tray */
 #tray {
   border-radius: 9999px;
