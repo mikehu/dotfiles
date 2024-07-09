@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # XDG configuration
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -40,11 +40,11 @@ fi
 antidote load
 
 # vi mode
-bindkey -v
-bindkey "^F" vi-cmd-mode
+# bindkey -v
+# bindkey "^F" vi-cmd-mode
 
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
+# bindkey "^A" beginning-of-line
+# bindkey "^E" end-of-line
 
 export HISTSIZE=4096
 export HISTFILE=~/.zsh_history
@@ -105,6 +105,8 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
+# Miniconda 3
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
 
 # Golang
 export GOPATH="$HOME/.go"

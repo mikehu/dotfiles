@@ -35,6 +35,27 @@ newline = true
     fetch_stash_count = true
     github_icon = ""
 
+  [[blocks.segments]]
+  type = "python"
+  style = "plain"
+  foreground = "p:shade_cyan"
+  background = "transparent"
+  template = " {{ .Full }}"
+
+  [[blocks.segments]]
+  type = "node"
+  style = "plain"
+  foreground = "p:shade_cyan"
+  background = "transparent"
+  template = " {{ .Full }}"
+
+  [[blocks.segments]]
+  type = "go"
+  style = "plain"
+  foreground = "p:shade_cyan"
+  background = "transparent"
+  template = " {{ .Full }}"
+
 [[blocks]]
 type = "rprompt"
 overflow = "hidden"
@@ -81,5 +102,6 @@ orange = "#FFB86C"
 pink = "#FF79C6"
 shade_pink = "#5E3E5A"
 cyan = "#8BE9FD"
+shade_cyan = "#538C98"
 yellow = "#F1FA8C"
 comment = "#6272A4"
