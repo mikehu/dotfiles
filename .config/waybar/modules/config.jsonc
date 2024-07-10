@@ -29,6 +29,20 @@
     "tooltip": false,
     "on-click": "cliphist list | rofi -dmenu | cliphist decode | wl-copy"
   },
+  "mpris": {
+    "ignored-players": ["firefox"],
+    "format": "{player_icon} {title} - {artist} {status_icon}",
+    "tooltip": false,
+    "player-icons": {
+      "default": " ",
+      "spotifyd": " ",
+      "vlc": "󰕼 "
+    },
+    "status-icons": {
+      "paused": " ",
+      "stopped": " "
+    }
+  },
   "hyprland/window": {
     "separate-outputs": true,
     "icon": true,

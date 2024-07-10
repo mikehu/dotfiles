@@ -8,7 +8,7 @@
         "~/.config/waybar/modules/config.jsonc"
     ],
 
-    "modules-left": [ "group/start", "hyprland/window", "custom/clipboard" ],
+    "modules-left": [ "group/start", "hyprland/window", "custom/clipboard", "mpris" ],
     "modules-center": [ "hyprland/workspaces" ],
     "modules-right": [ "tray", "group/hardware", "network", "custom/updates", "pulseaudio", "clock" ],
 
