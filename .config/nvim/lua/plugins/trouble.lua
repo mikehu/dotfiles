@@ -6,26 +6,16 @@ return {
 		})
 
 		local wk = require("which-key")
-		wk.register({
-			["<leader>t"] = {
-				name = "Trouble",
-				t = {
-					[[<cmd>Trouble diagnostics toggle<cr>]],
-					"Diagnostics",
-				},
-				b = {
-					[[<cmd>Trouble diagnostics toggle filter.buf=0<cr>]],
-					"Buffer diagnostics",
-				},
-				q = {
-					[[<cmd>Trouble qflist toggle<cr>]],
-					"Quickfix list",
-				},
-				l = {
-					[[<cmd>Trouble loclist toggle<cr>]],
-					"Location list",
-				},
+		wk.add({
+			{ "<leader>t", group = "Trouble", icon = "🚦" },
+			{ "<leader>tt", [[<cmd>Trouble diagnostics toggle<cr>]], desc = "Diagnostics" },
+			{
+				"<leader>tb",
+				[[<cmd>Trouble diagnostics toggle filter.buf=0<cr>]],
+				desc = "Buffer diagnostics",
 			},
+			{ "<leader>tq", [[<cmd>Trouble qflist toggle<cr>]], desc = "Quickfix list" },
+			{ "<leader>tl", [[<cmd>Trouble loclist toggle<cr>]], desc = "Location list" },
 		})
 	end,
 }

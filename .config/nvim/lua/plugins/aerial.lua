@@ -11,10 +11,12 @@ return {
 		aerial.setup({})
 
 		local wk = require("which-key")
-		wk.register({
-			["<leader>a"] = {
+		wk.add({
+			{
+				"<leader>a",
 				[[<cmd>AerialToggle!<cr>]],
-				"Aerial",
+				desc = "Aerial",
+				icon = "󰐷 ",
 			},
 		})
 	end,

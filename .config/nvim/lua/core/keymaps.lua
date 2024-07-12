@@ -59,11 +59,11 @@ local function close_buffer()
 end
 
 -- Buffer management
-wk.register({
-	x = { close_buffer, "Close buffer" },
-	X = { cmd([[bd!]]), "Force close buffer" },
-	N = { cmd([[enew]]), "New buffer" },
-}, { prefix = "<leader>" })
+wk.add({
+	{ "<leader>x", close_buffer, desc = "Close buffer" },
+	{ "<leader>X", cmd([[bd!]]), desc = "Force close buffer" },
+	{ "<leader>N", cmd([[enew]]), desc = "New buffer" },
+})
 
 -- Lists
 local function toggle_list(type)
@@ -80,23 +80,24 @@ local function toggle_list(type)
 	end
 	vim.cmd[open_command]()
 end
-wk.register({
-	l = {
-		-- d = { vim.diagnostic.setloclist, "Open diagnostic list" },
-		l = {
-			function()
-				toggle_list("l")
-			end,
-			"Toggle local list",
-		},
-		q = {
-			function()
-				toggle_list("c")
-			end,
-			"Toggle quickfix list",
-		},
+wk.add({
+	{ "<leader>l", group = "Lists", icon = "📝" },
+	-- d = { vim.diagnostic.setloclist, "Open diagnostic list" },
+	{
+		"<leader>ll",
+		function()
+			toggle_list("l")
+		end,
+		desc = "Toggle local list",
 	},
-}, { prefix = "<leader>" })
+	{
+		"<leader>lq",
+		function()
+			toggle_list("c")
+		end,
+		desc = "Toggle quickfix list",
+	},
+})
 
 -- Diagnostics / Trouble
 
@@ -107,36 +108,27 @@ keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic messag
 keymap.set("t", "<m-tab>", cmd([[bnext]]))
 keymap.set("t", "<m-s-tab>", cmd([[bprev]]))
 keymap.set("t", "<c-n>", [[<c-\><c-n>]])
-wk.register({
-	z = {
-		z = { cmd([[BufTermNext]]), "Cycle next terminal" },
-		name = "Terminal (zsh)",
-		Z = { cmd([[BufTermPrev]]), "Cycle prev terminal" },
-		n = { cmd([[terminal]]), "New terminal" },
-	},
-}, { prefix = "<leader>" })
+wk.add({
+	{ "<leader>z", group = "Terminal (zsh)", icon = " " },
+	{ "<leader>zz", cmd([[BufTermNext]]), desc = "Cycle next terminal" },
+	{ "<leader>zZ", cmd([[BufTermPrev]]), desc = "Cycle prev terminal" },
+	{ "<leader>zn", cmd([[terminal]]), desc = "New terminal" },
+})
 
 -- Git
-wk.register({
-	G = {
-		name = "Git",
-		g = { cmd([[Neogit]]), "🚧 Neogit" },
-		b = { cmd([[Gitsigns toggle_current_line_blame]]), "Toggle blame" },
-		d = { cmd([[Gitsigns toggle_deleted]]), "Diff this" },
-		p = { cmd([[Gitsigns preview_hunk]]), "Preview hunk" },
-		f = { cmd([[Telescope git_files theme=dropdown]]), "🔭 Find files" },
-		w = { cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), "🔭 Git worktree" },
-	},
-}, { prefix = "<leader>" })
+wk.add({
+	{ "<leader>G", group = "Git", icon = " " },
+	{ "<leader>Gg", cmd([[Neogit]]), desc = "Neogit" },
+	{ "<leader>Gb", cmd([[Gitsigns toggle_current_line_blame]]), desc = "Toggle blame" },
+	{ "<leader>Gd", cmd([[Gitsigns toggle_deleted]]), desc = "Diff this" },
+	{ "<leader>Gp", cmd([[Gitsigns preview_hunk]]), desc = "Preview hunk" },
+	{ "<leader>Gf", cmd([[Telescope git_files theme=dropdown]]), desc = "🔭 Find files" },
+	{ "<leader>Gw", cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), desc = "🔭 Git worktree" },
+})
 
 -- Prefix registrations
-wk.register({
-	["g"] = {
-		l = { name = "+LSP" },
-	},
-	["<leader>"] = {
-		l = { name = "+Lists" },
-		p = { name = "+Projects" },
-		K = { name = "+Definitions" },
-	},
+wk.add({
+	{ "gl", group = "LSP" },
+	{ "<leader>p", group = "Project" },
+	{ "<leader>K", group = "Definitions" },
 })

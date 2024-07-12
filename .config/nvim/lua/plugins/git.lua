@@ -22,8 +22,10 @@ return {
 				ts_repeat_move.make_repeatable_move_pair(gitsigns.next_hunk, gitsigns.prev_hunk)
 
 			local wk = require("which-key")
-			wk.register({
-				["]h"] = {
+			wk.add({
+				mode = { "n", "x", "o" },
+				{
+					"<leader>]h",
 					function()
 						if vim.wo.diff then
 							vim.cmd.normal({ "]h", bang = true })
@@ -31,9 +33,10 @@ return {
 							next_hunk()
 						end
 					end,
-					"Next hunk",
+					desc = "Next hunk",
 				},
-				["[h"] = {
+				{
+					"<leader>[h",
 					function()
 						if vim.wo.diff then
 							vim.cmd.normal({ "[h", bang = true })
@@ -41,17 +44,11 @@ return {
 							prev_hunk()
 						end
 					end,
-					"Prev hunk",
+					desc = "Prev hunk",
 				},
-				["<leader>Gs"] = {
-					gitsigns.stage_hunk,
-					"Stage hunk",
-				},
-				["<leader>Gr"] = {
-					gitsigns.reset_hunk,
-					"Reset hunk",
-				},
-			}, { mode = { "n", "x", "o" } })
+				{ "<leader>Gs", gitsigns.stage_hunk, desc = "Stage hunk" },
+				{ "<leader>Gr", gitsigns.reset_hunk, desc = "Reset hunk" },
+			})
 		end,
 	},
 	{

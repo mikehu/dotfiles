@@ -15,34 +15,19 @@ return {
 		telescope.load_extension("grapple")
 
 		local wk = require("which-key")
-		wk.register({
-			["<leader>g"] = {
-				name = "Grapple",
-				g = {
-					grapple.cycle_forward,
-					"Cycle forward",
-				},
-				G = {
-					grapple.cycle_backward,
-					"Cycle backward",
-				},
-				t = {
-					[[<cmd>Telescope grapple tags theme=dropdown<cr>]],
-					"🔭 Tags menu",
-				},
-				s = {
-					grapple.toggle_scopes,
-					"Scopes menu",
-				},
-				R = {
-					grapple.reset,
-					"Reset",
-				},
+		wk.add({
+			{ "<leader>g", group = "Grapple", icon = "🪝" },
+			{ "<leader>gg", grapple.cycle_forward, desc = "Cycle forward" },
+			{ "<leader>gG", grapple.cycle_backward, desc = "Cycle backward" },
+			{
+				"<leader>gt",
+				[[<cmd>Telescope grapple tags theme=dropdown<cr>]],
+				desc = "Tags menu",
+				icon = "🔭",
 			},
-			["<c-g>"] = {
-				grapple.toggle,
-				"Grapple toggle",
-			},
+			{ "<leader>gs", grapple.toggle_scopes, desc = "Scopes menu" },
+			{ "<leader>gR", grapple.reset, desc = "Reset" },
+			{ "<c-g>", grapple.toggle, desc = "Grapple toggle" },
 		})
 	end,
 }

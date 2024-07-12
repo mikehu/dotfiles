@@ -118,92 +118,101 @@ return {
 			end
 
 			-- Convenience keymaps
-			vim.keymap.set("n", "<leader>o", vim.find_files_from_project_git_root, { desc = "🔭 Open file" })
+			vim.keymap.set("n", "<leader>o", vim.find_files_from_project_git_root, { desc = "Open file" })
 			vim.keymap.set("n", "<leader>b", function()
 				builtin.buffers()
-			end, { desc = "🔭 Recent files" })
+			end, { desc = "Recent files" })
 			vim.keymap.set("n", "<leader>/", function()
 				builtin.current_buffer_fuzzy_find()
-			end, { desc = "🔭 Search current buffer" })
+			end, { desc = "Search current buffer" })
 
-			-- Telescope plugin
-			wk.register({
-				f = {
-					name = "+Telescope",
-					f = {
-						function()
-							builtin.resume()
-						end,
-						"Resume last",
-					},
-					y = {
-						function()
-							builtin.oldfiles()
-						end,
-						"Recent files",
-					},
-					g = {
-						function()
-							builtin.live_grep()
-						end,
-						"Live grep",
-					},
-					m = {
-						function()
-							media_files.media_files({ layout_strategy = "vertical" })
-						end,
-						"Media files",
-					},
-					w = {
-						function()
-							git_worktree.git_worktrees(with_dropdown)
-						end,
-						"Git worktree",
-					},
-					t = {
-						function()
-							todo_comments.todo({ layout_strategy = "vertical" })
-						end,
-						"Todo comments",
-					},
-					c = {
-						function()
-							whop.whop(with_dropdown)
-						end,
-						"Buffer operations",
-					},
-					q = {
-						function()
-							builtin.quickfix(with_dropdown)
-						end,
-						"Quickfix list",
-					},
-					j = {
-						function()
-							builtin.jumplist({ layout_strategy = "vertical" })
-						end,
-						"Jumplist",
-					},
-					N = {
-						function()
-							notify.notify({ layout_strategy = "vertical" })
-						end,
-						"Notifications",
-					},
-					h = {
-						function()
-							builtin.help_tags()
-						end,
-						"Help tags",
-					},
-					["<cr>"] = {
-						function()
-							builtin.commands()
-						end,
-						"Find commands",
-					},
+			wk.add({
+				{ "<leader>f", group = "Telescope", icon = "🔭" },
+				{
+					"<leader>ff",
+					function()
+						builtin.resume()
+					end,
+					desc = "Resume last",
 				},
-			}, { prefix = "<leader>" })
+				{
+					"<leader>fy",
+					function()
+						builtin.oldfiles()
+					end,
+					desc = "Recent files",
+				},
+				{
+					"<leader>fg",
+					function()
+						builtin.live_grep()
+					end,
+					desc = "Live grep",
+				},
+				{
+					"<leader>fm",
+					function()
+						media_files.media_files({ layout_strategy = "vertical" })
+					end,
+					desc = "Media files",
+				},
+				{
+					"<leader>fw",
+					function()
+						git_worktree.git_worktrees(with_dropdown)
+					end,
+					desc = "Git worktree",
+				},
+				{
+					"<leader>ft",
+					function()
+						todo_comments.todo({ layout_strategy = "vertical" })
+					end,
+					desc = "Todo comments",
+				},
+				{
+					"<leader>fc",
+					function()
+						whop.whop(with_dropdown)
+					end,
+					desc = "Buffer operations",
+				},
+				{
+					"<leader>fq",
+					function()
+						builtin.quickfix(with_dropdown)
+					end,
+					desc = "Quickfix list",
+				},
+				{
+					"<leader>fj",
+					function()
+						builtin.jumplist({ layout_strategy = "vertical" })
+					end,
+					desc = "Jumplist",
+				},
+				{
+					"<leader>fN",
+					function()
+						notify.notify({ layout_strategy = "vertical" })
+					end,
+					desc = "Notifications",
+				},
+				{
+					"<leader>fh",
+					function()
+						builtin.help_tags()
+					end,
+					desc = "Help tags",
+				},
+				{
+					"<leader>f<cr>",
+					function()
+						builtin.commands()
+					end,
+					desc = "Find commands",
+				},
+			})
 		end,
 	},
 }
