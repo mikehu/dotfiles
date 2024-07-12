@@ -22,7 +22,6 @@ return {
 			telescope.load_extension("notify")
 			telescope.load_extension("noice")
 			telescope.load_extension("media_files")
-			telescope.load_extension("persisted")
 			telescope.load_extension("git_worktree")
 			telescope.load_extension("todo-comments")
 			telescope.load_extension("whop")
@@ -32,6 +31,7 @@ return {
 				defaults = {
 					prompt_prefix = "  " .. nonicons.get("telescope") .. "  ",
 					selection_caret = " ❯ ",
+					selection_strategy = "row",
 					entry_prefix = "   ",
 					winblend = 20,
 					mappings = {
