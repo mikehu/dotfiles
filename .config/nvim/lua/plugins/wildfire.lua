@@ -6,6 +6,7 @@ return {
 		local wf = require("wildfire")
 		require("wildfire").setup({
 			keymaps = {
+				init_selection = "<leader>v",
 				node_incremental = "<tab>",
 				node_decremental = "<s-tab>",
 			},
