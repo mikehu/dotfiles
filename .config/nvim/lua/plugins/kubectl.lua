@@ -3,17 +3,20 @@ return {
 		"ramilito/kubectl.nvim",
 		event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		keys = {
-			{
-				"<leader>k",
-				function()
-					require("kubectl").open()
-				end,
-				desc = "🚢 Kubectl",
-			},
-		},
 		config = function()
-			require("kubectl").setup({})
+			local k = require("kubectl")
+			k.setup({})
+			local wk = require("which-key")
+			wk.add({
+				{
+					"<leader>uk",
+					function()
+						k.open()
+					end,
+					desc = "Kubectl",
+					icon = "🚢",
+				},
+			})
 		end,
 	},
 }

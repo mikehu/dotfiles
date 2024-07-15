@@ -141,11 +141,6 @@ return {
 							luasnip.expand_or_jump()
 						elseif neogen.jumpable() then
 							neogen.jump_next()
-						elseif has_words_before() then
-							cmp.complete()
-							if #cmp.get_entries() == 1 then
-								cmp.confirm({ select = true })
-							end
 						else
 							fallback()
 						end
@@ -157,6 +152,11 @@ return {
 							luasnip.jump(-1)
 						elseif neogen.jumpable(true) then
 							neogen.jump_prev()
+						elseif has_words_before() then
+							cmp.complete()
+							if #cmp.get_entries() == 1 then
+								cmp.confirm({ select = true })
+							end
 						else
 							fallback()
 						end
@@ -293,10 +293,6 @@ return {
 			--  This function gets run when an LSP connects to a particular buffer.
 			local on_attach = function(client, bufnr)
 				local nmap = function(keys, func, desc)
-					if desc then
-						desc = "✨LSP " .. desc
-					end
-
 					vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 				end
 

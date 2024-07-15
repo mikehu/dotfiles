@@ -25,7 +25,7 @@ return {
 			wk.add({
 				mode = { "n", "x", "o" },
 				{
-					"<leader>]h",
+					"]h",
 					function()
 						if vim.wo.diff then
 							vim.cmd.normal({ "]h", bang = true })
@@ -36,7 +36,7 @@ return {
 					desc = "Next hunk",
 				},
 				{
-					"<leader>[h",
+					"[h",
 					function()
 						if vim.wo.diff then
 							vim.cmd.normal({ "[h", bang = true })

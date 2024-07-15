@@ -13,7 +13,7 @@ return {
 		local wk = require("which-key")
 		wk.add({
 			{
-				"<leader>a",
+				"<leader>ua",
 				[[<cmd>AerialToggle!<cr>]],
 				desc = "Aerial",
 				icon = "󰐷 ",

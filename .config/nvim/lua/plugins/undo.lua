@@ -4,9 +4,9 @@ return {
 	dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	keys = {
 		{ -- lazy style key map
-			"<leader>u",
+			"<leader>fu",
 			"<cmd>Telescope undo<cr>",
-			desc = "🔭 Undo history",
+			desc = "Undo history",
 		},
 	},
 	config = function()

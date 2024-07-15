@@ -33,7 +33,6 @@ return {
 		})
 
 		vim.keymap.set("n", "-", [[<cmd>Oil<cr>]], { desc = " Open parent directory" })
-		vim.keymap.set("n", "<leader>E", [[<cmd>Oil --float<cr>]], { desc = " File explorer" })
 		vim.keymap.set("n", "cd", function()
 			local oil_dir = oil.get_current_dir()
 			if oil_dir then

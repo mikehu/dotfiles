@@ -10,6 +10,6 @@ return {
 			window_border = "rounded",
 		})
 
-		vim.keymap.set("n", "<leader>M", codewindow.toggle_minimap, { desc = "Minimap" })
+		vim.keymap.set("n", "<leader>um", codewindow.toggle_minimap, { desc = "Minimap" })
 	end,
 }

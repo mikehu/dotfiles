@@ -7,7 +7,7 @@ return {
 	end,
 	opts = {
 		icons = {
-			colors = false,
+			rules = false,
 		},
 	},
 }

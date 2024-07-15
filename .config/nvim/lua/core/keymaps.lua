@@ -9,17 +9,12 @@ keymap.set("n", "X", '"_X')
 
 keymap.set("n", "<D-s>", cmd([[w]]), { desc = "Save" })
 keymap.set("n", "<leader>s", cmd([[w]]), { desc = "Save" })
-keymap.set("n", "<leader>q", cmd([[q]]), { desc = "Quit" })
-keymap.set("n", "<leader>Q", cmd([[q!]]), { desc = "Force quit" })
 keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste over" })
 
 keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without register" })
 
 keymap.set("n", "<leader>+", "<c-a>", { desc = "Increment" })
 keymap.set("n", "<leader>-", "<c-x>", { desc = "Decrement" })
-
-keymap.set("n", "<m-o>", "o<esc>k", { desc = "Insert line below" })
-keymap.set("n", "<m-O>", "O<esc>j", { desc = "Insert line above" })
 
 keymap.set("n", "<c-d>", [[<c-d>zz]], { desc = "Page down" })
 keymap.set("n", "<c-u>", [[<c-u>zz]], { desc = "Page up" })
@@ -37,7 +32,6 @@ keymap.set("n", "<m-tab>", cmd([[bnext]]), { desc = "Cycle next buffer" })
 keymap.set("n", "<m-s-tab>", cmd([[bprev]]), { desc = "Cycle prev buffer" })
 
 keymap.set("n", "<leader>h", cmd([[nohl]]), { desc = "Remove highlights" })
-keymap.set("n", "<leader>,", "A,<esc>", { desc = "End with comma" })
 
 keymap.set("n", "<c-q>", cmd([[cclose]]), { desc = "Close quickfix list" })
 keymap.set("t", "<c-q>", cmd([[bd!]]), { desc = "Close terminal buffer" })
@@ -51,6 +45,11 @@ keymap.set("i", "<m-k>", "<up>")
 keymap.set("i", "<m-l>", "<right>")
 keymap.set("n", "Q", "<nop>")
 
+-- Diagnostics / Trouble
+
+keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic message" })
+keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic message" })
+
 local wk = require("which-key")
 
 local function close_buffer()
@@ -58,11 +57,20 @@ local function close_buffer()
 	vim.cmd("silent! bn | bd " .. bufnr .. " | silent! bp")
 end
 
+-- Quitting
+wk.add({
+	{ "<leader>q", group = "Quit", icon = " " },
+	{ "<leader>qq", cmd([[q]]), desc = "Quit" },
+	{ "<leader>qQ", cmd([[q!]]), desc = "Force quit" },
+})
+
 -- Buffer management
 wk.add({
-	{ "<leader>x", close_buffer, desc = "Close buffer" },
-	{ "<leader>X", cmd([[bd!]]), desc = "Force close buffer" },
-	{ "<leader>N", cmd([[enew]]), desc = "New buffer" },
+	{ "<leader>b", group = "Buffers", icon = " " },
+	{ "<leader>bb", cmd([[Telescope buffers]]), desc = "Goto buffer" },
+	{ "<leader>bd", close_buffer, desc = "Close buffer" },
+	{ "<leader>bD", cmd([[bd!]]), desc = "Force close buffer" },
+	{ "<leader>bn", cmd([[enew]]), desc = "New buffer" },
 })
 
 -- Lists
@@ -99,10 +107,17 @@ wk.add({
 	},
 })
 
--- Diagnostics / Trouble
-
-keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic message" })
-keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic message" })
+-- Various text manipulation shorthands
+wk.add({
+	{ "<leader>i", group = "Insert", icon = " " },
+	{ "<leader>io", [[m`o<esc>``]], desc = "Newline below" },
+	{ "<leader>iO", [[m`O<esc>``]], desc = "Newline above" },
+})
+wk.add({
+	{ "<leader>e", group = "End with", icon = " " },
+	{ "<leader>e,", [[m`A,<esc>``]], desc = "Comma" },
+	{ "<leader>e;", [[m`A;<esc>``]], desc = "Semicolon" },
+})
 
 -- Terminal
 keymap.set("t", "<m-tab>", cmd([[bnext]]))
@@ -122,13 +137,20 @@ wk.add({
 	{ "<leader>Gb", cmd([[Gitsigns toggle_current_line_blame]]), desc = "Toggle blame" },
 	{ "<leader>Gd", cmd([[Gitsigns toggle_deleted]]), desc = "Diff this" },
 	{ "<leader>Gp", cmd([[Gitsigns preview_hunk]]), desc = "Preview hunk" },
-	{ "<leader>Gf", cmd([[Telescope git_files theme=dropdown]]), desc = "🔭 Find files" },
-	{ "<leader>Gw", cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), desc = "🔭 Git worktree" },
+	{ "<leader>Gf", cmd([[Telescope git_files theme=dropdown]]), desc = "Find files" },
+	{ "<leader>Gw", cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), desc = "Git worktree" },
+})
+
+-- UI
+wk.add({
+	{ "<leader>u", group = "UI", icon = " " },
+	{ "<leader>ug", cmd([[Neogit]]), desc = "Neogit", icon = "󰊢 " },
+	{ "<leader>ue", cmd([[Oil --float]]), desc = "File explorer", icon = " " },
 })
 
 -- Prefix registrations
 wk.add({
-	{ "gl", group = "LSP" },
-	{ "<leader>p", group = "Project" },
-	{ "<leader>K", group = "Definitions" },
+	{ "gl", group = "LSP", icon = "✨" },
+	{ "<leader>p", group = "Project", icon = "📁" },
+	{ "<leader>K", group = "Definitions", icon = "🪪" },
 })

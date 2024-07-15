@@ -51,6 +51,7 @@ set autoread
 set history=1000
 set tabpagemax=50
 set conceallevel=1
+set nostartofline
 set hidden
 filetype plugin on
 filetype plugin indent on
