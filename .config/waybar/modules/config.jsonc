@@ -32,10 +32,13 @@
   "mpris": {
     "ignored-players": ["firefox"],
     "format": "{player_icon} {title} - {artist} {status_icon}",
+    "title-len": 28,
+    "artist-len": 20,
     "tooltip": false,
     "player-icons": {
       "default": " ",
       "spotifyd": " ",
+      "spotify_player": " ",
       "vlc": "󰕼 "
     },
     "status-icons": {
@@ -94,6 +97,9 @@
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
     "on-double-click": "pavucontrol"
+  },
+  "systemd-failed-units": {
+    "format": "  {nr_failed}"
   },
   "custom/updates": {
     "format": "{icon}{}",

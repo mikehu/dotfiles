@@ -111,8 +111,12 @@ window#waybar.empty #window {
   margin: 8px 10px 0 0;
   padding: 0 12px 0 10px;
   font-size: 12px;
-  background: alpha(@background, 0.4);
   color: @color6;
+}
+
+#mpris.playing,
+#mpris.paused {
+  background: alpha(@background, 0.4);
 }
 
 #mpris.spotifyd.playing {
@@ -162,6 +166,20 @@ window#waybar.empty #window {
   font-size: 12px;
   background: alpha(@background, 0.4);
   color: @foreground;
+}
+
+/* Systemd failed */
+#systemd-failed-units {
+  border-radius: 9999px;
+  margin: 8px 5px 0;
+  padding: 3px 6px 3px 8px;
+  font-size: 12px;
+  background: alpha(@background, 0.4);
+  color: @orange;
+}
+
+#systemd-failed-units.ok {
+  color: @green;
 }
 
 /* Pacman Updates */
