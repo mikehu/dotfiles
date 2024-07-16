@@ -320,9 +320,9 @@ return {
 				nmap("gK", vim.lsp.buf.signature_help, "Signature Documentation")
 
 				-- Lesser used LSP functionality
-				nmap("<leader>pa", vim.lsp.buf.add_workspace_folder, "Add folder")
-				nmap("<leader>pr", vim.lsp.buf.remove_workspace_folder, "Remove folder")
-				nmap("<leader>pl", function()
+				nmap("<leader>Pa", vim.lsp.buf.add_workspace_folder, "Add folder")
+				nmap("<leader>Pr", vim.lsp.buf.remove_workspace_folder, "Remove folder")
+				nmap("<leader>Pl", function()
 					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 				end, "List project folders")
 

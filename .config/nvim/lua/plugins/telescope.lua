@@ -24,6 +24,7 @@ return {
 			telescope.load_extension("media_files")
 			telescope.load_extension("git_worktree")
 			telescope.load_extension("todo-comments")
+			telescope.load_extension("yank_history")
 			telescope.load_extension("whop")
 
 			local actions = require("telescope.actions")
@@ -61,7 +62,7 @@ return {
 						previewer = false,
 						mappings = {
 							i = {
-								["<c-d>"] = actions.delete_buffer + actions.move_to_top,
+								["<C-d>"] = actions.delete_buffer + actions.move_to_top,
 							},
 						},
 					},
@@ -97,6 +98,7 @@ return {
 			local media_files = telescope.extensions.media_files
 			local git_worktree = telescope.extensions.git_worktree
 			local todo_comments = telescope.extensions["todo-comments"]
+			local yank_history = telescope.extensions.yank_history
 			local whop = telescope.extensions.whop
 			local notify = telescope.extensions.notify
 
@@ -166,6 +168,13 @@ return {
 						git_worktree.git_worktrees(with_dropdown)
 					end,
 					desc = "Git worktree",
+				},
+				{
+					"<leader>fp",
+					function()
+						yank_history.yank_history(with_dropdown)
+					end,
+					desc = "Yank history",
 				},
 				{
 					"<leader>ft",

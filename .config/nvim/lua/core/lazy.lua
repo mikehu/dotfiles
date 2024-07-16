@@ -16,7 +16,7 @@ require("lazy").setup({
 	{ import = "plugins" },
 }, {
 	install = {
-		colorscheme = { "catpuccin", "dracula" },
+		colorscheme = { "dracula" },
 	},
 	checker = {
 		enabled = true,

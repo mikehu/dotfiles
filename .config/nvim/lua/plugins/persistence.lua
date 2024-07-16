@@ -6,7 +6,7 @@ return {
 
 		-- local wk = require("which-key")
 		-- wk.add({
-		-- 	"<leader>pL",
+		-- 	"<leader>PL",
 		-- 	function()
 		-- 		persist.load()
 		-- 	end,

@@ -132,7 +132,7 @@ wk.add({
 
 -- Git
 wk.add({
-	{ "<leader>G", group = "Git", icon = " " },
+	{ "<leader>G", group = "Git", icon = "󰊢 " },
 	{ "<leader>Gg", cmd([[Neogit]]), desc = "Neogit" },
 	{ "<leader>Gb", cmd([[Gitsigns toggle_current_line_blame]]), desc = "Toggle blame" },
 	{ "<leader>Gd", cmd([[Gitsigns toggle_deleted]]), desc = "Diff this" },
@@ -151,6 +151,6 @@ wk.add({
 -- Prefix registrations
 wk.add({
 	{ "gl", group = "LSP", icon = "✨" },
-	{ "<leader>p", group = "Project", icon = "📁" },
-	{ "<leader>K", group = "Definitions", icon = "🪪" },
+	{ "<leader>P", group = "Project", icon = "📁" },
+	{ "<leader>K", group = "Definitions", icon = " " },
 })
