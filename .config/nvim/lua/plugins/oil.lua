@@ -6,6 +6,11 @@ return {
 	config = function()
 		local oil = require("oil")
 		local detail = false
+		local hidden_files = {}
+		local always_hidden_files = {
+			".git",
+			"node_modules",
+		}
 
 		oil.setup({
 			default_file_explorer = true,
@@ -13,8 +18,11 @@ return {
 			view_options = {
 				show_hidden = true,
 				natural_order = true,
+				is_hidden_file = function(name, _)
+					return vim.startswith(name, ".") or vim.tbl_contains(hidden_files, name)
+				end,
 				is_always_hidden = function(name, _)
-					return name == ".." or name == ".git"
+					return name == ".." or vim.tbl_contains(always_hidden_files, name)
 				end,
 			},
 			keymaps = {

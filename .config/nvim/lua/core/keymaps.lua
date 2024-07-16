@@ -9,9 +9,6 @@ keymap.set("n", "X", '"_X')
 
 keymap.set("n", "<D-s>", cmd([[w]]), { desc = "Save" })
 
-keymap.set("n", "<leader>+", "<c-a>", { desc = "Increment" })
-keymap.set("n", "<leader>-", "<c-x>", { desc = "Decrement" })
-
 keymap.set("n", "<c-d>", [[<c-d>zz]], { desc = "Page down" })
 keymap.set("n", "<c-u>", [[<c-u>zz]], { desc = "Page up" })
 
@@ -20,10 +17,11 @@ keymap.set("n", "<m-k>", cmd([[m-2]]), { desc = "Move line up" })
 keymap.set("v", "<m-j>", [[:m'>+<cr>gv=gv]], { desc = "Move block down" })
 keymap.set("v", "<m-k>", [[:m-2<cr>gv=gv]], { desc = "Move block up" })
 
-keymap.set({ "n", "i" }, "<c-y>", "<esc>Vyp<cr>k", { desc = "Duplicate line" })
-keymap.set("n", "c.", "viWo<esc>ct.", { desc = "Change up to <dot>" })
+keymap.set({ "n", "i" }, "<c-y>", [[<esc>Vyp<cr>k]], { desc = "Duplicate line" })
+keymap.set("n", "c.", [[viWo<esc>ct.]], { desc = "Change up to <dot>" })
 
 keymap.set("n", "go", [[:e ]], { desc = "Open path" })
+
 keymap.set("n", "<m-tab>", cmd([[bnext]]), { desc = "Cycle next buffer" })
 keymap.set("n", "<m-s-tab>", cmd([[bprev]]), { desc = "Cycle prev buffer" })
 
