@@ -126,7 +126,7 @@ return {
 			end, { desc = "Search current buffer" })
 
 			wk.add({
-				{ "<leader>f", group = "Telescope", icon = "🔭" },
+				{ "<leader>f", group = "Find/Telescope", icon = "🔭" },
 				{
 					"<leader>ff",
 					function()

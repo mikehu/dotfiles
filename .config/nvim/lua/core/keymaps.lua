@@ -8,10 +8,6 @@ keymap.set("n", "x", '"_x')
 keymap.set("n", "X", '"_X')
 
 keymap.set("n", "<D-s>", cmd([[w]]), { desc = "Save" })
-keymap.set("n", "<leader>s", cmd([[w]]), { desc = "Save" })
-keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste over" })
-
-keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without register" })
 
 keymap.set("n", "<leader>+", "<c-a>", { desc = "Increment" })
 keymap.set("n", "<leader>-", "<c-x>", { desc = "Decrement" })
@@ -56,6 +52,12 @@ local function close_buffer()
 	local bufnr = vim.fn.bufnr("%")
 	vim.cmd("silent! bn | bd " .. bufnr .. " | silent! bp")
 end
+
+-- Saving
+wk.add({
+	{ "<leader>s", cmd([[w]]), desc = "Save", icon = "💾" },
+	{ "<leader>S", cmd([[wa]]), desc = "Save all" },
+})
 
 -- Quitting
 wk.add({
@@ -117,6 +119,14 @@ wk.add({
 	{ "<leader>e", group = "End with", icon = " " },
 	{ "<leader>e,", [[m`A,<esc>``]], desc = "Comma" },
 	{ "<leader>e;", [[m`A;<esc>``]], desc = "Semicolon" },
+})
+wk.add({
+	mode = { "x" },
+	{ "<leader>p", [["_dP]], desc = "Paste over" },
+})
+wk.add({
+	mode = { "n", "v" },
+	{ "<leader>d", [["_d]], desc = "Delete without register" },
 })
 
 -- Terminal
