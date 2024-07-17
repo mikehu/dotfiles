@@ -36,8 +36,9 @@ return {
 
 		local wk = require("which-key")
 		wk.add({
+			mode = { "n" },
 			{
-				"<leader>y",
+				"<leader>p",
 				"<cmd>Telescope yank_history theme=dropdown<cr>",
 				desc = "Yank history",
 				icon = "📋",
