@@ -6,9 +6,7 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	config = function()
-		local aerial = require("aerial")
-
-		aerial.setup({})
+		require("aerial").setup({})
 
 		local wk = require("which-key")
 		wk.add({
