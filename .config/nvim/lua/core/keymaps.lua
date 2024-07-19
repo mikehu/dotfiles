@@ -121,7 +121,6 @@ wk.add({
 wk.add({
 	mode = { "x" },
 	{ "<leader>y", [["+y]], desc = "Yank to clipboard" },
-	{ "<leader>p", [["_dP]], desc = "Paste over" },
 })
 wk.add({
 	mode = { "n", "v" },

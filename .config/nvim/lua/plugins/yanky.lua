@@ -24,6 +24,7 @@ return {
 					mappings = {
 						default = mapping.put("p"),
 						i = {
+							["<c-i>"] = mapping.put("P"),
 							["<c-d>"] = mapping.delete(),
 						},
 						n = {
@@ -36,7 +37,7 @@ return {
 
 		local wk = require("which-key")
 		wk.add({
-			mode = { "n" },
+			mode = { "n", "x" },
 			{
 				"<leader>p",
 				"<cmd>Telescope yank_history theme=dropdown<cr>",
