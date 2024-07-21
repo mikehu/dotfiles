@@ -141,7 +141,7 @@ wk.add({
 -- Git
 wk.add({
 	{ "<leader>G", group = "Git", icon = "󰊢 " },
-	{ "<leader>Gg", cmd([[Neogit]]), desc = "Neogit" },
+	{ "<leader>GG", cmd([[Neogit]]), desc = "Neogit" },
 	{ "<leader>Gb", cmd([[Gitsigns toggle_current_line_blame]]), desc = "Toggle blame" },
 	{ "<leader>Gd", cmd([[Gitsigns toggle_deleted]]), desc = "Diff this" },
 	{ "<leader>Gp", cmd([[Gitsigns preview_hunk]]), desc = "Preview hunk" },
