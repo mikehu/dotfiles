@@ -17,7 +17,6 @@ return {
 		},
 		config = function()
 			local telescope = require("telescope")
-			local nonicons = require("nvim-nonicons")
 			telescope.load_extension("fzf")
 			telescope.load_extension("notify")
 			telescope.load_extension("noice")
@@ -30,7 +29,7 @@ return {
 			local actions = require("telescope.actions")
 			telescope.setup({
 				defaults = {
-					prompt_prefix = "  " .. nonicons.get("telescope") .. "  ",
+					prompt_prefix = "   ",
 					selection_caret = " ❯ ",
 					selection_strategy = "row",
 					entry_prefix = "   ",
