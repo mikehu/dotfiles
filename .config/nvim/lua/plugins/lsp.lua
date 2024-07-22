@@ -435,6 +435,24 @@ return {
 				volar = {},
 				yamlls = {
 					filetypes = { "yaml", "yml", "bu" },
+					settings = {
+						yaml = {
+							schemas = {
+								["kubernetes"] = {
+									".kube/config",
+									"*-deployment.yaml",
+									"*-service.yaml",
+									"*-cluster.yaml",
+									"*-store.yaml",
+									"*-configmap.yaml",
+									"secret-*.yaml",
+									"secret.yaml",
+									"ingress-*.yaml",
+									"ingress.yaml",
+								},
+							},
+						},
+					},
 				},
 			}
 
