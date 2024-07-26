@@ -97,7 +97,8 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 eval "$(oh-my-posh init zsh --config ~/.config/theme.omp.toml)"
 
 # Aliases
-alias n='nvim'
+alias n=nvim
+alias k=kubectl
 
 # PyEnv
 export PYENV_ROOT="$HOME/.pyenv"
