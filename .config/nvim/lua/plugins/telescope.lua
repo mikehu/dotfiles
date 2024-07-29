@@ -31,7 +31,7 @@ return {
 				defaults = {
 					prompt_prefix = "   ",
 					selection_caret = " ❯ ",
-					selection_strategy = "row",
+					selection_strategy = "reset",
 					entry_prefix = "   ",
 					winblend = 20,
 					mappings = {
