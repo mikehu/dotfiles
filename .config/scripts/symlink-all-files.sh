@@ -24,6 +24,9 @@ if [ ! -d "$dir" ]; then
     exit 1
 fi
 
+# Initialize the counter
+count=0
+
 # Loop through all files in the directory
 for file in "$dir"/*; do
     # Check if it's a file
@@ -32,7 +35,9 @@ for file in "$dir"/*; do
         filename=$(basename "$file")
         # Create a symbolic link in the current working directory
         ln -sf "$file" "$filename"
+        # Increment the counter
+        count=$((count + 1))
     fi
 done
 
-echo "Symbolic links created in the current directory."
+echo "Created $count symbolic links in the current directory."
