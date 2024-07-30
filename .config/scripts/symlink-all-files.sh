@@ -25,7 +25,7 @@ if [ ! -d "$dir" ]; then
 fi
 
 # Loop through all files in the directory
-for file in "$dir"/*; then
+for file in "$dir"/*; do
     # Check if it's a file
     if [ -f "$file" ]; then
         # Get the filename
