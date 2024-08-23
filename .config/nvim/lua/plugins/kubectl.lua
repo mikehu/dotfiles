@@ -14,7 +14,7 @@ return {
 						k.open()
 					end,
 					desc = "Kubectl",
-					icon = "🚢",
+					icon = "󰠳 ",
 				},
 			})
 		end,

@@ -152,6 +152,8 @@ wk.add({
 -- UI
 wk.add({
 	{ "<leader>u", group = "UI", icon = " " },
+	{ "<leader>ul", cmd([[Lazy]]), desc = "Lazy", icon = "󰒲 " },
+	{ "<leader>ub", cmd([[Mason]]), desc = "Mason", icon = "🧱" },
 	{ "<leader>ug", cmd([[Neogit]]), desc = "Neogit", icon = "󰊢 " },
 	{ "<leader>ue", cmd([[Oil --float]]), desc = "File explorer", icon = " " },
 })

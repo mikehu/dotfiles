@@ -9,6 +9,11 @@ return {
 				vertical = " │",
 				vertical_end = " ╰",
 			},
+			options = {
+				break_line = {
+					enabled = true,
+				},
+			},
 		})
 	end,
 }
