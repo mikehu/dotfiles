@@ -119,7 +119,7 @@ wk.add({
 	{ "<leader>e;", [[m`A;<esc>``]], desc = "Semicolon" },
 })
 wk.add({
-	mode = { "x" },
+	mode = { "n", "v" },
 	{ "<leader>y", [["+y]], desc = "Yank to clipboard" },
 })
 wk.add({

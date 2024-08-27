@@ -16,7 +16,8 @@ return {
 			["vue"] = true,
 		}
 		vim.g.copilot_workspace_folders = {
-			"~/Code/shuttle",
+			"~/Code/neurox",
+			"~/Code/illustrious-industries",
 		}
 	end,
 }
