@@ -17,8 +17,12 @@
         bl = branch --list
         clone-worktrees = "!sh $XDG_CONFIG_HOME/scripts/git-clone-bare-for-worktrees.sh"
         cw = clone-worktrees
+        init-worktree = "!sh $XDG_CONFIG_HOME/scripts/git-init-worktree.sh"
+        iw = init-worktree
+
 [help]
         autocorrect = 20
+
 [rerere]
         enabled = true
 
