@@ -127,7 +127,7 @@ alt-shift-3 = 'move-node-to-workspace 💬'
 alt-shift-4 = 'move-node-to-workspace 🍿'
 alt-shift-5 = 'move-node-to-workspace 📦'
 
-alt-shift-s = 'move-node-to-workspace 🖥️'
+alt-shift-s = 'move-node-to-workspace S'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#fullscreen
 alt-shift-z = 'fullscreen'
@@ -138,6 +138,10 @@ cmd-ctrl-n = 'move-workspace-to-monitor --wrap-around next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-shift-semicolon = 'mode service'
+
+# See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[workspace-to-monitor-force-assignment]
+S = 'secondary'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
