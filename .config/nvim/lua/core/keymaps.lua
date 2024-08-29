@@ -46,11 +46,6 @@ keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic messag
 
 local wk = require("which-key")
 
-local function close_buffer()
-	local bufnr = vim.fn.bufnr("%")
-	vim.cmd("silent! bn | bd " .. bufnr .. " | silent! bp")
-end
-
 -- Saving
 wk.add({
 	{ "<leader>s", cmd([[w]]), desc = "Save", icon = "💾" },
@@ -68,7 +63,7 @@ wk.add({
 wk.add({
 	{ "<leader>b", group = "Buffers", icon = " " },
 	{ "<leader>bb", cmd([[Telescope buffers]]), desc = "Goto buffer" },
-	{ "<leader>bd", close_buffer, desc = "Close buffer" },
+	{ "<leader>bd", cmd([[bd]]), desc = "Close buffer" },
 	{ "<leader>bD", cmd([[bd!]]), desc = "Force close buffer" },
 	{ "<leader>bn", cmd([[enew]]), desc = "New buffer" },
 })
