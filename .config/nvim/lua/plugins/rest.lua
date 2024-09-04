@@ -47,14 +47,14 @@ return {
 					vim.api.nvim_buf_set_keymap(
 						0,
 						"n",
-						"<c-k>",
+						"<c-p>",
 						"<cmd>lua require('kulala').jump_prev()<cr>",
 						{ noremap = true, silent = true }
 					)
 					vim.api.nvim_buf_set_keymap(
 						0,
 						"n",
-						"<c-j>",
+						"<c-n>",
 						"<cmd>lua require('kulala').jump_next()<cr>",
 						{ noremap = true, silent = true }
 					)
