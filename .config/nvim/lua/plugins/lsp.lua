@@ -391,7 +391,7 @@ return {
 				marksman = {},
 				pyright = {},
 				-- rust_analyzer = {},
-				tsserver = {
+				ts_ls = {
 					init_options = {
 						plugins = {
 							{
@@ -458,9 +458,6 @@ return {
 				automatic_installation = true,
 				handlers = {
 					function(server_name)
-						if server_name == "tsserver" then
-							server_name = "ts_ls"
-						end
 						lspconfig[server_name].setup({
 							capabilities = capabilities,
 							on_attach = on_attach,
