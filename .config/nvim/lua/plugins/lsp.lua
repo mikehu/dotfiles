@@ -297,10 +297,12 @@ return {
 				end
 
 				nmap("gld", vim.lsp.buf.definition, "Goto definition")
-				nmap("glr", "<cmd>Glance references<cr>", "Goto references")
-				nmap("gli", "<cmd>Glance implementations<cr>", "Goto implementation")
 				nmap("glt", vim.lsp.buf.type_definition, "Goto typedef")
 				nmap("glD", vim.lsp.buf.declaration, "Goto declaration")
+
+				nmap("glr", "<cmd>Glance references<cr>", "Glance references")
+				nmap("gli", "<cmd>Glance implementations<cr>", "Glance implementation")
+				nmap("glT", "<cmd>Glance type_definitions<cr>", "Glance type definitions")
 
 				nmap("gr", ":IncRename ", "Rename cursor word")
 				nmap("gla", vim.lsp.buf.code_action, "Code action")
