@@ -31,7 +31,6 @@ return {
 				defaults = {
 					prompt_prefix = "   ",
 					selection_caret = " ❯ ",
-					selection_strategy = "reset",
 					entry_prefix = "   ",
 					winblend = 20,
 					mappings = {
@@ -94,6 +93,7 @@ return {
 			local builtin = require("telescope.builtin")
 			local themes = require("telescope.themes")
 			local with_dropdown = themes.get_dropdown()
+			local with_ivy = themes.get_ivy()
 			local media_files = telescope.extensions.media_files
 			local git_worktree = telescope.extensions.git_worktree
 			local todo_comments = telescope.extensions["todo-comments"]
@@ -102,7 +102,7 @@ return {
 			local notify = telescope.extensions.notify
 
 			-- Find files from project root with fallback
-			function vim.find_files_from_project_git_root()
+			local function find_files_from_project_git_root()
 				local function is_git_repo()
 					vim.fn.system("git rev-parse --is-inside-work-tree")
 					return vim.v.shell_error == 0
@@ -111,15 +111,15 @@ return {
 					local dot_git_path = vim.fn.finddir(".git", ".;")
 					return vim.fn.fnamemodify(dot_git_path, ":h")
 				end
-				local opts = { wrap_results = true }
+				local opts = { layout_strategy = "vertical" }
 				if is_git_repo() then
 					table.insert(opts, { cwd = get_git_root() })
 				end
-				builtin.find_files(themes.get_dropdown(opts))
+				builtin.find_files(opts)
 			end
 
 			-- Convenience keymaps
-			vim.keymap.set("n", "<leader>o", vim.find_files_from_project_git_root, { desc = "Open file" })
+			vim.keymap.set("n", "<leader>o", find_files_from_project_git_root, { desc = "Open file" })
 			vim.keymap.set("n", "<leader>/", function()
 				builtin.current_buffer_fuzzy_find()
 			end, { desc = "Search current buffer" })
@@ -171,7 +171,7 @@ return {
 				{
 					"<leader>fp",
 					function()
-						yank_history.yank_history(with_dropdown)
+						yank_history.yank_history(with_ivy)
 					end,
 					desc = "Yank history",
 				},
