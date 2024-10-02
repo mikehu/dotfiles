@@ -7,7 +7,17 @@ return {
 			"sindrets/diffview.nvim",
 			"nvim-telescope/telescope.nvim",
 		},
-		config = true,
+		config = function()
+			local neogit = require("neogit")
+
+			neogit.setup({
+				sections = {
+					recent = {
+						folded = false,
+					},
+				},
+			})
+		end,
 	},
 	{
 		"lewis6991/gitsigns.nvim",
@@ -46,8 +56,8 @@ return {
 					end,
 					desc = "Prev hunk",
 				},
-				{ "<leader>Gs", gitsigns.stage_hunk, desc = "Stage hunk" },
-				{ "<leader>Gr", gitsigns.reset_hunk, desc = "Reset hunk" },
+				{ "<leader>gs", gitsigns.stage_hunk, desc = "Stage hunk" },
+				{ "<leader>gr", gitsigns.reset_hunk, desc = "Reset hunk" },
 			})
 		end,
 	},

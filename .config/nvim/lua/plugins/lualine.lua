@@ -35,7 +35,7 @@ return {
 					statusline = 1000,
 				},
 			},
-			extensions = { "quickfix", "oil", "trouble", "lazy", "aerial" },
+			extensions = { "quickfix", "oil", "trouble", "lazy", "aerial", "mason" },
 			sections = {
 				lualine_a = {
 					{

@@ -135,13 +135,13 @@ wk.add({
 
 -- Git
 wk.add({
-	{ "<leader>G", group = "Git", icon = "󰊢 " },
-	{ "<leader>GG", cmd([[Neogit]]), desc = "Neogit" },
-	{ "<leader>Gb", cmd([[Gitsigns toggle_current_line_blame]]), desc = "Toggle blame" },
-	{ "<leader>Gd", cmd([[Gitsigns toggle_deleted]]), desc = "Diff this" },
-	{ "<leader>Gp", cmd([[Gitsigns preview_hunk]]), desc = "Preview hunk" },
-	{ "<leader>Gf", cmd([[Telescope git_files theme=dropdown]]), desc = "Find files" },
-	{ "<leader>Gw", cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), desc = "Git worktree" },
+	{ "<leader>g", group = "Git / Grapple 🪝", icon = " " },
+	{ "<leader>gb", cmd([[Gitsigns toggle_current_line_blame]]), desc = "Toggle blame" },
+	{ "<leader>gd", cmd([[Gitsigns toggle_deleted]]), desc = "Diff this" },
+	{ "<leader>gp", cmd([[Gitsigns preview_hunk]]), desc = "Preview hunk" },
+	{ "<leader>gf", cmd([[Telescope git_files theme=dropdown]]), desc = "Find files" },
+	{ "<leader>gw", cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), desc = "Git worktree" },
+	{ "<leader>G", cmd([[Neogit]]), desc = "Neogit" },
 })
 
 -- UI

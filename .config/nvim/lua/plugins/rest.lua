@@ -71,6 +71,11 @@ return {
 	-- 		wk.add({
 	-- 			{ "<leader>R", group = "REST Http", icon = "󰘯 " },
 	-- 			{
+	-- 				"<leader>Ro",
+	-- 				[[<cmd>Rest open<cr>]],
+	-- 				desc = "Open pane",
+	-- 			},
+	-- 			{
 	-- 				"<leader>Rr",
 	-- 				[[<cmd>Rest run<cr>]],
 	-- 				desc = "Run",
@@ -79,6 +84,11 @@ return {
 	-- 				"<leader>Rl",
 	-- 				[[<cmd>Rest logs<cr>]],
 	-- 				desc = "Show logs",
+	-- 			},
+	-- 			{
+	-- 				"<leader>Rc",
+	-- 				[[<cmd>Rest logs<cr>]],
+	-- 				desc = "Edit cookies",
 	-- 			},
 	-- 			{
 	-- 				"<leader>Re",

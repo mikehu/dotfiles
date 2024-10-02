@@ -16,17 +16,16 @@ return {
 
 		local wk = require("which-key")
 		wk.add({
-			{ "<leader>g", group = "Grapple", icon = "🪝" },
-			{ "<leader>gg", grapple.cycle_forward, desc = "Cycle forward" },
-			{ "<leader>gG", grapple.cycle_backward, desc = "Cycle backward" },
+			{ "<leader>gg", grapple.cycle_forward, desc = "Cycle forward", icon = "🪝" },
+			{ "<leader>gG", grapple.cycle_backward, desc = "Cycle backward", icon = "🪝" },
 			{
 				"<leader>gt",
 				[[<cmd>Telescope grapple tags theme=dropdown<cr>]],
 				desc = "Tags menu",
 				icon = "🔭",
 			},
-			{ "<leader>gs", grapple.toggle_scopes, desc = "Scopes menu" },
-			{ "<leader>gR", grapple.reset, desc = "Reset" },
+			{ "<leader>gS", grapple.toggle_scopes, desc = "Scopes menu", icon = "🪝" },
+			{ "<leader>gR", grapple.reset, desc = "Reset", icon = "🪝" },
 			{ "<c-g>", grapple.toggle, desc = "Grapple toggle" },
 		})
 	end,
