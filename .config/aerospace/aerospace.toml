@@ -113,7 +113,7 @@ alt-shift-equal = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 cmd-ctrl-1 = 'workspace 👨🏻‍💻'
-cmd-ctrl-2 = 'workspace 📡'
+cmd-ctrl-2 = 'workspace 💼'
 cmd-ctrl-3 = 'workspace 💬'
 cmd-ctrl-4 = 'workspace 🍿'
 cmd-ctrl-5 = 'workspace 📦'
@@ -126,7 +126,7 @@ cmd-ctrl-leftSquareBracket = 'focus-monitor left'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 👨🏻‍💻'
-alt-shift-2 = 'move-node-to-workspace 📡'
+alt-shift-2 = 'move-node-to-workspace 💼'
 alt-shift-3 = 'move-node-to-workspace 💬'
 alt-shift-4 = 'move-node-to-workspace 🍿'
 alt-shift-5 = 'move-node-to-workspace 📦'
@@ -177,14 +177,18 @@ run = ['move-node-to-workspace 👨🏻‍💻']
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['move-node-to-workspace 📡']
+run = ['move-node-to-workspace 💼']
 
 [[on-window-detected]]
 if.app-id = 'com.readdle.SparkDesktop.appstore'
-run = ['move-node-to-workspace 📡']
+run = ['move-node-to-workspace 💼']
 
 [[on-window-detected]]
 if.app-id = 'notion.id'
+run = ['move-node-to-workspace 💼']
+
+[[on-window-detected]]
+if.app-id = 'com.linear'
 run = ['move-node-to-workspace 📡']
 
 [[on-window-detected]]
