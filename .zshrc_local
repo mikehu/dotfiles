@@ -1,0 +1,5 @@
+# pfetch
+if [ -f /usr/bin/pfetch ]; then
+  /usr/bin/pfetch
+fi
+

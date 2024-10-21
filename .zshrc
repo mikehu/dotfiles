@@ -125,7 +125,11 @@ eval "$(fzf --zsh)"
 # zoxide
 eval "$(zoxide init zsh)"
 
-# pfetch
-if [ -f /usr/bin/pfetch ]; then
-  /usr/bin/pfetch
+# local/ssh based config
+if [[ -n "$SSH_CONNECTION" ]]; then
+  # Load additional SSH-specific configuration
+  source ~/.zshrc_ssh
+else
+  source ~/.zshrc_local
 fi
+
