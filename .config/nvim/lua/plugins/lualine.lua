@@ -11,20 +11,20 @@ return {
 	config = function()
 		local grapple = require("grapple")
 		local noice = require("noice")
-		-- local trouble = require("trouble")
+		local trouble = require("trouble")
 		local lazy_status = require("lazy.status")
 
-		-- local symbols = trouble.statusline({
-		-- 	mode = "lsp_document_symbols",
-		-- 	groups = {},
-		-- 	title = false,
-		-- 	filter = { range = true },
-		-- 	sep = "›",
-		-- 	format = "{kind_icon}{symbol.name:Normal}",
-		-- 	-- The following line is needed to fix the background color
-		-- 	-- Set it to the lualine section you want to use
-		-- 	hl_group = "lualine_c_normal",
-		-- })
+		local symbols = trouble.statusline({
+			mode = "lsp_document_symbols",
+			groups = {},
+			title = false,
+			filter = { range = true },
+			sep = "›",
+			format = "{kind_icon}{symbol.name:Normal}",
+			-- The following line is needed to fix the background color
+			-- Set it to the lualine section you want to use
+			hl_group = "lualine_c_normal",
+		})
 
 		require("lualine").setup({
 			options = {
@@ -35,7 +35,7 @@ return {
 					statusline = 1000,
 				},
 			},
-			extensions = { "quickfix", "oil", "trouble", "lazy", "aerial", "mason" },
+			extensions = { "quickfix", "oil", "trouble", "lazy", "mason" },
 			sections = {
 				lualine_a = {
 					{
@@ -60,13 +60,13 @@ return {
 						},
 						separator = "⟩",
 					},
-					{
-						"aerial",
-					},
 					-- {
-					-- 	symbols.get,
-					-- 	cond = symbols.has,
+					-- 	"aerial",
 					-- },
+					{
+						symbols.get,
+						cond = symbols.has,
+					},
 				},
 				lualine_x = {
 					{

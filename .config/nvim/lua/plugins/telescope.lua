@@ -24,7 +24,6 @@ return {
 			telescope.load_extension("git_worktree")
 			telescope.load_extension("todo-comments")
 			telescope.load_extension("yank_history")
-			telescope.load_extension("whop")
 
 			local actions = require("telescope.actions")
 			telescope.setup({
@@ -98,7 +97,6 @@ return {
 			local git_worktree = telescope.extensions.git_worktree
 			local todo_comments = telescope.extensions["todo-comments"]
 			local yank_history = telescope.extensions.yank_history
-			local whop = telescope.extensions.whop
 			local notify = telescope.extensions.notify
 
 			-- Find files from project root with fallback
@@ -181,13 +179,6 @@ return {
 						todo_comments.todo({ layout_strategy = "vertical" })
 					end,
 					desc = "Todo comments",
-				},
-				{
-					"<leader>fc",
-					function()
-						whop.whop(with_dropdown)
-					end,
-					desc = "Buffer operations",
 				},
 				{
 					"<leader>fq",
