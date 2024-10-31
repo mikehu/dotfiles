@@ -189,7 +189,7 @@ run = ['move-node-to-workspace 💼']
 
 [[on-window-detected]]
 if.app-id = 'com.linear'
-run = ['move-node-to-workspace 📡']
+run = ['move-node-to-workspace 💼']
 
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
