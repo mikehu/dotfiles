@@ -17,6 +17,17 @@ return {
 					},
 				},
 			})
+
+			local wk = require("which-key")
+			wk.add({
+				{
+					"<leader>G",
+					function()
+						neogit.open()
+					end,
+					desc = "Neogit",
+				},
+			})
 		end,
 	},
 	{

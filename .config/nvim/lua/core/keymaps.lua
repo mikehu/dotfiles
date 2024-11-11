@@ -60,8 +60,6 @@ wk.add({
 wk.add({
 	{ "<leader>b", group = "Buffers", icon = " " },
 	{ "<leader>bb", cmd([[Telescope buffers]]), desc = "Goto buffer" },
-	{ "<leader>bd", cmd([[bd]]), desc = "Close buffer" },
-	{ "<leader>bD", cmd([[bd!]]), desc = "Force close buffer" },
 	{ "<leader>bn", cmd([[enew]]), desc = "New buffer" },
 })
 

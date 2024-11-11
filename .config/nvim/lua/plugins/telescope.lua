@@ -18,8 +18,6 @@ return {
 		config = function()
 			local telescope = require("telescope")
 			telescope.load_extension("fzf")
-			telescope.load_extension("notify")
-			telescope.load_extension("noice")
 			telescope.load_extension("media_files")
 			telescope.load_extension("git_worktree")
 			telescope.load_extension("todo-comments")
@@ -97,7 +95,6 @@ return {
 			local git_worktree = telescope.extensions.git_worktree
 			local todo_comments = telescope.extensions["todo-comments"]
 			local yank_history = telescope.extensions.yank_history
-			local notify = telescope.extensions.notify
 
 			-- Find files from project root with fallback
 			local function find_files_from_project_git_root()
@@ -193,13 +190,6 @@ return {
 						builtin.jumplist({ layout_strategy = "vertical" })
 					end,
 					desc = "Jumplist",
-				},
-				{
-					"<leader>fN",
-					function()
-						notify.notify({ layout_strategy = "vertical" })
-					end,
-					desc = "Notifications",
 				},
 				{
 					"<leader>fh",
