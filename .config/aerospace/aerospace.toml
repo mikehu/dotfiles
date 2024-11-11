@@ -116,7 +116,7 @@ cmd-ctrl-1 = 'workspace 👨🏻‍💻'
 cmd-ctrl-2 = 'workspace 💼'
 cmd-ctrl-3 = 'workspace 💬'
 cmd-ctrl-4 = 'workspace 🍿'
-cmd-ctrl-5 = 'workspace 📦'
+cmd-ctrl-5 = 'workspace 🎨'
 
 cmd-ctrl-s = 'workspace S'
 
@@ -129,7 +129,7 @@ alt-shift-1 = 'move-node-to-workspace 👨🏻‍💻'
 alt-shift-2 = 'move-node-to-workspace 💼'
 alt-shift-3 = 'move-node-to-workspace 💬'
 alt-shift-4 = 'move-node-to-workspace 🍿'
-alt-shift-5 = 'move-node-to-workspace 📦'
+alt-shift-5 = 'move-node-to-workspace 🎨'
 
 alt-shift-s = 'move-node-to-workspace S'
 
@@ -213,7 +213,7 @@ run = ['move-node-to-workspace 🍿']
 
 [[on-window-detected]]
 if.app-id = 'com.bambulab.bambu-studio'
-run = ['move-node-to-workspace 📦']
+run = ['move-node-to-workspace 🎨']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
