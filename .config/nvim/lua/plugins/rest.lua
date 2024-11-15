@@ -1,6 +1,7 @@
 return {
 	{
 		"mistweaverco/kulala.nvim",
+		event = "VeryLazy",
 		config = function()
 			local k = require("kulala")
 			-- Setup is required, even if you don't pass any options

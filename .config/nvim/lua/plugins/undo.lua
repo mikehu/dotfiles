@@ -1,6 +1,6 @@
 return {
 	"debugloop/telescope-undo.nvim",
-	lazy = true,
+	event = "VeryLazy",
 	dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	keys = {
 		{ -- lazy style key map

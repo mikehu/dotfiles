@@ -1,6 +1,6 @@
 return {
 	"cbochs/grapple.nvim",
-	event = { "BufReadPost", "BufNewFile" },
+	event = "VeryLazy",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()
 		local grapple = require("grapple")

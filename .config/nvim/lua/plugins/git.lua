@@ -32,7 +32,7 @@ return {
 	},
 	{
 		"lewis6991/gitsigns.nvim",
-		event = "VeryLazy",
+		event = "UIEnter",
 		config = function()
 			local gitsigns = require("gitsigns")
 			gitsigns.setup()
@@ -74,6 +74,7 @@ return {
 	},
 	{
 		"isakbm/gitgraph.nvim",
+		event = "VeryLazy",
 		dependencies = {
 			"sindrets/diffview.nvim",
 		},
@@ -101,6 +102,7 @@ return {
 	},
 	{
 		"ThePrimeagen/git-worktree.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("git-worktree").setup({
 				change_directory_command = "tcd",

@@ -1,5 +1,6 @@
 return {
 	"DanWlker/toolbox.nvim",
+	event = "VeryLazy",
 	dependencies = { "nvim-telescope/telescope.nvim" },
 	keys = {
 		{
