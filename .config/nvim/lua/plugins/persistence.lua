@@ -2,7 +2,7 @@ return {
 	"folke/persistence.nvim",
 	config = function()
 		local persist = require("persistence")
-		persist.setup({})
+		persist.setup({ need = 2 })
 
 		-- local wk = require("which-key")
 		-- wk.add({
@@ -12,7 +12,6 @@ return {
 		-- 	end,
 		-- 	desc = "Load last session",
 		-- })
-
 		vim.api.nvim_create_autocmd("VimEnter", {
 			group = vim.api.nvim_create_augroup("restore_session", { clear = true }),
 			callback = function()
