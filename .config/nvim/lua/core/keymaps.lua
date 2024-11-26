@@ -59,7 +59,11 @@ wk.add({
 -- Buffer management
 wk.add({
 	{ "<leader>b", group = "Buffers", icon = " " },
-	{ "<leader>bb", cmd([[Telescope buffers]]), desc = "Goto buffer" },
+	{
+		"<leader>bb",
+		cmd([[Telescope buffers sort_mru=true sort_lastused=true initial_mode=normal]]),
+		desc = "Goto buffer",
+	},
 	{ "<leader>bn", cmd([[enew]]), desc = "New buffer" },
 })
 
