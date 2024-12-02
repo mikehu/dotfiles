@@ -3,16 +3,12 @@ return {
 	event = "VeryLazy",
 	config = function()
 		require("tiny-inline-diagnostic").setup({
+			preset = "classic",
 			signs = {
 				arrow = "    ",
 				up_arrow = "    ",
 				vertical = " │",
 				vertical_end = " ╰",
-			},
-			options = {
-				break_line = {
-					enabled = true,
-				},
 			},
 		})
 	end,

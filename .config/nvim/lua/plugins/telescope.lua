@@ -50,8 +50,8 @@ return {
 						"--smart-case",
 						"--trim",
 						"--hidden",
-						"--glob", -- don't show inside of .git/ as it's not .gitignore'd
-						"!**/.git/*",
+						"--glob",
+						"!**/.git/*", -- don't show inside of .git/ as it's not .gitignore'd
 					},
 				},
 				pickers = {
