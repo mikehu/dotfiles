@@ -3,16 +3,28 @@ version = 3
 final_space = true
 
 [palette]
-  comment = '#6272A4'
-  cyan = '#8BE9FD'
-  green = '#50FA7B'
-  orange = '#FFB86C'
-  pink = '#FF79C6'
-  purple = '#BD93F9'
-  red = '#FF5555'
-  shade_cyan = '#538C98'
-  shade_pink = '#5E3E5A'
-  yellow = '#F1FA8C'
+  # -- Dracula --
+  # comment = '#6272A4'
+  # cyan = '#8BE9FD'
+  # green = '#50FA7B'
+  # orange = '#FFB86C'
+  # pink = '#FF79C6'
+  # purple = '#BD93F9'
+  # red = '#FF5555'
+  # yellow = '#F1FA8C'
+  # shade_cyan = '#538C98'
+  # shade_pink = '#5E3E5A'
+  # -- Rose Pine --
+  comment = '#908caa'
+  cyan = '#9ccfd8'
+  green = '#31748f'
+  orange = '#f6c177'
+  pink = '#ebbcba'
+  purple = '#c4a7e7'
+  red = '#eb6f92'
+  yellow = '#f6c177'
+  shade_cyan = '#56949f'
+  shade_pink = '#d7827e'
 
 [secondary_prompt]
   template = '<p:shade_pink>❯</>❯ '
