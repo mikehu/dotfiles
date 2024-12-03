@@ -1,23 +1,23 @@
 gui:
   theme:
     activeBorderColor:
-      - '#50FA7A'
+      - green
       - bold
     inactiveBorderColor:
-      - '#F8F8F2'
+      - colour7
     searchingActiveBorderColor:
-      - '#8BE9FD'
+      - cyan
       - bold
     optionsTextColor:
-      - '#BD93F9'
+      - blue
     selectedLineBgColor:
-      - '#6272A4' # set to `default` to have no background colour
+      - colour8 # set to `default` to have no background colour
     cherryPickedCommitBgColor:
-      - '#5E3E5A'
+      - colour0
     cherryPickedCommitFgColor:
-      - '#FF79C6'
+      - magenta
     unstagedChangesColor:
-      - '#FF5555'
+      - red
     defaultFgColor:
       - default
 git:
