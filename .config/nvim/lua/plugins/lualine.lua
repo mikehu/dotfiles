@@ -75,17 +75,17 @@ return {
 							return "[" .. key .. "]"
 						end,
 						cond = grapple.exists,
-						icon = { "󰛢", color = { fg = "#8BE9FD" } },
+						icon = { "󰛢", color = "DiagnosticInfo" },
 					},
-					{ "fancy_macro", icon = { "", color = { fg = "red" } } },
-					{ "searchcount", icon = { "", color = { fg = "#FFB86C" } } },
+					{ "fancy_macro", icon = { "", color = "DiagnosticError" } },
+					{ "searchcount", icon = { "", color = "DiagnosticWarn" } },
 				},
 				lualine_y = {
 					{
 						noice.api.status.command.get,
 						cond = noice.api.status.command.has,
-						color = { fg = "#F1FA8C" },
 						icon = { "" },
+						color = "DiagnosticHint",
 					},
 				},
 				lualine_z = {
@@ -113,7 +113,7 @@ return {
 					{
 						lazy_status.updates,
 						cond = lazy_status.has_updates,
-						color = { fg = "orange" },
+						color = "DiagnosticWarn",
 					},
 				},
 				lualine_y = {
