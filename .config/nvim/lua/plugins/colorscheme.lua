@@ -9,6 +9,7 @@ return {
 			rosepine.setup({
 				highlight_groups = {
 					StatusLine = { fg = "muted", bg = "base" },
+					DiagnosticUnnecessary = { fg = "muted", undercurl = true, sp = "rose" },
 					SatelliteSearch = { fg = "gold" },
 					-- ["@markup.heading.1.markdown"] = { fg = colors.purple },
 					-- RenderMarkdownH1Bg = { bg = colors.shade_purple },
