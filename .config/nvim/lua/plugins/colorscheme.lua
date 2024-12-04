@@ -8,7 +8,7 @@ return {
 			local rosepine = require("rose-pine")
 			rosepine.setup({
 				highlight_groups = {
-					StatusLine = { fg = "muted", bg = "overlay" },
+					StatusLine = { fg = "muted", bg = "base" },
 					SatelliteSearch = { fg = "gold" },
 					-- ["@markup.heading.1.markdown"] = { fg = colors.purple },
 					-- RenderMarkdownH1Bg = { bg = colors.shade_purple },
