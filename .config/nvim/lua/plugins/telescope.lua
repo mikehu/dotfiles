@@ -29,7 +29,7 @@ return {
 					prompt_prefix = "   ",
 					selection_caret = " ❯ ",
 					entry_prefix = "   ",
-					winblend = 20,
+					winblend = 15,
 					mappings = {
 						i = {
 							["<C-j>"] = actions.move_selection_next, -- move to next result

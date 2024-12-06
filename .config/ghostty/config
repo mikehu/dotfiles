@@ -1,0 +1,68 @@
+# Fonts
+font-family = "Fira Code Light"
+font-family-bold = "Fira Code SemiBold"
+
+font-size = 13
+
+# macOS thicken font
+font-thicken = true
+
+# Theme
+theme = rose-pine
+
+# Colors
+background = #191724
+foreground = #e0def4
+
+# Effects
+background-opacity = 0.9
+background-blur-radius = 20
+
+# macOS settings
+macos-titlebar-style = hidden
+
+# Nerd Fonts glyph codepoints
+# - See https://github.com/be5invis/Iosevka/issues/248
+# - See https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points
+font-codepoint-map = U+E5FA-U+E6B4="Symbols Nerd Font Mono"
+
+# Devicons
+font-codepoint-map = U+E700-U+E7C5="Symbols Nerd Font Mono"
+
+# Font Awesome
+font-codepoint-map = U+F000-U+F2E0="Symbols Nerd Font Mono"
+
+# Font Awesome Extension
+font-codepoint-map = U+E200-U+E2A9="Symbols Nerd Font Mono"
+
+# Material Design Icons
+font-codepoint-map = U+F0001-U+F1AF0="Symbols Nerd Font Mono"
+
+# Weather
+font-codepoint-map = U+E300-U+E3E3="Symbols Nerd Font Mono"
+
+# Octicons
+font-codepoint-map = U+F400-U+F532,U+2665,U+26A1="Symbols Nerd Font Mono"
+
+# Powerline="Symbols
+font-codepoint-map = U+E0A0-U+E0A2,U+E0B0-U+E0B3="Symbols Nerd Font Mono"
+
+# Powerline Extra="Symbols
+font-codepoint-map = U+E0A3,U+E0B4-U+E0C8,U+E0CA,U+E0CC-U+E0D4="Symbols Nerd Font Mono"
+
+# IEC Power="Symbols
+font-codepoint-map = U+23FB-U+23FE,U+2B58="Symbols Nerd Font Mono"
+
+# Font Logos
+font-codepoint-map = U+F300-U+F373="Symbols Nerd Font Mono"
+
+# Pomicons
+font-codepoint-map = U+E000-U+E00A="Symbols Nerd Font Mono"
+
+# Codicons
+font-codepoint-map = U+EA60-U+EBEB="Symbols Nerd Font Mono"
+
+# Additional sets
+font-codepoint-map = U+E276C-U+E2771="Symbols Nerd Font Mono" # Heavy Angle Brackets
+font-codepoint-map = U+2500-U+259F="Symbols Nerd Font Mono" # Box Drawing
+
