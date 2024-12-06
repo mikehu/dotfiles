@@ -156,5 +156,5 @@ wk.add({
 wk.add({
 	{ "gl", group = "LSP", icon = "✨" },
 	{ "<leader>P", group = "Project", icon = "📁" },
-	{ "<leader>K", group = "Definitions", icon = " " },
+	{ "<leader>k", group = "Definitions", icon = " " },
 })

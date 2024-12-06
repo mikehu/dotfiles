@@ -107,8 +107,8 @@ return {
 					border = "none",
 					floating_preview_opts = {},
 					peek_definition_code = {
-						["<leader>Kf"] = "@function.outer",
-						["<leader>Kc"] = "@class.outer",
+						["<leader>kf"] = "@function.outer",
+						["<leader>kc"] = "@class.outer",
 					},
 				},
 			},
