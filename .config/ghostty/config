@@ -13,13 +13,17 @@ theme = rose-pine
 # Colors
 background = #191724
 foreground = #e0def4
+selection-foreground = #191724
+selection-background = #f6c177
 
 # Effects
 background-opacity = 0.9
 background-blur-radius = 20
+unfocused-split-opacity = 0.6
 
 # macOS settings
 macos-titlebar-style = hidden
+macos-option-as-alt = left
 
 # Nerd Fonts glyph codepoints
 # - See https://github.com/be5invis/Iosevka/issues/248
@@ -66,3 +70,5 @@ font-codepoint-map = U+EA60-U+EBEB="Symbols Nerd Font Mono"
 font-codepoint-map = U+E276C-U+E2771="Symbols Nerd Font Mono" # Heavy Angle Brackets
 font-codepoint-map = U+2500-U+259F="Symbols Nerd Font Mono" # Box Drawing
 
+# Additional Config Files
+config-file =
