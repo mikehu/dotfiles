@@ -4,19 +4,13 @@ return {
 		local persist = require("persistence")
 		persist.setup({ need = 2 })
 
-		-- local wk = require("which-key")
-		-- wk.add({
-		-- 	"<leader>PL",
-		-- 	function()
-		-- 		persist.load()
-		-- 	end,
-		-- 	desc = "Load last session",
-		-- })
 		vim.api.nvim_create_autocmd("VimEnter", {
 			group = vim.api.nvim_create_augroup("restore_session", { clear = true }),
 			callback = function()
 				if vim.fn.argc(-1) == 0 then
 					persist.load()
+				else
+					persist.stop()
 				end
 			end,
 			nested = true,
