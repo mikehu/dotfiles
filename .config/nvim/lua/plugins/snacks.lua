@@ -5,6 +5,19 @@ return {
 		lazy = false,
 		opts = {
 			bigfile = { enabled = true },
+			indent = {
+				indent = {
+					only_current = true,
+				},
+				scope = {
+					char = "┊",
+					underline = true,
+					only_current = true,
+				},
+				animate = {
+					enabled = false,
+				},
+			},
 			notifier = {
 				enabled = true,
 				timeout = 3000,
@@ -46,6 +59,13 @@ return {
 					Snacks.bufdelete({ force = true })
 				end,
 				desc = "Force close buffer",
+			},
+			{
+				"<leader>gl",
+				function()
+					Snacks.git.blame_line()
+				end,
+				desc = "Blame line",
 			},
 			{
 				"]]",

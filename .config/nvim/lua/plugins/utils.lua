@@ -1,5 +1,6 @@
 return {
 	"tpope/vim-sleuth",
+	"tpope/vim-dotenv",
 	"sitiom/nvim-numbertoggle",
 	{
 		"m4xshen/smartcolumn.nvim",
