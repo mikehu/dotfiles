@@ -5,7 +5,7 @@ return {
 		cmdline = {
 			format = {
 				edit = { pattern = "^:%s*ed?i?t?%s+", icon = "", lang = "vim", title = "Edit" },
-				db = { pattern = "^:%s*DB%s+", icon = "", lang = "vim", title = "Database" },
+				-- db = { pattern = "^:%s*DB%s+", icon = "", lang = "vim", title = "Database" },
 			},
 		},
 		lsp = {
