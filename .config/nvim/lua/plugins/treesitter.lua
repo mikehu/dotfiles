@@ -12,8 +12,10 @@ return {
 			ensure_installed = {
 				"c",
 				"css",
+				"gleam",
 				"go",
 				"html",
+				"http",
 				"lua",
 				"markdown",
 				"markdown_inline",
@@ -23,9 +25,11 @@ return {
 				"json",
 				"tsx",
 				"typescript",
+				"svelte",
 				"vim",
 				"vue",
 				"yaml",
+				"zig",
 			},
 			auto_install = true,
 			highlight = {

@@ -5,9 +5,7 @@ return {
 		config = function()
 			local k = require("kulala")
 			-- Setup is required, even if you don't pass any options
-			k.setup({
-				debug = false,
-			})
+			k.setup({})
 
 			local wk = require("which-key")
 			wk.add({
