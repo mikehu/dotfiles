@@ -149,14 +149,6 @@ wk.add({
 	{ "<leader>tr", cmd([[TestNearest]]), desc = "Run test" },
 	{ "<leader>tf", cmd([[TestFile]]), desc = "Run test file" },
 	{ "<leader>ts", cmd([[TestSuite]]), desc = "Run test suite" },
-	{ "<leader>tt", cmd([[Trouble diagnostics toggle]]), desc = "Trouble diagnostics" },
-	{
-		"<leader>tb",
-		cmd([[Trouble diagnostics toggle filter.buf=0]]),
-		desc = "Trouble buffer",
-	},
-	{ "<leader>tq", cmd([[Trouble qflist toggle]]), desc = "Trouble quickfix list" },
-	{ "<leader>tl", cmd([[Trouble loclist toggle]]), desc = "Trouble location list" },
 })
 
 -- UI
