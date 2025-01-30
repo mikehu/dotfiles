@@ -36,7 +36,7 @@ keymap.set("i", "<m-k>", "<up>")
 keymap.set("i", "<m-l>", "<right>")
 keymap.set("n", "Q", "<nop>")
 
--- Diagnostics / Trouble
+-- Diagnostics
 
 keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic message" })
 keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic message" })
@@ -141,6 +141,22 @@ wk.add({
 	{ "<leader>gf", cmd([[Telescope git_files theme=dropdown]]), desc = "Find files" },
 	{ "<leader>gw", cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), desc = "Git worktree" },
 	{ "<leader>G", cmd([[Neogit]]), desc = "Neogit" },
+})
+
+-- Test
+wk.add({
+	{ "<leader>t", group = "Test / Trouble 🚦", icon = "🔬" },
+	{ "<leader>tr", cmd([[TestNearest]]), desc = "Run test" },
+	{ "<leader>tf", cmd([[TestFile]]), desc = "Run test file" },
+	{ "<leader>ts", cmd([[TestSuite]]), desc = "Run test suite" },
+	{ "<leader>tt", cmd([[Trouble diagnostics toggle]]), desc = "Trouble diagnostics" },
+	{
+		"<leader>tb",
+		cmd([[Trouble diagnostics toggle filter.buf=0]]),
+		desc = "Trouble buffer",
+	},
+	{ "<leader>tq", cmd([[Trouble qflist toggle]]), desc = "Trouble quickfix list" },
+	{ "<leader>tl", cmd([[Trouble loclist toggle]]), desc = "Trouble location list" },
 })
 
 -- UI
