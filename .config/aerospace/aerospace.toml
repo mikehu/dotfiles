@@ -163,7 +163,7 @@ alt-shift-l = ['join-with right', 'mode main']
 
 # 'on-window-detected' callbacks
 [[on-window-detected]]
-if.app-id = 'company.thebrowser.Browser'
+if.app-id = 'app.zen-browser.zen'
 if.during-aerospace-startup = true
 run = ['move-node-to-workspace 👨🏻‍💻']
 
@@ -203,11 +203,7 @@ run = ['move-node-to-workspace 💬']
 if.app-id = 'com.apple.MobileSMS'
 run = ['move-node-to-workspace 💬']
 
-[[on-window-detected]]
-if.app-id = 'com.brave.Browser'
-run = ['move-node-to-workspace 🍿']
-
-[[on-window-detected]]
+ [[on-window-detected]]
 if.app-id = 'dev.zed.Zed'
 run = ['move-node-to-workspace 🍿']
 
