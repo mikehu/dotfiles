@@ -35,7 +35,11 @@ return {
 		event = "UIEnter",
 		config = function()
 			local gitsigns = require("gitsigns")
-			gitsigns.setup()
+			gitsigns.setup({
+				current_line_blame_opts = {
+					virt_text_pos = "right_align",
+				},
+			})
 
 			local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
