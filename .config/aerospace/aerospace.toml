@@ -168,8 +168,18 @@ if.during-aerospace-startup = true
 run = ['move-node-to-workspace 👨🏻‍💻']
 
 [[on-window-detected]]
+if.app-id = 'app.zen-browser.zen'
+if.window-title-regex-substring = 'Picture-in-Picture'
+run = ['layout floating']
+
+[[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
 run = ['move-node-to-workspace 👨🏻‍💻']
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+if.window-title-regex-substring = 'Updating Ghostty'
+run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'net.kovidgoyal.kitty'
