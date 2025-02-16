@@ -26,6 +26,25 @@ return {
 			hl_group = "lualine_c_normal",
 		})
 
+		local copilot_status = {
+			get = function()
+				local status_icon = " "
+				local result = vim.api.nvim_exec2("Copilot status", { output = true })
+
+				if result.output:find("Ready") then
+					-- Command succeeded and output is Copilot Ready
+					return string.format("%%#DiagnosticOk#%s", status_icon)
+				else
+					-- Command succeeded but output is not as expected
+					return string.format("%%#DiagnosticWarn#%s", status_icon)
+				end
+			end,
+			has = function()
+				local success = pcall(vim.api.nvim_exec2, "Copilot status", { output = true })
+				return success
+			end,
+		}
+
 		require("lualine").setup({
 			options = {
 				theme = vim.g.colors_name,
@@ -118,6 +137,10 @@ return {
 				},
 				lualine_y = {
 					"diagnostics",
+					{
+						copilot_status.get,
+						cond = copilot_status.has,
+					},
 				},
 				lualine_z = {
 					{
