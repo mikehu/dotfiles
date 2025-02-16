@@ -11,6 +11,8 @@ return {
 			["c"] = true,
 			["c#"] = true,
 			["c++"] = true,
+			["html"] = false,
+			["htmx"] = true,
 			["go"] = true,
 			["python"] = true,
 			["vue"] = true,

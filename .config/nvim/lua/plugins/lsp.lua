@@ -128,9 +128,9 @@ return {
 						end,
 					}),
 					["<tab>"] = cmp.mapping(function(fallback)
-						local copilot_keys = vim.fn["copilot#Accept"]("")
-						if copilot_keys ~= "" then
-							vim.api.nvim_feedkeys(copilot_keys, "i", true)
+						local code_complete_keys = vim.fn["copilot#Accept"]("")
+						if code_complete_keys ~= "" then
+							vim.api.nvim_feedkeys(code_complete_keys, "i", true)
 						elseif cmp.visible() then
 							if #cmp.get_entries() == 1 then
 								cmp.confirm({ select = true })
