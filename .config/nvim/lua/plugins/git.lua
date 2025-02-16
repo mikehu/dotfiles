@@ -82,18 +82,46 @@ return {
 		dependencies = {
 			"sindrets/diffview.nvim",
 		},
-		-- opts = {
-		-- 	hooks = {
-		-- 		-- Check diff of a commit
-		-- 		on_select_commit = function(commit)
-		-- 			vim.cmd(":DiffviewOpen " .. commit.hash .. "^!")
-		-- 		end,
-		-- 		-- Check diff from commit a -> commit b
-		-- 		on_select_range_commit = function(from, to)
-		-- 			vim.cmd(":DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
-		-- 		end,
-		-- 	},
-		-- },
+		opts = {
+			symbols = {
+				merge_commit = "",
+				commit = "",
+				merge_commit_end = "",
+				commit_end = "",
+
+				-- Advanced symbols
+				GVER = "",
+				GHOR = "",
+				GCLD = "",
+				GCRD = "╭",
+				GCLU = "",
+				GCRU = "",
+				GLRU = "",
+				GLRD = "",
+				GLUD = "",
+				GRUD = "",
+				GFORKU = "",
+				GFORKD = "",
+				GRUDCD = "",
+				GRUDCU = "",
+				GLUDCD = "",
+				GLUDCU = "",
+				GLRDCL = "",
+				GLRDCR = "",
+				GLRUCL = "",
+				GLRUCR = "",
+			},
+			-- 	hooks = {
+			-- 		-- Check diff of a commit
+			-- 		on_select_commit = function(commit)
+			-- 			vim.cmd(":DiffviewOpen " .. commit.hash .. "^!")
+			-- 		end,
+			-- 		-- Check diff from commit a -> commit b
+			-- 		on_select_range_commit = function(from, to)
+			-- 			vim.cmd(":DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
+			-- 		end,
+			-- 	},
+		},
 		keys = {
 			{
 				"<leader>gL",
