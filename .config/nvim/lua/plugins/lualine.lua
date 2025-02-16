@@ -26,11 +26,16 @@ return {
 			hl_group = "lualine_c_normal",
 		})
 
+		local function is_copilot_available()
+			return (vim.fn.exists(":Copilot") == 2)
+		end
 		local copilot_status = {
 			get = function()
+				if not is_copilot_available() then
+					return ""
+				end
 				local status_icon = " "
 				local result = vim.api.nvim_exec2("Copilot status", { output = true })
-
 				if result.output:find("Ready") then
 					-- Command succeeded and output is Copilot Ready
 					return string.format("%%#DiagnosticOk#%s", status_icon)
@@ -40,8 +45,7 @@ return {
 				end
 			end,
 			has = function()
-				local success = pcall(vim.api.nvim_exec2, "Copilot status", { output = true })
-				return success
+				return is_copilot_available()
 			end,
 		}
 
