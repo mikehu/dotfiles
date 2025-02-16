@@ -23,6 +23,9 @@ else
   export EDITOR='nvim'
 fi
 
+# Global GitIgnore
+export GIT_IGNORE_FILE="$XDG_CONFIG_HOME/git/ignore"
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
