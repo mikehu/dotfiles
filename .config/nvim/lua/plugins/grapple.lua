@@ -26,7 +26,7 @@ return {
 			},
 			{ "<leader>gS", grapple.toggle_scopes, desc = "Scopes menu", icon = "🪝" },
 			{ "<leader>gR", grapple.reset, desc = "Reset", icon = "🪝" },
-			{ "<c-g>", grapple.toggle, desc = "Grapple toggle" },
+			{ "<C-g>g", grapple.toggle, desc = "Grapple toggle" },
 		})
 	end,
 }
