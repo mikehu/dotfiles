@@ -1,25 +1,85 @@
 return {
 	{
-		"robitx/gp.nvim",
-		event = "VeryLazy",
+		"github/copilot.vim",
+		event = "InsertEnter",
 		config = function()
-			require("gp").setup({
-				providers = {
-					copilot = {
-						endpoint = "https://api.githubcopilot.com/chat/completions",
-						secret = {
-							"bash",
-							"-c",
-							"cat ~/.config/github-copilot/hosts.json | sed -e 's/.*oauth_token...//;s/\".*//'",
+			vim.g.copilot_filetypes = {
+				["*"] = false,
+				["javascript"] = true,
+				["typescript"] = true,
+				["lua"] = false,
+				["rust"] = true,
+				["c"] = true,
+				["c#"] = true,
+				["c++"] = true,
+				["html"] = false,
+				["htmx"] = true,
+				["go"] = true,
+				["python"] = true,
+				["vue"] = true,
+			}
+			vim.g.copilot_workspace_folders = {
+				"~/Code/neurox",
+				"~/Code/illustrious-industries",
+			}
+		end,
+	},
+	{
+		"olimorris/codecompanion.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"j-hui/fidget.nvim",
+		},
+		init = function()
+			require("plugins.extensions.codecompanion-fidget"):init()
+		end,
+		config = function()
+			require("codecompanion").setup({
+				display = {
+					action_palette = {
+						provider = "telescope",
+					},
+					chat = {
+						show_settings = true,
+						start_in_insert_mode = true,
+						window = {
+							width = 0.4,
 						},
 					},
 				},
-				chat_template = require("gp.defaults").short_chat_template,
-				chat_confirm_delete = false,
-				chat_shortcut_respond = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>r" },
-				chat_shortcut_delete = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>d" },
-				chat_shortcut_stop = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>s" },
-				chat_shortcut_new = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>c" },
+				strategies = {
+					chat = {
+						adapter = "copilot",
+						roles = {
+							user = "Mike",
+							llm = function(adapter)
+								return "🤖 (" .. adapter.formatted_name .. ")"
+							end,
+						},
+						slash_commands = {
+							["file"] = {
+								-- Location to the slash command in CodeCompanion
+								callback = "strategies.chat.slash_commands.file",
+								description = "Select a file using Telescope",
+								opts = {
+									provider = "telescope", -- Other options include 'default', 'mini_pick', 'fzf_lua', snacks
+									contains_code = true,
+								},
+							},
+						},
+					},
+				},
+				adapters = {
+					openai = function()
+						return require("codecompanion.adapters").extend("openai", {
+							env = {
+								api_key = 'cmd:op item get "OpenAI - Homelab" --vault "Private" --account MXFJNCXIPZC2ZNSNS35K6CT334 --fields credential --reveal',
+							},
+						})
+					end,
+				},
 			})
 
 			local wk = require("which-key")
@@ -29,24 +89,14 @@ return {
 					mode = { "n" },
 					nowait = true,
 					remap = false,
-					{ "<leader>cc", "<cmd>GpChatToggle<cr>", desc = "Toggle Chat" },
-					{ "<leader>cn", "<cmd>GpChatNew<cr>", desc = "New Chat" },
-					{ "<leader>cf", "<cmd>GpChatFinder<cr>", desc = "Find Chat" },
-					{ "<leader>cx", "<cmd>GpContext<cr>", desc = "Toggle context" },
-					{ "<C-g>a", "<cmd>GpAppend<cr>", desc = "Append response" },
-					{ "<C-g>p", "<cmd>GpPrepend<cr>", desc = "Prepend response" },
-					{ "<C-g>r", "<cmd>GpRewrite<cr>", desc = "Rewrite line" },
+					{ "<leader>cc", "<cmd>CodeCompanionChat<cr>", desc = "Toggle Chat" },
+					{ "<leader>ca", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
 				},
 				{
 					mode = { "v" },
 					nowait = true,
 					remap = false,
-					{ "<leader>cc", "<cmd>GpChatToggle<cr>", desc = "Toggle Chat" },
-					{ "<leader>cf", "<cmd>GpChatFinder<cr>", desc = "Find Chat" },
-					{ "<C-g>a", ":<C-u>'<,'>GpAppend<cr>", desc = "Append response" },
-					{ "<C-g>p", ":<C-u>'<,'>GpPrepend<cr>", desc = "Prepend response" },
-					{ "<C-g>r", ":<C-u>'<,'>GpRewrite<cr>", desc = "Rewrite selection" },
-					{ "<C-g>i", ":<C-u>'<,'>GpImplement<cr>", desc = "Implement selection" },
+					{ "<leader>cc", ":'<,'>CodeCompanion<cr>", desc = "Inline assist" },
 				},
 			})
 		end,

@@ -14,6 +14,8 @@ return {
 		local trouble = require("trouble")
 		local lazy_status = require("lazy.status")
 
+		local codecompanion_statusline = require("plugins.extensions.codecompanion-statusline")
+
 		local symbols = trouble.statusline({
 			mode = "lsp_document_symbols",
 			groups = {},
@@ -26,26 +28,12 @@ return {
 			hl_group = "lualine_c_normal",
 		})
 
-		local function is_copilot_available()
-			return (vim.fn.exists(":Copilot") == 2)
-		end
 		local copilot_status = {
 			get = function()
-				if not is_copilot_available() then
-					return ""
-				end
-				local status_icon = " "
-				local result = vim.api.nvim_exec2("Copilot status", { output = true })
-				if result.output:find("Ready") then
-					-- Command succeeded and output is Copilot Ready
-					return string.format("%%#DiagnosticOk#%s", status_icon)
-				else
-					-- Command succeeded but output is not as expected
-					return string.format("%%#DiagnosticWarn#%s", status_icon)
-				end
+				return " "
 			end,
 			has = function()
-				return is_copilot_available()
+				return (vim.fn.exists(":Copilot") == 2)
 			end,
 		}
 
@@ -141,6 +129,7 @@ return {
 				},
 				lualine_y = {
 					"diagnostics",
+					codecompanion_statusline,
 					{
 						copilot_status.get,
 						cond = copilot_status.has,
