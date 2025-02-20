@@ -29,8 +29,9 @@ export GIT_IGNORE_FILE="$XDG_CONFIG_HOME/git/ignore"
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Homebrew (site-functions for zsh)
+# Homebrew specifics
 if [[ $(command -v brew) != "" ]]; then
+  # site-functions for zsh
   fpath+=("$(brew --prefix)/share/zsh/site-functions")
 fi
 
@@ -119,8 +120,13 @@ fi
 [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
 
 # Golang
+# golang env
 export GOPATH="$HOME/.go"
 export PATH="$GOPATH/bin:$PATH"
+if [[ $(command -v brew) != "" ]]; then
+  export GOROOT=$(brew --prefix go)/libexec
+  export PATH="$GOROOT/bin:$PATH"
+fi
 
 # Rust
 export CARGOPATH="$HOME/.cargo"

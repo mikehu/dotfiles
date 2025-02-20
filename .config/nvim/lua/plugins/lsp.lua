@@ -184,6 +184,7 @@ return {
 					{ name = "luasnip", keyword_length = 3 }, -- snippets
 					{ name = "emoji" },
 					{ name = "path", keyword_length = 2 }, -- file system paths
+					{ name = "render-markdown" },
 					{ name = "nvim_lua" },
 				},
 				formatting = {
