@@ -29,6 +29,7 @@ keymap.set("n", "<leader>h", cmd([[nohl]]), { desc = "Remove highlights" })
 keymap.set("n", "<c-q>", cmd([[cclose]]), { desc = "Close quickfix list" })
 keymap.set("t", "<c-q>", cmd([[bd!]]), { desc = "Close terminal buffer" })
 
+keymap.set("i", "<esc><esc>", "<esc>")
 keymap.set("i", "<c-c>", "<esc>")
 keymap.set("i", "jk", "<esc>")
 keymap.set("i", "kj", "<esc>")
@@ -136,11 +137,14 @@ wk.add({
 wk.add({
 	{ "<leader>g", group = "Git / Grapple 🪝", icon = " " },
 	{ "<leader>gb", cmd([[Gitsigns toggle_current_line_blame]]), desc = "Toggle blame" },
-	{ "<leader>gd", cmd([[Gitsigns toggle_deleted]]), desc = "Diff this" },
 	{ "<leader>gp", cmd([[Gitsigns preview_hunk]]), desc = "Preview hunk" },
-	{ "<leader>gf", cmd([[Telescope git_files theme=dropdown]]), desc = "Find files" },
 	{ "<leader>gw", cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), desc = "Git worktree" },
-	{ "<leader>G", cmd([[Neogit]]), desc = "Neogit" },
+	{ "<leader>gd", cmd([[Gdiffsplit]]), desc = "Diff this" },
+	{ "<leader>gW", cmd([[Gwrite]]), desc = "Write" },
+	{ "<leader>gf", cmd([[Gread]]), desc = "Checkout file" },
+	{ "<leader>gB", cmd([[GBrowse]]), desc = "Browse on web" },
+	{ "<leader>gc", cmd([[Git commit]]), desc = "Commit" },
+	{ "<leader>gM", cmd([[Git mergetool]]), desc = "Mergetool" },
 })
 
 -- Test
@@ -156,7 +160,7 @@ wk.add({
 	{ "<leader>u", group = "UI", icon = " " },
 	{ "<leader>ul", cmd([[Lazy]]), desc = "Lazy", icon = "󰒲 " },
 	{ "<leader>ub", cmd([[Mason]]), desc = "Mason", icon = "🧱" },
-	{ "<leader>ug", cmd([[Neogit]]), desc = "Neogit", icon = "󰊢 " },
+	-- { "<leader>ug", cmd([[Neogit]]), desc = "Neogit", icon = "󰊢 " },
 	{ "<leader>ue", cmd([[Oil --float]]), desc = "File explorer", icon = " " },
 })
 

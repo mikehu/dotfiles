@@ -1,34 +1,7 @@
 return {
 	{
-		"NeogitOrg/neogit",
+		"tpope/vim-fugitive",
 		event = "VeryLazy",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"sindrets/diffview.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-		config = function()
-			local neogit = require("neogit")
-
-			neogit.setup({
-				sections = {
-					recent = {
-						folded = false,
-					},
-				},
-			})
-
-			local wk = require("which-key")
-			wk.add({
-				{
-					"<leader>G",
-					function()
-						neogit.open()
-					end,
-					desc = "Neogit",
-				},
-			})
-		end,
 	},
 	{
 		"lewis6991/gitsigns.nvim",
@@ -111,16 +84,16 @@ return {
 				GLRUCL = "",
 				GLRUCR = "",
 			},
-			-- 	hooks = {
-			-- 		-- Check diff of a commit
-			-- 		on_select_commit = function(commit)
-			-- 			vim.cmd(":DiffviewOpen " .. commit.hash .. "^!")
-			-- 		end,
-			-- 		-- Check diff from commit a -> commit b
-			-- 		on_select_range_commit = function(from, to)
-			-- 			vim.cmd(":DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
-			-- 		end,
-			-- 	},
+			hooks = {
+				-- Check diff of a commit
+				on_select_commit = function(commit)
+					vim.cmd(":DiffviewOpen " .. commit.hash .. "^!")
+				end,
+				-- Check diff from commit a -> commit b
+				on_select_range_commit = function(from, to)
+					vim.cmd(":DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
+				end,
+			},
 		},
 		keys = {
 			{
