@@ -22,6 +22,12 @@ return {
 				enabled = true,
 			},
 			quickfile = { enabled = true },
+			scratch = {
+				icon = " ",
+				filekey = {
+					count = false,
+				},
+			},
 			statuscolumn = { enabled = true },
 			words = { enabled = true },
 			styles = {
@@ -65,6 +71,20 @@ return {
 					Snacks.git.blame_line()
 				end,
 				desc = "Blame line",
+			},
+			{
+				"<leader>.",
+				function()
+					Snacks.scratch()
+				end,
+				desc = "Toggle Scratch Buffer",
+			},
+			{
+				"<leader>ls",
+				function()
+					Snacks.scratch.select()
+				end,
+				desc = "List scratch buffer",
 			},
 			{
 				"]]",
