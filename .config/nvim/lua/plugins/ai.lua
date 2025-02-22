@@ -52,10 +52,10 @@ return {
 					chat = {
 						adapter = "copilot",
 						roles = {
-							user = "   " .. vim.env.USER:gsub("^%l", string.upper),
+							user = "  " .. vim.env.USER:gsub("^%l", string.upper),
 							llm = function(adapter)
 								return string.format(
-									"   %s (%s)",
+									"  %s (%s)",
 									adapter.formatted_name,
 									adapter.schema.model.default
 								)
@@ -75,15 +75,15 @@ return {
 					},
 				},
 				adapters = {
-					-- copilot = function()
-					-- 	return require("codecompanion.adapters").extend("copilot", {
-					-- 		schema = {
-					-- 			model = {
-					-- 				default = "claude-3.5-sonnet",
-					-- 			},
-					-- 		},
-					-- 	})
-					-- end,
+					copilot = function()
+						return require("codecompanion.adapters").extend("copilot", {
+							schema = {
+								model = {
+									default = "claude-3.5-sonnet",
+								},
+							},
+						})
+					end,
 					openai = function()
 						return require("codecompanion.adapters").extend("openai", {
 							env = {
