@@ -42,7 +42,6 @@ return {
 						provider = "telescope",
 					},
 					chat = {
-						show_settings = true,
 						start_in_insert_mode = true,
 						window = {
 							width = 0.4,
@@ -53,9 +52,13 @@ return {
 					chat = {
 						adapter = "copilot",
 						roles = {
-							user = "Mike",
+							user = "   " .. vim.env.USER:gsub("^%l", string.upper),
 							llm = function(adapter)
-								return "🤖 (" .. adapter.formatted_name .. ")"
+								return string.format(
+									"   %s (%s)",
+									adapter.formatted_name,
+									adapter.schema.model.default
+								)
 							end,
 						},
 						slash_commands = {
@@ -72,6 +75,15 @@ return {
 					},
 				},
 				adapters = {
+					-- copilot = function()
+					-- 	return require("codecompanion.adapters").extend("copilot", {
+					-- 		schema = {
+					-- 			model = {
+					-- 				default = "claude-3.5-sonnet",
+					-- 			},
+					-- 		},
+					-- 	})
+					-- end,
 					openai = function()
 						return require("codecompanion.adapters").extend("openai", {
 							env = {
@@ -89,7 +101,7 @@ return {
 					mode = { "n" },
 					nowait = true,
 					remap = false,
-					{ "<leader>cc", "<cmd>CodeCompanionChat<cr>", desc = "Toggle Chat" },
+					{ "<leader>cc", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
 					{ "<leader>ca", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
 				},
 				{
