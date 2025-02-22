@@ -137,14 +137,16 @@ wk.add({
 wk.add({
 	{ "<leader>g", group = "Git / Grapple 🪝", icon = " " },
 	{ "<leader>gb", cmd([[Gitsigns toggle_current_line_blame]]), desc = "Toggle blame" },
+	{ "<leader>gd", cmd([[Gitsigns toggle_deleted]]), desc = "Show/hide deleted" },
+	{ "<leader>gw", cmd([[Gitsigns toggle_word_diff]]), desc = "Show/hide word diff" },
 	{ "<leader>gp", cmd([[Gitsigns preview_hunk]]), desc = "Preview hunk" },
-	{ "<leader>gw", cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), desc = "Git worktree" },
-	{ "<leader>gd", cmd([[Gdiffsplit]]), desc = "Diff this" },
+	{ "<leader>gD", cmd([[Gdiff]]), desc = "Diff this" },
 	{ "<leader>gW", cmd([[Gwrite]]), desc = "Write" },
 	{ "<leader>gf", cmd([[Gread]]), desc = "Checkout file" },
 	{ "<leader>gB", cmd([[GBrowse]]), desc = "Browse on web" },
 	{ "<leader>gc", cmd([[Git commit]]), desc = "Commit" },
 	{ "<leader>gM", cmd([[Git mergetool]]), desc = "Mergetool" },
+	{ "<leader>gt", cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), desc = "Git worktree" },
 })
 
 -- Test
@@ -162,6 +164,7 @@ wk.add({
 	{ "<leader>ub", cmd([[Mason]]), desc = "Mason", icon = "🧱" },
 	-- { "<leader>ug", cmd([[Neogit]]), desc = "Neogit", icon = "󰊢 " },
 	{ "<leader>ue", cmd([[Oil --float]]), desc = "File explorer", icon = " " },
+	{ "<leader>un", cmd([[Nvumi]]), desc = "Nvumi", icon = "󰡱 " },
 })
 
 -- Prefix registrations
