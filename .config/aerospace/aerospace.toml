@@ -63,6 +63,9 @@ outer.right =      8
 # 'main' binding mode must be always presented
 [mode.main.binding]
 
+cmd-h = [] # Disable "hide application"
+cmd-alt-h = [] # Disable "hide others"
+
 # All possible keys:
 # - Letters.        a, b, c, ..., z
 # - Numbers.        0, 1, 2, ..., 9
@@ -116,7 +119,8 @@ cmd-ctrl-1 = 'workspace 👨🏻‍💻'
 cmd-ctrl-2 = 'workspace 💼'
 cmd-ctrl-3 = 'workspace 💬'
 cmd-ctrl-4 = 'workspace 🍿'
-cmd-ctrl-5 = 'workspace 🎨'
+cmd-ctrl-5 = 'workspace 📹'
+cmd-ctrl-6 = 'workspace 🎨'
 
 cmd-ctrl-s = 'workspace S'
 
@@ -129,7 +133,8 @@ alt-shift-1 = 'move-node-to-workspace 👨🏻‍💻'
 alt-shift-2 = 'move-node-to-workspace 💼'
 alt-shift-3 = 'move-node-to-workspace 💬'
 alt-shift-4 = 'move-node-to-workspace 🍿'
-alt-shift-5 = 'move-node-to-workspace 🎨'
+alt-shift-5 = 'move-node-to-workspace 📹'
+alt-shift-6 = 'move-node-to-workspace 🎨'
 
 alt-shift-s = 'move-node-to-workspace S'
 
@@ -248,6 +253,11 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'tandem.app'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'tandem.app'
+if.window-title-regex-substring = 'Tandem'
+run = ['move-node-to-workspace 📹']
 
 [[on-window-detected]]
 if.app-id = 'us.zoom.xos'
