@@ -101,7 +101,8 @@ return {
 					mode = { "n" },
 					nowait = true,
 					remap = false,
-					{ "<leader>cc", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
+					{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle Chat" },
+					{ "<leader>cn", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
 					{ "<leader>ca", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
 				},
 				{
