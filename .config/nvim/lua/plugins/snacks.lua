@@ -34,6 +34,9 @@ return {
 				notification = {
 					wo = { wrap = true },
 				},
+				scratch = {
+					zindex = 90,
+				},
 			},
 		},
 		keys = {
