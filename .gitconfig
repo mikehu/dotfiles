@@ -19,32 +19,47 @@
         cw = clone-worktrees
         init-worktree = "!sh $XDG_CONFIG_HOME/scripts/git-init-worktree.sh"
         iw = init-worktree
-
+[column]
+        ui = auto
+[branch]
+        sort = -committerdate
+[tag]
+        sort = version:refname
 [help]
         autocorrect = 20
-
 [rerere]
         enabled = true
-
+        autoupdate = true
 [init]
         defaultBranch = main
-
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
 [pull]
         rebase = true
-
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+[push]
+        default = simple
+        autoSetupRemote = true
+        followTags = true
 [core]
         pager = delta
-
 [interactive]
         diffFilter = delta --color-only --show-syntax-themes
-
 [delta]
         navigate = true    # use n and N to move between diff sections
         side-by-side = true
         line-numbers = true
-
 [merge]
-        conflictstyle = diff3
-
+        conflictstyle = zdiff3
 [diff]
+        algorithm = histogram
         colorMoved = default
+        mnemonicPrefix = true
+        renames = true
+[commit]
+        verbose = true
