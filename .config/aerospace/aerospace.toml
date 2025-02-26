@@ -119,24 +119,26 @@ cmd-ctrl-1 = 'workspace 👨🏻‍💻'
 cmd-ctrl-2 = 'workspace 💼'
 cmd-ctrl-3 = 'workspace 💬'
 cmd-ctrl-4 = 'workspace 🍿'
-cmd-ctrl-5 = 'workspace 📹'
-cmd-ctrl-6 = 'workspace 🎨'
+cmd-ctrl-5 = 'workspace 🎨'
+cmd-ctrl-6 = 'workspace 🎛️'
 
-cmd-ctrl-s = 'workspace S'
+cmd-ctrl-s = 'workspace 🖥️'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus-monitor
 cmd-ctrl-rightSquareBracket = 'focus-monitor right'
 cmd-ctrl-leftSquareBracket = 'focus-monitor left'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-alt-shift-1 = 'move-node-to-workspace 👨🏻‍💻'
-alt-shift-2 = 'move-node-to-workspace 💼'
-alt-shift-3 = 'move-node-to-workspace 💬'
-alt-shift-4 = 'move-node-to-workspace 🍿'
-alt-shift-5 = 'move-node-to-workspace 📹'
-alt-shift-6 = 'move-node-to-workspace 🎨'
+cmd-ctrl-tab = 'focus-monitor next --wrap-around'
 
-alt-shift-s = 'move-node-to-workspace S'
+# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
+alt-shift-1 = ['move-node-to-workspace 👨🏻‍💻', 'workspace 👨🏻‍💻']
+alt-shift-2 = ['move-node-to-workspace 💼', 'workspace 💼']
+alt-shift-3 = ['move-node-to-workspace 💬', 'workspace 💬']
+alt-shift-4 = ['move-node-to-workspace 🍿', 'workspace 🍿']
+alt-shift-5 = ['move-node-to-workspace 🎨', 'workspace 🎨']
+alt-shift-6 = ['move-node-to-workspace 🎛️', 'workspace 🎛️']
+
+alt-shift-s = ['move-node-to-workspace 🖥️', 'workspace 🖥️']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#fullscreen
 alt-shift-z = 'fullscreen'
@@ -150,7 +152,8 @@ alt-shift-semicolon = 'mode service'
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
-S = 'secondary'
+'👨🏻‍💻' = 'main'
+'🖥️' = 'secondary'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -190,11 +193,7 @@ run = ['layout floating']
 if.app-id = 'net.kovidgoyal.kitty'
 run = ['move-node-to-workspace 👨🏻‍💻']
 
-[[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['move-node-to-workspace 💼']
-
-[[on-window-detected]]
+ [[on-window-detected]]
 if.app-id = 'com.readdle.SparkDesktop.appstore'
 run = ['move-node-to-workspace 💼']
 
@@ -204,6 +203,10 @@ run = ['move-node-to-workspace 💼']
 
 [[on-window-detected]]
 if.app-id = 'com.linear'
+run = ['move-node-to-workspace 💼']
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
 run = ['move-node-to-workspace 💼']
 
 [[on-window-detected]]
@@ -227,6 +230,36 @@ if.app-id = 'com.bambulab.bambu-studio'
 run = ['move-node-to-workspace 🎨']
 
 [[on-window-detected]]
+if.app-id = 'com.spotify.client'
+if.during-aerospace-startup = true
+run = ['move-node-to-workspace 🎛️']
+
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
+run = ['move-node-to-workspace 🖥️']
+
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = ['move-node-to-workspace 🖥️']
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['move-node-to-workspace 🖥️']
+
+[[on-window-detected]]
+if.app-id = 'tandem.app'
+if.window-title-regex-substring = 'Tandem'
+run = ['move-node-to-workspace 🖥️']
+
+[[on-window-detected]]
+if.app-id = 'tandem.app'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'us.zoom.xos'
+run = ['layout floating', 'move-node-to-workspace 🖥️']
+
+[[on-window-detected]]
 if.app-id = 'com.apple.finder'
 run = ['layout floating']
 
@@ -242,25 +275,8 @@ run = ['layout floating']
 if.app-id = 'com.1password.1password'
 run = ['layout floating']
 
-[[on-window-detected]]
-if.app-id = 'com.openai.chat'
-run = ['layout floating']
-
-[[on-window-detected]]
+ [[on-window-detected]]
 if.app-id = 'com.googlecode.iterm2'
-run = ['layout floating']
-
-[[on-window-detected]]
-if.app-id = 'tandem.app'
-run = ['layout floating']
-
-[[on-window-detected]]
-if.app-id = 'tandem.app'
-if.window-title-regex-substring = 'Tandem'
-run = ['move-node-to-workspace 📹']
-
-[[on-window-detected]]
-if.app-id = 'us.zoom.xos'
 run = ['layout floating']
 
 [[on-window-detected]]
