@@ -39,7 +39,7 @@ return {
 			require("codecompanion").setup({
 				display = {
 					action_palette = {
-						provider = "telescope",
+						provider = "snacks",
 					},
 					chat = {
 						start_in_insert_mode = true,
@@ -50,7 +50,7 @@ return {
 				},
 				strategies = {
 					chat = {
-						adapter = "copilot",
+						adapter = "copilot_sonnet",
 						roles = {
 							user = "  " .. vim.env.USER:gsub("^%l", string.upper),
 							llm = function(adapter)
@@ -73,13 +73,25 @@ return {
 							},
 						},
 					},
+					inline = {
+						adapter = "copilot_sonnet",
+					},
 				},
 				adapters = {
-					copilot = function()
+					copilot_sonnet = function()
 						return require("codecompanion.adapters").extend("copilot", {
 							schema = {
 								model = {
 									default = "claude-3.7-sonnet",
+								},
+							},
+						})
+					end,
+					copilot_o3 = function()
+						return require("codecompanion.adapters").extend("copilot", {
+							schema = {
+								model = {
+									default = "o3-mini",
 								},
 							},
 						})

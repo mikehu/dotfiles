@@ -62,11 +62,6 @@ wk.add({
 -- Buffer management
 wk.add({
 	{ "<leader>b", group = "Buffers", icon = " " },
-	{
-		"<leader>bb",
-		cmd([[Telescope buffers sort_mru=true sort_lastused=true initial_mode=normal]]),
-		desc = "Goto buffer",
-	},
 	{ "<leader>bn", cmd([[enew]]), desc = "New buffer" },
 })
 
@@ -164,12 +159,12 @@ wk.add({
 	{ "<leader>ub", cmd([[Mason]]), desc = "Mason", icon = "🧱" },
 	-- { "<leader>ug", cmd([[Neogit]]), desc = "Neogit", icon = "󰊢 " },
 	{ "<leader>ue", cmd([[Oil --float]]), desc = "File explorer", icon = " " },
-	{ "<leader>un", cmd([[Nvumi]]), desc = "Nvumi", icon = "󰡱 " },
 })
 
 -- Prefix registrations
 wk.add({
 	{ "gl", group = "LSP", icon = "✨" },
+	{ "<leader>f", group = "Find / Telescope 🔭", icon = " " },
 	{ "<leader>P", group = "Project", icon = "📁" },
 	{ "<leader>k", group = "Definitions", icon = " " },
 })
