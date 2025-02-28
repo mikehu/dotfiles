@@ -4,16 +4,17 @@ return {
 		local persist = require("persistence")
 		persist.setup({ need = 2 })
 
+		local group = vim.api.nvim_create_augroup("PersistEvents", { clear = true })
 		vim.api.nvim_create_autocmd("VimEnter", {
-			group = vim.api.nvim_create_augroup("restore_session", { clear = true }),
+			group = group,
 			callback = function()
 				if vim.fn.argc(-1) == 0 then
-					persist.load()
+					vim.api.nvim_exec_autocmds("User", { pattern = "PersistEnter" })
 				else
 					persist.stop()
 				end
 			end,
-			nested = true,
+			once = true,
 		})
 	end,
 }

@@ -107,10 +107,66 @@ return {
 	},
 	{
 		"ThePrimeagen/git-worktree.nvim",
-		event = "VeryLazy",
 		config = function()
-			require("git-worktree").setup({
-				change_directory_command = "tcd",
+			local worktree = require("git-worktree")
+			worktree.setup({})
+
+			local function is_git_repo()
+				vim.fn.system("git rev-parse --is-inside-work-tree")
+				return vim.v.shell_error == 0
+			end
+
+			local function relative_path_to_worktree_root(path)
+				if is_git_repo() then
+					local bare_root = vim.fn.finddir(".bare", ".;")
+					if bare_root ~= "" then
+						local git_root = vim.fn.fnamemodify(vim.fn.fnamemodify(bare_root, ":h"), ":p")
+						local path_with_slash = path .. "/"
+						if path_with_slash == git_root then
+							return "/"
+						end
+						return path:gsub(git_root, "")
+					end
+				end
+				return path
+			end
+
+			worktree.on_tree_change(function(op, metadata)
+				if op == worktree.Operations.Switch then
+					vim.notify(
+						string.format(
+							"Switched from '%s' to '%s'",
+							relative_path_to_worktree_root(metadata.prev_path),
+							relative_path_to_worktree_root(metadata.path)
+						),
+						nil,
+						{ title = "Git Worktree", id = "git-worktree" }
+					)
+				end
+			end)
+
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "PersistEnter",
+				callback = function()
+					local persist = require("persistence")
+					local rel_path = relative_path_to_worktree_root(vim.fn.getcwd())
+					if rel_path == "/" then
+						local success, worktrees = pcall(worktree.get_worktrees)
+
+						vim.notify("success: " .. success .. " > " .. #worktrees)
+						if success and #worktrees > 0 then
+							vim.notify("Switching to worktree: " .. worktrees[1].name)
+							worktree.switch_worktree(worktrees[1])
+
+							vim.defer_fn(function()
+								persist.load()
+							end, 100)
+						end
+					else
+						persist.load()
+					end
+				end,
+				once = true,
 			})
 		end,
 	},

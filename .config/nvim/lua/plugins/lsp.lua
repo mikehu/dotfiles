@@ -308,16 +308,6 @@ return {
 				nmap("gr", ":IncRename ", "Rename cursor word")
 				nmap("gla", vim.lsp.buf.code_action, "Code action")
 
-				local ts_builtin = require("telescope.builtin")
-				nmap("<leader>fr", ts_builtin.lsp_references, "Find references")
-				nmap("<leader>fs", function()
-					ts_builtin.lsp_document_symbols({
-						winblend = 20,
-						symbols = { "function", "constant", "variable", "class" },
-					})
-				end, "Find symbols")
-				nmap("<leader>fS", ts_builtin.lsp_dynamic_workspace_symbols, "Find workspace symbols")
-
 				-- See `:help K` for why this keymap
 				-- nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 				nmap("gK", vim.lsp.buf.signature_help, "Signature Documentation")
