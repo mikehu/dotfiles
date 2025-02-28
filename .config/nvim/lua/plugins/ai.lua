@@ -25,6 +25,16 @@ return {
 		end,
 	},
 	{
+		"augmentcode/augment.vim",
+		event = "VeryLazy",
+		config = function()
+			vim.g.augment_workspace_folders = {
+				"~/Code/neurox",
+				"~/Code/illustrious-industries",
+			}
+		end,
+	},
+	{
 		"olimorris/codecompanion.nvim",
 		event = "VeryLazy",
 		dependencies = {
@@ -39,7 +49,7 @@ return {
 			require("codecompanion").setup({
 				display = {
 					action_palette = {
-						provider = "snacks",
+						provider = "default",
 					},
 					chat = {
 						start_in_insert_mode = true,
@@ -67,7 +77,7 @@ return {
 								callback = "strategies.chat.slash_commands.file",
 								description = "Select a file using Telescope",
 								opts = {
-									provider = "telescope", -- Other options include 'default', 'mini_pick', 'fzf_lua', snacks
+									provider = "snacks", -- Other options include 'default', 'mini_pick', 'fzf_lua', snacks
 									contains_code = true,
 								},
 							},
