@@ -1,19 +1,10 @@
--- Find files from project root with fallback
-local function find_files_from_project_git_root()
-	local function is_git_repo()
-		vim.fn.system("git rev-parse --is-inside-work-tree")
-		return vim.v.shell_error == 0
-	end
-	local function get_git_root()
-		local dot_git_path = vim.fn.finddir(".git", ".;")
-		return vim.fn.fnamemodify(dot_git_path, ":h")
-	end
-	local opts = { layout_strategy = "vertical" }
-	if is_git_repo() then
-		table.insert(opts, { cwd = get_git_root() })
-	end
-	builtin.find_files(opts)
+_G.dd = function(...)
+	Snacks.debug.inspect(...)
 end
+_G.bt = function()
+	Snacks.debug.backtrace()
+end
+vim.print = _G.dd
 
 return {
 	"folke/snacks.nvim",
@@ -34,10 +25,44 @@ return {
 				enabled = false,
 			},
 		},
+		input = {
+			enabled = true,
+		},
 		notifier = {
 			enabled = true,
 		},
-		picker = {},
+		picker = {
+			enabled = true,
+			debug = {
+				files = true,
+			},
+			sources = {
+				files = {
+					cmd = "fd",
+					-- cmd = "rg",
+					-- hidden = true,
+					-- exclude = "**/.git/*",
+					args = { "--color=never", "--hidden", "--exclude", ".git" },
+					filter = { cwd = true },
+					matcher = { frecency = true },
+				},
+				grep = {
+					cmd = "rg",
+					hidden = true,
+					glob = "!**/.git/*",
+					args = {
+						"--color=never",
+						"--no-heading",
+						"--with-filename",
+						"--line-number",
+						"--column",
+						"--smart-case",
+						"--trim",
+					},
+					matcher = { frecency = true },
+				},
+			},
+		},
 		quickfile = { enabled = true },
 		scratch = {
 			icon = " ",
@@ -81,14 +106,21 @@ return {
 		{
 			"<leader>o",
 			function()
-				Snacks.picker.smart()
+				Snacks.picker.smart({ filter = { cwd = true } })
 			end,
 			desc = "Open file",
 		},
 		{
 			"<leader>/",
 			function()
-				Snacks.picker.grep()
+				Snacks.picker.grep({ buffers = true })
+			end,
+			desc = "Find in buffers",
+		},
+		{
+			"<leader>fg",
+			function()
+				Snacks.picker.grep({ buffers = false })
 			end,
 			desc = "Grep",
 		},
