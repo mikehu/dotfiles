@@ -46,6 +46,24 @@ keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic messag
 
 local wk = require("which-key")
 
+-- Prefix registrations
+wk.add({
+	{ "gl", group = "LSP", icon = "✨" },
+	{ "<leader>b", group = "Buffers", icon = " " },
+	{ "<leader>c", group = "Chat / AI", icon = "🤖" },
+	{ "<leader>e", group = "End with", icon = " " },
+	{ "<leader>f", group = "Find", icon = " " },
+	{ "<leader>g", group = "Git / Grapple 🪝", icon = " " },
+	{ "<leader>i", group = "Insert", icon = " " },
+	{ "<leader>k", group = "Definitions", icon = " " },
+	{ "<leader>l", group = "Lists", icon = "📝" },
+	{ "<leader>P", group = "Project", icon = "📁" },
+	{ "<leader>q", group = "Quit", icon = " " },
+	{ "<leader>t", group = "Test / Trouble 🚦", icon = "🔬" },
+	{ "<leader>u", group = "UI", icon = " " },
+	{ "<leader>z", group = "Terminal (zsh)", icon = " " },
+})
+
 -- Saving
 wk.add({
 	{ "<leader>s", cmd([[w]]), desc = "Save", icon = "💾" },
@@ -54,14 +72,12 @@ wk.add({
 
 -- Quitting
 wk.add({
-	{ "<leader>q", group = "Quit", icon = " " },
 	{ "<leader>qq", cmd([[q]]), desc = "Quit" },
 	{ "<leader>qQ", cmd([[q!]]), desc = "Force quit" },
 })
 
 -- Buffer management
 wk.add({
-	{ "<leader>b", group = "Buffers", icon = " " },
 	{ "<leader>bn", cmd([[enew]]), desc = "New buffer" },
 })
 
@@ -81,8 +97,6 @@ local function toggle_list(type)
 	vim.cmd[open_command]()
 end
 wk.add({
-	{ "<leader>l", group = "Lists", icon = "📝" },
-	-- d = { vim.diagnostic.setloclist, "Open diagnostic list" },
 	{
 		"<leader>ll",
 		function()
@@ -101,12 +115,10 @@ wk.add({
 
 -- Various text manipulation shorthands
 wk.add({
-	{ "<leader>i", group = "Insert", icon = " " },
 	{ "<leader>io", [[m`o<esc>``]], desc = "Newline below" },
 	{ "<leader>iO", [[m`O<esc>``]], desc = "Newline above" },
 })
 wk.add({
-	{ "<leader>e", group = "End with", icon = " " },
 	{ "<leader>e,", [[m`A,<esc>``]], desc = "Comma" },
 	{ "<leader>e;", [[m`A;<esc>``]], desc = "Semicolon" },
 })
@@ -122,49 +134,15 @@ wk.add({
 -- Terminal
 keymap.set("t", "<c-n>", [[<c-\><c-n>]])
 wk.add({
-	{ "<leader>z", group = "Terminal (zsh)", icon = " " },
 	{ "<leader>zz", cmd([[BufTermNext]]), desc = "Cycle next terminal" },
 	{ "<leader>zZ", cmd([[BufTermPrev]]), desc = "Cycle prev terminal" },
 	{ "<leader>zn", cmd([[terminal]]), desc = "New terminal" },
 })
 
--- Git
-wk.add({
-	{ "<leader>g", group = "Git / Grapple 🪝", icon = " " },
-	{ "<leader>gb", cmd([[Gitsigns toggle_current_line_blame]]), desc = "Toggle blame" },
-	{ "<leader>gd", cmd([[Gitsigns toggle_deleted]]), desc = "Show/hide deleted" },
-	{ "<leader>gw", cmd([[Gitsigns toggle_word_diff]]), desc = "Show/hide word diff" },
-	{ "<leader>gp", cmd([[Gitsigns preview_hunk]]), desc = "Preview hunk" },
-	{ "<leader>gD", cmd([[Gdiff]]), desc = "Diff this" },
-	{ "<leader>gW", cmd([[Gwrite]]), desc = "Write" },
-	{ "<leader>gf", cmd([[Gread]]), desc = "Checkout file" },
-	{ "<leader>gB", cmd([[GBrowse]]), desc = "Browse on web" },
-	{ "<leader>gc", cmd([[Git commit]]), desc = "Commit" },
-	{ "<leader>gM", cmd([[Git mergetool]]), desc = "Mergetool" },
-	{ "<leader>gt", cmd([[Telescope git_worktree git_worktrees theme=dropdown]]), desc = "Git worktree" },
-})
-
--- Test
-wk.add({
-	{ "<leader>t", group = "Test / Trouble 🚦", icon = "🔬" },
-	{ "<leader>tr", cmd([[TestNearest]]), desc = "Run test" },
-	{ "<leader>tf", cmd([[TestFile]]), desc = "Run test file" },
-	{ "<leader>ts", cmd([[TestSuite]]), desc = "Run test suite" },
-})
-
 -- UI
 wk.add({
-	{ "<leader>u", group = "UI", icon = " " },
 	{ "<leader>ul", cmd([[Lazy]]), desc = "Lazy", icon = "󰒲 " },
 	{ "<leader>ub", cmd([[Mason]]), desc = "Mason", icon = "🧱" },
 	-- { "<leader>ug", cmd([[Neogit]]), desc = "Neogit", icon = "󰊢 " },
 	{ "<leader>ue", cmd([[Oil --float]]), desc = "File explorer", icon = " " },
-})
-
--- Prefix registrations
-wk.add({
-	{ "gl", group = "LSP", icon = "✨" },
-	{ "<leader>f", group = "Find / Telescope 🔭", icon = " " },
-	{ "<leader>P", group = "Project", icon = "📁" },
-	{ "<leader>k", group = "Definitions", icon = " " },
 })

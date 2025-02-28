@@ -56,7 +56,6 @@ set hidden
 filetype plugin on
 filetype plugin indent on
 syntax enable
-nmap <cr> :
 nmap <space> <leader>
 vmap <space> <leader>
 autocmd BufReadPost quickfix nnoremap <buffer> <cr> <cr>
