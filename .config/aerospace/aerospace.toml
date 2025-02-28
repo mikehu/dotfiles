@@ -248,7 +248,7 @@ run = ['move-node-to-workspace 🖥️']
 
 [[on-window-detected]]
 if.app-id = 'tandem.app'
-if.window-title-regex-substring = 'Tandem'
+if.window-title-regex-substring = '^(Watercooler|Neurox)'
 run = ['move-node-to-workspace 🖥️']
 
 [[on-window-detected]]
@@ -257,7 +257,7 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'us.zoom.xos'
-run = ['layout floating', 'move-node-to-workspace 🖥️']
+run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
