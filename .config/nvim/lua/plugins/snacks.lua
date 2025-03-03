@@ -225,6 +225,13 @@ return {
 			desc = "Jump list",
 		},
 		{
+			"<leader>fm",
+			function()
+				Snacks.picker.marks()
+			end,
+			desc = "Marks",
+		},
+		{
 			"<leader>fq",
 			function()
 				Snacks.picker.qflist()
