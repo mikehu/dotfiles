@@ -1,3 +1,5 @@
+shell-integration = zsh
+
 # Fonts
 font-family = "Fira Code Light"
 font-family-bold = "Fira Code SemiBold"
@@ -24,6 +26,10 @@ unfocused-split-opacity = 0.6
 # macOS settings
 macos-titlebar-style = hidden
 macos-option-as-alt = left
+macos-icon = custom-style
+macos-icon-frame = aluminum
+macos-icon-ghost-color = #ebbcba
+macos-icon-screen-color = #31748f
 
 # Nerd Fonts glyph codepoints
 # - See https://github.com/be5invis/Iosevka/issues/248
