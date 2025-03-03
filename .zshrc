@@ -2,6 +2,7 @@
 if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
   builtin source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
 fi
+export SNACKS_GHOSTTY=true
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH

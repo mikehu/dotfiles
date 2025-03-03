@@ -11,7 +11,7 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
-		bigfile = { enabled = true },
+		bigfile = {},
 		indent = {
 			indent = {
 				only_current = true,
@@ -25,24 +25,16 @@ return {
 				enabled = false,
 			},
 		},
-		input = {
-			enabled = true,
-		},
-		notifier = {
-			enabled = true,
-		},
+		image = {},
+		input = {},
+		notifier = {},
 		picker = {
-			enabled = true,
-			debug = {
-				files = true,
-			},
 			sources = {
 				files = {
 					cmd = "fd",
-					-- cmd = "rg",
-					-- hidden = true,
-					-- exclude = "**/.git/*",
-					args = { "--color=never", "--hidden", "--exclude", ".git" },
+					hidden = true,
+					exclude = { ".git", "node_modules" },
+					args = { "--color=never" },
 					filter = { cwd = true },
 					matcher = { frecency = true },
 				},
@@ -62,8 +54,16 @@ return {
 					matcher = { frecency = true },
 				},
 			},
+			win = {
+				preview = {
+					wo = {
+						number = false,
+						relativenumber = false,
+					},
+				},
+			},
 		},
-		quickfile = { enabled = true },
+		quickfile = {},
 		scratch = {
 			icon = " ",
 			filekey = {
@@ -84,8 +84,8 @@ return {
 			-- 	}
 			-- }
 		},
-		statuscolumn = { enabled = true },
-		words = { enabled = true },
+		statuscolumn = {},
+		words = {},
 		styles = {
 			notification = {
 				wo = { wrap = true },
