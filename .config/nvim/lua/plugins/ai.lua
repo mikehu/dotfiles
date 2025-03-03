@@ -75,7 +75,7 @@ return {
 							["file"] = {
 								-- Location to the slash command in CodeCompanion
 								callback = "strategies.chat.slash_commands.file",
-								description = "Select a file using Telescope",
+								description = "Select a file",
 								opts = {
 									provider = "snacks", -- Other options include 'default', 'mini_pick', 'fzf_lua', snacks
 									contains_code = true,
@@ -109,7 +109,7 @@ return {
 					openai = function()
 						return require("codecompanion.adapters").extend("openai", {
 							env = {
-								api_key = 'cmd:op item get "OpenAI - Homelab" --vault "Private" --account MXFJNCXIPZC2ZNSNS35K6CT334 --fields credential --reveal',
+								api_key = 'cmd:pass show "API/OpenAI API Key"',
 							},
 						})
 					end,
