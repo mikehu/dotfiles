@@ -1,3 +1,7 @@
+local workspace_folders = {
+	"~/Code/neurox",
+	"~/Code/illustrious-industries",
+}
 return {
 	{
 		"github/copilot.vim",
@@ -18,20 +22,7 @@ return {
 				["python"] = true,
 				["vue"] = true,
 			}
-			vim.g.copilot_workspace_folders = {
-				"~/Code/neurox",
-				"~/Code/illustrious-industries",
-			}
-		end,
-	},
-	{
-		"augmentcode/augment.vim",
-		event = "VeryLazy",
-		config = function()
-			vim.g.augment_workspace_folders = {
-				"~/Code/neurox",
-				"~/Code/illustrious-industries",
-			}
+			vim.g.copilot_workspace_folders = workspace_folders
 		end,
 	},
 	{
@@ -125,7 +116,7 @@ return {
 					remap = false,
 					{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle Chat" },
 					{ "<leader>cn", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
-					{ "<leader>ca", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
+					{ "<leader>cx", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
 				},
 				{
 					mode = { "v" },
@@ -136,4 +127,31 @@ return {
 			})
 		end,
 	},
+	-- {
+	-- 	"augmentcode/augment.vim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		vim.g.augment_disable_tab_mapping = true
+	-- 		vim.g.augment_workspace_folders = workspace_folders
+	--
+	-- 		local wk = require("which-key")
+	-- 		wk.add({
+	-- 			{ "<leader>ca", group = "Augment Code", icon = "󰘦 " },
+	-- 			{
+	-- 				mode = { "n" },
+	-- 				nowait = true,
+	-- 				remap = false,
+	-- 				{ "<leader>cac", "<cmd>Augment chat<cr>", desc = "Send chat" },
+	-- 				{ "<leader>can", "<cmd>Augment chat-new<cr>", desc = "New conversation" },
+	-- 				{ "<leader>cat", "<cmd>Augment chat-toggle<cr>", desc = "Toggle" },
+	-- 			},
+	-- 			{
+	-- 				mode = { "i" },
+	-- 				nowait = true,
+	-- 				remap = false,
+	-- 				{ "<c-y>", "<cmd>call augment#Accept()<cr>", desc = "Accept" },
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 }

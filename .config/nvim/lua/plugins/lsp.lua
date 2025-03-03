@@ -128,7 +128,8 @@ return {
 						end,
 					}),
 					["<tab>"] = cmp.mapping(function(fallback)
-						local code_complete_keys = vim.fn["copilot#Accept"]("")
+						local code_complete = "copilot"
+						local code_complete_keys = vim.fn[code_complete .. "#Accept"]("")
 						if code_complete_keys ~= "" then
 							vim.api.nvim_feedkeys(code_complete_keys, "i", true)
 						elseif cmp.visible() then
