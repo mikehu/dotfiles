@@ -32,6 +32,8 @@ export GIT_IGNORE_FILE="$XDG_CONFIG_HOME/git/ignore"
 
 # Homebrew specifics
 if [[ $(command -v brew) != "" ]]; then
+  # add /opt/homebrew/share/
+  export XDG_DATA_DIRS="/opt/homebrew/share:${XDG_DATA_DIRS}"
   # site-functions for zsh
   fpath+=("$(brew --prefix)/share/zsh/site-functions")
 fi
@@ -50,11 +52,11 @@ fi
 antidote load
 
 # vi mode
-# bindkey -v
-# bindkey "^F" vi-cmd-mode
+bindkey -v
+bindkey "^F" vi-cmd-mode
 
-# bindkey "^A" beginning-of-line
-# bindkey "^E" end-of-line
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
 
 export HISTSIZE=4096
 export HISTFILE=~/.zsh_history
