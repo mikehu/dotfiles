@@ -39,39 +39,6 @@ return {
 						"!**/.git/*", -- don't show inside of .git/ as it's not .gitignore'd
 					},
 				},
-				pickers = {
-					buffers = {
-						theme = "dropdown",
-						previewer = false,
-						mappings = {
-							i = {
-								["<C-d>"] = actions.delete_buffer + actions.move_to_top,
-							},
-							n = {
-								["d"] = actions.delete_buffer,
-							},
-						},
-					},
-					find_files = {
-						find_command = { "rg", "--color=never", "--files", "--hidden", "--glob", "!**/.git/*" },
-					},
-				},
-			})
-
-			local wk = require("which-key")
-			local themes = require("telescope.themes")
-			local with_ivy = themes.get_ivy()
-			local yank_history = telescope.extensions.yank_history
-
-			wk.add({
-				{
-					"<leader>fp",
-					function()
-						yank_history.yank_history(with_ivy)
-					end,
-					desc = "Yank history",
-					icon = "🔭",
-				},
 			})
 		end,
 	},

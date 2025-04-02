@@ -8,7 +8,6 @@ return {
 		opts = {},
 	},
 	"tpope/vim-repeat",
-	"tpope/vim-unimpaired",
 	{
 		"willothy/flatten.nvim",
 		config = true,

@@ -40,7 +40,7 @@ return {
 			mode = { "n", "x" },
 			{
 				"<leader>p",
-				"<cmd>Telescope yank_history theme=dropdown<cr>",
+				"<cmd>Telescope yank_history theme=ivy<cr>",
 				desc = "Yank history",
 				icon = "📋",
 			},
