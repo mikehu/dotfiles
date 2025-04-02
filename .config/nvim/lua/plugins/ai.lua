@@ -25,6 +25,41 @@ return {
 			vim.g.copilot_workspace_folders = workspace_folders
 		end,
 	},
+	-- {
+	-- 	"supermaven-inc/supermaven-nvim",
+	-- 	config = function()
+	-- 		require("supermaven-nvim").setup({})
+	-- 	end,
+	-- },
+	{
+		"ravitemer/mcphub.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
+		},
+		build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
+		config = function()
+			require("mcphub").setup({
+				-- Required options
+				port = 3600, -- Port for MCP Hub server
+				config = vim.fn.expand("~/.config/mcpservers.json"), -- Absolute path to config file
+				-- Optional options
+				on_ready = function(hub)
+					-- Called when hub is ready
+				end,
+				on_error = function(err)
+					-- Called on errors
+				end,
+				shutdown_delay = 0, -- Wait 0ms before shutting down server after last client exits
+				log = {
+					level = vim.log.levels.WARN,
+					to_file = false,
+					file_path = nil,
+					prefix = "MCPHub",
+				},
+			})
+		end,
+	},
 	{
 		"olimorris/codecompanion.nvim",
 		event = "VeryLazy",
@@ -32,6 +67,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"j-hui/fidget.nvim",
+			"ravitemer/mcphub.nvim",
 		},
 		init = function()
 			require("plugins.extensions.codecompanion-fidget"):init()
@@ -72,10 +108,26 @@ return {
 									contains_code = true,
 								},
 							},
+							["buffer"] = {
+								opts = {
+									provider = "snacks",
+								},
+							},
+						},
+						tools = {
+							["mcp"] = {
+								callback = function()
+									return require("mcphub.extensions.codecompanion")
+								end,
+								description = "Call tools and resources from the MCP Servers",
+								opts = {
+									requires_approval = true,
+								},
+							},
 						},
 					},
 					inline = {
-						adapter = "copilot_sonnet",
+						adapter = "copilot_o3",
 					},
 				},
 				adapters = {
@@ -83,7 +135,7 @@ return {
 						return require("codecompanion.adapters").extend("copilot", {
 							schema = {
 								model = {
-									default = "claude-3.7-sonnet",
+									default = "claude-3.5-sonnet",
 								},
 							},
 						})

@@ -39,11 +39,6 @@ keymap.set("i", "<m-k>", "<up>")
 keymap.set("i", "<m-l>", "<right>")
 keymap.set("n", "Q", "<nop>")
 
--- Diagnostics
-
-keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic message" })
-keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic message" })
-
 local wk = require("which-key")
 
 -- Prefix registrations
@@ -145,4 +140,5 @@ wk.add({
 	{ "<leader>ub", cmd([[Mason]]), desc = "Mason", icon = "🧱" },
 	-- { "<leader>ug", cmd([[Neogit]]), desc = "Neogit", icon = "󰊢 " },
 	{ "<leader>ue", cmd([[Oil --float]]), desc = "File explorer", icon = " " },
+	{ "<leader>uh", cmd([[MCPHub]]), desc = "MCPHub", icon = " " },
 })
