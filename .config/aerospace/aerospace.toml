@@ -252,6 +252,10 @@ if.window-title-regex-substring = '^(Watercooler|Neurox)'
 run = ['move-node-to-workspace 🖥️']
 
 [[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'
+run = ['move-node-to-workspace 🖥️']
+
+[[on-window-detected]]
 if.app-id = 'tandem.app'
 run = ['layout floating']
 
