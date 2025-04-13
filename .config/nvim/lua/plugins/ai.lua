@@ -37,25 +37,21 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
 		},
-		build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
+		-- build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
+		build = "bundled_build.lua",
 		config = function()
 			require("mcphub").setup({
-				-- Required options
-				port = 3600, -- Port for MCP Hub server
-				config = vim.fn.expand("~/.config/mcpservers.json"), -- Absolute path to config file
-				-- Optional options
-				on_ready = function(hub)
-					-- Called when hub is ready
-				end,
-				on_error = function(err)
-					-- Called on errors
-				end,
-				shutdown_delay = 0, -- Wait 0ms before shutting down server after last client exits
-				log = {
-					level = vim.log.levels.WARN,
-					to_file = false,
-					file_path = nil,
-					prefix = "MCPHub",
+				config = vim.fn.expand("~/.config/mcphub/servers.json"), -- Absolute path to config file
+				use_bundled_binary = true,
+				auto_approve = true,
+				extensions = {
+					codecompanion = {
+						-- Show the mcp tool result in the chat buffer
+						-- NOTE:if the result is markdown with headers, content after the headers wont be sent by codecompanion
+						show_result_in_chat = false,
+						make_vars = true, -- make chat #variables from MCP server resources
+						make_slash_commands = true, -- make /slack_commands from MCP
+					},
 				},
 			})
 		end,
@@ -67,7 +63,6 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"j-hui/fidget.nvim",
-			"ravitemer/mcphub.nvim",
 		},
 		init = function()
 			require("plugins.extensions.codecompanion-fidget"):init()
@@ -121,7 +116,7 @@ return {
 								end,
 								description = "Call tools and resources from the MCP Servers",
 								opts = {
-									requires_approval = true,
+									requires_approval = false,
 								},
 							},
 						},
