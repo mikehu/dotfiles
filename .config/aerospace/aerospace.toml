@@ -193,7 +193,12 @@ run = ['layout floating']
 if.app-id = 'net.kovidgoyal.kitty'
 run = ['move-node-to-workspace 👨🏻‍💻']
 
- [[on-window-detected]]
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+# if.window-title-regex-substring = 'Inbox'
+run = ['move-node-to-workspace 💼']
+
+[[on-window-detected]]
 if.app-id = 'com.readdle.SparkDesktop.appstore'
 run = ['move-node-to-workspace 💼']
 
