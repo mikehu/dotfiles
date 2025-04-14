@@ -206,14 +206,19 @@ return {
 		{
 			"<leader>fc",
 			function()
-				Snacks.picker.command_history()
+				Snacks.picker.command_history({
+					layout = {
+						preset = "ivy",
+						preview = false,
+					},
+				})
 			end,
 			desc = "Prev commands",
 		},
 		{
 			"<leader>fh",
 			function()
-				Snacks.picker.help()
+				Snacks.picker.help({ layout = { preset = "ivy" } })
 			end,
 			desc = "Help",
 		},
@@ -241,21 +246,21 @@ return {
 		{
 			"<leader>fr",
 			function()
-				Snacks.picker.lsp_references()
+				Snacks.picker.lsp_references({ layout = { preset = "ivy" } })
 			end,
 			desc = "References",
 		},
 		{
 			"<leader>fs",
 			function()
-				Snacks.picker.lsp_symbols()
+				Snacks.picker.lsp_symbols({ layout = { preset = "ivy" } })
 			end,
 			desc = "Symbols",
 		},
 		{
 			"<leader>fS",
 			function()
-				Snacks.picker.lsp_workspace_symbols()
+				Snacks.picker.lsp_workspace_symbols({ layout = { preset = "ivy" } })
 			end,
 			desc = "Workspace symbols",
 		},

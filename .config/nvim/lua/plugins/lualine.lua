@@ -9,7 +9,6 @@ return {
 		"folke/noice.nvim",
 	},
 	config = function()
-		local grapple = require("grapple")
 		local noice = require("noice")
 		local trouble = require("trouble")
 		local lazy_status = require("lazy.status")
@@ -81,11 +80,7 @@ return {
 				},
 				lualine_x = {
 					{
-						function()
-							local key = grapple.name_or_index()
-							return "[" .. key .. "]"
-						end,
-						cond = grapple.exists,
+						"grapple",
 						icon = { "󰛢", color = "DiagnosticInfo" },
 					},
 					{ "fancy_macro", icon = { "", color = "DiagnosticError" } },
