@@ -233,12 +233,13 @@ return {
 				automatic_installation = true,
 				handlers = {
 					function(server_name)
+						local server_config = (servers[server_name] or {})
 						lspconfig[server_name].setup({
 							capabilities = capabilities,
 							on_attach = on_attach,
-							init_options = (servers[server_name] or {}).init_options,
-							settings = (servers[server_name] or {}).settings or {},
-							filetypes = (servers[server_name] or {}).filetypes,
+							init_options = server_config.init_options,
+							settings = server_config.settings or {},
+							filetypes = server_config.filetypes,
 						})
 					end,
 				},
