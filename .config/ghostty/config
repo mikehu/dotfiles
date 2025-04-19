@@ -31,6 +31,9 @@ macos-icon-frame = aluminum
 macos-icon-ghost-color = #ebbcba
 macos-icon-screen-color = #31748f
 
+# Window settings
+window-inherit-working-directory = true
+
 # Nerd Fonts glyph codepoints
 # - See https://github.com/be5invis/Iosevka/issues/248
 # - See https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points
