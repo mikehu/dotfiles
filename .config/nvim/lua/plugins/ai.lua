@@ -82,7 +82,7 @@ return {
 				},
 				strategies = {
 					chat = {
-						adapter = "copilot_sonnet",
+						adapter = "copilot_gemini",
 						roles = {
 							user = "  " .. vim.env.USER:gsub("^%l", string.upper),
 							llm = function(adapter)
@@ -135,11 +135,29 @@ return {
 							},
 						})
 					end,
+					copilot_gemini = function()
+						return require("codecompanion.adapters").extend("copilot", {
+							schema = {
+								model = {
+									default = "gemini-2.5-pro",
+								},
+							},
+						})
+					end,
 					copilot_o3 = function()
 						return require("codecompanion.adapters").extend("copilot", {
 							schema = {
 								model = {
 									default = "o3-mini",
+								},
+							},
+						})
+					end,
+					copilot_gpt41 = function()
+						return require("codecompanion.adapters").extend("copilot", {
+							schema = {
+								model = {
+									default = "gpt-4.1",
 								},
 							},
 						})
