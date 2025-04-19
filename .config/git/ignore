@@ -1,5 +1,7 @@
 *.log
 .DS_Store
+.stfolder
+.stignore
 .env
 codecompanion-workspace.json
 .vectorcode
