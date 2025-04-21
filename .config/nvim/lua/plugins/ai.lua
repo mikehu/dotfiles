@@ -82,7 +82,7 @@ return {
 				},
 				strategies = {
 					chat = {
-						adapter = "copilot_gemini",
+						adapter = "copilot_sonnet",
 						roles = {
 							user = "  " .. vim.env.USER:gsub("^%l", string.upper),
 							llm = function(adapter)
@@ -122,7 +122,7 @@ return {
 						},
 					},
 					inline = {
-						adapter = "copilot_o3",
+						adapter = "copilot_gemini",
 					},
 				},
 				adapters = {
@@ -176,10 +176,15 @@ return {
 			wk.add({
 				{ "<leader>c", group = "Chat / AI", icon = "🤖" },
 				{
-					mode = { "n" },
+					mode = { "n", "v" },
 					nowait = true,
 					remap = false,
 					{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle Chat" },
+				},
+				{
+					mode = { "n" },
+					nowait = true,
+					remap = false,
 					{ "<leader>cn", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
 					{ "<leader>cx", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
 				},
@@ -187,7 +192,7 @@ return {
 					mode = { "v" },
 					nowait = true,
 					remap = false,
-					{ "<leader>cc", ":'<,'>CodeCompanion<cr>", desc = "Inline assist" },
+					{ "<leader>ci", ":'<,'>CodeCompanion<cr>", desc = "Inline assist" },
 				},
 			})
 		end,
