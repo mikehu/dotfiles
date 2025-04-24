@@ -4,6 +4,7 @@ sync_targets=(
   "OpenAI API Key"
   "Claude API Key"
   "DeepSeek API Key"
+  "Gemini API Key"
   "Groq API Key"
 )
 
