@@ -7,6 +7,14 @@ return {
 			format = {
 				edit = { pattern = "^:%s*ed?i?t?%s+", icon = "", lang = "vim", title = "Edit" },
 				-- db = { pattern = "^:%s*DB%s+", icon = "", lang = "vim", title = "Database" },
+				IncRename = {
+					opts = {
+						size = { width = 60 },
+						border = {
+							style = "rounded",
+						},
+					},
+				},
 			},
 		},
 		notify = {
