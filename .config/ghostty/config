@@ -3,8 +3,8 @@ shell-integration = zsh
 # Fonts
 font-family = "Fira Code Light"
 font-family-bold = "Fira Code SemiBold"
-
 font-size = 13
+font-feature = +cv16, +cv18, +cv29, +cv30, +ss02, +ss06, +ss07, +zero, +onum
 
 # macOS thicken font
 font-thicken = true
@@ -60,7 +60,7 @@ font-codepoint-map = U+F400-U+F532,U+2665,U+26A1="Symbols Nerd Font Mono"
 # Powerline="Symbols
 font-codepoint-map = U+E0A0-U+E0A2,U+E0B0-U+E0B3="Symbols Nerd Font Mono"
 
-# Powerline Extra="Symbols
+# Powerline Extra="Symbols"
 font-codepoint-map = U+E0A3,U+E0B4-U+E0C8,U+E0CA,U+E0CC-U+E0D4="Symbols Nerd Font Mono"
 
 # IEC Power="Symbols
@@ -80,4 +80,4 @@ font-codepoint-map = U+E276C-U+E2771="Symbols Nerd Font Mono" # Heavy Angle Brac
 font-codepoint-map = U+2500-U+259F="Symbols Nerd Font Mono" # Box Drawing
 
 # Additional Config Files
-config-file =
+# config-file =
