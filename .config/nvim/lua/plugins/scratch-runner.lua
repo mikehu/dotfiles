@@ -1,9 +1,15 @@
 return {
 	"DestopLine/scratch-runner.nvim",
-	dependencies = "folke/snacks.nvim",
+	event = "VeryLazy",
+	dependencies = {
+		{ "folke/snacks.nvim" },
+	},
 	opts = {
 		sources = {
-			javascript = { { "node" }, extension = "js" },
+			javascript = {
+				{ "bun" },
+				extension = "js",
+			},
 		},
 	},
 }

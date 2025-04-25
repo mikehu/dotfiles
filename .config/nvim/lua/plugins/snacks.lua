@@ -65,33 +65,15 @@ return {
 		},
 		quickfile = {},
 		scratch = {
-			icon = " ",
 			filekey = {
 				count = false,
 			},
-			-- win_by_ft = {
-			-- 	javascript = {
-			-- 		keys = {
-			-- 			["run"] = {
-			-- 				"<cr>",
-			-- 				function(self)
-			--
-			-- 				end,
-			-- 				desc = "Run with node",
-			-- 				mode = {"n", "x" }
-			-- 			}
-			-- 		}
-			-- 	}
-			-- }
 		},
 		statuscolumn = {},
 		words = {},
 		styles = {
 			notification = {
 				wo = { wrap = true },
-			},
-			scratch = {
-				zindex = 90,
 			},
 		},
 	},
@@ -171,7 +153,7 @@ return {
 			function()
 				Snacks.scratch()
 			end,
-			desc = "Toggle Scratch Buffer",
+			desc = "Toggle scratch buffer",
 		},
 		{
 			"<leader>ls",
