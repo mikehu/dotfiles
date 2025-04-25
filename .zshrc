@@ -7,6 +7,8 @@ export SNACKS_GHOSTTY=true
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+typeset -U path PATH
+
 # XDG configuration
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -31,7 +33,7 @@ export GIT_IGNORE_FILE="$XDG_CONFIG_HOME/git/ignore"
 # export ARCHFLAGS="-arch x86_64"
 
 # Homebrew specifics
-if [[ $(command -v brew) != "" ]]; then
+if command -v brew >/dev/null 2>&1; then
   # add /opt/homebrew/share/
   export XDG_DATA_DIRS="/opt/homebrew/share:${XDG_DATA_DIRS}"
   # site-functions for zsh
@@ -43,10 +45,12 @@ autoload -U zmv
 autoload -Uz compinit && compinit
 
 # Antidote
-if [[ $(command -v brew) == "" ]]; then
-  source "$HOME/.antidote/antidote.zsh"
-else
+if command -v brew >/dev/null 2>&1; then
+  # ...using Homebrew version
   source "$(brew --prefix)/opt/antidote/share/antidote/antidote.zsh"
+else
+  # this is the generic (linux) version
+  source "$HOME/.antidote/antidote.zsh"
 fi
 
 antidote load
@@ -117,10 +121,16 @@ if [[ -z "$OPENAI_API_KEY" ]]; then
   export OPENAI_API_KEY=$(pass show "API/OpenAI API Key" | head -n 1)
 fi
 
+# Volta
+if command -v volta >/dev/null 2>&1; then
+  export VOLTA_HOME="$HOME/.volta"
+  export PATH="$VOLTA_HOME/bin:$PATH"
+fi
+
 # PyEnv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
+if command -v pyenv >/dev/null 2>&1; then
   eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
@@ -131,7 +141,7 @@ fi
 # golang env
 export GOPATH="$HOME/.go"
 export PATH="$GOPATH/bin:$PATH"
-if [[ $(command -v brew) != "" ]]; then
+if command -v brew >/dev/null 2>&1; then
   export GOROOT=$(brew --prefix go)/libexec
   export PATH="$GOROOT/bin:$PATH"
 fi
