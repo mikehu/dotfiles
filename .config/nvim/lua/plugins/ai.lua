@@ -44,15 +44,7 @@ return {
 				config = vim.fn.expand("~/.config/mcphub/servers.json"), -- Absolute path to config file
 				use_bundled_binary = true,
 				auto_approve = true,
-				extensions = {
-					codecompanion = {
-						-- Show the mcp tool result in the chat buffer
-						-- NOTE:if the result is markdown with headers, content after the headers wont be sent by codecompanion
-						show_result_in_chat = false,
-						make_vars = true, -- make chat #variables from MCP server resources
-						make_slash_commands = true, -- make /slack_commands from MCP
-					},
-				},
+				auto_toggle_mcp_servers = true,
 			})
 		end,
 	},
@@ -63,6 +55,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"j-hui/fidget.nvim",
+			"ravitemer/mcphub.nvim",
 		},
 		init = function()
 			require("plugins.extensions.codecompanion-fidget"):init()
@@ -77,6 +70,16 @@ return {
 						start_in_insert_mode = true,
 						window = {
 							width = 0.4,
+						},
+					},
+				},
+				extensions = {
+					mcphub = {
+						callback = "mcphub.extensions.codecompanion",
+						opts = {
+							show_result_in_chat = false, -- Show the mcp tool result in the chat buffer
+							make_vars = true, -- make chat #variables from MCP server resources
+							make_slash_commands = true, -- make /slash_commands from MCP server prompts
 						},
 					},
 				},
@@ -95,28 +98,13 @@ return {
 						},
 						slash_commands = {
 							["file"] = {
-								-- Location to the slash command in CodeCompanion
-								callback = "strategies.chat.slash_commands.file",
-								description = "Select a file",
 								opts = {
-									provider = "snacks", -- Other options include 'default', 'mini_pick', 'fzf_lua', snacks
-									contains_code = true,
+									provider = "snacks",
 								},
 							},
 							["buffer"] = {
 								opts = {
 									provider = "snacks",
-								},
-							},
-						},
-						tools = {
-							["mcp"] = {
-								callback = function()
-									return require("mcphub.extensions.codecompanion")
-								end,
-								description = "Call tools and resources from the MCP Servers",
-								opts = {
-									requires_approval = false,
 								},
 							},
 						},
