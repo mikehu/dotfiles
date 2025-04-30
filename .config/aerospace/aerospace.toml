@@ -33,6 +33,9 @@ default-root-container-layout = 'tiles'
 #               tall monitor (anything higher than wide) gets vertical orientation
 default-root-container-orientation = 'auto'
 
+# macOS hidden windows
+automatically-unhide-macos-hidden-apps = true
+
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 key-mapping.preset = 'qwerty'
@@ -171,6 +174,16 @@ alt-shift-l = ['join-with right', 'mode main']
 
 # 'on-window-detected' callbacks
 [[on-window-detected]]
+if.app-id = 'com.apple.notificationcenterui'
+if.window-title-regex-substring = 'Picture-in-Picture'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+if.window-title-regex-substring = 'Picture-in-Picture'
+run = ['layout floating']
+
+[[on-window-detected]]
 if.app-id = 'app.zen-browser.zen'
 if.during-aerospace-startup = true
 run = ['move-node-to-workspace 👨🏻‍💻']
@@ -302,4 +315,8 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'cx.c3.theunarchiver'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.softwareambience.Unclutter'
 run = ['layout floating']
