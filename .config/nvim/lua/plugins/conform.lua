@@ -15,6 +15,7 @@ return {
 				json = { "prettierd", "prettier", stop_after_first = true },
 				yaml = { "yamlfmt" },
 				vue = { "prettierd", "prettier", stop_after_first = true },
+				svelte = { "prettierd", "prettier", stop_after_first = true },
 				go = { "goimports-reviser", "gofmt" },
 				["_"] = { "trim_whitespace" },
 			},
