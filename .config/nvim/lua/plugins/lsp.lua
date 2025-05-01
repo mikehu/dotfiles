@@ -48,8 +48,6 @@ return {
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ "j-hui/fidget.nvim", opts = {} },
-
-			-- LSP ui
 		},
 
 		opts = {
@@ -142,7 +140,19 @@ return {
 				},
 				-- denols = {},
 				emmet_ls = {},
-				eslint = {},
+				eslint = {
+					filetypes = {
+						"typescript",
+						"javascript",
+						"javascriptreact",
+						"typescriptreact",
+						"vue",
+						"html",
+						"markdown",
+					},
+					experimental = { useFlatConfig = true },
+					workingDirectory = { mode = "auto" },
+				},
 				html = {},
 				jsonls = {},
 				lua_ls = {
@@ -206,8 +216,20 @@ return {
 					},
 					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 				},
-				tailwindcss = {},
+				tailwindcss = {
+					filetypes = { "html", "css", "vue", "svelte" },
+				},
 				volar = {},
+				svelte = {
+					filetypes = { "svelte" },
+					settings = {
+						svelte = {
+							plugin = {
+								css = { enable = true },
+							},
+						},
+					},
+				},
 				yamlls = {
 					filetypes = { "yaml", "yml", "bu" },
 					settings = {
