@@ -179,6 +179,12 @@ return {
 				},
 			})
 
+			cmp.setup.filetype({ "codecompanion" }, {
+				sources = {
+					{ name = "codecompanion" },
+				},
+			})
+
 			-- cmp.setup.cmdline("/", {
 			-- 	mapping = cmp.mapping.preset.cmdline(),
 			-- 	sources = {

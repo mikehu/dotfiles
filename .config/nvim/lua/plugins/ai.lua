@@ -2,6 +2,7 @@ local workspace_folders = {
 	"~/Code/neurox",
 	"~/Code/illustrious-industries",
 }
+
 return {
 	{
 		"github/copilot.vim",
@@ -67,7 +68,7 @@ return {
 						provider = "default",
 					},
 					chat = {
-						start_in_insert_mode = true,
+						start_in_insert_mode = false,
 						window = {
 							width = 0.4,
 						},
