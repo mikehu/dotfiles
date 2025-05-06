@@ -3,3 +3,6 @@ if [ -f /usr/bin/pfetch ]; then
   /usr/bin/pfetch
 fi
 
+# aliases
+alias rkcp='~/.config/scripts/remote-kubeconfig-copy.sh'
+alias tun='~/.config/scripts/ssh-tunnels.sh'
