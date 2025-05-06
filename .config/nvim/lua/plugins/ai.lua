@@ -65,7 +65,7 @@ return {
 			require("codecompanion").setup({
 				display = {
 					action_palette = {
-						provider = "default",
+						provider = "snacks",
 					},
 					chat = {
 						start_in_insert_mode = false,
