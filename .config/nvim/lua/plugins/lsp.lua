@@ -55,16 +55,16 @@ return {
 		},
 
 		config = function()
-			local lspconfig = require("lspconfig")
 			local mason_lspconfig = require("mason-lspconfig")
-			local mason_registry = require("mason-registry")
 
 			-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-			--  This function gets run when an LSP connects to a particular buffer.
-			local on_attach = function(client, bufnr)
+			local function global_on_attach(args)
+				local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+				local bufnr = args.buf -- buffer that was just attached
+
 				local nmap = function(keys, func, desc)
 					vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 				end
@@ -104,6 +104,11 @@ return {
 				client.server_capabilities.documentFormattingProvider = false
 			end
 
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("MyLspAttach", { clear = true }),
+				callback = global_on_attach,
+			})
+
 			-- Enable the following language servers
 			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 			--
@@ -112,8 +117,6 @@ return {
 			--
 			--  If you want to override the default filetypes that your language server will attach to you can
 			--  define the property 'filetypes' to the map in question.
-			local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
-				.. "/node_modules/@vue/language-server"
 			local servers = {
 				bashls = {},
 				-- clangd = {},
@@ -147,6 +150,7 @@ return {
 						"javascriptreact",
 						"typescriptreact",
 						"vue",
+						"svelte",
 						"html",
 						"markdown",
 					},
@@ -177,15 +181,6 @@ return {
 				pyright = {},
 				-- rust_analyzer = {},
 				ts_ls = {
-					init_options = {
-						plugins = {
-							{
-								name = "@vue/typescript-plugin",
-								location = vue_language_server_path,
-								languages = { "vue" },
-							},
-						},
-					},
 					settings = {
 						typescript = {
 							inlayHints = {
@@ -214,12 +209,14 @@ return {
 							},
 						},
 					},
-					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
 				},
 				tailwindcss = {
 					filetypes = { "html", "css", "vue", "svelte" },
 				},
-				volar = {},
+				volar = {
+					filetypes = { "vue" },
+				},
 				svelte = {
 					filetypes = { "svelte" },
 					settings = {
@@ -250,21 +247,17 @@ return {
 				},
 			}
 
+			for server, server_config in pairs(servers) do
+				vim.lsp.config(server, {
+					capabilities = capabilities,
+					init_options = server_config.init_options,
+					settings = server_config.settings or {},
+					filetypes = server_config.filetypes,
+				})
+			end
+
 			mason_lspconfig.setup({
 				ensure_installed = vim.tbl_keys(servers),
-				automatic_installation = true,
-				handlers = {
-					function(server_name)
-						local server_config = (servers[server_name] or {})
-						lspconfig[server_name].setup({
-							capabilities = capabilities,
-							on_attach = on_attach,
-							init_options = server_config.init_options,
-							settings = server_config.settings or {},
-							filetypes = server_config.filetypes,
-						})
-					end,
-				},
 			})
 		end,
 	},
