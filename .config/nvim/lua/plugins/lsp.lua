@@ -149,8 +149,6 @@ return {
 						"javascript",
 						"javascriptreact",
 						"typescriptreact",
-						"vue",
-						"svelte",
 						"html",
 						"markdown",
 					},
