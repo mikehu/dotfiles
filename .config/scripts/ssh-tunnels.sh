@@ -4,7 +4,7 @@ IFS=$'\n\t'
 
 ###–– Defaults ––###
 REMOTE_IP=""
-REMOTE_USER="$(whoami)"            # default to current user
+REMOTE_USER="$(whoami)"
 CTX_SUBSTR="nx-lxc"
 SSH_KEY="$HOME/.ssh/id_ed25519"
 
@@ -46,18 +46,16 @@ SSH_LAN="${REMOTE_USER}@${REMOTE_IP}"
 ###–– autossh tuning ––###
 export AUTOSSH_POLL=60
 export AUTOSSH_GATETIME=30
-readonly AUTOSSH_OPTS=( -M 0 )
 
 ###–– Functions ––###
 get_kube_ports(){
-  awk -v ctx="$CTX_SUBSTR" '
-    $0 ~ ctx { getline; if ($0 ~ /127\.0\.0\.1:[0-9]+/) {
-      split($0, F, ":"); print F[4]
-    }}' ~/.kube/config
+  grep -B1 "${CTX_SUBSTR}" ~/.kube/config \
+    | grep "127\.0\.0\.1" \
+    | cut -d: -f4
 }
 cleanup_tunnels(){
   pkill autossh 2>/dev/null || true
-  pkill -f "ssh -f -N" 2>/dev/null || true
+  sudo pkill -f "ssh -f -N" 2>/dev/null || true
 }
 kill_remote(){
   ssh -t "$SSH_LAN" \
@@ -69,7 +67,7 @@ NODE_PORTS=(5557 6379 7080 9090)
 KUBE_PORTS=( $(get_kube_ports) )
 
 LOCAL_FWD=()
-for p in "${NODE_PORTS[@]}" "${KUBE_PORTS[@]}"; do
+for p in "${NODE_PORTS[@]}" "${KUBE_PORTS[@]:-}"; do
   LOCAL_FWD+=("-L" "${p}:localhost:${p}")
 done
 REVERSE_FWD=( "-R3080:localhost:3080" "-R5173:localhost:5173" )
@@ -79,10 +77,10 @@ PRIV_FWD=( "-L80:localhost:80" "-L443:localhost:443" )
 cleanup_tunnels
 kill_remote
 
-autossh "${AUTOSSH_OPTS[@]}" -f -N \
+autossh -M0 -f -N -g \
   "${LOCAL_FWD[@]}" "${REVERSE_FWD[@]}" \
   -i "$SSH_KEY" "$SSH_LAN"
 
-sudo autossh "${AUTOSSH_OPTS[@]}" -f -N \
+sudo ssh -f -N \
   "${PRIV_FWD[@]}" \
   -i "$SSH_KEY" "$SSH_LAN"

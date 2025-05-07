@@ -4,7 +4,7 @@ IFS=$'\n\t'
 
 usage() {
   cat <<EOF
-Usage: $0 -i <REMOTE_HOST_IP> [-u <REMOTE_HOST_USER>]
+Usage: $(basename "$0") -i <REMOTE_HOST_IP> [-u <REMOTE_HOST_USER>]
 
   -i    IP address of the remote host (required)
   -u    SSH user on the remote host (defaults to current user)
