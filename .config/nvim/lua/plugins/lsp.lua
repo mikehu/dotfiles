@@ -35,11 +35,11 @@ return {
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
 			{
-				"williamboman/mason.nvim",
+				"mason-org/mason.nvim",
 				config = true,
 			},
 			{
-				"williamboman/mason-lspconfig.nvim",
+				"mason-org/mason-lspconfig.nvim",
 			},
 			{
 				"hrsh7th/cmp-nvim-lsp",
@@ -55,8 +55,6 @@ return {
 		},
 
 		config = function()
-			local mason_lspconfig = require("mason-lspconfig")
-
 			-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
@@ -254,6 +252,7 @@ return {
 				})
 			end
 
+			local mason_lspconfig = require("mason-lspconfig")
 			mason_lspconfig.setup({
 				ensure_installed = vim.tbl_keys(servers),
 			})
