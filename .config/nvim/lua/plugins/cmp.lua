@@ -21,7 +21,7 @@ return {
 			-- Some additional helpers
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
-			-- "hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-emoji",
 			"hrsh7th/cmp-nvim-lua",
 
@@ -185,25 +185,29 @@ return {
 				},
 			})
 
-			-- cmp.setup.cmdline("/", {
-			-- 	mapping = cmp.mapping.preset.cmdline(),
-			-- 	sources = {
-			-- 		{ name = "buffer" },
-			-- 	},
-			-- })
+			cmp.setup.cmdline("/", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
 
 			-- cmp.setup.cmdline(":", {
-			-- 	mapping = cmp.mapping.preset.cmdline(),
-			-- 	sources = cmp.config.sources({
+			-- 	mapping = cmp.mapping.preset.cmdline({
+			-- 		["<c-j>"] = cmp.mapping.select_next_item(),
+			-- 		["<c-k>"] = cmp.mapping.select_prev_item(),
+			-- 		["<c-u>"] = cmp.mapping.scroll_docs(-4),
+			-- 		["<c-d>"] = cmp.mapping.scroll_docs(4),
+			-- 	}),
+			-- 	sources = {
 			-- 		{ name = "path" },
-			-- 	}, {
 			-- 		{
 			-- 			name = "cmdline",
 			-- 			option = {
 			-- 				ignore_cmds = { "Man", "!" },
 			-- 			},
 			-- 		},
-			-- 	}),
+			-- 	},
 			-- })
 
 			-- autopairs

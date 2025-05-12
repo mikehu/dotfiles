@@ -1,6 +1,9 @@
 return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
+	dependencies = {
+		"MunifTanjim/nui.nvim",
+	},
 	opts = {
 		cmdline = {
 			view = "cmdline",
@@ -39,8 +42,5 @@ return {
 			inc_rename = true, -- enables an input dialog for inc-rename.nvim
 			lsp_doc_border = true, -- add a border to hover docs and signature help
 		},
-	},
-	dependencies = {
-		"MunifTanjim/nui.nvim",
 	},
 }
