@@ -29,36 +29,17 @@ return {
 		end,
 	},
 	{
-		-- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			-- Automatically install LSPs to stdpath for neovim
-			{
-				"mason-org/mason.nvim",
-				config = true,
-			},
-			{
-				"mason-org/mason-lspconfig.nvim",
-			},
-			{
-				"hrsh7th/cmp-nvim-lsp",
-			},
-
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ "j-hui/fidget.nvim", opts = {} },
 		},
-
 		opts = {
 			inlay_hints = { enabled = true },
 		},
-
 		config = function()
-			-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
 			local function global_on_attach(args)
 				local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 				local bufnr = args.buf -- buffer that was just attached
@@ -106,6 +87,23 @@ return {
 				group = vim.api.nvim_create_augroup("MyLspAttach", { clear = true }),
 				callback = global_on_attach,
 			})
+		end,
+	},
+	{
+		"mason-org/mason-lspconfig.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "neovim/nvim-lspconfig" },
+			{
+				"mason-org/mason.nvim",
+				config = true,
+			},
+		},
+		config = function()
+			-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 			-- Enable the following language servers
 			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
