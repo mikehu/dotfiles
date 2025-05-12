@@ -46,11 +46,58 @@ return {
 				end
 			end
 
-			local has_words_before = function()
+			local function has_words_before()
 				unpack = unpack or table.unpack
 				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 				return col ~= 0
 					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+			end
+
+			local function get_entry_text(entry)
+				local item = entry.completion_item
+				if item.textEdit then
+					-- If textEdit is a table, it has newText (LSP spec)
+					-- If it's a string, it's the newText directly (some sources)
+					if type(item.textEdit) == "table" then
+						return item.textEdit.newText
+					else
+						return item.textEdit
+					end
+				end
+				return item.label -- Fallback to label
+			end
+
+			local intelligent_cr = function(fallback)
+				if cmp.visible() then
+					local entry = cmp.get_selected_entry()
+					if entry then
+						local current_cmdline_text = vim.fn.getcmdline()
+						local selected_item_text = get_entry_text(entry) -- Use helper or entry:get_label() if simpler
+
+						-- If what's typed is exactly what's selected,
+						-- or if the selected item would result in no change to the cmdline.
+						-- This check might need refinement based on how sources provide `textEdit` vs `label`.
+						-- For simple cmdline sources (path, cmdline), label is often enough.
+						if current_cmdline_text == selected_item_text then
+							-- Abort cmp so it doesn't try to handle the <CR> itself by just confirming.
+							-- Then, use fallback() to let Neovim execute the command line.
+							cmp.abort()
+							fallback() -- Fallback should make Neovim execute the command.
+						else
+							-- Different item selected, or current text is a prefix.
+							-- Confirm the selection (this will update the command line).
+							cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+							-- The user will then need to press <CR> again to execute, which is standard.
+						end
+					else
+						-- cmp is visible, but no entry is selected (e.g., menu just appeared).
+						-- Let Neovim execute what's currently typed.
+						fallback()
+					end
+				else
+					-- cmp is not visible. Let Neovim execute the command.
+					fallback()
+				end
 			end
 
 			cmp.setup({
@@ -185,30 +232,49 @@ return {
 				},
 			})
 
-			cmp.setup.cmdline("/", {
-				mapping = cmp.mapping.preset.cmdline(),
+			local commandline_mapping = cmp.mapping.preset.cmdline({
+				["<c-j>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+					else
+						-- If you want C-j to do something else when cmp is not visible,
+						-- e.g., act like <Down> for history.
+						-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Down>", true, false, true), "n", false)
+						fallback() -- Or just fallback to default Neovim behavior for C-j in cmdline
+					end
+				end, { "c" }),
+				["<c-k>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+					else
+						-- If you want C-k to do something else when cmp is not visible,
+						-- e.g., act like <Up> for history.
+						-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Up>", true, false, true), "n", false)
+						fallback() -- Or just fallback to default Neovim behavior for C-k in cmdline
+					end
+				end, { "c" }),
+				["<cr>"] = cmp.mapping(intelligent_cr, { "c" }),
+			})
+
+			cmp.setup.cmdline({ "/", "?" }, {
+				mapping = commandline_mapping,
 				sources = {
 					{ name = "buffer" },
 				},
 			})
 
-			-- cmp.setup.cmdline(":", {
-			-- 	mapping = cmp.mapping.preset.cmdline({
-			-- 		["<c-j>"] = cmp.mapping.select_next_item(),
-			-- 		["<c-k>"] = cmp.mapping.select_prev_item(),
-			-- 		["<c-u>"] = cmp.mapping.scroll_docs(-4),
-			-- 		["<c-d>"] = cmp.mapping.scroll_docs(4),
-			-- 	}),
-			-- 	sources = {
-			-- 		{ name = "path" },
-			-- 		{
-			-- 			name = "cmdline",
-			-- 			option = {
-			-- 				ignore_cmds = { "Man", "!" },
-			-- 			},
-			-- 		},
-			-- 	},
-			-- })
+			cmp.setup.cmdline(":", {
+				mapping = commandline_mapping,
+				sources = {
+					{ name = "path" },
+					{
+						name = "cmdline",
+						option = {
+							ignore_cmds = { "Man", "!" },
+						},
+					},
+				},
+			})
 
 			-- autopairs
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
