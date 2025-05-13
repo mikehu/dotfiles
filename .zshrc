@@ -116,11 +116,6 @@ eval "$(oh-my-posh init zsh --config ~/.config/theme.omp.toml)"
 alias n=nvim
 alias k=kubectl
 
-# AI
-if [[ -z "$OPENAI_API_KEY" ]]; then
-  export OPENAI_API_KEY=$(pass show "API/OpenAI API Key" | head -n 1)
-fi
-
 # Volta
 if command -v volta >/dev/null 2>&1; then
   export VOLTA_HOME="$HOME/.volta"

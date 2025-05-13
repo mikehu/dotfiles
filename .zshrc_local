@@ -3,7 +3,18 @@ if [ -f /usr/bin/pfetch ]; then
   /usr/bin/pfetch
 fi
 
+# Pass Sync
+export SYNC_VAULT="MXFJNCXIPZC2ZNSNS35K6CT334"
+
+# AI
+if [[ -z "$OPENAI_API_KEY" ]]; then
+  export OPENAI_API_KEY=$(pass show "API/OpenAI API Key" | head -n 1)
+fi
+
 # aliases
 alias rkcp='~/.config/scripts/remote-kubeconfig-copy.sh'
 alias tun='~/.config/scripts/ssh-tunnels.sh'
 alias hq='harlequin'
+
+# Neurox
+alias nxld='DOCKER_HOST=$(docker context inspect --format "{{.Endpoints.docker.Host}}") lazydocker'
