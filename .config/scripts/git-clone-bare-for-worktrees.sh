@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/sh
+set -eu
 
 # Examples of call:
 # git-clone-bare-for-worktrees git@github.com:name/repo.git
@@ -9,10 +9,10 @@ set -e
 # => Clones to a /my-repo directory
 
 url=$1
-basename=${url##*/}
-name=${2:-${basename%.*}}
+basename=$(basename "$url")
+name=${2:-$(echo "$basename" | sed 's/\.git$//')}
 
-mkdir $name
+mkdir "$name"
 cd "$name"
 
 # Moves all the administrative git files (a.k.a $GIT_DIR) under .bare directory.

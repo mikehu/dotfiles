@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/sh
+set -eu
 
 # Function to display the help message
 show_help() {
@@ -36,7 +37,7 @@ for file in "$dir"/*; do
         # Create a symbolic link in the current working directory
         ln -sf "$file" "$filename"
         # Increment the counter
-        count=$((count + 1))
+        count=$(expr $count + 1)
     fi
 done
 

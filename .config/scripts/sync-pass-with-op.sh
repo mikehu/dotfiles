@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
 
 # Check for required tools and environment variables
 check_requirements() {
