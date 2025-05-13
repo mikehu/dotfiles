@@ -6,3 +6,4 @@ fi
 # aliases
 alias rkcp='~/.config/scripts/remote-kubeconfig-copy.sh'
 alias tun='~/.config/scripts/ssh-tunnels.sh'
+alias hq='harlequin'

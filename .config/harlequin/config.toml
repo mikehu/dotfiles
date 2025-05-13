@@ -1,0 +1,8 @@
+default_profile = "default"
+
+[profiles.default]
+adapter = "duckdb"
+theme = "harlequin"
+limit = 100000
+keymap_name = ["vscode"]
+
