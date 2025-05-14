@@ -63,7 +63,7 @@ kill_remote(){
 }
 
 ###–– Build forwards ––###
-NODE_PORTS=(5557 6379 7080 9090)
+NODE_PORTS=(5557 6379 6820 7080 9090)
 KUBE_PORTS=( $(get_kube_ports) )
 
 LOCAL_FWD=()
