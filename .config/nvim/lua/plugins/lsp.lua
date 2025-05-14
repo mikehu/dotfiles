@@ -1,39 +1,9 @@
 return {
 	{
-		"dnlhc/glance.nvim",
-		event = "LspAttach",
-		config = function()
-			require("glance").setup({
-				border = {
-					enable = true,
-				},
-				list = {
-					position = "left",
-				},
-				hooks = {
-					before_open = function(results, open, jump)
-						local uri = vim.uri_from_bufnr(0)
-						if #results == 1 then
-							local target_uri = results[1].uri or results[1].targetUri
-							if target_uri == uri then
-								jump(results[1])
-							else
-								open(results)
-							end
-						else
-							open(results)
-						end
-					end,
-				},
-			})
-		end,
-	},
-	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			-- Useful status updates for LSP
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+			{ "smjonas/inc-rename.nvim", opts = {} },
 			{ "j-hui/fidget.nvim", opts = {} },
 		},
 		opts = {
@@ -48,13 +18,31 @@ return {
 					vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 				end
 
-				nmap("gld", vim.lsp.buf.definition, "Goto definition")
-				nmap("glt", vim.lsp.buf.type_definition, "Goto typedef")
-				nmap("glD", vim.lsp.buf.declaration, "Goto declaration")
-
-				nmap("glr", "<cmd>Glance references<cr>", "Glance references")
-				nmap("gli", "<cmd>Glance implementations<cr>", "Glance implementation")
-				nmap("glT", "<cmd>Glance type_definitions<cr>", "Glance type definitions")
+				nmap("gld", function()
+					Snacks.picker.lsp_definitions({
+						layout = { preset = "ivy" },
+					})
+				end, "Goto definition")
+				nmap("glD", function()
+					Snacks.picker.lsp_declarations({
+						layout = { preset = "ivy" },
+					})
+				end, "Goto declaration")
+				nmap("glt", function()
+					Snacks.picker.lsp_type_definitions({
+						layout = { preset = "ivy" },
+					})
+				end, "Goto typedef")
+				nmap("gli", function()
+					Snacks.picker.lsp_implementations({
+						layout = { preset = "ivy" },
+					})
+				end, "Goto implementation")
+				nmap("glr", function()
+					Snacks.picker.lsp_references({
+						layout = { preset = "ivy" },
+					})
+				end, "List references")
 
 				nmap("gr", ":IncRename ", "Rename cursor word")
 				nmap("gla", vim.lsp.buf.code_action, "Code action")
@@ -62,10 +50,10 @@ return {
 				-- See `:help K` for why this keymap
 				nmap("K", function()
 					vim.lsp.buf.hover({ border = "rounded" })
-				end, "Hover Documentation")
-				nmap("gK", function()
-					vim.lsp.buf.signature_help({ border = "rounded" })
-				end, "Signature Documentation")
+				end, "Hover documentation")
+				-- nmap("gK", function()
+				-- 	vim.lsp.buf.signature_help({ border = "rounded" })
+				-- end, "Signature documentation")
 
 				-- Lesser used LSP functionality
 				nmap("<leader>Pa", vim.lsp.buf.add_workspace_folder, "Add folder")
@@ -173,7 +161,6 @@ return {
 				},
 				marksman = {},
 				pyright = {},
-				-- rust_analyzer = {},
 				ts_ls = {
 					settings = {
 						typescript = {
@@ -204,6 +191,7 @@ return {
 						},
 					},
 					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
+					root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
 				},
 				tailwindcss = {
 					filetypes = { "html", "css", "vue", "svelte" },

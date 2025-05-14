@@ -56,8 +56,14 @@ return {
 					desc = "Prev hunk",
 				},
 				{ "<leader>gb", gitsigns.toggle_current_line_blame, desc = "Toggle blame" },
-				{ "<leader>gd", gitsigns.toggle_deleted, desc = "Show/hide deleted" },
-				{ "<leader>gw", gitsigns.toggle_word_diff, desc = "Show/hide word diff" },
+				{
+					"<leader>gd",
+					function()
+						gitsigns.toggle_word_diff()
+						gitsigns.toggle_deleted()
+					end,
+					desc = "Show/hide diff/deleted",
+				},
 				{ "<leader>gp", gitsigns.preview_hunk, desc = "Preview hunk" },
 				{ "<leader>gs", gitsigns.stage_hunk, desc = "Stage hunk" },
 				{ "<leader>gr", gitsigns.reset_hunk, desc = "Reset hunk" },
