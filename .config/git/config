@@ -1,13 +1,13 @@
-# This is Git's per-user configuration file.
 [user]
         name = Mike Hu
         email = m@mikehu.com
 [alias]
-        p = push
-        r = pull --rebase
+        p = pull --rebase
+        P = push
+        r = reset
         st = status -sb
+        la = "log --graph --all --pretty=format:\"%C(bold magenta)%h  %C(white)%an%C(reset)  %C(yellow)%ar  %C(blue)%D%n%s%n\""
         ll = log --oneline
-        last = log -1 HEAD --stat
         a = add
         c = commit
         ca = commit --amend
@@ -19,17 +19,35 @@
         cw = clone-worktrees
         init-worktree = "!sh $XDG_CONFIG_HOME/scripts/git-init-worktree.sh"
         iw = init-worktree
+[core]
+        pager = delta
+        compression = 8
+        preloadindex = true
+[interactive]
+        diffFilter = delta --color-only --show-syntax-themes
+        singlekey = true
+[merge]
+        conflictstyle = zdiff3
+[diff]
+        algorithm = histogram
+        colorMoved = default
+        mnemonicPrefix = true
+        context = 3
+        interHunkContext = 10
+        renames = true
+[advice]
+        statusHints = false
 [column]
         ui = auto
+[status]
+        branch = true
+        showStash = true
+[log]
+        abbrevCommit = true
 [branch]
         sort = -committerdate
 [tag]
         sort = version:refname
-[help]
-        autocorrect = 20
-[rerere]
-        enabled = true
-        autoupdate = true
 [init]
         defaultBranch = main
 [fetch]
@@ -37,29 +55,31 @@
         pruneTags = true
         all = true
 [pull]
+        default = current
         rebase = true
 [rebase]
         autoSquash = true
         autoStash = true
         updateRefs = true
+        missingCommitsCheck = warn
 [push]
         default = simple
         autoSetupRemote = true
         followTags = true
-[core]
-        pager = delta
-[interactive]
-        diffFilter = delta --color-only --show-syntax-themes
+[commit]
+        verbose = true
+[help]
+        autocorrect = 20
+[rerere]
+        enabled = true
+        autoupdate = true
+
+# Third-party
 [delta]
         navigate = true    # use n and N to move between diff sections
         side-by-side = true
         line-numbers = true
-[merge]
-        conflictstyle = zdiff3
-[diff]
-        algorithm = histogram
-        colorMoved = default
-        mnemonicPrefix = true
-        renames = true
-[commit]
-        verbose = true
+
+# URL Shortcuts
+[url "git@github.com:"]
+        insteadOf = "gh:"
