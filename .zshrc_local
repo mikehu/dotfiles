@@ -12,9 +12,9 @@ if [[ -z "$OPENAI_API_KEY" ]]; then
 fi
 
 # aliases
+alias hq='harlequin'
 alias rkcp='~/.config/scripts/remote-kubeconfig-copy.sh'
 alias tun='~/.config/scripts/ssh-tunnels.sh'
-alias hq='harlequin'
 
 # Neurox
 alias nxld='DOCKER_HOST=$(docker context inspect --format "{{.Endpoints.docker.Host}}") lazydocker'

@@ -113,8 +113,9 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 eval "$(oh-my-posh init zsh --config ~/.config/theme.omp.toml)"
 
 # Aliases
-alias n=nvim
+alias g=git
 alias k=kubectl
+alias n=nvim
 
 # Volta
 if command -v volta >/dev/null 2>&1; then
