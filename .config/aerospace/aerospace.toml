@@ -153,6 +153,11 @@ alt-shift-semicolon = 'mode service'
 # See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
 '👨🏻‍💻' = 'main'
+'💼' = 'main'
+'💬' = 'main'
+'🍿' = 'main'
+'🎨' = 'main'
+'🎛️' = 'main'
 '🖥️' = 'secondary'
 
 # 'service' binding mode declaration.
@@ -246,7 +251,6 @@ run = ['move-node-to-workspace 🎨']
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-if.during-aerospace-startup = true
 run = ['move-node-to-workspace 🎛️']
 
 [[on-window-detected]]
@@ -294,7 +298,7 @@ run = ['layout floating']
 if.app-id = 'com.1password.1password'
 run = ['layout floating']
 
- [[on-window-detected]]
+[[on-window-detected]]
 if.app-id = 'com.googlecode.iterm2'
 run = ['layout floating']
 
