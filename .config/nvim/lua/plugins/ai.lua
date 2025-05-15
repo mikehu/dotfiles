@@ -67,7 +67,8 @@ return {
 			require("plugins.extensions.codecompanion-fidget"):init()
 		end,
 		config = function()
-			require("codecompanion").setup({
+			local codecompanion = require("codecompanion")
+			codecompanion.setup({
 				display = {
 					action_palette = {
 						provider = "snacks",
@@ -204,7 +205,7 @@ return {
 					nowait = true,
 					remap = false,
 					{ "<leader>cn", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
-					{ "<leader>cx", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
+					{ "<leader>ca", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
 				},
 				{
 					mode = { "v" },

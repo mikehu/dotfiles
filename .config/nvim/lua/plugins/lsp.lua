@@ -15,7 +15,7 @@ return {
 				local bufnr = args.buf -- buffer that was just attached
 
 				local nmap = function(keys, func, desc)
-					vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+					vim.keymap.set("n", keys, func, { nowait = true, buffer = bufnr, desc = desc })
 				end
 
 				nmap("gld", function()

@@ -27,7 +27,7 @@ return {
 			function()
 				code_action.code_action()
 			end,
-			desc = "code action",
+			desc = "Code action",
 			icon = "🛠️",
 		})
 	end,
