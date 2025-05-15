@@ -1,21 +1,32 @@
 {
-  "nativeMCPServers": [
-    
-  ],
+  "nativeMCPServers": [],
   "mcpServers": {
-    "fetch": {
+    "github": {
+      "command": "docker",
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "",
+        "GITHUB_TOOLSETS": "repos,issues,pull_requests,code_security"
+      },
       "disabled": false,
-      "command": "uvx",
       "args": [
-        "mcp-server-fetch"
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
       ]
     },
+    "browserTools": {
+      "command": "npx",
+      "args": ["@agentdeskai/browser-tools-mcp@1.2.0"]
+    },
     "vectorcode": {
-      "disabled": false,
+      "command": "uvx",
       "env": {
         "FASTMCP_LOG_LEVEL": "INFO"
       },
-      "command": "uvx",
+      "disabled": false,
       "args": [
         "--from",
         "vectorcode[mcp]",
@@ -24,11 +35,10 @@
         "vectorcode-mcp-server"
       ]
     },
-    "browserTools": {
-      "command": "npx",
-      "args": [
-        "@agentdeskai/browser-tools-mcp@1.2.0"
-      ]
+    "fetch": {
+      "command": "uvx",
+      "disabled": false,
+      "args": ["mcp-server-fetch"]
     }
   }
 }
