@@ -3,16 +3,18 @@ if [ -f /usr/bin/pfetch ]; then
   /usr/bin/pfetch
 fi
 
-# Pass Sync
+# Credentials
 export SYNC_VAULT="MXFJNCXIPZC2ZNSNS35K6CT334"
-
-# AI
 if [[ -z "$OPENAI_API_KEY" ]]; then
   export OPENAI_API_KEY=$(pass show "API/OpenAI API Key" | head -n 1)
+fi
+if [[ -z "$GITHUB_PERSONAL_ACCESS_TOKEN" ]]; then
+  export GITHUB_PERSONAL_ACCESS_TOKEN=$(pass show "Tokens/GitHub Personal Access Token" | head -n 1)
 fi
 
 # aliases
 alias hq='harlequin'
+alias psync='~/.config/scripts/sync-pass-with-op.sh'
 alias rkcp='~/.config/scripts/remote-kubeconfig-copy.sh'
 alias tun='~/.config/scripts/ssh-tunnels.sh'
 

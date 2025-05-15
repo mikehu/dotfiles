@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 IFS=$'\n\t'
 
 # Check for required tools and environment variables
@@ -37,12 +37,16 @@ check_requirements() {
     [ $missing_requirements -eq 1 ] && exit 1
 }
 
-sync_targets=(
+sync_credentials=(
     "OpenAI API Key"
     "Claude API Key"
     "DeepSeek API Key"
     "Gemini API Key"
     "Groq API Key"
+)
+
+sync_tokens=(
+    "GitHub Personal Access Token"
 )
 
 # Perform initial requirement checks
@@ -53,35 +57,62 @@ echo "Starting password synchronization from 1Password to system password store.
 count=0
 failures=0
 
-for target in "${sync_targets[@]}"; do
-    echo "Processing $target..."
+# Process credential targets
+for target in "${sync_credentials[@]}"; do
+  echo "Processing $target..."
+  # Retrieve credential field from 1Password CLI
+  password=$(op item get "$target" --vault "Private" --account "$SYNC_VAULT" --fields credential --reveal)
 
-    # Retrieve password from 1Password CLI
-    password=$(op item get "$target" --vault "Private" --account "$SYNC_VAULT" --fields credential --reveal 2>/dev/null)
+  if [ -z "$password" ]; then
+      echo "Error: Failed to retrieve credential for '$target' from 1Password."
+      echo "Possible issues:"
+      echo "  - Item doesn't exist in the vault"
+      echo "  - You're not authenticated (run 'op signin')"
+      echo "  - Incorrect vault name or account"
+      ((failures++))
+      continue
+  fi
 
-    if [ -z "$password" ]; then
-        echo "Error: Failed to retrieve password for '$target' from 1Password."
-        echo "Possible issues:"
-        echo "  - Item doesn't exist in the vault"
-        echo "  - You're not authenticated (run 'op signin')"
-        echo "  - Incorrect vault name or account"
-        ((failures++))
-        continue
-    fi
+  echo "Updating pass entry for $target..."
+  if echo "$password" | pass insert -fe "API/$target" > /dev/null 2>&1; then
+      echo "Successfully updated pass entry for '$target'"
+      ((count++))
+  else
+      echo "Error: Failed to update pass entry for '$target'."
+      echo "Possible issues:"
+      echo "  - GPG key problems"
+      echo "  - Permission issues with password store"
+      ((failures++))
+  fi
+done
 
-    # Insert/update the password in pass
-    # pass automatically encrypts the password using GPG
-    echo "Updating pass entry for $target..."
-    if echo "$password" | pass insert -fe "API/$target" > /dev/null 2>&1; then
-        echo "Successfully updated pass entry for '$target'"
-        ((count++))
-    else
-        echo "Error: Failed to update pass entry for '$target'."
-        echo "Possible issues:"
-        echo "  - GPG key problems"
-        echo "  - Permission issues with password store"
-        ((failures++))
-    fi
+# Process token targets
+for target in "${sync_tokens[@]}"; do
+  echo "Processing $target..."
+  # Retrieve token field from 1Password CLI
+  password=$(op item get "$target" --vault "Private" --account "$SYNC_VAULT" --fields token --reveal)
+
+  if [ -z "$password" ]; then
+      echo "Error: Failed to retrieve token for '$target' from 1Password."
+      echo "Possible issues:"
+      echo "  - Item doesn't exist in the vault"
+      echo "  - You're not authenticated (run 'op signin')"
+      echo "  - Incorrect vault name or account"
+      ((failures++))
+      continue
+  fi
+
+  echo "Updating pass entry for $target..."
+  if echo "$password" | pass insert -fe "Tokens/$target" > /dev/null 2>&1; then
+      echo "Successfully updated pass entry for '$target'"
+      ((count++))
+  else
+      echo "Error: Failed to update pass entry for '$target'."
+      echo "Possible issues:"
+      echo "  - GPG key problems"
+      echo "  - Permission issues with password store"
+      ((failures++))
+  fi
 done
 
 echo "Password synchronization complete: $count successful, $failures failed."
