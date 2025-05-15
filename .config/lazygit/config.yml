@@ -21,5 +21,6 @@ gui:
     defaultFgColor:
       - default
 git:
+  branchPrefix: "mikehu/"
   paging:
-    externalDiffCommand: difft --color=always
+    externalDiffCommand: "difft --color=always"
