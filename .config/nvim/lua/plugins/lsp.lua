@@ -127,18 +127,6 @@ return {
 				},
 				-- denols = {},
 				emmet_ls = {},
-				eslint = {
-					filetypes = {
-						"typescript",
-						"javascript",
-						"javascriptreact",
-						"typescriptreact",
-						"html",
-						"markdown",
-					},
-					experimental = { useFlatConfig = true },
-					workingDirectory = { mode = "auto" },
-				},
 				html = {},
 				jsonls = {},
 				lua_ls = {
@@ -161,6 +149,27 @@ return {
 				},
 				marksman = {},
 				pyright = {},
+				-- eslint = {
+				-- 	filetypes = {
+				-- 		"typescript",
+				-- 		"javascript",
+				-- 		"javascriptreact",
+				-- 		"typescriptreact",
+				-- 		"html",
+				-- 		"markdown",
+				-- 	},
+				-- 	experimental = { useFlatConfig = true },
+				-- 	workingDirectory = { mode = "auto" },
+				-- },
+				oxlint = {
+					filetypes = {
+						"typescript",
+						"javascript",
+						"javascriptreact",
+						"typescriptreact",
+						"markdown",
+					},
+				},
 				ts_ls = {
 					settings = {
 						typescript = {
