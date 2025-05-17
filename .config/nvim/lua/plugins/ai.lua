@@ -1,6 +1,7 @@
 local workspace_folders = {
 	"~/Code/neurox",
 	"~/Code/illustrious-industries",
+	"~/Code/personal",
 }
 
 return {
@@ -141,7 +142,7 @@ return {
 						},
 					},
 					inline = {
-						adapter = "copilot_gemini",
+						adapter = "copilot_o4",
 					},
 				},
 				adapters = {
@@ -149,7 +150,7 @@ return {
 						return require("codecompanion.adapters").extend("copilot", {
 							schema = {
 								model = {
-									default = "claude-3.5-sonnet",
+									default = "claude-3.7-sonnet",
 								},
 							},
 						})
@@ -163,20 +164,11 @@ return {
 							},
 						})
 					end,
-					copilot_o3 = function()
+					copilot_o4 = function()
 						return require("codecompanion.adapters").extend("copilot", {
 							schema = {
 								model = {
-									default = "o3-mini",
-								},
-							},
-						})
-					end,
-					copilot_gpt41 = function()
-						return require("codecompanion.adapters").extend("copilot", {
-							schema = {
-								model = {
-									default = "gpt-4.1",
+									default = "o4-mini",
 								},
 							},
 						})
