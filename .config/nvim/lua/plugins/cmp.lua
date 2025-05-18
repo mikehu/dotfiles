@@ -259,19 +259,20 @@ return {
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = commandline_mapping,
 				sources = {
-					{ name = "buffer" },
+					{ name = "buffer", keyword_length = 4, ignore_case = false },
 				},
 			})
 
 			cmp.setup.cmdline(":", {
 				mapping = commandline_mapping,
 				sources = {
-					{ name = "path" },
+					{ name = "path", keyword_length = 4 },
 					{
 						name = "cmdline",
 						option = {
 							ignore_cmds = { "Man", "!" },
 						},
+						keyword_length = 3,
 					},
 				},
 			})
