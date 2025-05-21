@@ -4,6 +4,31 @@ local workspace_folders = {
 	"~/Code/personal",
 }
 
+local plan_prompts = require("plugins.prompts.plan")
+
+local prompt_library = {
+	["Project Plan"] = {
+		strategy = "chat",
+		description = "Updates a project plan to be referenced by the AI to serve as guard rails and task plan",
+		opts = {
+			short_name = "plan",
+			is_default = true,
+			is_slash_cmd = true,
+			ignore_system_prompt = true,
+		},
+		prompts = {
+			{
+				role = "system",
+				content = plan_prompts.system_prompt,
+			},
+			{
+				role = "user",
+				content = "Create a project plan for ...",
+			},
+		},
+	},
+}
+
 return {
 	{
 		"github/copilot.vim",
@@ -66,6 +91,7 @@ return {
 		},
 		init = function()
 			require("plugins.extensions.codecompanion-fidget"):init()
+			require("plugins.extensions.codecompanion-extmarks").setup()
 		end,
 		config = function()
 			local codecompanion = require("codecompanion")
@@ -89,9 +115,9 @@ return {
 							-- Automatically generate titles for new chats
 							auto_generate_title = true,
 							-- On exiting and entering neovim, loads the last chat on opening chat
-							continue_last_chat = true,
+							continue_last_chat = false,
 							-- When chat is cleared with `gx` delete the chat from history
-							delete_on_clearing_chat = false,
+							delete_on_clearing_chat = true,
 							-- Picker interface ("telescope", "snacks" or "default")
 							picker = "snacks",
 							-- Enable detailed logging for history extension
@@ -115,6 +141,7 @@ return {
 						},
 					},
 				},
+				prompt_library = prompt_library,
 				strategies = {
 					chat = {
 						adapter = "copilot_sonnet",
@@ -164,6 +191,15 @@ return {
 							},
 						})
 					end,
+					copilot_41 = function()
+						return require("codecompanion.adapters").extend("copilot", {
+							schema = {
+								model = {
+									default = "gpt-4.1",
+								},
+							},
+						})
+					end,
 					copilot_o4 = function()
 						return require("codecompanion.adapters").extend("copilot", {
 							schema = {
@@ -208,31 +244,4 @@ return {
 			})
 		end,
 	},
-	-- {
-	-- 	"augmentcode/augment.vim",
-	-- 	event = "VeryLazy",
-	-- 	config = function()
-	-- 		vim.g.augment_disable_tab_mapping = true
-	-- 		vim.g.augment_workspace_folders = workspace_folders
-	--
-	-- 		local wk = require("which-key")
-	-- 		wk.add({
-	-- 			{ "<leader>ca", group = "Augment Code", icon = "󰘦 " },
-	-- 			{
-	-- 				mode = { "n" },
-	-- 				nowait = true,
-	-- 				remap = false,
-	-- 				{ "<leader>cac", "<cmd>Augment chat<cr>", desc = "Send chat" },
-	-- 				{ "<leader>can", "<cmd>Augment chat-new<cr>", desc = "New conversation" },
-	-- 				{ "<leader>cat", "<cmd>Augment chat-toggle<cr>", desc = "Toggle" },
-	-- 			},
-	-- 			{
-	-- 				mode = { "i" },
-	-- 				nowait = true,
-	-- 				remap = false,
-	-- 				{ "<c-y>", "<cmd>call augment#Accept()<cr>", desc = "Accept" },
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
 }
