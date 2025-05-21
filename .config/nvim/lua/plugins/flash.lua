@@ -4,7 +4,7 @@ return {
 	keys = {
 		{
 			"s",
-			mode = { "n", "x" },
+			mode = { "n", "x", "o" },
 			function()
 				require("flash").jump()
 			end,
@@ -12,7 +12,7 @@ return {
 		},
 		{
 			"S",
-			mode = { "n", "x" },
+			mode = { "n", "x", "o" },
 			function()
 				require("flash").treesitter()
 			end,
@@ -28,22 +28,22 @@ return {
 			end,
 			desc = "Flash",
 		},
-		{
-			"r",
-			mode = "o",
-			function()
-				require("flash").remote()
-			end,
-			desc = "Remote flash",
-		},
-		{
-			"R",
-			mode = { "o", "x" },
-			function()
-				require("flash").treesitter_search()
-			end,
-			desc = "Remote treesitter search",
-		},
+		-- {
+		-- 	"r",
+		-- 	mode = "o",
+		-- 	function()
+		-- 		require("flash").remote()
+		-- 	end,
+		-- 	desc = "Remote flash",
+		-- },
+		-- {
+		-- 	"R",
+		-- 	mode = { "o", "x" },
+		-- 	function()
+		-- 		require("flash").treesitter_search()
+		-- 	end,
+		-- 	desc = "Remote treesitter search",
+		-- },
 		-- {
 		-- 	"<c-s>",
 		-- 	mode = { "c" },

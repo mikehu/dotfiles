@@ -27,7 +27,9 @@ return {
 		},
 		image = {},
 		input = {},
-		notifier = {},
+		notifier = {
+			style = "compact",
+		},
 		picker = {
 			sources = {
 				files = {

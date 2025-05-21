@@ -14,18 +14,6 @@ return {
 					StatusLine = { fg = "muted", bg = "base" },
 					DiagnosticUnnecessary = { fg = "muted", undercurl = true, sp = "rose" },
 					SatelliteSearch = { fg = "gold" },
-					-- ["@markup.heading.1.markdown"] = { fg = colors.purple },
-					-- RenderMarkdownH1Bg = { bg = colors.shade_purple },
-					-- ["@markup.heading.2.markdown"] = { fg = colors.green },
-					-- RenderMarkdownH2Bg = { bg = colors.shade_green },
-					-- ["@markup.heading.3.markdown"] = { fg = colors.cyan },
-					-- RenderMarkdownH3Bg = { bg = colors.shade_cyan },
-					-- ["@markup.heading.4.markdown"] = { fg = colors.yellow },
-					-- RenderMarkdownH4Bg = { bg = colors.shade_yellow },
-					-- ["@markup.heading.5.markdown"] = { fg = colors.orange },
-					-- RenderMarkdownH5Bg = { bg = colors.shade_orange },
-					-- ["@markup.heading.6.markdown"] = { fg = colors.pink },
-					-- RenderMarkdownH6Bg = { bg = colors.shade_pink },
 				},
 			})
 
