@@ -1,13 +1,16 @@
 {
   "nativeMCPServers": [],
   "mcpServers": {
-    "github": {
-      "command": "docker",
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "",
-        "GITHUB_TOOLSETS": "repos,issues,pull_requests,code_security"
-      },
+    "openmemory": {
       "disabled": false,
+      "url": "https://mem0.local.106source.ca/mcp/mcphub/sse/mike"
+    },
+    "github": {
+      "disabled": false,
+      "env": {
+        "GITHUB_TOOLSETS": "repos,issues,pull_requests,code_security",
+        "GITHUB_PERSONAL_ACCESS_TOKEN": ""
+      },
       "args": [
         "run",
         "-i",
@@ -15,30 +18,32 @@
         "-e",
         "GITHUB_PERSONAL_ACCESS_TOKEN",
         "ghcr.io/github/github-mcp-server"
-      ]
-    },
-    "browserTools": {
-      "command": "npx",
-      "args": ["@agentdeskai/browser-tools-mcp@1.2.0"]
+      ],
+      "command": "docker"
     },
     "vectorcode": {
-      "command": "uvx",
+      "disabled": false,
       "env": {
         "FASTMCP_LOG_LEVEL": "INFO"
       },
-      "disabled": false,
       "args": [
         "--from",
         "vectorcode[mcp]",
         "--with",
         "mcp",
         "vectorcode-mcp-server"
-      ]
+      ],
+      "command": "uvx"
     },
     "fetch": {
-      "command": "uvx",
       "disabled": false,
-      "args": ["mcp-server-fetch"]
+      "args": ["mcp-server-fetch"],
+      "command": "uvx"
+    },
+    "browserTools": {
+      "args": ["@agentdeskai/browser-tools-mcp@1.2.0"],
+      "command": "npx"
     }
   }
 }
+
