@@ -8,9 +8,10 @@ local plan_prompts = require("plugins.prompts.plan")
 
 local prompt_library = {
 	["Project Plan"] = {
-		strategy = "chat",
+		strategy = "workflow",
 		description = "Updates a project plan to be referenced by the AI to serve as guard rails and task plan",
 		opts = {
+			index = 3,
 			short_name = "plan",
 			is_default = true,
 			is_slash_cmd = true,
@@ -18,12 +19,26 @@ local prompt_library = {
 		},
 		prompts = {
 			{
-				role = "system",
-				content = plan_prompts.system_prompt,
-			},
-			{
-				role = "user",
-				content = "Create a project plan for ...",
+				{
+					role = "system",
+					content = plan_prompts.system_prompt,
+					opts = {
+						visible = false,
+					},
+				},
+				{
+					role = "user",
+					opts = {
+						auto_submit = false,
+					},
+					content = function()
+						vim.g.codecompanion_auto_tool_mode = true
+						return [[
+Create a project requirements document as `PRD.md` using the @files tool.
+
+This project is ... ]]
+					end,
+				},
 			},
 		},
 	},
@@ -225,20 +240,17 @@ return {
 				{
 					mode = { "n", "v" },
 					nowait = true,
-					remap = false,
 					{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle Chat" },
 				},
 				{
 					mode = { "n" },
 					nowait = true,
-					remap = false,
 					{ "<leader>cn", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
 					{ "<leader>ca", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
 				},
 				{
 					mode = { "v" },
 					nowait = true,
-					remap = false,
 					{ "<leader>ci", ":'<,'>CodeCompanion<cr>", desc = "Inline assist" },
 				},
 			})
