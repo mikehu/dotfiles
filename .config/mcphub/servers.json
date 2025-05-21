@@ -5,6 +5,10 @@
       "disabled": false,
       "url": "https://mem0.local.106source.ca/mcp/mcphub/sse/mike"
     },
+    "taskmaster": {
+      "disabled": false,
+      "command": "task-master-ai"
+    },
     "github": {
       "disabled": false,
       "env": {
@@ -40,10 +44,8 @@
       "args": ["mcp-server-fetch"],
       "command": "uvx"
     },
-    "browserTools": {
-      "args": ["@agentdeskai/browser-tools-mcp@1.2.0"],
-      "command": "npx"
+    "browsertools": {
+      "command": "browser-tools-mcp"
     }
   }
 }
-
