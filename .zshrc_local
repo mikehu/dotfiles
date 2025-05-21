@@ -15,7 +15,7 @@ fi
 # aliases
 alias hq='harlequin'
 alias psync='~/.config/scripts/sync-pass-with-op.sh'
-alias rkcp='~/.config/scripts/remote-kubeconfig-copy.sh'
+alias kcrs='~/.config/scripts/remote-kubeconfig-copy.sh'
 alias tun='~/.config/scripts/ssh-tunnels.sh'
 
 # Neurox
