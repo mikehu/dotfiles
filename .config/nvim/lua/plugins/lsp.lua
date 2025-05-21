@@ -205,7 +205,7 @@ return {
 				tailwindcss = {
 					filetypes = { "html", "css", "vue", "svelte" },
 				},
-				volar = {
+				vue_ls = {
 					filetypes = { "vue" },
 				},
 				svelte = {
@@ -239,7 +239,8 @@ return {
 			}
 
 			for server, server_config in pairs(servers) do
-				vim.lsp.config(server, {
+				local server_name = server_config.lsp_name or server
+				vim.lsp.config(server_name, {
 					capabilities = capabilities,
 					init_options = server_config.init_options,
 					settings = server_config.settings or {},
