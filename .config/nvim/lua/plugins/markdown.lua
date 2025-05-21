@@ -1,3 +1,5 @@
+local filetypes = { "markdown", "codecompanion" }
+
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	event = { "BufReadPre", "BufNewFile" },
@@ -5,7 +7,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-tree/nvim-web-devicons",
 	},
-	ft = { "markdown", "codecompanion" },
+	ft = filetypes,
 	opts = {
 		heading = {
 			icons = { "󰎦 ", "󰎩 ", "󰎬 ", "󰎮 ", "󰎰 ", "󰎵 " },
@@ -16,4 +18,16 @@ return {
 			},
 		},
 	},
+	config = function(_, opts)
+		require("render-markdown").setup(opts)
+
+		-- Apply wrap/linebreak/spell once filetype is known
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = filetypes,
+			callback = function()
+				vim.opt_local.wrap = true
+				vim.opt_local.linebreak = true
+			end,
+		})
+	end,
 }
