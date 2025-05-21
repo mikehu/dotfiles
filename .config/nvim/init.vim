@@ -57,7 +57,6 @@ filetype plugin on
 filetype plugin indent on
 syntax enable
 let mapleader = " "
-nmap <space> <leader>
-vmap <space> <leader>
+nnoremap <space> <nop>
 autocmd BufReadPost quickfix nnoremap <buffer> <cr> <cr>
 lua require("init")
