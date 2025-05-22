@@ -43,6 +43,7 @@ sync_credentials=(
     "DeepSeek API Key"
     "Gemini API Key"
     "Groq API Key"
+    "Perplexity API Key"
 )
 
 sync_tokens=(
