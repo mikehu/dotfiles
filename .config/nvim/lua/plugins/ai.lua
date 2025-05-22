@@ -34,7 +34,7 @@ local prompt_library = {
 					content = function()
 						vim.g.codecompanion_auto_tool_mode = true
 						return [[
-Create a project requirements document as `PRD.md` using the @files tool.
+Create a product requirements document as `PRD.md` using the @files tool based on the following:
 
 This project is ... ]]
 					end,
