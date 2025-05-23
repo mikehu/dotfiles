@@ -26,6 +26,7 @@ return {
 			},
 			keymaps = {
 				["<C-l>"] = false,
+				["<C-h>"] = false,
 				["<C-r>"] = "actions.refresh",
 				["gd"] = {
 					desc = "Toggle file detail view",

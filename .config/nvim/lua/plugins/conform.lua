@@ -12,10 +12,11 @@ return {
 				html = { "prettierd" },
 				handlebars = { "prettierd" },
 				javascript = { "prettierd", stop_after_first = true },
+				typescript = { "prettierd", stop_after_first = true },
 				json = { "prettierd", stop_after_first = true },
 				yaml = { "yamlfmt" },
-				vue = { "prettierd", stop_after_first = true },
-				svelte = { "prettierd", stop_after_first = true },
+				vue = { "prettierd" },
+				svelte = { "prettierd" },
 				go = { "goimports-reviser", "gofmt" },
 				["_"] = { "trim_whitespace" },
 			},
@@ -24,7 +25,7 @@ return {
 				timeout_ms = 500,
 				lsp_fallback = true,
 			},
-			notify_on_error = false,
+			notify_on_error = true,
 		})
 
 		vim.api.nvim_create_user_command("Format", function(args)
