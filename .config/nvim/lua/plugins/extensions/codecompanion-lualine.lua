@@ -1,7 +1,7 @@
-local M = require("lualine.component"):extend()
+local Spinner = require("lualine.component"):extend()
 
-M.processing = false
-M.spinner_index = 1
+Spinner.processing = false
+Spinner.spinner_index = 1
 
 local spinner_symbols = {
 	"⠋",
@@ -18,8 +18,8 @@ local spinner_symbols = {
 local spinner_symbols_len = 10
 
 -- Initializer
-function M:init(options)
-	M.super.init(self, options)
+function Spinner:init(options)
+	Spinner.super.init(self, options)
 
 	local group = vim.api.nvim_create_augroup("CodeCompanionHooks", {})
 
@@ -37,7 +37,7 @@ function M:init(options)
 end
 
 -- Function that runs every time statusline is updated
-function M:update_status()
+function Spinner:update_status()
 	if self.processing then
 		self.spinner_index = (self.spinner_index % spinner_symbols_len) + 1
 		return spinner_symbols[self.spinner_index]
@@ -46,4 +46,28 @@ function M:update_status()
 	end
 end
 
-return M
+local function codecompanion_modifiable_status()
+	local current_bufnr = vim.api.nvim_get_current_buf()
+	if not vim.api.nvim_get_option_value("modifiable", { buf = current_bufnr }) then
+		return "✨ Working on an answer..."
+	else
+		return "✏️ Awaiting input..." -- Or perhaps '✏️' to indicate editable
+	end
+end
+local Extension = {
+	filetypes = { "codecompanion" },
+	sections = {
+		lualine_c = {
+			{
+				"filename",
+				path = 1,
+			},
+			codecompanion_modifiable_status,
+		},
+	},
+}
+
+return {
+	component = Spinner,
+	extension = Extension,
+}

@@ -14,7 +14,7 @@ return {
 		local trouble = require("trouble")
 		local lazy_status = require("lazy.status")
 
-		local codecompanion_statusline = require("plugins.extensions.codecompanion-statusline")
+		local codecompanion_lualine = require("plugins.extensions.codecompanion-lualine")
 
 		local symbols = trouble.statusline({
 			mode = "lsp_document_symbols",
@@ -46,7 +46,7 @@ return {
 					statusline = 1000,
 				},
 			},
-			extensions = { "quickfix", "oil", "trouble", "lazy", "mason" },
+			extensions = { "quickfix", "oil", "trouble", "lazy", "mason", codecompanion_lualine.extension },
 			sections = {
 				lualine_a = {
 					{
@@ -71,9 +71,6 @@ return {
 						},
 						separator = "⟩",
 					},
-					-- {
-					-- 	"aerial",
-					-- },
 					{
 						symbols.get,
 						cond = symbols.has,
@@ -129,7 +126,7 @@ return {
 				},
 				lualine_y = {
 					"diagnostics",
-					codecompanion_statusline,
+					codecompanion_lualine.component,
 					{
 						copilot_status.get,
 						cond = copilot_status.has,
