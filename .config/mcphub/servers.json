@@ -1,30 +1,39 @@
 {
-  "nativeMCPServers": [],
   "mcpServers": {
-    "openmemory": {
+    "repomix": {
       "disabled": false,
-      "url": "https://mem0.local.106source.ca/mcp/mcphub/sse/mike"
+      "command": "repomix",
+      "args": [
+        "--mcp"
+      ]
     },
-    "taskmaster": {
-      "disabled": false,
-      "command": "task-master-ai",
+    "browsertools": {
+      "command": "bunx",
+      "args": [
+        "@agentdeskai/browser-tools-mcp@1.2.0"
+      ]
+    },
+    "vectorcode": {
       "env": {
-        "ANTHROPIC_API_KEY": "$: cmd:pass show \"API/Claude API Key\"",
-        "PERPLEXITY_API_KEY": "$: cmd:pass show \"API/Perplexity API Key\"",
-        "MODEL": "claude-3-7-sonnet-20250219",
-        "PERPLEXITY_MODEL": "sonar-pro",
-        "MAX_TOKENS": 64000,
-        "TEMPERATURE": 0.2,
-        "DEFAULT_SUBTASKS": 5,
-        "DEFAULT_PRIORITY": "medium"
-      }
+        "FASTMCP_LOG_LEVEL": "INFO"
+      },
+      "disabled": false,
+      "command": "uvx",
+      "args": [
+        "--from",
+        "vectorcode[mcp]",
+        "--with",
+        "mcp",
+        "vectorcode-mcp-server"
+      ]
     },
     "github": {
-      "disabled": false,
       "env": {
-        "GITHUB_TOOLSETS": "repos,issues,pull_requests,code_security",
-        "GITHUB_PERSONAL_ACCESS_TOKEN": ""
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "",
+        "GITHUB_TOOLSETS": "repos,issues,pull_requests,code_security"
       },
+      "disabled": false,
+      "command": "docker",
       "args": [
         "run",
         "-i",
@@ -32,30 +41,21 @@
         "-e",
         "GITHUB_PERSONAL_ACCESS_TOKEN",
         "ghcr.io/github/github-mcp-server"
-      ],
-      "command": "docker"
+      ]
     },
-    "vectorcode": {
-      "disabled": false,
-      "env": {
-        "FASTMCP_LOG_LEVEL": "INFO"
-      },
-      "args": [
-        "--from",
-        "vectorcode[mcp]",
-        "--with",
-        "mcp",
-        "vectorcode-mcp-server"
-      ],
-      "command": "uvx"
+    "openmemory": {
+      "url": "https://mem0.local.106source.ca/mcp/mcphub/sse/mike",
+      "disabled": false
     },
     "fetch": {
       "disabled": false,
-      "args": ["mcp-server-fetch"],
-      "command": "uvx"
-    },
-    "browsertools": {
-      "command": "browser-tools-mcp"
+      "command": "uvx",
+      "args": [
+        "mcp-server-fetch"
+      ]
     }
-  }
+  },
+  "nativeMCPServers": [
+    
+  ]
 }
