@@ -25,7 +25,9 @@ return {
 				enabled = false,
 			},
 		},
-		image = {},
+		image = {
+			enabled = false,
+		},
 		input = {},
 		notifier = {
 			style = "compact",

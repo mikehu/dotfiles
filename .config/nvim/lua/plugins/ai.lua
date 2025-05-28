@@ -238,13 +238,9 @@ return {
 			wk.add({
 				{ "<leader>c", group = "Chat / AI", icon = "🤖" },
 				{
-					mode = { "n", "v" },
-					nowait = true,
-					{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle Chat" },
-				},
-				{
 					mode = { "n" },
 					nowait = true,
+					{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle Chat" },
 					{ "<leader>cn", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
 					{ "<leader>ca", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
 				},
@@ -252,6 +248,7 @@ return {
 					mode = { "v" },
 					nowait = true,
 					{ "<leader>ci", ":'<,'>CodeCompanion<cr>", desc = "Inline assist" },
+					{ "<leader>cn", ":'<,'>CodeCompanionChat<cr>", desc = "New Chat" },
 				},
 			})
 		end,
