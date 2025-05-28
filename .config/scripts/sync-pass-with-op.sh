@@ -40,8 +40,9 @@ check_requirements() {
 sync_credentials=(
     "OpenAI API Key"
     "Claude API Key"
-    "DeepSeek API Key"
+    "xAI API Key"
     "Gemini API Key"
+    "DeepSeek API Key"
     "Groq API Key"
     "Perplexity API Key"
 )
