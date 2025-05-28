@@ -14,8 +14,8 @@ fi
 
 # aliases
 alias psync='~/.config/scripts/sync-pass-with-op.sh'
-alias kcrs='~/.config/scripts/remote-kubeconfig-copy.sh'
-alias tun='~/.config/scripts/ssh-tunnels.sh'
+alias tun='~/.config/scripts/ssh-tunnels.sh -u root'
+alias kcrs='~/.config/scripts/remote-kubeconfig-copy.sh -h nx-lxc.local -u root'
 
 # Neurox
 alias nxld='DOCKER_HOST=$(docker context inspect --format "{{.Endpoints.docker.Host}}") lazydocker'
