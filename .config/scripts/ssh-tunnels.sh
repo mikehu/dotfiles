@@ -3,45 +3,43 @@ set -euo pipefail
 IFS=$'\n\t'
 
 ###–– Defaults ––###
-REMOTE_IP=""
+REMOTE_ADDR="nx-lxc.local"
 REMOTE_USER="$(whoami)"
 CTX_SUBSTR="nx-lxc"
 SSH_KEY="$HOME/.ssh/id_ed25519"
 
 usage() {
   cat <<EOF
-Usage: $(basename "$0") -i ip [-u user] [-c ctx_substr] [-k ssh_key] [-h]
+Usage: $(basename "$0") -h host [-u user] [-c ctx_substr] [-k ssh_key]
 
-  -i  MAC‑Mini IP address        (required)
-  -u  MAC‑Mini SSH user          (default: $REMOTE_USER)
+  -h  Tunnel Host address        (required)
+  -u  Tunnel SSH user            (default: $REMOTE_USER)
   -c  Kube‑context substring     (default: $CTX_SUBSTR)
   -k  SSH key for tunneling      (default: $SSH_KEY)
-  -h  Show this help and exit
 EOF
   exit 1
 }
 
 ###–– Parse flags ––###
-while getopts "i:u:c:k:h" opt; do
+while getopts "h:u:c:k" opt; do
   case $opt in
-    i) REMOTE_IP="$OPTARG" ;;
+    h) REMOTE_ADDR="$OPTARG" ;;
     u) REMOTE_USER="$OPTARG" ;;
     c) CTX_SUBSTR="$OPTARG" ;;
     k) SSH_KEY="$OPTARG" ;;
-    h) usage ;;
     *) usage ;;
   esac
 done
 shift $((OPTIND-1))
 
 # Validate mandatory
-if [[ -z "$REMOTE_IP" ]]; then
+if [[ -z "$REMOTE_ADDR" ]]; then
   echo "Error: -i IP is required." >&2
   usage
 fi
 
 ###–– Derived ––###
-SSH_LAN="${REMOTE_USER}@${REMOTE_IP}"
+SSH_LAN="${REMOTE_USER}@${REMOTE_ADDR}"
 
 ###–– autossh tuning ––###
 export AUTOSSH_POLL=60
