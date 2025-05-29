@@ -63,13 +63,16 @@ kill_remote(){
 ###–– Build forwards ––###
 NODE_PORTS=(5557 6379 6820 7080 9090)
 KUBE_PORTS=( $(get_kube_ports) )
-
 LOCAL_FWD=()
 for p in "${NODE_PORTS[@]}" "${KUBE_PORTS[@]:-}"; do
   LOCAL_FWD+=("-L" "${p}:localhost:${p}")
 done
-REVERSE_FWD=( "-R3080:localhost:3080" "-R5173:localhost:5173" )
-PRIV_FWD=( "-L80:localhost:80" "-L443:localhost:443" )
+
+REVERSE_PORTS=(3080 5173)
+REVERSE_FWD=()
+for p in "${REVERSE_PORTS[@]}"; do
+  REVERSE_FWD+=("-R" "${p}:localhost:${p}")
+done
 
 ###–– Launch ––###
 cleanup_tunnels
@@ -79,6 +82,27 @@ autossh -M0 -f -N -g \
   "${LOCAL_FWD[@]}" "${REVERSE_FWD[@]}" \
   -i "$SSH_KEY" "$SSH_LAN"
 
-sudo ssh -f -N \
-  "${PRIV_FWD[@]}" \
-  -i "$SSH_KEY" "$SSH_LAN"
+###–– Count ’em ––###
+# Give SSH a sec to bind
+sleep 3
+
+# build list of all tunneled ports
+ALL_PORTS=( "${NODE_PORTS[@]}" "${KUBE_PORTS[@]:-}" "${REVERSE_PORTS[@]}")
+success=0
+failed=()
+
+for p in "${ALL_PORTS[@]}"; do
+  if lsof -i TCP:"$p" -sTCP:LISTEN >/dev/null 2>&1; then
+    ((success++))
+  else
+    failed+=("$p")
+  fi
+done
+
+total=${#ALL_PORTS[@]}
+echo "✅ Established $success out of $total tunnels."
+
+if (( ${#failed[@]} )); then
+  local IFS=' '
+  echo "⚠️  Failed to establish tunnels on ports: ${failed[*]}"
+fi
