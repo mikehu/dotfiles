@@ -39,106 +39,107 @@ keymap.set("i", "<m-k>", "<up>")
 keymap.set("i", "<m-l>", "<right>")
 keymap.set("n", "Q", "<nop>")
 
-local wk = require("which-key")
+local ok, wk = pcall(require, "which-key")
+if ok then
+	-- Prefix registrations
+	wk.add({
+		{ "gl", group = "LSP", icon = "✨" },
+		{ "<leader>b", group = "Buffers", icon = " " },
+		{ "<leader>c", group = "Chat / AI", icon = "🤖" },
+		{ "<leader>e", group = "End with", icon = " " },
+		{ "<leader>f", group = "Find", icon = " " },
+		{ "<leader>g", group = "Git / Grapple 🪝", icon = " " },
+		{ "<leader>i", group = "Insert", icon = " " },
+		{ "<leader>k", group = "Definitions", icon = " " },
+		{ "<leader>l", group = "Lists", icon = "📝" },
+		{ "<leader>P", group = "Project", icon = "📁" },
+		{ "<leader>q", group = "Quit", icon = " " },
+		{ "<leader>t", group = "Test / Trouble 🚦", icon = "🔬" },
+		{ "<leader>u", group = "UI", icon = " " },
+		{ "<leader>z", group = "Terminal (zsh)", icon = " " },
+	})
 
--- Prefix registrations
-wk.add({
-	{ "gl", group = "LSP", icon = "✨" },
-	{ "<leader>b", group = "Buffers", icon = " " },
-	{ "<leader>c", group = "Chat / AI", icon = "🤖" },
-	{ "<leader>e", group = "End with", icon = " " },
-	{ "<leader>f", group = "Find", icon = " " },
-	{ "<leader>g", group = "Git / Grapple 🪝", icon = " " },
-	{ "<leader>i", group = "Insert", icon = " " },
-	{ "<leader>k", group = "Definitions", icon = " " },
-	{ "<leader>l", group = "Lists", icon = "📝" },
-	{ "<leader>P", group = "Project", icon = "📁" },
-	{ "<leader>q", group = "Quit", icon = " " },
-	{ "<leader>t", group = "Test / Trouble 🚦", icon = "🔬" },
-	{ "<leader>u", group = "UI", icon = " " },
-	{ "<leader>z", group = "Terminal (zsh)", icon = " " },
-})
+	-- Saving
+	wk.add({
+		{ "<leader>s", cmd([[w]]), desc = "Save", icon = "💾" },
+		{ "<leader>S", cmd([[wa]]), desc = "Save all" },
+	})
 
--- Saving
-wk.add({
-	{ "<leader>s", cmd([[w]]), desc = "Save", icon = "💾" },
-	{ "<leader>S", cmd([[wa]]), desc = "Save all" },
-})
+	-- Quitting
+	wk.add({
+		{ "<leader>qq", cmd([[q]]), desc = "Quit" },
+		{ "<leader>qQ", cmd([[q!]]), desc = "Force quit" },
+	})
 
--- Quitting
-wk.add({
-	{ "<leader>qq", cmd([[q]]), desc = "Quit" },
-	{ "<leader>qQ", cmd([[q!]]), desc = "Force quit" },
-})
+	-- Buffer management
+	wk.add({
+		{ "<leader>bn", cmd([[enew]]), desc = "New buffer" },
+	})
 
--- Buffer management
-wk.add({
-	{ "<leader>bn", cmd([[enew]]), desc = "New buffer" },
-})
-
--- Lists
-local function toggle_list(type)
-	local windows = vim.fn.getwininfo()
-	local ll = type == "l" and 1 or 0
-	local wintype = ll == 1 and "loclist" or "quickfix"
-	local close_command = type .. "close"
-	local open_command = type .. "open"
-	for _, win in pairs(windows) do
-		if win[wintype] == 1 then
-			vim.cmd[close_command]()
-			return
+	-- Lists
+	local function toggle_list(type)
+		local windows = vim.fn.getwininfo()
+		local ll = type == "l" and 1 or 0
+		local wintype = ll == 1 and "loclist" or "quickfix"
+		local close_command = type .. "close"
+		local open_command = type .. "open"
+		for _, win in pairs(windows) do
+			if win[wintype] == 1 then
+				vim.cmd[close_command]()
+				return
+			end
 		end
+		vim.cmd[open_command]()
 	end
-	vim.cmd[open_command]()
+	wk.add({
+		{
+			"<leader>ll",
+			function()
+				toggle_list("l")
+			end,
+			desc = "Toggle local list",
+		},
+		{
+			"<leader>lq",
+			function()
+				toggle_list("c")
+			end,
+			desc = "Toggle quickfix list",
+		},
+	})
+
+	-- Various text manipulation shorthands
+	wk.add({
+		{ "<leader>io", [[m`o<esc>``]], desc = "Newline below" },
+		{ "<leader>iO", [[m`O<esc>``]], desc = "Newline above" },
+	})
+	wk.add({
+		{ "<leader>e,", [[m`A,<esc>``]], desc = "Comma" },
+		{ "<leader>e;", [[m`A;<esc>``]], desc = "Semicolon" },
+	})
+	wk.add({
+		mode = { "n", "v" },
+		{ "<leader>y", [["+y]], desc = "Yank to clipboard" },
+	})
+	wk.add({
+		mode = { "n", "v" },
+		{ "<leader>d", [["_d]], desc = "Delete without register" },
+	})
+
+	-- Terminal
+	keymap.set("t", "<c-n>", [[<c-\><c-n>]])
+	wk.add({
+		{ "<leader>zz", cmd([[BufTermNext]]), desc = "Cycle next terminal" },
+		{ "<leader>zZ", cmd([[BufTermPrev]]), desc = "Cycle prev terminal" },
+		{ "<leader>zn", cmd([[terminal]]), desc = "New terminal" },
+	})
+
+	-- UI
+	wk.add({
+		{ "<leader>ul", cmd([[Lazy]]), desc = "Lazy", icon = "󰒲 " },
+		{ "<leader>ub", cmd([[Mason]]), desc = "Mason", icon = "🧱" },
+		-- { "<leader>ug", cmd([[Neogit]]), desc = "Neogit", icon = "󰊢 " },
+		{ "<leader>ue", cmd([[Oil --float]]), desc = "File explorer", icon = " " },
+		{ "<leader>uh", cmd([[MCPHub]]), desc = "MCPHub", icon = " " },
+	})
 end
-wk.add({
-	{
-		"<leader>ll",
-		function()
-			toggle_list("l")
-		end,
-		desc = "Toggle local list",
-	},
-	{
-		"<leader>lq",
-		function()
-			toggle_list("c")
-		end,
-		desc = "Toggle quickfix list",
-	},
-})
-
--- Various text manipulation shorthands
-wk.add({
-	{ "<leader>io", [[m`o<esc>``]], desc = "Newline below" },
-	{ "<leader>iO", [[m`O<esc>``]], desc = "Newline above" },
-})
-wk.add({
-	{ "<leader>e,", [[m`A,<esc>``]], desc = "Comma" },
-	{ "<leader>e;", [[m`A;<esc>``]], desc = "Semicolon" },
-})
-wk.add({
-	mode = { "n", "v" },
-	{ "<leader>y", [["+y]], desc = "Yank to clipboard" },
-})
-wk.add({
-	mode = { "n", "v" },
-	{ "<leader>d", [["_d]], desc = "Delete without register" },
-})
-
--- Terminal
-keymap.set("t", "<c-n>", [[<c-\><c-n>]])
-wk.add({
-	{ "<leader>zz", cmd([[BufTermNext]]), desc = "Cycle next terminal" },
-	{ "<leader>zZ", cmd([[BufTermPrev]]), desc = "Cycle prev terminal" },
-	{ "<leader>zn", cmd([[terminal]]), desc = "New terminal" },
-})
-
--- UI
-wk.add({
-	{ "<leader>ul", cmd([[Lazy]]), desc = "Lazy", icon = "󰒲 " },
-	{ "<leader>ub", cmd([[Mason]]), desc = "Mason", icon = "🧱" },
-	-- { "<leader>ug", cmd([[Neogit]]), desc = "Neogit", icon = "󰊢 " },
-	{ "<leader>ue", cmd([[Oil --float]]), desc = "File explorer", icon = " " },
-	{ "<leader>uh", cmd([[MCPHub]]), desc = "MCPHub", icon = " " },
-})
