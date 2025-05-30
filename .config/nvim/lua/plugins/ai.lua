@@ -159,7 +159,7 @@ return {
 				prompt_library = prompt_library,
 				strategies = {
 					chat = {
-						adapter = "copilot_sonnet",
+						adapter = "copilot",
 						roles = {
 							user = "  " .. vim.env.USER:gsub("^%l", string.upper),
 							llm = function(adapter)
@@ -184,11 +184,11 @@ return {
 						},
 					},
 					inline = {
-						adapter = "copilot_o4",
+						adapter = "openai",
 					},
 				},
 				adapters = {
-					copilot_sonnet = function()
+					copilot = function()
 						return require("codecompanion.adapters").extend("copilot", {
 							schema = {
 								model = {
@@ -197,37 +197,29 @@ return {
 							},
 						})
 					end,
-					copilot_gemini = function()
-						return require("codecompanion.adapters").extend("copilot", {
-							schema = {
-								model = {
-									default = "gemini-2.5-pro",
-								},
-							},
-						})
-					end,
-					copilot_41 = function()
-						return require("codecompanion.adapters").extend("copilot", {
-							schema = {
-								model = {
-									default = "gpt-4.1",
-								},
-							},
-						})
-					end,
-					copilot_o4 = function()
-						return require("codecompanion.adapters").extend("copilot", {
-							schema = {
-								model = {
-									default = "o4-mini",
-								},
-							},
-						})
-					end,
 					openai = function()
 						return require("codecompanion.adapters").extend("openai", {
 							env = {
 								api_key = 'cmd:pass show "API/OpenAI API Key"',
+							},
+							schema = {
+								model = {
+									default = "gpt-4o-mini",
+								},
+							},
+						})
+					end,
+					anthropic = function()
+						return require("codecompanion.adapters").extend("anthropic", {
+							env = {
+								api_key = 'cmd:pass show "API/Claude API Key"',
+							},
+						})
+					end,
+					gemini = function()
+						return require("codecompanion.adapters").extend("gemini", {
+							env = {
+								api_key = 'cmd:pass show "API/Gemini API Key"',
 							},
 						})
 					end,
