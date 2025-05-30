@@ -2,13 +2,17 @@ return {
 	"folke/persistence.nvim",
 	config = function()
 		local persist = require("persistence")
-		persist.setup({ need = 2 })
+		persist.setup({
+			need = 2,
+		})
 
 		vim.api.nvim_create_autocmd("VimEnter", {
-			group = vim.api.nvim_create_augroup("restore_session", { clear = true }),
+			group = vim.api.nvim_create_augroup("PersistenceRestoreSession", { clear = true }),
 			callback = function()
 				if vim.fn.argc(-1) == 0 then
-					persist.load()
+					vim.defer_fn(function()
+						persist.load()
+					end, 0) -- 0ms delay is usually enough, just "next tick"
 				else
 					persist.stop()
 				end

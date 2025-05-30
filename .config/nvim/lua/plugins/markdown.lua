@@ -2,7 +2,7 @@ local filetypes = { "markdown", "codecompanion" }
 
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "LspAttach" },
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-tree/nvim-web-devicons",
