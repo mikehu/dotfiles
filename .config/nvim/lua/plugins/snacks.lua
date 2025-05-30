@@ -22,7 +22,10 @@ return {
 				only_current = true,
 			},
 			animate = {
-				enabled = false,
+				enabled = true,
+				duration = {
+					total = 240,
+				},
 			},
 		},
 		image = {

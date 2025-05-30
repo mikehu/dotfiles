@@ -158,8 +158,10 @@ return {
 				-- 		"html",
 				-- 		"markdown",
 				-- 	},
-				-- 	experimental = { useFlatConfig = true },
-				-- 	workingDirectory = { mode = "auto" },
+				-- 	settings = {
+				-- 	  experimental = { useFlatConfig = true },
+				-- 	  workingDirectory = { mode = "auto" },
+				-- 	}
 				-- },
 				oxlint = {
 					filetypes = {
