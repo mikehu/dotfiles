@@ -19,8 +19,8 @@ adopt_colors() {
 cache_wallpaper() {
     local filepath=$1
     # we need to cached wallpaper assets for hyprlock
-    magick convert "$filepath" -filter Gaussian -blur 0x40 "$CACHE_DIR/blurred_wallpaper.png"
-    magick convert "$filepath" -resize 600x600^ -gravity Center -extent 1:1 "$CACHE_DIR/cropped_center_wallpaper.png"
+    magick "$filepath" -blur 0x40 "$CACHE_DIR/blurred_wallpaper.png"
+    magick "$filepath" -resize 600x600^ -gravity Center -extent 1:1 "$CACHE_DIR/cropped_center_wallpaper.png"
 }
 
 # Check if a filepath is provided
