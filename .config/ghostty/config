@@ -81,3 +81,6 @@ font-codepoint-map = U+2500-U+259F="Symbols Nerd Font Mono" # Box Drawing
 
 # Additional Config Files
 # config-file =
+
+# Keybinds
+keybind = shift+enter=text:\n
