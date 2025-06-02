@@ -5,4 +5,4 @@
 .env
 codecompanion-workspace.json
 .vectorcode
-.codex
+**/.claude/settings.local.json
