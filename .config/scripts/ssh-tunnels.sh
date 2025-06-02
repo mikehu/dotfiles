@@ -21,7 +21,7 @@ EOF
 }
 
 ###–– Parse flags ––###
-while getopts "h:u:c:k" opt; do
+while getopts "h:u:c:k:" opt; do
   case $opt in
     h) REMOTE_ADDR="$OPTARG" ;;
     u) REMOTE_USER="$OPTARG" ;;

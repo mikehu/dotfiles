@@ -13,11 +13,11 @@ EOF
 }
 
 # defaults
-REMOTE_HOST_USER="$(whoami)"
 REMOTE_HOST_ADDR=""
+REMOTE_HOST_USER="$(whoami)"
 
 # parse flags
-while getopts "i:u" opt; do
+while getopts "h:u:" opt; do
   case $opt in
     h) REMOTE_HOST_ADDR=$OPTARG ;;
     u) REMOTE_HOST_USER=$OPTARG ;;
