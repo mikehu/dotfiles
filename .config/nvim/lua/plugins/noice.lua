@@ -23,6 +23,9 @@ return {
 		notify = {
 			enabled = false,
 		},
+		messages = {
+			enabled = true,
+		},
 		lsp = {
 			progress = {
 				enabled = true,

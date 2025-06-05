@@ -49,6 +49,10 @@ return {
 					-- 	node_decremental = "<s-tab>",
 					-- },
 				},
+				matchup = {
+					enable = true,
+					include_match_words = true,
+				},
 				textobjects = {
 					select = {
 						enable = true,
