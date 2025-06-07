@@ -74,6 +74,14 @@ return {
 	-- 	end,
 	-- },
 	{
+		"coder/claudecode.nvim",
+		config = true,
+		keys = {
+			{ "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+			{ "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+		},
+	},
+	{
 		"ravitemer/codecompanion-history.nvim",
 		event = "VeryLazy",
 	},
@@ -232,15 +240,15 @@ return {
 				{
 					mode = { "n" },
 					nowait = true,
-					{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle Chat" },
+					{ "<leader>ct", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle Chat" },
 					{ "<leader>cn", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
 					{ "<leader>ca", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
 				},
 				{
 					mode = { "v" },
 					nowait = true,
-					{ "<leader>ci", ":'<,'>CodeCompanion<cr>", desc = "Inline assist" },
-					{ "<leader>cn", ":'<,'>CodeCompanionChat<cr>", desc = "New Chat" },
+					{ "<leader>ci", "<cmd>CodeCompanion<cr>", desc = "Inline assist" },
+					{ "<leader>cn", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
 				},
 			})
 		end,
