@@ -75,10 +75,15 @@ return {
 	-- },
 	{
 		"coder/claudecode.nvim",
-		config = true,
 		keys = {
-			{ "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-			{ "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+			{ "<leader>cC", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+			{ "<leader>cs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+		},
+		opts = {
+			terminal = {
+				split_width_percentage = 0.35,
+				provider = "snacks",
+			},
 		},
 	},
 	{
@@ -240,7 +245,7 @@ return {
 				{
 					mode = { "n" },
 					nowait = true,
-					{ "<leader>ct", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle Chat" },
+					{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle Chat" },
 					{ "<leader>cn", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
 					{ "<leader>ca", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
 				},

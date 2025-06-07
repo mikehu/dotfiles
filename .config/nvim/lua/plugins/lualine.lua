@@ -45,6 +45,9 @@ return {
 				refresh = {
 					statusline = 1000,
 				},
+				disabled_filetypes = {
+					statusline = { "terminal", "snacks_terminal", "toggleterm" },
+				},
 			},
 			extensions = { "quickfix", "oil", "trouble", "lazy", "mason", codecompanion_lualine.extension },
 			sections = {
