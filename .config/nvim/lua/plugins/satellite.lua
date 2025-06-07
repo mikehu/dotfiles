@@ -4,7 +4,12 @@ return {
 	config = function()
 		local satellite = require("satellite")
 		satellite.setup({
+			current_only = true,
+			excluded_filetypes = { "codecompanion" },
 			handlers = {
+				cursor = {
+					enable = false,
+				},
 				diagnostic = {
 					enable = false,
 				},
