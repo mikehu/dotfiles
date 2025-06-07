@@ -53,6 +53,7 @@ set tabpagemax=50
 set conceallevel=1
 set nostartofline
 set hidden
+set lazyredraw
 filetype plugin on
 filetype plugin indent on
 syntax enable
