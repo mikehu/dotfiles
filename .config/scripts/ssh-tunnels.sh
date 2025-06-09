@@ -86,13 +86,23 @@ autossh -M0 -f -N -g \
 # Give SSH a sec to bind
 sleep 3
 
-# build list of all tunneled ports
+# Check tunnels
 ALL_PORTS=( "${NODE_PORTS[@]}" "${KUBE_PORTS[@]:-}" "${REVERSE_PORTS[@]}")
 success=0
 failed=()
 
-for p in "${ALL_PORTS[@]}"; do
+# Check tunnels locally
+for p in "${NODE_PORTS[@]}" "${KUBE_PORTS[@]:-}"; do
   if lsof -i TCP:"$p" -sTCP:LISTEN >/dev/null 2>&1; then
+    ((success++))
+  else
+    failed+=("$p")
+  fi
+done
+
+# Check reverse tunnels on remote host
+for p in "${REVERSE_PORTS[@]}"; do
+  if ssh "$SSH_LAN" "lsof -i TCP:$p -sTCP:LISTEN >/dev/null 2>&1"; then
     ((success++))
   else
     failed+=("$p")
@@ -103,6 +113,8 @@ total=${#ALL_PORTS[@]}
 echo "✅ Established $success out of $total tunnels."
 
 if (( ${#failed[@]} )); then
-  local IFS=' '
-  echo "⚠️  Failed to establish tunnels on ports: ${failed[*]}"
+  (
+    IFS=' '
+    echo "⚠️ Failed to establish tunnels on ports: ${failed[*]}"
+  )
 fi
