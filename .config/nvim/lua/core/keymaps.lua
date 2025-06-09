@@ -11,11 +11,17 @@ keymap.set("n", "<D-s>", cmd([[w]]), { desc = "Save" })
 
 keymap.set("n", "<c-d>", [[<c-d>zz]], { desc = "Page down" })
 keymap.set("n", "<c-u>", [[<c-u>zz]], { desc = "Page up" })
+keymap.set("n", "n", [[nzzzv]], { desc = "Next match" })
+keymap.set("n", "N", [[Nzzzv]], { desc = "Prev match" })
 
 keymap.set("n", "<m-j>", cmd([[m+]]), { desc = "Move line down" })
 keymap.set("n", "<m-k>", cmd([[m-2]]), { desc = "Move line up" })
-keymap.set("v", "<m-j>", [[:m'>+<cr>gv=gv]], { desc = "Move block down" })
-keymap.set("v", "<m-k>", [[:m-2<cr>gv=gv]], { desc = "Move block up" })
+keymap.set("v", "<m-j>", [[:m '>+<cr>gv=gv]], { desc = "Move block down" })
+keymap.set("v", "<m-k>", [[:m '<-2<cr>gv=gv]], { desc = "Move block up" })
+keymap.set("n", "J", [[mzJ`z]], { desc = "Join lines" })
+
+keymap.set("v", "<", "<gv", { desc = "Dedent selection" })
+keymap.set("v", ">", ">gv", { desc = "Indent selection" })
 
 keymap.set("i", "<c-y>", [[<esc>Ypi]], { desc = "Duplicate line" })
 keymap.set("n", "<c-y>", [[Yp]], { desc = "Duplicate line" })
@@ -28,6 +34,9 @@ keymap.set("n", "<leader>h", cmd([[nohl]]), { desc = "Remove highlights" })
 
 keymap.set("n", "<c-q>", cmd([[cclose]]), { desc = "Close quickfix list" })
 keymap.set("t", "<c-q>", cmd([[bd!]]), { desc = "Close terminal buffer" })
+
+keymap.set("n", "<tab>", cmd([[bn]]))
+keymap.set("n", "<s-tab>", cmd([[bp]]))
 
 keymap.set("i", "<esc><esc>", "<esc>")
 keymap.set("i", "<c-c>", "<esc>")
