@@ -35,9 +35,6 @@ keymap.set("n", "<leader>h", cmd([[nohl]]), { desc = "Remove highlights" })
 keymap.set("n", "<c-q>", cmd([[cclose]]), { desc = "Close quickfix list" })
 keymap.set("t", "<c-q>", cmd([[bd!]]), { desc = "Close terminal buffer" })
 
-keymap.set("n", "<tab>", cmd([[bn]]))
-keymap.set("n", "<s-tab>", cmd([[bp]]))
-
 keymap.set("i", "<esc><esc>", "<esc>")
 keymap.set("i", "<c-c>", "<esc>")
 keymap.set("i", "jk", "<esc>")
