@@ -6,6 +6,7 @@ return {
 		local conform = require("conform")
 		conform.setup({
 			formatters_by_ft = {
+				sh = { "shfmt" },
 				bash = { "shfmt" },
 				css = { "prettierd" },
 				lua = { "stylua" },
