@@ -20,11 +20,29 @@ while [ $# -gt 0 ]; do
     esac
 done
 
+get_project_dirs() {
+    for work_dir in $work_dirs; do
+        fd --type d --max-depth 1 --exclude '.bare' . "$work_dir" | while read -r dir; do
+            # Skip the work_dir itself
+            [ "$dir" = "$work_dir" ] && continue
+
+            # Check if this directory has git worktrees
+            if [ -d "$dir/.bare" ] && git -C "$dir" worktree list >/dev/null 2>&1; then
+                # List all worktree paths, excluding .bare
+                git -C "$dir" worktree list --porcelain | grep '^worktree ' | cut -d' ' -f2- | grep -v '\.bare$'
+            else
+                # Regular directory
+                printf '%s\n' "$dir"
+            fi
+        done
+    done
+}
+
 # If no directory was provided as argument, use fzf to select
 if [ -z "$selected" ]; then
     selected=$(
         {
-            fd --type d --max-depth 1 . $work_dirs
+            get_project_dirs
             printf '%s\n' "$HOME/dotfiles"
         } | fzf
     )
@@ -34,7 +52,27 @@ if [ -z "$selected" ]; then
     exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
+# Smart session naming that handles worktrees
+if git -C "$selected" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    # This is a git worktree, check if it's in a worktree setup
+    git_top_level=$(git -C "$selected" rev-parse --show-toplevel)
+    parent_dir=$(dirname "$git_top_level")
+
+    # If parent has .bare, this is likely a worktree setup
+    if [ -d "$parent_dir/.bare" ]; then
+        parent_name=$(basename "$parent_dir")
+        worktree_name=$(basename "$selected")
+        selected_name="${parent_name}_${worktree_name}"
+    else
+        selected_name=$(basename "$selected")
+    fi
+else
+    selected_name=$(basename "$selected")
+fi
+
+# Clean up the name (replace dots and other problematic chars)
+selected_name=$(echo "$selected_name" | tr '. -' '___')
+
 tmux_running=""
 
 if pgrep tmux >/dev/null 2>&1; then
