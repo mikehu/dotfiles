@@ -39,7 +39,6 @@ set wildoptions+=fuzzy
 set undofile
 set noswapfile
 set backupdir=~/.cache/vim
-set sessionoptions+=curdir
 set complete-=i
 set completeopt=menuone,noselect
 set updatetime=250

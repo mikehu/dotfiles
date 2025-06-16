@@ -186,7 +186,7 @@ return {
 			mode = { "n", "t" },
 		},
 		{
-			"<leader>ff",
+			"<leader>fP",
 			function()
 				Snacks.picker.pickers()
 			end,
@@ -252,6 +252,40 @@ return {
 				Snacks.picker.lsp_workspace_symbols({ layout = { preset = "ivy" } })
 			end,
 			desc = "Workspace symbols",
+		},
+		{
+			"<leader>ft",
+			function()
+				Snacks.picker.pick({
+					name = "tmux-sessionizer",
+					format = "text",
+					layout = {
+						preset = "select",
+					},
+					finder = function()
+						local handle = io.popen("~/.config/scripts/tmux-sessionizer.sh --list")
+						local result = {}
+						if handle then
+							for line in handle:lines() do
+								table.insert(result, {
+									text = line,
+								})
+							end
+							handle:close()
+						end
+						return result
+					end,
+					confirm = function(picker, item)
+						picker:close()
+						if item then
+							local cmd = '~/.config/scripts/tmux-sessionizer.sh -c nvim "' .. item.text .. '"'
+							vim.fn.jobstart(cmd, { detach = true })
+						end
+					end,
+				})
+				-- Snacks.picker.lsp_workspace_symbols({ layout = { preset = "ivy" } })
+			end,
+			desc = "Tmux sessionizer",
 		},
 	},
 }

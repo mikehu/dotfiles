@@ -5,7 +5,7 @@ return {
 	opts = {},
 	keys = {
 		{
-			"<leader>ft",
+			"<leader>fT",
 			function()
 				Snacks.picker.todo_comments()
 			end,

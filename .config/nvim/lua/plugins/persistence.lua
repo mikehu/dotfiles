@@ -4,6 +4,7 @@ return {
 		local persist = require("persistence")
 		persist.setup({
 			need = 2,
+			options = { "buffers", "curdir", "tabpages", "winsize", "globals" },
 		})
 
 		vim.api.nvim_create_autocmd("VimEnter", {
