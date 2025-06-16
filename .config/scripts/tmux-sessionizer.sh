@@ -6,12 +6,17 @@ work_dirs="$HOME/Code $HOME/Code/personal $HOME/Code/neurox $HOME/Code/illustrio
 # Parse arguments
 command=""
 selected=""
+list_only=false
 
 while [ $# -gt 0 ]; do
     case $1 in
     -c)
         command="$2"
         shift 2
+        ;;
+    --list)
+        list_only=true
+        shift
         ;;
     *)
         selected="$1"
@@ -20,19 +25,23 @@ while [ $# -gt 0 ]; do
     esac
 done
 
+get_zoxide_dirs() {
+    zoxide query --list | head -20 | sed 's/^/ /'
+}
+
 get_project_dirs() {
     for work_dir in $work_dirs; do
-        fd --type d --max-depth 1 --exclude '.bare' . "$work_dir" | while read -r dir; do
+        fd --type d --max-depth 1 --exclude '.bare' . "$work_dir" | sed 's|/$||' | while read -r dir; do
             # Skip the work_dir itself
             [ "$dir" = "$work_dir" ] && continue
 
             # Check if this directory has git worktrees
             if [ -d "$dir/.bare" ] && git -C "$dir" worktree list >/dev/null 2>&1; then
                 # List all worktree paths, excluding .bare
-                git -C "$dir" worktree list --porcelain | grep '^worktree ' | cut -d' ' -f2- | grep -v '\.bare$'
+                git -C "$dir" worktree list --porcelain | grep '^worktree ' | cut -d' ' -f2- | grep -v '\.bare$' | sed 's/^/ /'
             else
                 # Regular directory
-                printf '%s\n' "$dir"
+                printf ' %s\n' "$dir"
             fi
         done
     done
@@ -40,17 +49,28 @@ get_project_dirs() {
 
 # If no directory was provided as argument, use fzf to select
 if [ -z "$selected" ]; then
-    selected=$(
+    list=$(
         {
+            get_zoxide_dirs
             get_project_dirs
-            printf '%s\n' "$HOME/dotfiles"
-        } | fzf
+            printf '%s\n' " $HOME/dotfiles"
+        } | sort -u
     )
+    if [ "$list_only" = true ]; then
+        # Strip icons/prefixes for external tools (like Neovim)
+        echo "$list" | sed 's/^[^ ]* //'
+        exit 0
+    else
+        # Use fzf with icons for interactive mode
+        selected=$(echo "$list" | fzf --height 100% --no-border)
+    fi
 fi
 
 if [ -z "$selected" ]; then
     exit 0
 fi
+
+selected=$(echo "$selected" | sed 's/^[^ ]* //')
 
 # Smart session naming that handles worktrees
 if git -C "$selected" rev-parse --is-inside-work-tree >/dev/null 2>&1; then

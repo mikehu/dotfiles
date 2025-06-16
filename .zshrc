@@ -147,7 +147,7 @@ export CARGOPATH="$HOME/.cargo"
 export PATH="$CARGOPATH/bin:$PATH"
 
 # fzf
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --color=fg:#e0def4,bg:#191724,hl:#eb6f92 --color=fg+:#e0def4,bg+:#403d52,hl+:#eb6f92 --color=info:#f6c177,prompt:#31748f,pointer:#c4a7e7 --color=marker:#c4a7e7,spinner:#f6c177,header:#524f67 --bind alt-j:down,alt-k:up'
+export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --color=fg:#e0def4,bg:#191724,hl:#eb6f92 --color=fg+:#e0def4,bg+:#403d52,hl+:#eb6f92 --color=info:#f6c177,prompt:#31748f,pointer:#c4a7e7 --color=marker:#c4a7e7,spinner:#f6c177,header:#524f67 --bind alt-j:down,alt-k:up'
 eval "$(fzf --zsh)"
 
 # zoxide
