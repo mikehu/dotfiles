@@ -19,7 +19,7 @@ selection-foreground = #191724
 selection-background = #f6c177
 
 # Effects
-background-opacity = 0.85
+background-opacity = 0.95
 background-blur-radius = 40
 unfocused-split-opacity = 0.6
 
