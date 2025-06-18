@@ -33,7 +33,6 @@ keymap.set("n", "go", [[:e ]], { desc = "Open path" })
 keymap.set("n", "<leader>h", cmd([[nohl]]), { desc = "Remove highlights" })
 
 keymap.set("n", "<c-q>", cmd([[cclose]]), { desc = "Close quickfix list" })
-keymap.set("t", "<c-q>", cmd([[bd!]]), { desc = "Close terminal buffer" })
 
 keymap.set("i", "<esc><esc>", "<esc>")
 keymap.set("i", "<c-c>", "<esc>")
@@ -44,6 +43,10 @@ keymap.set("i", "<m-j>", "<down>")
 keymap.set("i", "<m-k>", "<up>")
 keymap.set("i", "<m-l>", "<right>")
 keymap.set("n", "Q", "<nop>")
+
+-- Terminal
+keymap.set("t", "<c-n>", [[<c-\><c-n>]])
+keymap.set("t", "<c-q>", cmd([[bd!]]), { desc = "Close terminal buffer" })
 
 local ok, wk = pcall(require, "which-key")
 if ok then
@@ -130,14 +133,6 @@ if ok then
 	wk.add({
 		mode = { "n", "v" },
 		{ "<leader>d", [["_d]], desc = "Delete without register" },
-	})
-
-	-- Terminal
-	keymap.set("t", "<c-n>", [[<c-\><c-n>]])
-	wk.add({
-		{ "<leader>zz", cmd([[BufTermNext]]), desc = "Cycle next terminal" },
-		{ "<leader>zZ", cmd([[BufTermPrev]]), desc = "Cycle prev terminal" },
-		{ "<leader>zn", cmd([[terminal]]), desc = "New terminal" },
 	})
 
 	-- UI
