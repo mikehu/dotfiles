@@ -8,8 +8,8 @@ return {
 		})
 
 		vim.keymap.set({ "n", "i", "t" }, "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
-		vim.keymap.set({ "n", "i", "t" }, "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
-		vim.keymap.set({ "n", "i", "t" }, "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+		vim.keymap.set({ "n", "i" }, "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+		vim.keymap.set({ "n", "i" }, "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
 		vim.keymap.set({ "n", "i", "t" }, "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
 	end,
 }
