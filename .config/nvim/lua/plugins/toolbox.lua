@@ -37,7 +37,7 @@ local function safe_vim_cmd(cmd)
 	if not success and err:match("E486") then
 		return false -- Indicate that nothing was replaced
 	elseif not success then
-		vim.api.nvim_err_writeln("Error: " .. err)
+		vim.notify("Error: " .. err, vim.log.levels.ERROR)
 	end
 
 	return success
