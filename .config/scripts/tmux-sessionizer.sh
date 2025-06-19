@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-work_dirs="$HOME/Code $HOME/Code/personal $HOME/Code/neurox $HOME/Code/illustrious-industries $HOME/Code/shuttle"
+# work_dirs="$HOME/Code $HOME/Code/personal $HOME/Code/neurox $HOME/Code/illustrious-industries $HOME/Code/shuttle"
 
 # Parse arguments
 command=""
@@ -29,30 +29,29 @@ get_zoxide_dirs() {
     zoxide query --list | head -20 | sed 's/^/ /'
 }
 
-get_project_dirs() {
-    for work_dir in $work_dirs; do
-        fd --type d --max-depth 1 --exclude '.bare' . "$work_dir" | sed 's|/$||' | while read -r dir; do
-            # Skip the work_dir itself
-            [ "$dir" = "$work_dir" ] && continue
-
-            # Check if this directory has git worktrees
-            if [ -d "$dir/.bare" ] && git -C "$dir" worktree list >/dev/null 2>&1; then
-                # List all worktree paths, excluding .bare
-                git -C "$dir" worktree list --porcelain | grep '^worktree ' | cut -d' ' -f2- | grep -v '\.bare$' | sed 's/^/ /'
-            else
-                # Regular directory
-                printf ' %s\n' "$dir"
-            fi
-        done
-    done
-}
+# get_project_dirs() {
+#     for work_dir in $work_dirs; do
+#         fd --type d --max-depth 1 --exclude '.bare' . "$work_dir" | sed 's|/$||' | while read -r dir; do
+#             # Skip the work_dir itself
+#             [ "$dir" = "$work_dir" ] && continue
+#
+#             # Check if this directory has git worktrees
+#             if [ -d "$dir/.bare" ] && git -C "$dir" worktree list >/dev/null 2>&1; then
+#                 # List all worktree paths, excluding .bare
+#                 git -C "$dir" worktree list --porcelain | grep '^worktree ' | cut -d' ' -f2- | grep -v '\.bare$' | sed 's/^/ /'
+#             else
+#                 # Regular directory
+#                 printf ' %s\n' "$dir"
+#             fi
+#         done
+#     done
+# }
 
 # If no directory was provided as argument, use fzf to select
 if [ -z "$selected" ]; then
     list=$(
         {
             get_zoxide_dirs
-            get_project_dirs
             printf '%s\n' " $HOME/dotfiles"
         } | sort -u
     )
