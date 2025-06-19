@@ -4,7 +4,7 @@ return {
 	enabled = true,
 	lazy = false,
 	keys = {
-		{ "<leader>um", "<cmd>Neominimap toggle<cr>", desc = "Minimap" },
+		{ "<leader>um", "<cmd>Neominimap Toggle<cr>", desc = "Minimap" },
 	},
 	init = function()
 		vim.opt.wrap = false
