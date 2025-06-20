@@ -43,9 +43,14 @@ return {
 						layout = { preset = "ivy" },
 					})
 				end, "List references")
+				nmap("gls", function()
+					Snacks.picker.lsp_symbols({
+						layout = { preset = "ivy" },
+					})
+				end, "List document symbols")
 
 				nmap("gr", ":IncRename ", "Rename cursor word")
-				nmap("gla", vim.lsp.buf.code_action, "Code action")
+				-- nmap("gla", vim.lsp.buf.code_action, "Code action")
 
 				-- See `:help K` for why this keymap
 				nmap("K", function()
