@@ -19,14 +19,14 @@
 # (windows: C:\Users\USER\AppData\Local\rio\themes\dracula.toml)
 #
 # Example:
-# theme = "dracula"
+theme = "rose-pine"
 
 # Padding-x
 #
 # define x axis padding (default is 0)
 #
 # Example:
-# padding-x = 10
+padding-x = 4
 
 # Padding-y
 #
@@ -158,12 +158,12 @@ decorations = "Transparent"
 # • filters: A list of paths to RetroArch slang shaders. Might not work with OpenGL.
 #
 # Example:
-# [renderer]
-# performance = "high"
-# backend = "automatic"
-# disable-unfocused-render = false
-# level = 1
-# filters = []
+[renderer]
+performance = "high"
+backend = "automatic"
+disable-unfocused-render = true
+level = 1
+filters = []
 
 # Keyboard
 #
@@ -174,7 +174,7 @@ decorations = "Transparent"
 #
 # Example:
 [keyboard]
-use-kitty-keyboard-protocol = false
+use-kitty-keyboard-protocol = true
 # disable-ctlseqs-alt = false
 
 # Fonts
@@ -185,17 +185,17 @@ use-kitty-keyboard-protocol = false
 # will always look for regular font bounds whene
 #
 # You can also set family on root to overwrite all fonts.
-# [fonts]
-# family = "cascadiamono"
-#
+[fonts]
+family = "Fira Code"
+
 # You can also specify extra fonts to load
 # [fonts]
-# extras = [{ family = "Microsoft JhengHei" }]
-#
+# extras = [{ family = "Symbols Nerd Font Mono" }]
+
 # In case you want to specify any font feature:
 # [fonts]
-# features = ["ss02", "ss03", "ss05", "ss19"]
-#
+features = ["cv16", "cv18", "cv29", "cv30", "ss02", "ss06", "ss07", "zero", "onum"]
+
 # Note: Font features do not have support to live reload on configuration,
 # so to reflect your changes, you will need to close and reopen Rio.
 #
@@ -205,24 +205,22 @@ use-kitty-keyboard-protocol = false
 #
 # You can also map the specified Unicode codepoints to a particular font.
 # [fonts]
-# symbol-map = [
-#   { start = "2297", end = "2299", font-family = "Cascadia Code NF" }
-# ]
-#
+symbol-map = [
+  { start = "2297", end = "2299", font-family = "Symbols Nerd Font Mono" }
+]
+
 # Simple example:
 # [fonts]
-# size = 18
-#
-# [fonts.regular]
-# family = "cascadiamono"
-# style = "Normal"
-# weight = 400
-#
-# [fonts.bold]
-# family = "cascadiamono"
-# style = "Normal"
-# weight = 800
-#
+size = 13
+
+[fonts.regular]
+style = "Normal"
+weight = 400
+
+[fonts.bold]
+style = "Normal"
+weight = 800
+
 # [fonts.italic]
 # family = "cascadiamono"
 # style = "Italic"
