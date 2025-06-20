@@ -26,11 +26,11 @@ keymap.set("v", ">", ">gv", { desc = "Indent selection" })
 keymap.set("i", "<c-y>", [[<esc>Ypi]], { desc = "Duplicate line" })
 keymap.set("n", "<c-y>", [[Yp]], { desc = "Duplicate line" })
 keymap.set("v", "<c-y>", [["zyP`[V`]p`]"]], { desc = "Duplicate selection" })
+
 keymap.set("n", "c.", [[viWoc]], { desc = "Change <dot> segment" })
 
-keymap.set("n", "go", [[:e ]], { desc = "Open path" })
-
-keymap.set("n", "<leader>h", cmd([[nohl]]), { desc = "Remove highlights" })
+keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
+keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without register" })
 
 keymap.set("n", "<c-q>", cmd([[cclose]]), { desc = "Close quickfix list" })
 
@@ -55,17 +55,17 @@ if ok then
 		{ "gl", group = "LSP", icon = "✨" },
 		{ "<leader>b", group = "Buffers", icon = " " },
 		{ "<leader>c", group = "Chat / AI", icon = "🤖" },
-		{ "<leader>e", group = "End with", icon = " " },
+		{ "<leader>e", group = "Edit", icon = " " },
 		{ "<leader>f", group = "Find", icon = " " },
 		{ "<leader>g", group = "Git / Grapple 🪝", icon = " " },
-		{ "<leader>i", group = "Insert", icon = " " },
+		{ "<leader>h", group = "Hide decorations", icon = " " },
 		{ "<leader>k", group = "Definitions", icon = " " },
 		{ "<leader>l", group = "Lists", icon = "📝" },
 		{ "<leader>P", group = "Project", icon = "📁" },
 		{ "<leader>q", group = "Quit", icon = " " },
 		{ "<leader>t", group = "Test / Trouble 🚦", icon = "🔬" },
 		{ "<leader>u", group = "UI", icon = " " },
-		{ "<leader>z", group = "Terminal (zsh)", icon = " " },
+		{ "<leader>x", group = "Toolbox", icon = "🧰" },
 	})
 
 	-- Saving
@@ -83,6 +83,20 @@ if ok then
 	-- Buffer management
 	wk.add({
 		{ "<leader>bn", cmd([[enew]]), desc = "New buffer" },
+	})
+
+	-- Decorations
+	wk.add({
+		{ "<leader>hh", cmd([[nohl]]), desc = "Remove highlights" },
+		{ "<leader>hm", cmd([[delm! 0-9 A-Z a-z]]), desc = "Remove all marks" },
+	})
+
+	-- Editing shorthands
+	wk.add({
+		{ "<leader>eo", [[m`o<esc>``]], desc = "Newline below" },
+		{ "<leader>eO", [[m`O<esc>``]], desc = "Newline above" },
+		{ "<leader>e,", [[m`A,<esc>``]], desc = "End with comma" },
+		{ "<leader>e;", [[m`A;<esc>``]], desc = "End with semicolon" },
 	})
 
 	-- Lists
@@ -115,24 +129,6 @@ if ok then
 			end,
 			desc = "Toggle quickfix list",
 		},
-	})
-
-	-- Various text manipulation shorthands
-	wk.add({
-		{ "<leader>io", [[m`o<esc>``]], desc = "Newline below" },
-		{ "<leader>iO", [[m`O<esc>``]], desc = "Newline above" },
-	})
-	wk.add({
-		{ "<leader>e,", [[m`A,<esc>``]], desc = "Comma" },
-		{ "<leader>e;", [[m`A;<esc>``]], desc = "Semicolon" },
-	})
-	wk.add({
-		mode = { "n", "v" },
-		{ "<leader>y", [["+y]], desc = "Yank to clipboard" },
-	})
-	wk.add({
-		mode = { "n", "v" },
-		{ "<leader>d", [["_d]], desc = "Delete without register" },
 	})
 
 	-- UI
