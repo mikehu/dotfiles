@@ -287,5 +287,50 @@ return {
 			end,
 			desc = "Tmux sessionizer",
 		},
+		{
+			"<leader>r",
+			function()
+				vim.ui.input({
+					prompt = "󰘳 Execute command: ",
+					default = "",
+				}, function(command)
+					if not command or command == "" then
+						return
+					end
+
+					-- Open terminal split with snacks.nvim
+					local term = Snacks.terminal(command, {
+						win = {
+							position = "bottom",
+							height = 0.2,
+						},
+					})
+
+					-- Set up auto-close after command finishes
+					if term and term.buf and vim.api.nvim_buf_is_valid(term.buf) then
+						-- Use TermClose autocmd - simpler and more reliable
+						vim.api.nvim_create_autocmd("TermClose", {
+							buffer = term.buf,
+							once = true,
+							callback = function()
+								-- Wait 3 seconds then close the terminal
+								vim.defer_fn(function()
+									if vim.api.nvim_buf_is_valid(term.buf) then
+										local windows = vim.fn.win_findbuf(term.buf)
+										for _, win in ipairs(windows) do
+											if vim.api.nvim_win_is_valid(win) then
+												vim.api.nvim_win_close(win, false)
+											end
+										end
+									end
+								end, 3000) -- 3 seconds delay
+							end,
+						})
+					end
+				end)
+			end,
+			desc = "Run terminal command",
+			silent = true,
+		},
 	},
 }
