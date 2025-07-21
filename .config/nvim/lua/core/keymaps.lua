@@ -64,14 +64,14 @@ if ok then
 		{ "<leader>P", group = "Project", icon = "📁" },
 		{ "<leader>q", group = "Quit", icon = " " },
 		{ "<leader>t", group = "Test / Trouble 🚦", icon = "🔬" },
+		{ "<leader>T", group = "Toolbox", icon = "🧰" },
 		{ "<leader>u", group = "UI", icon = " " },
-		{ "<leader>x", group = "Toolbox", icon = "🧰" },
 	})
 
 	-- Saving
 	wk.add({
 		{ "<leader>s", cmd([[w]]), desc = "Save", icon = "💾" },
-		{ "<leader>S", cmd([[wa]]), desc = "Save all" },
+		{ "<leader>S", cmd([[wa]]), desc = "Save all", icon = "💾" },
 	})
 
 	-- Quitting
@@ -88,7 +88,7 @@ if ok then
 	-- Decorations
 	wk.add({
 		{ "<leader>hh", cmd([[nohl]]), desc = "Remove highlights" },
-		{ "<leader>hm", cmd([[delm! 0-9 A-Z a-z]]), desc = "Remove all marks" },
+		{ "<leader>hm", cmd([[delmarks!]]), desc = "Remove all marks" },
 	})
 
 	-- Editing shorthands

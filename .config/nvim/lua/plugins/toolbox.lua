@@ -49,7 +49,7 @@ return {
 	keys = {
 		{
 			mode = { "n", "x" },
-			"<leader>x",
+			"<leader>T",
 			function()
 				require("toolbox").show_picker()
 			end,
