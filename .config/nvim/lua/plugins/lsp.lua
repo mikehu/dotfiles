@@ -3,7 +3,7 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "smjonas/inc-rename.nvim", opts = {} },
+			{ "smjonas/inc-rename.nvim", opts = { input_buffer_type = "snacks" } },
 			{ "j-hui/fidget.nvim", opts = {} },
 		},
 		opts = {
@@ -154,29 +154,29 @@ return {
 				},
 				marksman = {},
 				pyright = {},
-				-- eslint = {
-				-- 	filetypes = {
-				-- 		"typescript",
-				-- 		"javascript",
-				-- 		"javascriptreact",
-				-- 		"typescriptreact",
-				-- 		"html",
-				-- 		"markdown",
-				-- 	},
-				-- 	settings = {
-				-- 	  experimental = { useFlatConfig = true },
-				-- 	  workingDirectory = { mode = "auto" },
-				-- 	}
-				-- },
-				oxlint = {
+				eslint = {
 					filetypes = {
 						"typescript",
 						"javascript",
 						"javascriptreact",
 						"typescriptreact",
+						"html",
 						"markdown",
 					},
+					settings = {
+						experimental = { useFlatConfig = true },
+						workingDirectory = { mode = "auto" },
+					},
 				},
+				-- oxlint = {
+				-- 	filetypes = {
+				-- 		"typescript",
+				-- 		"javascript",
+				-- 		"javascriptreact",
+				-- 		"typescriptreact",
+				-- 		"markdown",
+				-- 	},
+				-- },
 				ts_ls = {
 					settings = {
 						typescript = {
