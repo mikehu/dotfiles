@@ -53,53 +53,6 @@ return {
 					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 			end
 
-			local function get_entry_text(entry)
-				local item = entry.completion_item
-				if item.textEdit then
-					-- If textEdit is a table, it has newText (LSP spec)
-					-- If it's a string, it's the newText directly (some sources)
-					if type(item.textEdit) == "table" then
-						return item.textEdit.newText
-					else
-						return item.textEdit
-					end
-				end
-				return item.label -- Fallback to label
-			end
-
-			local intelligent_cr = function(fallback)
-				if cmp.visible() then
-					local entry = cmp.get_selected_entry()
-					if entry then
-						local current_cmdline_text = vim.fn.getcmdline()
-						local selected_item_text = get_entry_text(entry) -- Use helper or entry:get_label() if simpler
-
-						-- If what's typed is exactly what's selected,
-						-- or if the selected item would result in no change to the cmdline.
-						-- This check might need refinement based on how sources provide `textEdit` vs `label`.
-						-- For simple cmdline sources (path, cmdline), label is often enough.
-						if current_cmdline_text == selected_item_text then
-							-- Abort cmp so it doesn't try to handle the <CR> itself by just confirming.
-							-- Then, use fallback() to let Neovim execute the command line.
-							cmp.abort()
-							fallback() -- Fallback should make Neovim execute the command.
-						else
-							-- Different item selected, or current text is a prefix.
-							-- Confirm the selection (this will update the command line).
-							cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-							-- The user will then need to press <CR> again to execute, which is standard.
-						end
-					else
-						-- cmp is visible, but no entry is selected (e.g., menu just appeared).
-						-- Let Neovim execute what's currently typed.
-						fallback()
-					end
-				else
-					-- cmp is not visible. Let Neovim execute the command.
-					fallback()
-				end
-			end
-
 			cmp.setup({
 				completion = {
 					completeopt = "menu,menuone,noinsert",
@@ -139,7 +92,6 @@ return {
 							fallback()
 						end,
 						s = cmp.mapping.confirm({ select = true }),
-						c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 					}),
 					["<esc>"] = cmp.mapping({
 						i = function(fallback)
@@ -253,7 +205,22 @@ return {
 						fallback() -- Or just fallback to default Neovim behavior for C-k in cmdline
 					end
 				end, { "c" }),
-				["<cr>"] = cmp.mapping(intelligent_cr, { "c" }),
+				["<tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						if #cmp.get_entries() >= 1 then
+							-- Select first item if none selected, then confirm
+							local entry = cmp.get_selected_entry()
+							if not entry then
+								cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+							end
+							cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+						else
+							fallback()
+						end
+					else
+						fallback()
+					end
+				end, { "c" }),
 			})
 
 			cmp.setup.cmdline({ "/", "?" }, {
