@@ -88,4 +88,8 @@ keybind = shift+enter=text:\n
 
 # Custom Shaders
 custom-shader-animation = false
-custom-shader = shaders/cursor_blaze.glsl
+#custom-shader = shaders/cursor_blaze.glsl
+custom-shader = shaders/cursor_blaze_tapered.glsl
+#custom-shader = shaders/cursor_frozen.glsl
+#custom-shader = shaders/cursor_smear_fade.glsl
+#custom-shader = shaders/cursor_manga_slash.glsl
