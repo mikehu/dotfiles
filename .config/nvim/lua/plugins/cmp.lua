@@ -231,7 +231,24 @@ return {
 			})
 
 			cmp.setup.cmdline(":", {
-				mapping = commandline_mapping,
+				mapping = vim.tbl_extend("force", commandline_mapping, {
+					["<cr>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							if #cmp.get_entries() >= 1 then
+								local selected_entry = cmp.get_selected_entry()
+								if not selected_entry then
+									cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+								end
+								cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+							else
+								-- No item selected, just submit what's typed
+								fallback()
+							end
+						else
+							fallback()
+						end
+					end, { "c" }),
+				}),
 				sources = {
 					{ name = "path", keyword_length = 4 },
 					{
