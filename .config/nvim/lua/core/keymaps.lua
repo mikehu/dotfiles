@@ -76,8 +76,8 @@ if ok then
 
 	-- Quitting
 	wk.add({
-		{ "<leader>qq", cmd([[q]]), desc = "Quit" },
-		{ "<leader>qQ", cmd([[q!]]), desc = "Force quit" },
+		{ "<leader>qq", cmd([[qall]]), desc = "Quit" },
+		{ "<leader>qQ", cmd([[qall!]]), desc = "Force quit" },
 	})
 
 	-- Buffer management
