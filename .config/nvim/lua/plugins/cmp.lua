@@ -184,11 +184,9 @@ return {
 				},
 			})
 
-			local explicit_selection = false
 			local select_next = function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-					explicit_selection = true
 				else
 					fallback()
 				end
@@ -196,7 +194,6 @@ return {
 			local select_prev = function(fallback)
 				if cmp.visible() then
 					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-					explicit_selection = true
 				else
 					fallback()
 				end
@@ -209,7 +206,7 @@ return {
 						if not entry then
 							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 						end
-						cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+						cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace })
 					else
 						fallback()
 					end
@@ -218,10 +215,6 @@ return {
 				end
 			end
 
-			cmp.event:on("menu_closed", function()
-				explicit_selection = false
-			end)
-
 			local commandline_mapping = cmp.mapping.preset.cmdline({
 				["<c-j>"] = cmp.mapping(select_next, { "c" }),
 				["<down>"] = cmp.mapping(select_next, { "c" }),
@@ -229,22 +222,25 @@ return {
 				["<c-k>"] = cmp.mapping(select_prev, { "c" }),
 				["<tab>"] = cmp.mapping(auto_select, { "c" }),
 				["<cr>"] = cmp.mapping(function(fallback)
-					if cmp.visible() and explicit_selection then
-						-- User explicitly selected an item, confirm it
-						cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-						explicit_selection = false
+					if cmp.visible() and cmp.get_selected_entry() then
+						cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace })
+						-- Let the default <cr> behavior execute the command
+						vim.defer_fn(function()
+							vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<cr>", true, false, true), "n", false)
+						end, 0)
 					else
-						-- No explicit selection, just submit what's typed
-						explicit_selection = false
 						fallback()
 					end
-				end),
+				end, { "c" }),
 			})
 
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = commandline_mapping,
 				sources = {
 					{ name = "buffer", keyword_length = 4, ignore_case = false },
+				},
+				completion = {
+					completeopt = "menu,menuone,noselect", -- Disable auto-selection
 				},
 			})
 
@@ -259,6 +255,9 @@ return {
 						},
 						keyword_length = 3,
 					},
+				},
+				completion = {
+					completeopt = "menu,menuone,noselect", -- Disable auto-selection
 				},
 			})
 
