@@ -184,43 +184,61 @@ return {
 				},
 			})
 
-			local commandline_mapping = cmp.mapping.preset.cmdline({
-				["<c-j>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-					else
-						-- If you want C-j to do something else when cmp is not visible,
-						-- e.g., act like <Down> for history.
-						-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Down>", true, false, true), "n", false)
-						fallback() -- Or just fallback to default Neovim behavior for C-j in cmdline
-					end
-				end, { "c" }),
-				["<c-k>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-					else
-						-- If you want C-k to do something else when cmp is not visible,
-						-- e.g., act like <Up> for history.
-						-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Up>", true, false, true), "n", false)
-						fallback() -- Or just fallback to default Neovim behavior for C-k in cmdline
-					end
-				end, { "c" }),
-				["<tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						if #cmp.get_entries() >= 1 then
-							-- Select first item if none selected, then confirm
-							local entry = cmp.get_selected_entry()
-							if not entry then
-								cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-							end
-							cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-						else
-							fallback()
+			local explicit_selection = false
+			local select_next = function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+					explicit_selection = true
+				else
+					fallback()
+				end
+			end
+			local select_prev = function(fallback)
+				if cmp.visible() then
+					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+					explicit_selection = true
+				else
+					fallback()
+				end
+			end
+			local auto_select = function(fallback)
+				if cmp.visible() then
+					if #cmp.get_entries() >= 1 then
+						-- Select first item if none selected, then confirm
+						local entry = cmp.get_selected_entry()
+						if not entry then
+							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 						end
+						cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
 					else
 						fallback()
 					end
-				end, { "c" }),
+				else
+					fallback()
+				end
+			end
+
+			cmp.event:on("menu_closed", function()
+				explicit_selection = false
+			end)
+
+			local commandline_mapping = cmp.mapping.preset.cmdline({
+				["<c-j>"] = cmp.mapping(select_next, { "c" }),
+				["<down>"] = cmp.mapping(select_next, { "c" }),
+				["<up>"] = cmp.mapping(select_prev, { "c" }),
+				["<c-k>"] = cmp.mapping(select_prev, { "c" }),
+				["<tab>"] = cmp.mapping(auto_select, { "c" }),
+				["<cr>"] = cmp.mapping(function(fallback)
+					if cmp.visible() and explicit_selection then
+						-- User explicitly selected an item, confirm it
+						cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+						explicit_selection = false
+					else
+						-- No explicit selection, just submit what's typed
+						explicit_selection = false
+						fallback()
+					end
+				end),
 			})
 
 			cmp.setup.cmdline({ "/", "?" }, {
@@ -231,24 +249,7 @@ return {
 			})
 
 			cmp.setup.cmdline(":", {
-				mapping = vim.tbl_extend("force", commandline_mapping, {
-					["<cr>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							if #cmp.get_entries() >= 1 then
-								local selected_entry = cmp.get_selected_entry()
-								if not selected_entry then
-									cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-								end
-								cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-							else
-								-- No item selected, just submit what's typed
-								fallback()
-							end
-						else
-							fallback()
-						end
-					end, { "c" }),
-				}),
+				mapping = commandline_mapping,
 				sources = {
 					{ name = "path", keyword_length = 4 },
 					{
