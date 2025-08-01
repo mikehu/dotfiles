@@ -30,5 +30,18 @@ return {
 		vim.keymap.set("v", "g<C-x>", function()
 			dial_map.manipulate("decrement", "gvisual")
 		end)
+
+		local augend = require("dial.augend")
+		require("dial.config").augends:register_group({
+			default = {
+				augend.integer.alias.decimal,
+				augend.integer.alias.hex,
+				augend.constant.alias.bool,
+				augend.hexcolor.new({
+					case = "prefer_upper",
+				}),
+				augend.semver.alias.semver,
+			},
+		})
 	end,
 }
