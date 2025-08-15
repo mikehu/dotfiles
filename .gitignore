@@ -11,9 +11,10 @@ lazy-lock.json
 # ignore tmux plugins
 .config/tmux/plugins
 
-.codex
+.codex/**
 !.codex/config.json
 
-.claude
+.claude/**
 !.claude/settings.json
-!.claude/commands
+!.claude/commands/
+!.claude/commands/*.md
