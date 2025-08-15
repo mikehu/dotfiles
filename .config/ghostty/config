@@ -1,8 +1,10 @@
 shell-integration = zsh
 
 # Fonts
-font-family = "Fira Code Light"
-font-family-bold = "Fira Code SemiBold"
+font-family = "Fira Code"
+font-style = "Light"
+font-family-bold = "Fira Code"
+font-style-bold = "SemiBold"
 font-size = 13
 font-feature = +cv16, +cv18, +cv29, +cv30, +ss02, +ss06, +ss07, +zero, +onum
 
@@ -19,8 +21,8 @@ selection-foreground = #191724
 selection-background = #f6c177
 
 # Effects
-background-opacity = 0.95
-background-blur-radius = 40
+background-opacity = 0.68
+background-blur-radius = 120
 unfocused-split-opacity = 0.6
 
 # macOS settings
@@ -33,6 +35,8 @@ macos-icon-screen-color = #31748f
 
 # Window settings
 window-inherit-working-directory = true
+window-height = 38
+window-width = 120
 
 # Nerd Fonts glyph codepoints
 # - See https://github.com/be5invis/Iosevka/issues/248
@@ -85,6 +89,11 @@ font-codepoint-map = U+2500-U+259F="Symbols Nerd Font Mono" # Box Drawing
 # Keybinds
 keybind = global:cmd+escape=toggle_quick_terminal
 keybind = shift+enter=text:\n
+
+keybind = super+j=goto_split:down
+keybind = super+k=goto_split:up
+keybind = super+h=goto_split:left
+keybind = super+l=goto_split:right
 
 # Custom Shaders
 custom-shader-animation = false
