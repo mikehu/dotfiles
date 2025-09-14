@@ -9,9 +9,11 @@
       "Read(~/.zshrc)"
     ]
   },
+  "model": "opusplan",
   "feedbackSurveyState": {
     "lastShownTime": 1754068864445
   },
-  "model": "opusplan"
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  }
 }
-
