@@ -201,41 +201,52 @@ return {
 					},
 				},
 				adapters = {
-					copilot = function()
-						return require("codecompanion.adapters").extend("copilot", {
-							schema = {
-								model = {
-									default = "claude-sonnet-4",
+					acp = {
+						claude_code = function()
+							return require("codecompanion.adapters").extend("claude_code", {
+								env = {
+									CLAUDE_CODE_OAUTH_TOKEN = 'cmd:pass show "API/Claude Token"',
 								},
-							},
-						})
-					end,
-					openai = function()
-						return require("codecompanion.adapters").extend("openai", {
-							env = {
-								api_key = 'cmd:pass show "API/OpenAI API Key"',
-							},
-							schema = {
-								model = {
-									default = "gpt-4o-mini",
+							})
+						end,
+					},
+					http = {
+						copilot = function()
+							return require("codecompanion.adapters").extend("copilot", {
+								schema = {
+									model = {
+										default = "claude-sonnet-4",
+									},
 								},
-							},
-						})
-					end,
-					anthropic = function()
-						return require("codecompanion.adapters").extend("anthropic", {
-							env = {
-								api_key = 'cmd:pass show "API/Claude API Key"',
-							},
-						})
-					end,
-					gemini = function()
-						return require("codecompanion.adapters").extend("gemini", {
-							env = {
-								api_key = 'cmd:pass show "API/Gemini API Key"',
-							},
-						})
-					end,
+							})
+						end,
+						openai = function()
+							return require("codecompanion.adapters").extend("openai", {
+								env = {
+									api_key = 'cmd:pass show "API/OpenAI API Key"',
+								},
+								schema = {
+									model = {
+										default = "gpt-4o-mini",
+									},
+								},
+							})
+						end,
+						anthropic = function()
+							return require("codecompanion.adapters").extend("anthropic", {
+								env = {
+									api_key = 'cmd:pass show "API/Anthropic API Key"',
+								},
+							})
+						end,
+						gemini = function()
+							return require("codecompanion.adapters").extend("gemini", {
+								env = {
+									api_key = 'cmd:pass show "API/Gemini API Key"',
+								},
+							})
+						end,
+					},
 				},
 			})
 
