@@ -12,7 +12,7 @@ font-feature = +cv16, +cv18, +cv29, +cv30, +ss02, +ss06, +ss07, +zero, +onum
 font-thicken = true
 
 # Theme
-theme = rose-pine
+theme = Rose Pine
 
 # Colors
 background = #191724
@@ -24,6 +24,9 @@ selection-background = #f6c177
 background-opacity = 0.68
 background-blur-radius = 120
 unfocused-split-opacity = 0.6
+
+# Clipboard
+clipboard-read = allow
 
 # macOS settings
 macos-titlebar-style = hidden
