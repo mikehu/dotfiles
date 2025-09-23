@@ -44,6 +44,10 @@ keymap.set("i", "<m-k>", "<up>")
 keymap.set("i", "<m-l>", "<right>")
 keymap.set("n", "Q", "<nop>")
 
+-- Stop recording macros on certain keys
+keymap.set("n", "qj", "<nop>", { noremap = true })
+keymap.set("n", "qk", "<nop>", { noremap = true })
+
 -- Terminal
 keymap.set("t", "<c-n>", [[<c-\><c-n>]])
 keymap.set("t", "<c-q>", cmd([[bd!]]), { desc = "Close terminal buffer" })
