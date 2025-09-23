@@ -254,6 +254,10 @@ if.app-id = 'com.blackmagic-design.DaVinciResolve'
 run = ['move-node-to-workspace 🎨']
 
 [[on-window-detected]]
+if.app-id = 'com.seriflabs.affinitydesigner2'
+run = ['move-node-to-workspace 🎨']
+
+[[on-window-detected]]
 if.app-id = 'com.spotify.client'
 run = ['move-node-to-workspace 🎛️']
 
@@ -316,6 +320,10 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'org.RedisLabs.RedisInsight-V2'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.mongodb.compass'
 run = ['layout floating']
 
 [[on-window-detected]]
