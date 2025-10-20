@@ -87,6 +87,16 @@ if ok then
 	-- Buffer management
 	wk.add({
 		{ "<leader>bn", cmd([[enew]]), desc = "New buffer" },
+		{
+			"<leader>br",
+			function()
+				vim.cmd("e")
+				vim.cmd("syntax reset")
+				vim.cmd("TSBufDisable highlight")
+				vim.cmd("TSBufEnable highlight")
+			end,
+			desc = "Refresh buffer",
+		},
 	})
 
 	-- Decorations
