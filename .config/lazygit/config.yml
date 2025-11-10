@@ -22,5 +22,5 @@ gui:
       - default
 git:
   branchPrefix: "mikehu/"
-  paging:
-    externalDiffCommand: "difft --color=always"
+  pagers:
+    - externalDiffCommand: "difft --color=always"

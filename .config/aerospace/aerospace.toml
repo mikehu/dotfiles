@@ -258,6 +258,10 @@ if.app-id = 'com.seriflabs.affinitydesigner2'
 run = ['move-node-to-workspace 🎨']
 
 [[on-window-detected]]
+if.app-id = 'com.canva.affinity'
+run = ['move-node-to-workspace 🎨']
+
+[[on-window-detected]]
 if.app-id = 'com.spotify.client'
 run = ['move-node-to-workspace 🎛️']
 
@@ -279,7 +283,7 @@ if.window-title-regex-substring = '^(Watercooler|Neurox)'
 run = ['move-node-to-workspace 🖥️']
 
 [[on-window-detected]]
-if.app-id = 'company.thebrowser.Browser'
+if.app-id = 'com.openai.atls'
 run = ['move-node-to-workspace 🖥️']
 
 [[on-window-detected]]
@@ -311,10 +315,6 @@ if.app-id = 'com.1password.1password'
 run = ['layout floating']
 
 [[on-window-detected]]
-if.app-id = 'com.googlecode.iterm2'
-run = ['layout floating']
-
-[[on-window-detected]]
 if.app-id = 'com.transgui'
 run = ['layout floating']
 
@@ -332,10 +332,6 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'cx.c3.theunarchiver'
-run = ['layout floating']
-
-[[on-window-detected]]
-if.app-id = 'com.softwareambience.Unclutter'
 run = ['layout floating']
 
 [[on-window-detected]]

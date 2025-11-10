@@ -1,5 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
   "permissions": {
     "allow": [
       "Bash(curl:*)",
@@ -9,11 +12,7 @@
       "Read(~/.zshrc)"
     ]
   },
-  "model": "opusplan",
   "feedbackSurveyState": {
     "lastShownTime": 1754068864445
-  },
-  "env": {
-    "DISABLE_AUTOUPDATER": "1"
   }
 }
