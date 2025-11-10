@@ -23,14 +23,14 @@ EOF
 ###–– Parse flags ––###
 while getopts "h:u:c:k:" opt; do
   case $opt in
-    h) REMOTE_ADDR="$OPTARG" ;;
-    u) REMOTE_USER="$OPTARG" ;;
-    c) CTX_SUBSTR="$OPTARG" ;;
-    k) SSH_KEY="$OPTARG" ;;
-    *) usage ;;
+  h) REMOTE_ADDR="$OPTARG" ;;
+  u) REMOTE_USER="$OPTARG" ;;
+  c) CTX_SUBSTR="$OPTARG" ;;
+  k) SSH_KEY="$OPTARG" ;;
+  *) usage ;;
   esac
 done
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 
 # Validate mandatory
 if [[ -z "$REMOTE_ADDR" ]]; then
@@ -46,23 +46,23 @@ export AUTOSSH_POLL=60
 export AUTOSSH_GATETIME=30
 
 ###–– Functions ––###
-get_kube_ports(){
-  grep -B1 "${CTX_SUBSTR}" ~/.kube/config \
-    | grep "127\.0\.0\.1" \
-    | cut -d: -f4
+get_kube_ports() {
+  grep -B1 "${CTX_SUBSTR}" ~/.kube/config |
+    grep "127\.0\.0\.1" |
+    cut -d: -f4
 }
-cleanup_tunnels(){
+cleanup_tunnels() {
   pkill autossh 2>/dev/null || true
   sudo pkill -f "ssh -f -N" 2>/dev/null || true
 }
-kill_remote(){
+kill_remote() {
   ssh -t "$SSH_LAN" \
     "lsof -t -sTCP:LISTEN -i :3080 -i :5173 | xargs --no-run-if-empty kill"
 }
 
 ###–– Build forwards ––###
-NODE_PORTS=(5557 6379 6820 7080 9090)
-KUBE_PORTS=( $(get_kube_ports) )
+NODE_PORTS=(5557 6379 6820 7080 10902)
+KUBE_PORTS=($(get_kube_ports))
 LOCAL_FWD=()
 for p in "${NODE_PORTS[@]}" "${KUBE_PORTS[@]:-}"; do
   LOCAL_FWD+=("-L" "${p}:localhost:${p}")
@@ -87,7 +87,7 @@ autossh -M0 -f -N -g \
 sleep 3
 
 # Check tunnels
-ALL_PORTS=( "${NODE_PORTS[@]}" "${KUBE_PORTS[@]:-}" "${REVERSE_PORTS[@]}")
+ALL_PORTS=("${NODE_PORTS[@]}" "${KUBE_PORTS[@]:-}" "${REVERSE_PORTS[@]}")
 success=0
 failed=()
 
@@ -112,7 +112,7 @@ done
 total=${#ALL_PORTS[@]}
 echo "✅ Established $success out of $total tunnels."
 
-if (( ${#failed[@]} )); then
+if ((${#failed[@]})); then
   (
     IFS=' '
     echo "⚠️ Failed to establish tunnels on ports: ${failed[*]}"

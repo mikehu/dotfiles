@@ -19,9 +19,9 @@ REMOTE_HOST_USER="$(whoami)"
 # parse flags
 while getopts "h:u:" opt; do
   case $opt in
-    h) REMOTE_HOST_ADDR=$OPTARG ;;
-    u) REMOTE_HOST_USER=$OPTARG ;;
-    *) usage ;;
+  h) REMOTE_HOST_ADDR=$OPTARG ;;
+  u) REMOTE_HOST_USER=$OPTARG ;;
+  *) usage ;;
   esac
 done
 
@@ -51,12 +51,12 @@ fi
 REMOTE_CONFIG="${REMOTE_HOME}/.kube/config"
 
 # fetch remote kubeconfig
-ssh "${REMOTE_HOST_USER}@${REMOTE_HOST_ADDR}" "cat '${REMOTE_CONFIG}'" > "${REMOTE_CONFIG_LOCAL}"
+ssh "${REMOTE_HOST_USER}@${REMOTE_HOST_ADDR}" "cat '${REMOTE_CONFIG}'" >"${REMOTE_CONFIG_LOCAL}"
 
 # merge & flatten
 cp "${LOCAL_KUBE_DIR}/config" "${BACKUP_CONFIG}"
 KUBECONFIG="${REMOTE_CONFIG_LOCAL}:${LOCAL_KUBE_DIR}/config" \
-  kubectl config view --flatten > "${TMP_FLATTENED}"
+  kubectl config view --flatten >"${TMP_FLATTENED}"
 mv "${TMP_FLATTENED}" "${LOCAL_KUBE_DIR}/config"
 
 echo "✅ Merged ${REMOTE_HOST_USER}@${REMOTE_HOST_ADDR}:${REMOTE_CONFIG} into ${LOCAL_KUBE_DIR}/config"
