@@ -45,6 +45,7 @@ keymap.set("i", "<m-l>", "<right>")
 keymap.set("n", "Q", "<nop>")
 
 -- Stop recording macros on certain keys
+keymap.set("n", "qq", "<nop>", { noremap = true })
 keymap.set("n", "qj", "<nop>", { noremap = true })
 keymap.set("n", "qk", "<nop>", { noremap = true })
 
