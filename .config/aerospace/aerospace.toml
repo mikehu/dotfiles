@@ -66,6 +66,8 @@ outer.right =      8
 cmd-h = [] # Disable "hide application"
 cmd-alt-h = [] # Disable "hide others"
 
+cmd-esc = 'exec-and-forget open -na $(which kitten) --args quick-access-terminal'
+
 # All possible keys:
 # - Letters.        a, b, c, ..., z
 # - Numbers.        0, 1, 2, ..., 9
@@ -197,11 +199,15 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
-run = ['move-node-to-workspace 👨🏻‍💻']
+if.window-title-regex-substring = 'Updating Ghostty'
+run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
-if.window-title-regex-substring = 'Updating Ghostty'
+run = ['move-node-to-workspace 👨🏻‍💻']
+
+[[on-window-detected]]
+if.app-id = 'net.kovidgoyal.kitty-quick-access'
 run = ['layout floating']
 
 [[on-window-detected]]
