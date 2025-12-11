@@ -26,7 +26,7 @@ while [ $# -gt 0 ]; do
 done
 
 get_zoxide_dirs() {
-    zoxide query --list | head -20
+    zoxide query --list | head -20 | sed 's|^|d:|'
 }
 
 get_project_dirs() {
@@ -39,10 +39,10 @@ get_project_dirs() {
                 # Check if this directory has git worktrees
                 if [ -d "$dir/.bare" ] && git -C "$dir" worktree list >/dev/null 2>&1; then
                     # List all worktree paths, excluding .bare
-                    git -C "$dir" worktree list --porcelain | grep '^worktree ' | cut -d' ' -f2- | grep -v '\.bare$'
+                    git -C "$dir" worktree list --porcelain | grep '^worktree ' | cut -d' ' -f2- | grep -v '\.bare$' | sed 's|^|t:|'
                 else
                     # Regular directory
-                    printf ' %s\n' "$dir"
+                    printf 'd:%s\n' "$dir"
                 fi
             done
         fi
@@ -54,12 +54,9 @@ if [ -z "$selected" ]; then
     # Collect paths with type markers for different icons
     all_paths=$(
         {
-            # Mark zoxide dirs with 'z:'
-            get_zoxide_dirs | sed 's|/*$||' | sed 's|^|z:|'
-            # Mark project dirs with 'p:'
-            get_project_dirs | sed 's|/*$||' | sed 's|^|p:|'
-            # Mark dotfiles with 'd:'
-            printf 'd:%s\n' "$HOME/dotfiles"
+            get_zoxide_dirs | sed 's|/*$||'
+            get_project_dirs | sed 's|/*$||'
+            printf 'c:%s\n' "$HOME/dotfiles"
         }
     )
 
@@ -68,9 +65,9 @@ if [ -z "$selected" ]; then
 
     # Add appropriate icons based on type
     list=$(echo "$normalized_paths" | sed \
-        -e 's|^z:| |' \
-        -e 's|^p:| |' \
-        -e 's|^d:| |')
+        -e 's|^d:| |' \
+        -e 's|^t:| |' \
+        -e 's|^c:| |')
 
     if [ "$list_only" = true ]; then
         # Strip icons/prefixes for external tools (like Neovim)
@@ -86,7 +83,7 @@ if [ -z "$selected" ]; then
     exit 0
 fi
 
-selected=$(echo "$selected" | sed 's/^[^ ]* *//')
+selected=$(echo "$selected" | sed 's/^[^ ]* //')
 
 # Smart session naming that handles worktrees
 if git -C "$selected" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
