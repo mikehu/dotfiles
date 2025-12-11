@@ -86,7 +86,7 @@ if [ -z "$selected" ]; then
     exit 0
 fi
 
-selected=$(echo "$selected" | sed 's/^[^ ]* //')
+selected=$(echo "$selected" | sed 's/^[^ ]* *//')
 
 # Smart session naming that handles worktrees
 if git -C "$selected" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
