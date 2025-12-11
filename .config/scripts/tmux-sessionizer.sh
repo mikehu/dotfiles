@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-# work_dirs="$HOME/Code $HOME/Code/personal $HOME/Code/neurox $HOME/Code/illustrious-industries $HOME/Code/shuttle"
+work_dirs="$HOME/Code $HOME/Code/personal $HOME/Code/neurox $HOME/Code/minicart $HOME/Code/illustrious-industries $HOME/Code/shuttle"
 
 # Parse arguments
 command=""
@@ -26,35 +26,52 @@ while [ $# -gt 0 ]; do
 done
 
 get_zoxide_dirs() {
-    zoxide query --list | head -20 | sed 's/^/ /'
+    zoxide query --list | head -20
 }
 
-# get_project_dirs() {
-#     for work_dir in $work_dirs; do
-#         fd --type d --max-depth 1 --exclude '.bare' . "$work_dir" | sed 's|/$||' | while read -r dir; do
-#             # Skip the work_dir itself
-#             [ "$dir" = "$work_dir" ] && continue
-#
-#             # Check if this directory has git worktrees
-#             if [ -d "$dir/.bare" ] && git -C "$dir" worktree list >/dev/null 2>&1; then
-#                 # List all worktree paths, excluding .bare
-#                 git -C "$dir" worktree list --porcelain | grep '^worktree ' | cut -d' ' -f2- | grep -v '\.bare$' | sed 's/^/ /'
-#             else
-#                 # Regular directory
-#                 printf ' %s\n' "$dir"
-#             fi
-#         done
-#     done
-# }
+get_project_dirs() {
+    for work_dir in $work_dirs; do
+        if [ -d "$work_dir" ]; then
+            fd --type d --max-depth 1 --exclude '.bare' . "$work_dir" | sed 's|/$||' | while read -r dir; do
+                # Skip the work_dir itself
+                [ "$dir" = "$work_dir" ] && continue
+
+                # Check if this directory has git worktrees
+                if [ -d "$dir/.bare" ] && git -C "$dir" worktree list >/dev/null 2>&1; then
+                    # List all worktree paths, excluding .bare
+                    git -C "$dir" worktree list --porcelain | grep '^worktree ' | cut -d' ' -f2- | grep -v '\.bare$'
+                else
+                    # Regular directory
+                    printf ' %s\n' "$dir"
+                fi
+            done
+        fi
+    done
+}
 
 # If no directory was provided as argument, use fzf to select
 if [ -z "$selected" ]; then
-    list=$(
+    # Collect paths with type markers for different icons
+    all_paths=$(
         {
-            get_zoxide_dirs
-            printf '%s\n' " $HOME/dotfiles"
-        } | sort -u
+            # Mark zoxide dirs with 'z:'
+            get_zoxide_dirs | sed 's|/*$||' | sed 's|^|z:|'
+            # Mark project dirs with 'p:'
+            get_project_dirs | sed 's|/*$||' | sed 's|^|p:|'
+            # Mark dotfiles with 'd:'
+            printf 'd:%s\n' "$HOME/dotfiles"
+        }
     )
+
+    # Deduplicate based on path (keep first occurrence) - simpler approach
+    normalized_paths=$(echo "$all_paths" | sort -t: -k2 -u)
+
+    # Add appropriate icons based on type
+    list=$(echo "$normalized_paths" | sed \
+        -e 's|^z:| |' \
+        -e 's|^p:| |' \
+        -e 's|^d:| |')
+
     if [ "$list_only" = true ]; then
         # Strip icons/prefixes for external tools (like Neovim)
         echo "$list" | sed 's/^[^ ]* //'
