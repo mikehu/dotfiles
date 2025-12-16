@@ -1,20 +1,8 @@
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
-version = 3
+version = 4
 final_space = true
 
 [palette]
-  # -- Dracula --
-  # comment = '#6272A4'
-  # cyan = '#8BE9FD'
-  # green = '#50FA7B'
-  # orange = '#FFB86C'
-  # pink = '#FF79C6'
-  # purple = '#BD93F9'
-  # red = '#FF5555'
-  # yellow = '#F1FA8C'
-  # shade_cyan = '#538C98'
-  # shade_pink = '#5E3E5A'
-  # -- Rose Pine --
   comment = '#908caa'
   cyan = '#9ccfd8'
   green = '#31748f'
@@ -22,9 +10,9 @@ final_space = true
   pink = '#ebbcba'
   purple = '#c4a7e7'
   red = '#eb6f92'
-  yellow = '#f6c177'
   shade_cyan = '#56949f'
   shade_pink = '#d7827e'
+  yellow = '#f6c177'
 
 [secondary_prompt]
   template = '<p:shade_pink>❯</>❯ '
@@ -43,66 +31,58 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
+    type = 'path'
     style = 'plain'
     template = '{{ .Path }} '
     foreground = 'p:purple'
     background = 'transparent'
-    type = 'path'
 
-    [blocks.segments.properties]
-      style = 'full'
+    [blocks.segments.options]
+      style = 'agnoster_short'
+      max_depth = 3
+      display_root = true
+
+      [blocks.segments.options.mapped_locations]
+        "/Volumes/Pebble/" = " "
 
   [[blocks.segments]]
-    style = 'plain'
     template = '{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<p:orange>*</>{{ .Working.String }}{{ end }} '
     foreground = 'p:comment'
     background = 'transparent'
     type = 'git'
-
-    [blocks.segments.properties]
-      branch_ahead_icon = '<p:cyan>⇡ </>'
-      branch_behind_icon = '<p:cyan>⇣ </>'
-      branch_icon = ''
-      commit_icon = '@'
-      fetch_stash_count = true
-      fetch_status = true
-      github_icon = ''
+    style = 'plain'
 
   [[blocks.segments]]
-    style = 'plain'
     template = ' {{ .Full }}'
     foreground = 'p:shade_cyan'
     background = 'transparent'
     type = 'python'
+    style = 'plain'
 
   [[blocks.segments]]
-    style = 'plain'
     template = ' {{ .Full }}'
     foreground = 'p:shade_cyan'
     background = 'transparent'
     type = 'node'
+    style = 'plain'
 
   [[blocks.segments]]
-    style = 'plain'
     template = ' {{ .Full }}'
     foreground = 'p:shade_cyan'
     background = 'transparent'
     type = 'go'
+    style = 'plain'
 
 [[blocks]]
   type = 'rprompt'
   overflow = 'hidden'
 
   [[blocks.segments]]
-    style = 'plain'
     template = ' {{ .FormattedMs }} '
     foreground = 'p:yellow'
     background = 'transparent'
     type = 'executiontime'
-
-    [blocks.segments.properties]
-      style = 'austin'
-      threshold = 5000
+    style = 'plain'
 
 [[blocks]]
   type = 'prompt'
@@ -110,9 +90,8 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
-    style = 'plain'
     template = '❯'
     foreground = 'p:green'
-    background = ''
     type = 'text'
+    style = 'plain'
     foreground_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']

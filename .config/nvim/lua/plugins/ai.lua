@@ -170,9 +170,12 @@ return {
 					},
 				},
 				prompt_library = prompt_library,
-				strategies = {
+				interactions = {
 					chat = {
-						adapter = "copilot",
+						adapter = {
+							name = "copilot",
+							model = "claude-sonnet-4.5",
+						},
 						roles = {
 							user = "  " .. vim.env.USER:gsub("^%l", string.upper),
 							llm = function(adapter)
@@ -215,7 +218,7 @@ return {
 							return require("codecompanion.adapters").extend("copilot", {
 								schema = {
 									model = {
-										default = "claude-sonnet-4",
+										default = "claude-sonnet-4.5",
 									},
 								},
 							})
