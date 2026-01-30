@@ -284,11 +284,6 @@ if.app-id = 'com.tinyspeck.slackmacgap'
 run = ['move-node-to-workspace 🖥️']
 
 [[on-window-detected]]
-if.app-id = 'tandem.app'
-if.window-title-regex-substring = '^(Watercooler|Neurox)'
-run = ['move-node-to-workspace 🖥️']
-
-[[on-window-detected]]
 if.app-id = 'com.openai.atls'
 run = ['move-node-to-workspace 🖥️']
 
@@ -298,7 +293,7 @@ run = ['move-node-to-workspace 🖥️']
 
 [[on-window-detected]]
 if.app-id = 'tandem.app'
-run = ['layout floating']
+run = ['layout floating', 'move-node-to-workspace 🖥️']
 
 [[on-window-detected]]
 if.app-id = 'us.zoom.xos'
@@ -306,6 +301,10 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Preview'
 run = ['layout floating']
 
 [[on-window-detected]]
