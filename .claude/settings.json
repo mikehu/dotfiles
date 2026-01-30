@@ -12,6 +12,12 @@
       "Read(~/.zshrc)"
     ]
   },
+  "model": "opus",
+  "enabledPlugins": {
+    "explanatory-output-style@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754068864445
   }
