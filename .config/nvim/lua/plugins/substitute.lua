@@ -9,7 +9,7 @@ return {
 			hideKeymapHints = true,
 		},
 		keymaps = {
-			insertModeConfirm = "<C-r>",
+			insertModeConfirmAndSubstituteInBuffer = "<C-r>",
 		},
 		notification = {
 			icon = " ",
