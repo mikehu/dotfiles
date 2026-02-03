@@ -45,32 +45,26 @@ This project is ... ]]
 }
 
 return {
-	{
-		"github/copilot.vim",
-		event = "InsertEnter",
-		config = function()
-			vim.g.copilot_filetypes = {
-				["*"] = false,
-				["javascript"] = true,
-				["typescript"] = true,
-				["lua"] = false,
-				["rust"] = true,
-				["c"] = true,
-				["c#"] = true,
-				["c++"] = true,
-				["html"] = false,
-				["htmx"] = true,
-				["go"] = true,
-				["python"] = true,
-				["vue"] = true,
-			}
-			vim.g.copilot_workspace_folders = workspace_folders
-		end,
-	},
 	-- {
-	-- 	"supermaven-inc/supermaven-nvim",
+	-- 	"github/copilot.vim",
+	-- 	event = "InsertEnter",
 	-- 	config = function()
-	-- 		require("supermaven-nvim").setup({})
+	-- 		vim.g.copilot_filetypes = {
+	-- 			["*"] = false,
+	-- 			["javascript"] = true,
+	-- 			["typescript"] = true,
+	-- 			["lua"] = false,
+	-- 			["rust"] = true,
+	-- 			["c"] = true,
+	-- 			["c#"] = true,
+	-- 			["c++"] = true,
+	-- 			["html"] = false,
+	-- 			["htmx"] = true,
+	-- 			["go"] = true,
+	-- 			["python"] = true,
+	-- 			["vue"] = true,
+	-- 		}
+	-- 		vim.g.copilot_workspace_folders = workspace_folders
 	-- 	end,
 	-- },
 	{
@@ -214,15 +208,6 @@ return {
 						end,
 					},
 					http = {
-						copilot = function()
-							return require("codecompanion.adapters").extend("copilot", {
-								schema = {
-									model = {
-										default = "claude-sonnet-4.5",
-									},
-								},
-							})
-						end,
 						openai = function()
 							return require("codecompanion.adapters").extend("openai", {
 								env = {
