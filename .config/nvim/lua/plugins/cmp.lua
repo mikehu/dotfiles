@@ -36,6 +36,7 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 			luasnip.config.setup({})
 			local lspkind = require("lspkind")
+			local has_copilot = vim.fn.exists("*copilot#Accept") == 1
 
 			local function deprioritize_snippet(entry1, entry2)
 				if entry1:get_kind() == types.lsp.CompletionItemKind.Snippet then
@@ -110,11 +111,14 @@ return {
 						end,
 					}),
 					["<tab>"] = cmp.mapping(function(fallback)
-						local code_complete = "copilot"
-						local code_complete_keys = vim.fn[code_complete .. "#Accept"]("")
-						if code_complete_keys ~= "" then
-							vim.api.nvim_feedkeys(code_complete_keys, "i", true)
-						elseif cmp.visible() then
+						if has_copilot then
+							local code_complete_keys = vim.fn["copilot#Accept"]("")
+							if code_complete_keys ~= "" then
+								vim.api.nvim_feedkeys(code_complete_keys, "i", true)
+								return
+							end
+						end
+						if cmp.visible() then
 							if #cmp.get_entries() == 1 then
 								cmp.confirm({ select = true })
 							else

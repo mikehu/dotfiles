@@ -1,8 +1,8 @@
-local workspace_folders = {
-	"~/Code/neurox",
-	"~/Code/illustrious-industries",
-	"~/Code/personal",
-}
+-- local workspace_folders = {
+-- 	"~/Code/neurox",
+-- 	"~/Code/illustrious-industries",
+-- 	"~/Code/personal",
+-- }
 
 local plan_prompts = require("plugins.prompts.plan")
 
