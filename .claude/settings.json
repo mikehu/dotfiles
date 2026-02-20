@@ -12,10 +12,10 @@
       "Read(~/.zshrc)"
     ]
   },
-  "model": "opus",
   "enabledPlugins": {
     "explanatory-output-style@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
   "feedbackSurveyState": {

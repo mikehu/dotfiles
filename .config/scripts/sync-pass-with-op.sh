@@ -45,7 +45,7 @@ sync_credentials=(
     "DeepSeek API Key"
     "Groq API Key"
     "Perplexity API Key"
-    "Claude Token"
+    "OpenRouter API Key"
 )
 
 sync_tokens=(
