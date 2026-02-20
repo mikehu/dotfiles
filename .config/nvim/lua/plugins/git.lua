@@ -5,7 +5,6 @@ return {
 		config = function()
 			local wk = require("which-key")
 			wk.add({
-				{ "<leader>gD", [[<cmd>Gdiff<cr>]], desc = "Diff this" },
 				{ "<leader>gW", [[<cmd>Gwrite<cr>]], desc = "Write" },
 				{ "<leader>gf", [[<cmd>Gread<cr>]], desc = "Checkout file" },
 				{ "<leader>gB", [[<cmd>GBrowse<cr>]], desc = "Browse on web" },
@@ -73,9 +72,6 @@ return {
 	{
 		"isakbm/gitgraph.nvim",
 		event = "VeryLazy",
-		dependencies = {
-			"sindrets/diffview.nvim",
-		},
 		opts = {
 			symbols = {
 				merge_commit = "",

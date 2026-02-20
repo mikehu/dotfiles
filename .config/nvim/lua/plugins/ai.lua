@@ -4,46 +4,6 @@
 -- 	"~/Code/personal",
 -- }
 
-local plan_prompts = require("plugins.prompts.plan")
-
-local prompt_library = {
-	["Project Plan"] = {
-		strategy = "workflow",
-		description = "Draft a project plan in the form of a PRD to be referenced by AI",
-		opts = {
-			index = 3,
-			short_name = "plan",
-			is_default = true,
-			is_slash_cmd = true,
-			ignore_system_prompt = true,
-		},
-		prompts = {
-			{
-				{
-					role = "system",
-					content = plan_prompts.system_prompt,
-					opts = {
-						visible = false,
-					},
-				},
-				{
-					role = "user",
-					opts = {
-						auto_submit = false,
-					},
-					content = function()
-						vim.g.codecompanion_auto_tool_mode = true
-						return [[
-Create a product requirements document as `PRD.md` using the @files tool based on the following:
-
-This project is ... ]]
-					end,
-				},
-			},
-		},
-	},
-}
-
 return {
 	-- {
 	-- 	"github/copilot.vim",
@@ -70,191 +30,54 @@ return {
 	{
 		"coder/claudecode.nvim",
 		keys = {
-			{ "<leader>cC", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+			{ "<leader>cc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+			{ "<leader>cr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+			{ "<leader>cC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+			{ "<leader>ca", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
 			{ "<leader>cs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
 		},
-		opts = {
-			terminal = {
-				split_width_percentage = 0.35,
-				provider = "snacks",
-			},
-		},
-	},
-	{
-		"ravitemer/codecompanion-history.nvim",
-		event = "VeryLazy",
-	},
-	{
-		"ravitemer/mcphub.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
-		},
-		-- build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
-		build = "bundled_build.lua",
 		config = function()
-			require("mcphub").setup({
-				config = vim.fn.expand("~/.config/mcphub/servers.json"), -- Absolute path to config file
-				use_bundled_binary = true,
-				auto_approve = true,
-				auto_toggle_mcp_servers = true,
-			})
-		end,
-	},
-	{
-		"olimorris/codecompanion.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"j-hui/fidget.nvim",
-			"ravitemer/codecompanion-history.nvim",
-			"ravitemer/mcphub.nvim",
-		},
-		init = function()
-			require("plugins.extensions.codecompanion-fidget"):init()
-			require("plugins.extensions.codecompanion-extmarks").setup()
-		end,
-		config = function()
-			local codecompanion = require("codecompanion")
-			codecompanion.setup({
-				display = {
-					action_palette = {
-						provider = "snacks",
-					},
-					chat = {
-						start_in_insert_mode = false,
-						window = {
-							width = 0.4,
-						},
-					},
-				},
-				extensions = {
-					history = {
-						opts = {
-							-- Keymap to open history from chat buffer (default: gh)
-							keymap = "gh",
-							-- Automatically generate titles for new chats
-							auto_generate_title = true,
-							-- On exiting and entering neovim, loads the last chat on opening chat
-							continue_last_chat = false,
-							-- When chat is cleared with `gx` delete the chat from history
-							delete_on_clearing_chat = true,
-							-- Picker interface ("telescope", "snacks" or "default")
-							picker = "snacks",
-							-- Enable detailed logging for history extension
-							enable_logging = false,
-							-- Directory path to save the chats
-							dir_to_save = vim.fn.stdpath("data") .. "/codecompanion-history",
-							-- Save all chats by default
-							auto_save = true,
-							-- Keymap to save the current chat manually
-							save_chat_keymap = "gw",
-							-- Number of days after which chats are automatically deleted (0 to disable)
-							expiration_days = 7,
-						},
-					},
-					mcphub = {
-						callback = "mcphub.extensions.codecompanion",
-						opts = {
-							show_result_in_chat = false, -- Show the mcp tool result in the chat buffer
-							make_vars = true, -- make chat #variables from MCP server resources
-							make_slash_commands = true, -- make /slash_commands from MCP server prompts
-						},
-					},
-				},
-				prompt_library = prompt_library,
-				interactions = {
-					chat = {
-						adapter = {
-							name = "copilot",
-							model = "claude-sonnet-4.5",
-						},
-						roles = {
-							user = "  " .. vim.env.USER:gsub("^%l", string.upper),
-							llm = function(adapter)
-								return string.format(
-									"  %s (%s)",
-									adapter.formatted_name,
-									adapter.schema.model.default
-								)
-							end,
-						},
-						slash_commands = {
-							["file"] = {
-								opts = {
-									provider = "snacks",
-								},
-							},
-							["buffer"] = {
-								opts = {
-									provider = "snacks",
-								},
-							},
-						},
-					},
-					inline = {
-						adapter = "openai",
-					},
-				},
-				adapters = {
-					acp = {
-						claude_code = function()
-							return require("codecompanion.adapters").extend("claude_code", {
-								env = {
-									CLAUDE_CODE_OAUTH_TOKEN = 'cmd:pass show "API/Claude Token"',
-								},
-							})
-						end,
-					},
-					http = {
-						openai = function()
-							return require("codecompanion.adapters").extend("openai", {
-								env = {
-									api_key = 'cmd:pass show "API/OpenAI API Key"',
-								},
-								schema = {
-									model = {
-										default = "gpt-4o-mini",
-									},
-								},
-							})
-						end,
-						anthropic = function()
-							return require("codecompanion.adapters").extend("anthropic", {
-								env = {
-									api_key = 'cmd:pass show "API/Anthropic API Key"',
-								},
-							})
-						end,
-						gemini = function()
-							return require("codecompanion.adapters").extend("gemini", {
-								env = {
-									api_key = 'cmd:pass show "API/Gemini API Key"',
-								},
-							})
-						end,
-					},
+			local cc = require("claudecode")
+			cc.setup({
+				focus_after_send = true,
+				terminal = {
+					split_width_percentage = 0.35,
+					provider = "snacks",
 				},
 			})
 
-			local wk = require("which-key")
-			wk.add({
-				{ "<leader>c", group = "Chat / AI", icon = "🤖" },
-				{
-					mode = { "n" },
-					nowait = true,
-					{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle Chat" },
-					{ "<leader>cn", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
-					{ "<leader>ca", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
-				},
-				{
-					mode = { "v" },
-					nowait = true,
-					{ "<leader>ci", "<cmd>CodeCompanion<cr>", desc = "Inline assist" },
-					{ "<leader>cn", "<cmd>CodeCompanionChat<cr>", desc = "New Chat" },
-				},
+			-- Buffer-local keymaps for diff accept/reject, only active in diff buffers
+			vim.api.nvim_create_autocmd("BufEnter", {
+				group = vim.api.nvim_create_augroup("ClaudeCodeDiffKeymaps", { clear = true }),
+				callback = function(ev)
+					if vim.b[ev.buf].claudecode_diff_tab_name then
+						vim.keymap.set(
+							"n",
+							"<leader>cy",
+							"<cmd>ClaudeCodeDiffAccept<cr>",
+							{ buffer = ev.buf, desc = "Accept diff" }
+						)
+						vim.keymap.set(
+							"n",
+							"<leader>cn",
+							"<cmd>ClaudeCodeDiffDeny<cr>",
+							{ buffer = ev.buf, desc = "Reject diff" }
+						)
+					end
+				end,
 			})
+		end,
+	},
+	{
+		name = "chisel",
+		dir = vim.fn.stdpath("config") .. "/lua/chisel",
+		cmd = { "Chisel", "ChiselFile", "ChiselAbort" },
+		keys = {
+			{ "<leader>ci", ":Chisel<CR>", mode = "v", desc = "Chisel inline edit" },
+			{ "<leader>ci", ":ChiselFile<CR>", mode = "n", desc = "Chisel file edit" },
+		},
+		config = function()
+			require("chisel").setup()
 		end,
 	},
 }

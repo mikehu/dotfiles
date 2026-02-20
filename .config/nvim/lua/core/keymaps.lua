@@ -59,7 +59,7 @@ if ok then
 	wk.add({
 		{ "gl", group = "LSP", icon = "✨" },
 		{ "<leader>b", group = "Buffers", icon = " " },
-		{ "<leader>c", group = "Chat / AI", icon = "🤖" },
+		{ "<leader>c", group = "Claude / AI", icon = "🤖" },
 		{ "<leader>e", group = "Edit", icon = " " },
 		{ "<leader>f", group = "Find", icon = " " },
 		{ "<leader>g", group = "Git / Grapple 🪝", icon = " " },
