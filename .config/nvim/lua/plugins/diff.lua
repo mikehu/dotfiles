@@ -2,6 +2,42 @@ return {
 	{
 		"nvim-mini/mini.diff",
 		event = "VeryLazy",
+		keys = {
+			{ "<leader>gd", function() MiniDiff.toggle_overlay() end, desc = "Toggle diff overlay" },
+			{
+				"<leader>gD",
+				function()
+					local presets = { "HEAD", "HEAD~1", "HEAD~3", "main", "origin/main" }
+					vim.ui.select(presets, { prompt = "Diff base (or Esc to enter manually)" }, function(choice)
+						if choice then
+							MiniDiff.set_ref_text(0, vim.fn.system({ "git", "show", choice .. ":" .. vim.fn.expand("%:.") }))
+							vim.notify("Diff base: " .. choice)
+							return
+						end
+						Snacks.input({ prompt = "Diff base (ref/hash, empty to reset): " }, function(input)
+							if not input then
+								return
+							end
+							if input == "" then
+								-- Reset to git index by re-attaching the source
+								MiniDiff.toggle()
+								MiniDiff.toggle()
+								vim.notify("Diff base: reset to index")
+								return
+							end
+							local text = vim.fn.system({ "git", "show", input .. ":" .. vim.fn.expand("%:.") })
+							if vim.v.shell_error ~= 0 then
+								vim.notify("Invalid ref: " .. input, vim.log.levels.ERROR)
+								return
+							end
+							MiniDiff.set_ref_text(0, text)
+							vim.notify("Diff base: " .. input)
+						end)
+					end)
+				end,
+				desc = "Set diff base",
+			},
+		},
 		opts = {
 			view = {
 				style = "number",
