@@ -24,48 +24,9 @@ return {
 				},
 			})
 
-			local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-
-			local next_hunk, prev_hunk =
-				ts_repeat_move.make_repeatable_move_pair(gitsigns.next_hunk, gitsigns.prev_hunk)
-
 			local wk = require("which-key")
 			wk.add({
-				mode = { "n", "x", "o" },
-				{
-					"]h",
-					function()
-						if vim.wo.diff then
-							vim.cmd.normal({ "]h", bang = true })
-						else
-							next_hunk()
-						end
-					end,
-					desc = "Next hunk",
-				},
-				{
-					"[h",
-					function()
-						if vim.wo.diff then
-							vim.cmd.normal({ "[h", bang = true })
-						else
-							prev_hunk()
-						end
-					end,
-					desc = "Prev hunk",
-				},
 				{ "<leader>gb", gitsigns.toggle_current_line_blame, desc = "Toggle blame" },
-				{
-					"<leader>gd",
-					function()
-						gitsigns.toggle_word_diff()
-						gitsigns.toggle_deleted()
-					end,
-					desc = "Show/hide diff/deleted",
-				},
-				{ "<leader>gp", gitsigns.preview_hunk, desc = "Preview hunk" },
-				{ "<leader>gs", gitsigns.stage_hunk, desc = "Stage hunk" },
-				{ "<leader>gr", gitsigns.reset_hunk, desc = "Reset hunk" },
 			})
 		end,
 	},
