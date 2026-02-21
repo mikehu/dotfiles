@@ -23,40 +23,26 @@ local function build_cmd(prompt, ctx)
 		system_context = string.format(
 			"You are a code editing assistant.\n"
 				.. "The user is working in `%s` (filetype: %s). Their cursor is at line %d.\n"
-				.. "Use the Edit tool to make targeted changes. Only change what's needed.",
+				.. "Use the Edit tool to make targeted changes. Only change what's needed.\n"
+				.. "If other files also need changes, mention that in your response.",
 			ctx.file_path,
 			ctx.filetype or "",
 			ctx.start_line
 		)
 	else
-		local preamble = table.concat({
-			"You are a code editing assistant.",
-			"When outputting code, always wrap it in a single fenced code block (```lang).",
-			"If no code changes are needed, respond with an explanation only — no code block.",
-		}, "\n")
-
-		if ctx.mode == "insert" then
-			system_context = string.format(
-				"%s\nOutput code to be inserted, not a diff.\n\nThe cursor is at line %d in `%s` (filetype: %s).",
-				preamble,
-				ctx.start_line,
-				ctx.file_path,
-				ctx.filetype or ""
-			)
-		else
-			system_context = string.format(
-				"%s\nOutput the complete replacement, not a diff. If the instruction\n"
-					.. "doesn't make sense, output the original code unchanged.\n\n"
-					.. "The user has selected the following code from `%s` (lines %d-%d, filetype: %s):\n```%s\n%s\n```",
-				preamble,
-				ctx.file_path,
-				ctx.start_line,
-				ctx.end_line,
-				ctx.filetype or "",
-				ctx.filetype or "",
-				ctx.text
-			)
-		end
+		system_context = string.format(
+			"You are a code editing assistant.\n"
+				.. "The user has selected the following code from `%s` (lines %d-%d, filetype: %s):\n```%s\n%s\n```\n"
+				.. "Use the Edit tool to make targeted changes to this file. Focus on the selected code,\n"
+				.. "but you may also edit other parts of the file if needed for correctness.\n"
+				.. "If other files also need changes, mention that in your response.",
+			ctx.file_path,
+			ctx.start_line,
+			ctx.end_line,
+			ctx.filetype or "",
+			ctx.filetype or "",
+			ctx.text
+		)
 	end
 
 	local cmd = { cfg.cmd, "-p", prompt }
@@ -64,15 +50,9 @@ local function build_cmd(prompt, ctx)
 		table.insert(cmd, arg)
 	end
 
-	-- Mode-specific tool access
-	if ctx.mode == "file" then
-		table.insert(cmd, "--tools")
-		table.insert(cmd, "Read,Edit")
-		table.insert(cmd, "--dangerously-skip-permissions")
-	else
-		table.insert(cmd, "--tools")
-		table.insert(cmd, "")
-	end
+	table.insert(cmd, "--tools")
+	table.insert(cmd, "Read,Edit")
+	table.insert(cmd, "--dangerously-skip-permissions")
 
 	table.insert(cmd, "--append-system-prompt")
 	table.insert(cmd, system_context)
@@ -114,7 +94,7 @@ local function process_line(line, callbacks, state)
 		log("message_stop: text_len=" .. #state.text)
 	elseif event.type == "result" then
 		log("result event")
-		if not state.done and #state.text > 0 then
+		if not state.done then
 			state.done = true
 			callbacks.on_done(state.text)
 		end
@@ -168,8 +148,9 @@ function M.spawn(prompt, ctx, callbacks)
 				process_line(buffer, callbacks, state)
 				buffer = ""
 			end
-			-- If we accumulated text but never got message_stop, fire on_done now
-			if #state.text > 0 and not state.done then
+			-- If we never got a result event, fire on_done now as fallback
+			if not state.done then
+				state.done = true
 				callbacks.on_done(state.text)
 			end
 			if exit_code ~= 0 then

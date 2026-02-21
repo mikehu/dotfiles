@@ -7,6 +7,9 @@ local M = {}
 --- @type ChiselSession|nil
 local active_session = nil
 
+--- @type snacks.win|nil
+local review_win = nil
+
 --- Prompt for instruction and start a session with the given context.
 --- @param ctx table
 local function prompt_and_start(ctx)
@@ -48,6 +51,48 @@ function M.start_file()
 	prompt_and_start(ctx)
 end
 
+--- Toggle a review float showing the last chisel response.
+function M.review()
+	-- Toggle: close if already open
+	if review_win and review_win:valid() then
+		review_win:close()
+		review_win = nil
+		return
+	end
+
+	local text = session.last_response
+	if not text then
+		vim.notify("chisel: no response to review", vim.log.levels.INFO)
+		return
+	end
+
+	local lines = vim.split(text, "\n", { plain = true })
+	local height = math.min(#lines + 2, math.floor(vim.o.lines * 0.4))
+	height = math.max(height, 10)
+
+	review_win = Snacks.win({
+		text = text,
+		ft = "markdown",
+		row = -1,
+		width = 0,
+		height = height,
+		border = "top",
+		title = " chisel response ",
+		title_pos = "left",
+		backdrop = false,
+		enter = true,
+		bo = { modifiable = false },
+		wo = { conceallevel = 2, wrap = true },
+		keys = {
+			q = "close",
+			["<Esc>"] = "close",
+		},
+		on_close = function()
+			review_win = nil
+		end,
+	})
+end
+
 --- Abort the current active session.
 function M.abort()
 	if active_session and not active_session.done then
@@ -72,6 +117,10 @@ function M.setup(opts)
 	vim.api.nvim_create_user_command("ChiselAbort", function()
 		M.abort()
 	end, { desc = "Abort chisel session" })
+
+	vim.api.nvim_create_user_command("ChiselReview", function()
+		M.review()
+	end, { desc = "Review last chisel response" })
 end
 
 return M
