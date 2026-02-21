@@ -14,6 +14,7 @@ return {
 					StatusLine = { fg = "muted", bg = "base" },
 					DiagnosticUnnecessary = { fg = "muted", undercurl = true, sp = "rose" },
 					SatelliteSearch = { fg = "gold" },
+					MiniDiffOverContext = { fg = "subtle", bg = "highlight_med" },
 				},
 			})
 

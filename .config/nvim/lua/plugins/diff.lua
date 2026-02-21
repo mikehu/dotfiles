@@ -3,14 +3,23 @@ return {
 		"nvim-mini/mini.diff",
 		event = "VeryLazy",
 		keys = {
-			{ "<leader>gd", function() MiniDiff.toggle_overlay() end, desc = "Toggle diff overlay" },
+			{
+				"<leader>gd",
+				function()
+					MiniDiff.toggle_overlay()
+				end,
+				desc = "Toggle diff overlay",
+			},
 			{
 				"<leader>gD",
 				function()
-					local presets = { "HEAD", "HEAD~1", "HEAD~3", "main", "origin/main" }
+					local presets = { "HEAD", "HEAD~1", "main", "origin/main" }
 					vim.ui.select(presets, { prompt = "Diff base (or Esc to enter manually)" }, function(choice)
 						if choice then
-							MiniDiff.set_ref_text(0, vim.fn.system({ "git", "show", choice .. ":" .. vim.fn.expand("%:.") }))
+							MiniDiff.set_ref_text(
+								0,
+								vim.fn.system({ "git", "show", choice .. ":" .. vim.fn.expand("%:.") })
+							)
 							vim.notify("Diff base: " .. choice)
 							return
 						end
