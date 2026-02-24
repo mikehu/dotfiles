@@ -4,7 +4,7 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			{ "smjonas/inc-rename.nvim", opts = { input_buffer_type = "snacks" } },
-			{ "j-hui/fidget.nvim", opts = {} },
+			{ "j-hui/fidget.nvim", opts = { notification = { window = { relative = "win" } } } },
 		},
 		opts = {
 			inlay_hints = { enabled = true },
