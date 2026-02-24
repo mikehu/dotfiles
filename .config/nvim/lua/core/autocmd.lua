@@ -17,3 +17,8 @@ autocmd("BufWinEnter", {
 	pattern = "term://*",
 	command = "setlocal listchars= nonumber norelativenumber nocursorline",
 })
+
+-- Reload buffers when files change on disk (pairs with `set autoread` in init.vim)
+autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+	command = "checktime",
+})
