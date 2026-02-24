@@ -39,14 +39,12 @@ function M.start(ctx, prompt)
 		end)
 	end
 
-	-- Start spinners on the selection (visual mode only)
-	if ctx.mode ~= "file" then
-		session.extmark_state = extmarks.show(ctx)
-	end
+	-- Start spinners (full selection for visual mode, cursor line for file mode)
+	session.extmark_state = extmarks.show(ctx)
 
 	-- Start fidget progress
 	session.fidget_handle = progress.handle.create({
-		title = "chisel",
+		title = "chiseling",
 		message = "Starting...",
 		lsp_client = { name = "chisel" },
 	})

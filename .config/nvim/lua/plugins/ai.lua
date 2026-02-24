@@ -34,7 +34,7 @@ return {
 			{ "<leader>cR", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
 			{ "<leader>cC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
 			{ "<leader>ca", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-			{ "<leader>cs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+			{ "<leader>cs", ":ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
 		},
 		config = function()
 			local cc = require("claudecode")
@@ -83,9 +83,10 @@ return {
 		dir = vim.fn.stdpath("config") .. "/lua/chisel",
 		cmd = { "Chisel", "ChiselFile", "ChiselAbort", "ChiselReview" },
 		keys = {
-			{ "<leader>ci", ":Chisel<CR>", mode = "v", desc = "Chisel inline edit" },
-			{ "<leader>ci", ":ChiselFile<CR>", mode = "n", desc = "Chisel file edit" },
-			{ "<leader>cr", ":ChiselReview<CR>", mode = "n", desc = "Review chisel response" },
+			{ "<leader>ci", ":Chisel<cr>", mode = "v", desc = "Chisel inline edit" },
+			{ "<leader>ci", "<cmd>ChiselFile<cr>", mode = "n", desc = "Chisel file edit" },
+			{ "<leader>cr", "<cmd>ChiselReview<cr>", mode = "n", desc = "Review chisel response" },
+			{ "<leader>cx", "<cmd>ChiselAbort<cr>", mode = "n", desc = "Abort chisel" },
 		},
 		config = function()
 			require("chisel").setup()

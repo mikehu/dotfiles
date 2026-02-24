@@ -38,6 +38,7 @@ function M.capture_file()
 	return {
 		bufnr = bufnr,
 		start_line = cursor_line,
+		end_line = cursor_line,
 		file_path = file_path,
 		filetype = ft,
 		mode = "file",

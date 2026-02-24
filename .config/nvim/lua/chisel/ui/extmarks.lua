@@ -33,7 +33,7 @@ function M.show(ctx)
 		width = block.width,
 		opts = {
 			hl_group = spinner_hl,
-			spinner_text = "  chiseling...",
+			spinner_text = "  ⛏️ chiseling...",
 			extmark = { virt_text_pos = "overlay", priority = 1001 },
 		},
 	})

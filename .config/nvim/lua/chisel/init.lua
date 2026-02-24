@@ -17,8 +17,8 @@ local function prompt_and_start(ctx)
 	vim.api.nvim_win_set_cursor(0, { ctx.start_line, 0 })
 
 	Snacks.input({
-		prompt = "chisel> ",
-		win = { relative = "cursor", row = -1, col = 0 },
+		prompt = "⛏️ chisel> ",
+		win = { relative = "cursor", row = -1, col = 0, width = 80 },
 	}, function(instruction)
 		if not instruction or instruction == "" then
 			return
@@ -77,7 +77,7 @@ function M.review()
 		width = 0,
 		height = height,
 		border = "top",
-		title = " chisel response ",
+		title = " ⛏️ chisel response ",
 		title_pos = "left",
 		backdrop = false,
 		enter = true,
