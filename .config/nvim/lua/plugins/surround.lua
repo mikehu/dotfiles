@@ -2,11 +2,15 @@ return {
 	"kylechui/nvim-surround",
 	version = "*", -- Use for stability; omit to use `main` branch for the latest features
 	event = "VeryLazy",
+	init = function()
+		vim.g.nvim_surround_no_visual_mappings = true
+	end,
+	keys = {
+		{ "gs", "<Plug>(nvim-surround-visual)", mode = "x", desc = "Surround selection" },
+		{ "gS", "<Plug>(nvim-surround-visual-line)", mode = "x", desc = "Surround selection (lines)" },
+	},
 	config = function()
 		require("nvim-surround").setup({
-			keymaps = {
-				visual = "gs",
-			},
 			surrounds = {
 				["$"] = {
 					add = function()
