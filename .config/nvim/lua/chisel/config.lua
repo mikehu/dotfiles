@@ -2,6 +2,7 @@ local M = {}
 
 local defaults = {
 	keymap = "<leader>ci",
+	exclude_filetypes = { "oil" },
 	backend = "claude",
 	claude = {
 		cmd = "claude",

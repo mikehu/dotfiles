@@ -33,10 +33,21 @@ local function prompt_and_start(ctx)
 	end)
 end
 
+--- Check if the current buffer should be excluded from chisel.
+--- @return boolean
+local function is_excluded()
+	local ft = vim.bo.filetype
+	local bt = vim.bo.buftype
+	-- Skip special buffers (floats, terminals, help, etc.)
+	if bt ~= "" then return true end
+	return vim.tbl_contains(config.values.exclude_filetypes, ft)
+end
+
 --- Start a chisel session from a visual selection.
 --- @param line1 number 1-indexed start line (from command range)
 --- @param line2 number 1-indexed end line (from command range)
 function M.start(line1, line2)
+	if is_excluded() then return end
 	local ctx = context.capture(line1, line2)
 	if #ctx.lines == 0 then
 		vim.notify("chisel: no selection", vim.log.levels.WARN)
@@ -47,6 +58,7 @@ end
 
 --- Start a chisel session for whole-file editing (normal mode).
 function M.start_file()
+	if is_excluded() then return end
 	local ctx = context.capture_file()
 	prompt_and_start(ctx)
 end
