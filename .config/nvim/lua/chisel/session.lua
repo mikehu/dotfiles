@@ -54,16 +54,21 @@ function M.start(ctx, prompt)
 		on_thinking = function(text)
 			vim.schedule(function()
 				if session.fidget_handle then
-					-- Show last line of thinking
-					local last = ""
+					-- Show last 2 lines of thinking
+					local all = {}
 					for line in text:gmatch("[^\n]+") do
-						last = line
+						table.insert(all, line)
 					end
-					last = vim.trim(last)
-					if #last > 80 then
-						last = last:sub(1, 79) .. "…"
+					local start = math.max(1, #all - 1)
+					local display = {}
+					for i = start, #all do
+						local l = vim.trim(all[i])
+						if #l > 80 then
+							l = l:sub(1, 79) .. "…"
+						end
+						table.insert(display, l)
 					end
-					session.fidget_handle.message = last
+					session.fidget_handle.message = table.concat(display, "\n")
 				end
 			end)
 		end,

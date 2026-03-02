@@ -48,6 +48,7 @@ local VirtualTextBlockSpinner = {
 --- @field ns_id number Namespace ID for the extmarks
 --- @field start_line number Starting line (1-indexed) for the spinner
 --- @field end_line number Ending line (1-indexed) for the spinner
+--- @field min_width? number Minimum display width for the spinner
 --- @field opts? VirtualTextBlockSpinner.SpinnerOpts Optional configuration options
 
 --- Creates a new VirtualTextBlockSpinner instance
@@ -60,6 +61,10 @@ function VirtualTextBlockSpinner.new(opts)
 			return vim.fn.strdisplaywidth(line)
 		end)
 		:totable())
+
+	if opts.min_width then
+		display_width = math.max(display_width, opts.min_width)
+	end
 
 	local merged_opts = vim.tbl_deep_extend("force", spinner_opts, opts.opts or {})
 	local patterns = {}

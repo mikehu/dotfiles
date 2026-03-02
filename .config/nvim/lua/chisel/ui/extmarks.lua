@@ -21,6 +21,7 @@ function M.show(ctx)
 		ns_id = ns_id,
 		start_line = ctx.start_line,
 		end_line = ctx.end_line,
+		min_width = 40,
 		opts = { hl_group = spinner_hl, extmark = { virt_text_pos = "overlay" } },
 	})
 	block:start()
