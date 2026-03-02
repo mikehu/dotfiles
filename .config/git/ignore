@@ -3,6 +3,5 @@
 .stfolder
 .stignore
 .env
-codecompanion-workspace.json
 .vectorcode
 **/.claude/settings.local.json
