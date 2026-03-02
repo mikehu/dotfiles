@@ -5,7 +5,7 @@ return {
 		local satellite = require("satellite")
 		satellite.setup({
 			current_only = true,
-			excluded_filetypes = { "codecompanion", "snacks_terminal" },
+			excluded_filetypes = { "snacks_terminal" },
 			handlers = {
 				cursor = {
 					enable = false,

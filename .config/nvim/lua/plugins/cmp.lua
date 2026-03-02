@@ -182,12 +182,6 @@ return {
 				},
 			})
 
-			cmp.setup.filetype({ "codecompanion" }, {
-				sources = {
-					{ name = "codecompanion" },
-				},
-			})
-
 			local select_next = function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })

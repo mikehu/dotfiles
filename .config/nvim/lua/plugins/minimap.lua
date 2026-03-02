@@ -2,7 +2,6 @@ return {
 	"Isrothy/neominimap.nvim",
 	version = "v3.*.*",
 	enabled = true,
-	lazy = false,
 	keys = {
 		{ "<leader>um", "<cmd>Neominimap Toggle<cr>", desc = "Minimap" },
 	},
@@ -12,7 +11,7 @@ return {
 
 		vim.g.neominimap = {
 			auto_enable = false,
-			exclude_filetypes = { "help", "oil", "noice", "kulala", "codecompanion" },
+			exclude_filetypes = { "help", "oil", "noice", "kulala" },
 			float = {
 				minimap_width = 12,
 				window_border = "rounded",
