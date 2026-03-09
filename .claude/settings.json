@@ -4,7 +4,6 @@
     "DISABLE_AUTOUPDATER": "1"
   },
   "permissions": {
-    "defaultMode": "acceptEdits",
     "allow": [
       "Read",
       "Edit",
@@ -40,7 +39,8 @@
       "Bash(touch:*)",
       "WebFetch",
       "WebSearch"
-    ]
+    ],
+    "defaultMode": "acceptEdits"
   },
   "enabledPlugins": {
     "explanatory-output-style@claude-plugins-official": true,
