@@ -1,5 +1,5 @@
 # Ghostty shell integration
-if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
+if [[ -n $GHOSTTY_RESOURCES_DIR ]] && [[ -f "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration" ]]; then
   builtin source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
 fi
 export SNACKS_GHOSTTY=true
