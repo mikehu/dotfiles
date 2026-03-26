@@ -43,7 +43,19 @@ return {
 							end
 						end,
 					},
-					["gC"] = {
+					["go"] = {
+					desc = "Open in Finder",
+					callback = function()
+						local entry = oil.get_cursor_entry()
+						local dir = oil.get_current_dir()
+						if entry and entry.type == "directory" and dir then
+							vim.ui.open(dir .. entry.name)
+						elseif dir then
+							vim.ui.open(dir)
+						end
+					end,
+				},
+				["gC"] = {
 						desc = "Send to Claude Code",
 						callback = function()
 							if vim.fn.exists(":ClaudeCodeAdd") ~= 2 then

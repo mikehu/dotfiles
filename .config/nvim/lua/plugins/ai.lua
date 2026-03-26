@@ -79,9 +79,7 @@ return {
 		end,
 	},
 	{
-		name = "chisel",
-		dir = vim.fn.stdpath("config") .. "/lua/chisel",
-		cmd = { "Chisel", "ChiselFile", "ChiselAbort", "ChiselReview" },
+		"mikehu/chisel.nvim",
 		keys = {
 			{ "<leader>ci", ":Chisel<cr>", mode = "v", desc = "Chisel inline edit" },
 			{ "<leader>ci", "<cmd>ChiselFile<cr>", mode = "n", desc = "Chisel file edit" },
