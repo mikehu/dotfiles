@@ -32,6 +32,7 @@
       "Bash(mv:*)",
       "Bash(touch:*)",
       "Bash(wc:*)",
+      "Bash(pbcopy:*)",
       "WebFetch",
       "WebSearch"
     ],
