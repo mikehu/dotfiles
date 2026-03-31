@@ -284,12 +284,8 @@ if.app-id = 'com.tinyspeck.slackmacgap'
 run = ['move-node-to-workspace 🖥️']
 
 [[on-window-detected]]
-if.app-id = 'com.openai.atls'
-run = ['move-node-to-workspace 🖥️']
-
-[[on-window-detected]]
-if.app-id = 'ai.perplexity.comet'
-run = ['move-node-to-workspace 🖥️']
+if.app-id = 'net.imput.helium'
+run = ['layout floating', 'move-node-to-workspace 🖥️']
 
 [[on-window-detected]]
 if.app-id = 'tandem.app'
