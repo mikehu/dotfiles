@@ -14,8 +14,7 @@ return {
 			surrounds = {
 				["$"] = {
 					add = function()
-						local ts_utils = require("nvim-treesitter.ts_utils")
-						local cur = ts_utils.get_node_at_cursor(0, true)
+						local cur = vim.treesitter.get_node()
 						local language = vim.bo.filetype
 						local is_jsy = (
 							language == "javascript"
