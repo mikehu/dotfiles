@@ -13,6 +13,8 @@ return {
 				"git_rebase",
 				"gleam",
 				"go",
+				"gomod",
+				"gosum",
 				"html",
 				"http",
 				"lua",
@@ -27,6 +29,7 @@ return {
 				"svelte",
 				"vim",
 				"vue",
+				"xml",
 				"yaml",
 				"zig",
 			})
