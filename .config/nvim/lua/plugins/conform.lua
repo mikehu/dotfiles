@@ -21,6 +21,7 @@ return {
 				vue = { "eslint_d" },
 				svelte = { "eslint_d" },
 				go = { "gofmt" },
+				xml = { "xmllint" },
 				["_"] = { "trim_whitespace" },
 			},
 			format_on_save = {

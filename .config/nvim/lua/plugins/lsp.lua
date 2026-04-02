@@ -225,7 +225,8 @@ return {
 						},
 					},
 				},
-				yamlls = {
+				lemminx = {},
+			yamlls = {
 					filetypes = { "yaml", "yml", "bu" },
 					settings = {
 						yaml = {

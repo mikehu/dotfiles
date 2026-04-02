@@ -27,5 +27,6 @@ vim.diagnostic.config({
 vim.filetype.add({
 	extension = {
 		["http"] = "http",
+		["plist"] = "xml",
 	},
 })
