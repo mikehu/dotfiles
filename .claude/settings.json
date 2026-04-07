@@ -39,19 +39,6 @@
     ],
     "defaultMode": "acceptEdits"
   },
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/mike/.cmdr/hooks/on-pr-create.sh"
-          }
-        ]
-      }
-    ]
-  },
   "enabledPlugins": {
     "explanatory-output-style@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
