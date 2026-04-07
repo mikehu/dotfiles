@@ -23,4 +23,4 @@ gui:
 git:
   branchPrefix: "mikehu/"
   pagers:
-    - externalDiffCommand: "difft --color=always"
+    - externalDiffCommand: "difft --color=always --display inline"

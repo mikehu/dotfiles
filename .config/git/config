@@ -77,7 +77,6 @@
 # Third-party
 [delta]
         navigate = true    # use n and N to move between diff sections
-        side-by-side = true
         line-numbers = true
 
 # URL Shortcuts
