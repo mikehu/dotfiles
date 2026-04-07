@@ -82,12 +82,19 @@ return {
 		"mikehu/chisel.nvim",
 		keys = {
 			{ "<leader>ci", ":Chisel<cr>", mode = "v", desc = "Chisel inline edit" },
-			{ "<leader>ci", "<cmd>ChiselFile<cr>", mode = "n", desc = "Chisel file edit" },
-			{ "<leader>cr", "<cmd>ChiselReview<cr>", mode = "n", desc = "Review chisel response" },
-			{ "<leader>cx", "<cmd>ChiselAbort<cr>", mode = "n", desc = "Abort chisel" },
+			{ "<leader>ci", "<cmd>Chisel file<cr>", mode = "n", desc = "Chisel file edit" },
+			{ "<leader>cr", "<cmd>Chisel review<cr>", mode = "n", desc = "Review chisel response" },
+			{ "<leader>cx", "<cmd>Chisel abort<cr>", mode = "n", desc = "Abort chisel" },
+			{ "<leader>ck", "<cmd>Chisel continue<cr>", mode = "n", desc = "Continue in Claude Code" },
 		},
 		config = function()
-			require("chisel").setup()
+			require("chisel").setup({
+				continue = {
+					handler = function(cmd)
+						vim.fn.system({ "tmux", "split-window", "-h", cmd })
+					end,
+				},
+			})
 		end,
 	},
 }

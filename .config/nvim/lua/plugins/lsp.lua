@@ -161,7 +161,6 @@ return {
 						"javascriptreact",
 						"typescriptreact",
 						"html",
-						"markdown",
 					},
 					settings = {
 						experimental = { useFlatConfig = true },
@@ -253,6 +252,7 @@ return {
 					init_options = server_config.init_options,
 					settings = server_config.settings or {},
 					filetypes = server_config.filetypes,
+					root_dir = server_config.root_dir,
 				})
 			end
 
