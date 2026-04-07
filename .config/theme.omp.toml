@@ -53,21 +53,21 @@ final_space = true
     style = 'plain'
 
   [[blocks.segments]]
-    template = ' {{ .Full }}'
+    template = ' {{ .Full }} '
     foreground = 'p:shade_cyan'
     background = 'transparent'
     type = 'python'
     style = 'plain'
 
   [[blocks.segments]]
-    template = ' {{ .Full }}'
+    template = ' {{ .Full }} '
     foreground = 'p:shade_cyan'
     background = 'transparent'
     type = 'node'
     style = 'plain'
 
   [[blocks.segments]]
-    template = ' {{ .Full }}'
+    template = ' {{ .Full }} '
     foreground = 'p:shade_cyan'
     background = 'transparent'
     type = 'go'
