@@ -28,6 +28,7 @@ _ensure_dependencies() {
     kubectl
     op
     rg
+    tree-sitter  # brew install tree-sitter-cli (not tree-sitter)
   )
 
   for dep in "${common_deps[@]}"; do
