@@ -1,7 +1,6 @@
 ---
 name: distill
 description: Process unprocessed raw notes in ThoughtQuarry into refined, interlinked concept pages.
-argument-hint: ""
 ---
 
 Process unprocessed raw notes in ThoughtQuarry into refined, interlinked concept pages.

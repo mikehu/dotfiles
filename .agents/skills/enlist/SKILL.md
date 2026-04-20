@@ -1,7 +1,6 @@
 ---
 name: enlist
 description: Enlist a squad member to help with cross-repo work.
-argument-hint: ""
 ---
 
 Enlist a squad member to help with cross-repo work.

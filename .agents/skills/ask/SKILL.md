@@ -1,7 +1,6 @@
 ---
 name: ask
 description: Answer a question by searching the ThoughtQuarry knowledge base first, then supplementing with general knowledge.
-argument-hint: "[question]"
 ---
 
 Answer a question by searching the ThoughtQuarry knowledge base first, then supplementing with general knowledge.
