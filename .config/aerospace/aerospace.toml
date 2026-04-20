@@ -268,7 +268,7 @@ if.app-id = 'com.canva.affinity'
 run = ['move-node-to-workspace 🎨']
 
 [[on-window-detected]]
-if.app-id = 'com.mikehu.cmdr'
+if.app-id = 'com.cmdr-tool.cmdr'
 run = ['move-node-to-workspace 🎨']
 
 [[on-window-detected]]
@@ -346,3 +346,8 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'com.apptorium.SideNotes'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.BlueBubbles.BlueBubbles-Server'
+run = ['layout floating']
+
