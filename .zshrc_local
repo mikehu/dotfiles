@@ -18,6 +18,9 @@ alias psync='~/.config/scripts/sync-pass-with-op.sh'
 alias tun='~/.config/scripts/ssh-tunnels.sh -u root'
 alias kcrs='~/.config/scripts/remote-kubeconfig-copy.sh -h nx-lxc.local -u root'
 
+# agent skills symlink (until .agents/skills/ is natively supported)
+ln -sfn ~/.agents/skills ~/.claude/skills
+
 # ensure dependencies
 source ~/.config/scripts/ensure-dependencies.sh
 
