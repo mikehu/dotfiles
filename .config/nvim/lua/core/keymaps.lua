@@ -31,7 +31,6 @@ keymap.set("n", "c.", [[viWoc]], { desc = "Change <dot> segment" })
 
 keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
 keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without register" })
-
 keymap.set("n", "<c-q>", cmd([[cclose]]), { desc = "Close quickfix list" })
 
 keymap.set("i", "<esc><esc>", "<esc>")
@@ -155,3 +154,16 @@ if ok then
 		{ "<leader>uh", cmd([[MCPHub]]), desc = "MCPHub", icon = " " },
 	})
 end
+
+-- Copy file reference in @path:LXX-LYY format
+keymap.set("v", "<leader>a", function()
+	local start_line = vim.fn.line("v")
+	local end_line = vim.fn.line(".")
+	if start_line > end_line then
+		start_line, end_line = end_line, start_line
+	end
+	local rel_path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
+	local ref = string.format("%s:L%d-L%d", rel_path, start_line, end_line)
+	vim.fn.setreg("+", ref)
+	vim.notify(ref, vim.log.levels.INFO, { title = "Copied reference" })
+end, { desc = "Copy @file:line ref" })
