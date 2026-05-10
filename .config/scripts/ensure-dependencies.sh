@@ -54,7 +54,7 @@ _ensure_dependencies() {
       kitten
       gsettings
       waybar
-      swww
+      awww-daemon
       wallust
       makoctl
       notify-send
