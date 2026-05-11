@@ -6,9 +6,6 @@ return {
 			{ "smjonas/inc-rename.nvim", opts = { input_buffer_type = "snacks" } },
 			"j-hui/fidget.nvim",
 		},
-		opts = {
-			inlay_hints = { enabled = true },
-		},
 		config = function()
 			local function global_on_attach(args)
 				local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
@@ -68,10 +65,12 @@ return {
 				end, "List project folders")
 
 				-- inlay hints
-				local function toggle_inlay_hints()
-					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-				end
-				nmap("glh", toggle_inlay_hints, "Toggle inlay hints")
+				nmap("glh", function()
+					local ok, ih = pcall(function() return vim.lsp.inlay_hint end)
+					if ok and ih then
+						ih.enable(not ih.is_enabled())
+					end
+				end, "Toggle inlay hints")
 
 				client.server_capabilities.documentFormattingProvider = false
 			end
