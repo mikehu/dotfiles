@@ -91,7 +91,7 @@ font-codepoint-map = U+2500-U+259F="Symbols Nerd Font Mono" # Box Drawing
 
 # Keybinds
 #keybind = global:cmd+escape=toggle_quick_terminal
-keybind = shift+enter=text:\n
+keybind = shift+enter=text:\x1b[13;2u
 
 keybind = super+j=goto_split:down
 keybind = super+k=goto_split:up
