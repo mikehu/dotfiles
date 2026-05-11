@@ -4,5 +4,6 @@
 .stignore
 .env
 .vectorcode
+.agents
 **/.claude/settings.local.json
 **/.claude/worktrees

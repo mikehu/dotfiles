@@ -29,6 +29,8 @@ _ensure_dependencies() {
     op
     rg
     tree-sitter  # brew install tree-sitter-cli (not tree-sitter)
+    claude
+    pi           # brew install pi-coding-agent
   )
 
   for dep in "${common_deps[@]}"; do
