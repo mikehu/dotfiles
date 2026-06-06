@@ -10,12 +10,24 @@
     "explanatory-output-style@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
-    "swift-lsp@claude-plugins-official": true
+    "swift-lsp@claude-plugins-official": true,
+    "pr@minicart-skills": true,
+    "review@minicart-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "minicart-skills": {
+      "source": {
+        "source": "git",
+        "url": "git@github.com:minicartcom/skills.git"
+      }
+    }
   },
   "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true,
+  "remoteControlAtStartup": false,
   "voiceEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754068864445
-  },
-  "skipDangerousModePermissionPrompt": true
+  }
 }

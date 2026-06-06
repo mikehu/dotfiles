@@ -85,7 +85,7 @@ return {
 			{
 				name = "URL decode",
 				execute = function()
-					safe_vim_cmd(cmd_on_text("perl -MURI::Escape -ne 'print uri_unescape($_)' | tr -d '\\n'", true))
+					safe_vim_cmd(cmd_on_text("perl -MURI::Escape -ne 'print uri_unescape($_)'", true))
 				end,
 			},
 		},
