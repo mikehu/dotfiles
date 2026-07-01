@@ -1,5 +1,22 @@
 vim.opt.rtp:append("/opt/homebrew/opt/fzf")
 
+-- Native UI (Neovim 0.12+ ui2) — replaces noice.nvim.
+-- cmdheight=0 hides the cmdline until you type : or / (lualine becomes the bottom row);
+-- transient messages float in the bottom-right msg window instead of a cmdline row.
+vim.o.cmdheight = 0
+local ok, ui2 = pcall(require, "vim._core.ui2")
+if ok then
+	ui2.enable({
+		msg = { targets = "msg" },
+	})
+end
+
+-- Default border for all floats (LSP hover, signature, diagnostics). New in 0.12.
+vim.opt.winborder = "rounded"
+
+-- Show pending command/operator keys in the statusline (lualine renders %S).
+vim.o.showcmdloc = "statusline"
+
 vim.o.foldenable = false
 vim.o.foldlevel = 99
 vim.o.foldmethod = "expr"
