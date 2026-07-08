@@ -15,6 +15,7 @@ lazy-lock.json
 !.codex/config.json
 
 .claude/**
+!.claude/CLAUDE.md
 !.claude/settings.json
 !.claude/commands/
 !.claude/commands/*.md
