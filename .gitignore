@@ -20,4 +20,6 @@ lazy-lock.json
 !.claude/commands/
 !.claude/commands/*.md
 
-!.agents/skills/**
+# unignore .agents
+!.agents/
+!.agents/skills/
