@@ -19,3 +19,5 @@ lazy-lock.json
 !.claude/settings.json
 !.claude/commands/
 !.claude/commands/*.md
+
+!.agents/skills/**
