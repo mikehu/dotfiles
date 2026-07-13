@@ -45,6 +45,10 @@ conversation, not just the patch.
   worktree branches), rebase onto the target branch first, then fast-forward merge. This keeps history
   linear and readable.
 - When cleaning up after a worktree, remove the worktree directory and delete the branch.
+- **Conventional Commit format** — both commit messages and PR titles use `type(scope): subject`
+  (imperative, lowercase subject, no trailing period). Type is required — one of `feat`, `fix`, `chore`,
+  `docs`, `refactor`, `test`, `build`, `ci`, `perf`; scope is optional. A PR title describes the whole PR,
+  not just the last commit.
 
 ## Logging
 
