@@ -14,6 +14,7 @@ First check for an **explicit leading keyword** in `$ARGUMENTS` — these force 
 - `defer …` (or `add`, `capture`) → **Capture**, with the rest of the args as the subject.
 - `resume …` (or `find`, `on`) → **Resume**, with the rest of the args as the search topic.
 - `list` (or `ls`, `status`) → **List**.
+- `clean` (or `prune`, `cleanup`, `tidy`) → **Clean**.
 
 If no keyword is present, **infer** from the args and recent conversation:
 
@@ -65,7 +66,7 @@ Guidelines:
    - No match → tell the user plainly there's no follow-up for that topic; offer to Capture one.
    - One match → read it fully and load its context into the session. Summarize the Context/Scope/Pointers, then confirm this is the one to pick up.
    - Multiple matches → list titles + one-line summaries, ask which.
-4. **Grill before building.** Once a follow-up is selected and confirmed, do **not** jump into implementation. First iron out ambiguity by following the grill-me protocol at `.agents/skills/grill-me/SKILL.md` — read that file and apply it to *this* follow-up's scope: walk the design tree one decision at a time, recommend an answer for each, look up facts in the codebase rather than asking, and don't start coding until the user confirms shared understanding. (Invoke it as your own step — `grill-me` is user-triggered and can't be auto-called via the Skill tool, so adopt its protocol directly here.) A follow-up written in a prior session is exactly where stale assumptions hide, so this step is load-bearing.
+4. **Grill before building.** Once a follow-up is selected and confirmed, do **not** jump into implementation. A follow-up written in a prior session is exactly where stale assumptions hide, so hand off to the `grill-me` skill to iron out ambiguity first. `grill-me` is user-triggered (it can't be auto-invoked), so tell the user to run `/grill-me` to stress-test this follow-up's scope before you build — and don't start coding until that grilling has reached a shared understanding.
 5. When the user finishes the resumed work (or explicitly says it's handled), **mark it done**: set `status: done` and `completed: "YYYY-MM-DD"` in that file's frontmatter, in place. Don't delete it.
 
 ## List
@@ -73,5 +74,16 @@ Guidelines:
 1. Compute the dir. If missing/empty, say there are no follow-ups and stop.
 2. Read the frontmatter of each `.md`. Show **open** ones grouped first, as `title — created — tags`. Mention the count of `done` ones without listing them unless asked.
 3. Keep it scannable; this is a status glance, not a report.
+
+## Clean
+
+Prune completed follow-ups so the folder stays manageable. Deletion is destructive, so this lane is **only** entered on an explicit `clean` request (or when the user asks to prune/tidy) — never as a side effect of the other lanes.
+
+1. Compute the dir. If missing/empty, say there's nothing to clean and stop.
+2. Collect every `.md` with `status: done`. If none, tell the user the folder is already clean and stop.
+3. List the done ones (`title — completed date`) and ask for confirmation before deleting. If the user scoped it ("clean up the retry ones", "anything done before June"), filter to that subset and confirm that subset.
+4. On confirmation, delete the confirmed files (`rm`). Report how many were removed and how many open follow-ups remain.
+
+Only ever delete `status: done` items. Never prune an `open` follow-up — if the user wants one gone that isn't done, point out it's still open and ask them to confirm explicitly.
 
 $ARGUMENTS
