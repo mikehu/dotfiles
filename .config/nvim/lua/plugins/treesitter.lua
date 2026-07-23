@@ -42,9 +42,8 @@ return {
 			vim.api.nvim_create_autocmd("FileType", {
 				callback = function(ev)
 					local lang = vim.treesitter.language.get_lang(ev.match) or ev.match
-					local has_queries = pcall(vim.treesitter.query.get, lang, "highlights")
-						and vim.treesitter.query.get(lang, "highlights") ~= nil
-					if has_queries then
+					local ok, query = pcall(vim.treesitter.query.get, lang, "highlights")
+					if ok and query then
 						pcall(vim.treesitter.start, ev.buf)
 					end
 				end,
