@@ -1,3 +1,12 @@
+## Interaction style
+
+- Narrate intent: one short sentence before starting work or a batch of tool
+  calls, and a brief summary of what you did when done.
+- When a steering message arrives mid-task, acknowledge it in one line before
+  continuing or changing course.
+- Extremely concise; sacrifice grammar for concision. No preamble, no
+  restating the request.
+
 ## Repository changes
 
 When asked to change a repository:
