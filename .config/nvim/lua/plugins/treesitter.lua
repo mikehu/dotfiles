@@ -35,10 +35,18 @@ return {
 				"zig",
 			})
 
-			-- Neovim 0.12: highlighting is a core feature via vim.treesitter.start()
+			-- Neovim 0.12: highlighting is a core feature via vim.treesitter.start().
+			-- Only start it when highlight queries actually exist; otherwise fall back
+			-- to Neovim's bundled legacy syntax (e.g. syntax/tmux.vim — nvim-treesitter's
+			-- main branch has a tmux parser but ships no queries for it).
 			vim.api.nvim_create_autocmd("FileType", {
 				callback = function(ev)
-					pcall(vim.treesitter.start, ev.buf)
+					local lang = vim.treesitter.language.get_lang(ev.match) or ev.match
+					local has_queries = pcall(vim.treesitter.query.get, lang, "highlights")
+						and vim.treesitter.query.get(lang, "highlights") ~= nil
+					if has_queries then
+						pcall(vim.treesitter.start, ev.buf)
+					end
 				end,
 			})
 		end,
