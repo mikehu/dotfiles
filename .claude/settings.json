@@ -25,7 +25,9 @@
     "lua-lsp@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true,
     "pr@minicart-skills": true,
-    "review@minicart-skills": true
+    "review@minicart-skills": true,
+    "linear@claude-plugins-official": true,
+    "design@minicart-skills": true
   },
   "extraKnownMarketplaces": {
     "minicart-skills": {

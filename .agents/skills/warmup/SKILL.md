@@ -1,3 +1,9 @@
+---
+name: warmup
+description: Prepare for this session by understanding this project's conventions — reads CLAUDE.md, .claude/rules/, and recent git history.
+disable-model-invocation: true
+---
+
 Prepare for this session by understanding this project's conventions.
 
 Do these in parallel:
