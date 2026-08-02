@@ -1,0 +1,11 @@
+[server]
+# Numeric readout on the right of the OSD, so the level is unambiguous.
+show_percentage = true
+
+# Defaults kept from /etc/xdg/swayosd/config.toml; a user config replaces it
+# rather than merging, so they are restated here.
+min_brightness = 5
+keyboard_backlight = true
+
+# max_volume = 150   # ceiling in %, above 100 boosts
+# top_margin = 0.85  # 0.5 would be screen centre

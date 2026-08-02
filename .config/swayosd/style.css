@@ -1,0 +1,89 @@
+/* Based on /etc/xdg/swayosd/style.css.
+ *
+ * Sizes are explicit rather than `inherit` (which the shipped stylesheet uses
+ * for trough/progress), and units are px only -- GTK has no `ch` unit, and a
+ * single invalid unit makes it reject the whole stylesheet silently.
+ *
+ * Blur behind the panel is not CSS: it comes from the blur-swayosd layer rule
+ * in hyprland.lua, matching the `swayosd` layer namespace. */
+
+window#osd {
+  border-radius: 16px;
+  /* Low alpha lets the Hyprland layer blur show through; the hairline gives
+     the panel a defined edge the way macOS vibrancy does. */
+  background-color: rgba(22, 20, 28, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Right margin is trimmed: the icon is a glyph that fills its box, while the
+ * percentage is text with its own side bearing, so a uniform margin reads as
+ * heavier on the text side. */
+window#osd #container {
+  margin: 22px;
+  margin-left: 26px;
+  margin-right: 18px;
+}
+
+window#osd image,
+window#osd label {
+  color: @theme_fg_color;
+}
+
+/* GTK CSS supports px/pt/em/rem/% only -- no `ch`. An invalid unit anywhere
+ * makes GTK reject the entire stylesheet, not just the one declaration.
+ *
+ * No margin and no min-width here. The container is a GtkBox with 12px
+ * spacing, so a margin stacks on top of it; and a min-width wider than the
+ * text makes GtkLabel centre the text, splitting the slack to both sides --
+ * which reads as the percentage having more padding than the icon. Letting
+ * the label size to its text keeps the gaps even, at the cost of the pill
+ * changing width slightly between "9%" and "100%". */
+window#osd label {
+  font-weight: bold;
+}
+
+window#osd progressbar:disabled,
+window#osd image:disabled {
+  opacity: 0.5;
+}
+
+/* swayosd sets valign=Center on the bar, which centres it geometrically but
+ * reads slightly high beside the icon and text. GTK counts margins inside the
+ * centred allocation, so an unbalanced top margin shifts it down by half. */
+window#osd progressbar,
+window#osd segmentedprogress {
+  min-height: 12px;
+  min-width: 120px;
+  margin-top: 4px;
+  border-radius: 999px;
+  background: transparent;
+  border: none;
+}
+
+/* Explicit colours, not @theme_fg_color: swayosd is GTK4 while rose-pine-gtk
+ * is a GTK3 theme, so the legacy theme_* names are not reliably defined here.
+ * An unresolvable colour makes GTK drop the whole declaration, which renders
+ * as "no bar at all". */
+window#osd progressbar trough,
+window#osd segment {
+  min-height: 8px;
+  border-radius: 999px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+window#osd progressbar progress,
+window#osd segment.active {
+  min-height: 8px;
+  border-radius: 999px;
+  border: none;
+  background-color: #ffffff;
+}
+
+window#osd segment {
+  margin-left: 8px;
+}
+
+window#osd segment:first-child {
+  margin-left: 0;
+}

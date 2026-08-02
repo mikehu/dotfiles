@@ -1,0 +1,18 @@
+[general]
+# Toolbar button/icon size is GTK, not a satty option -- see overrides.css.
+# For the window itself, satty enforces .root { min-width: 65rem } and
+# input-scale scales that default; neither affects icon size.
+# input-scale = 1.25
+
+# Behaviour lives here rather than in screenshot.sh, so the script just pipes
+# an image in. CLI flags always override this file.
+copy-command = "wl-copy"
+early-exit = ["all"]
+output-filename = "~/Pictures/Screenshots/%Y-%m-%d_%H-%M-%S.png"
+
+# Annotations scale with the image, not the screen; bump if markup looks thin
+# on the 3440x1440 panel.
+annotation-size-factor = 1
+
+# initial-tool = "arrow"   # pointer, crop, line, arrow, rectangle, ellipse,
+                           # text, marker, blur, highlight, brush

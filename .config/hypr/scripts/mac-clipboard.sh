@@ -19,8 +19,11 @@ TERMINAL_CLASSES='^(com\.mitchellh\.ghostty|kitty|kitty-float|Alacritty|foot|foo
 
 class=$(hyprctl activewindow -j | jq -r '.class // empty')
 
+# Since 0.55 hyprctl dispatch takes Lua, not the old "MOD, key, window" string.
 if [[ "$class" =~ $TERMINAL_CLASSES ]]; then
-    hyprctl dispatch sendshortcut "CTRL SHIFT, $key, activewindow"
+    mods='CTRL SHIFT'
 else
-    hyprctl dispatch sendshortcut "CTRL, $key, activewindow"
+    mods='CTRL'
 fi
+
+hyprctl dispatch "hl.dsp.send_shortcut({ mods = '$mods', key = '$key', window = 'activewindow' })"

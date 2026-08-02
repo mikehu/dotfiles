@@ -57,6 +57,8 @@ hl.on("hyprland.start", function()
     hl.exec_cmd(terminal)
     hl.exec_cmd("~/.config/hypr/scripts/apply-desktop-experience.sh")
     hl.exec_cmd("hypridle")
+    hl.exec_cmd("swayosd-server") -- on-screen display for volume/mute
+    hl.exec_cmd("hyprsunset")     -- night-light, profiles in hyprsunset.conf
 end)
 
 
@@ -214,6 +216,28 @@ for key, mode in pairs({ ["3"] = "full", ["4"] = "region", ["5"] = "window" }) d
         hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh " .. mode .. " clipboard"))
 end
 
+-- Annotate a region in satty (markup, then save + copy)
+hl.bind(meta .. " + SHIFT + 6", hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh region annotate"))
+
+-- Media keys, routed through swayosd-client so they show an on-screen display.
+-- No brightness binds: this box has no backlight device (external DP monitor),
+-- so brightnessctl would be a no-op. ddcutil would be the route if wanted.
+local osd = "swayosd-client "
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(osd .. "--output-volume raise"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(osd .. "--output-volume lower"), { locked = true, repeating = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd(osd .. "--output-volume mute-toggle"), { locked = true })
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd(osd .. "--input-volume mute-toggle"), { locked = true })
+
+-- Precise 1% steps with ALT held
+hl.bind("ALT + XF86AudioRaiseVolume", hl.dsp.exec_cmd(osd .. "--output-volume +1"), { locked = true, repeating = true })
+hl.bind("ALT + XF86AudioLowerVolume", hl.dsp.exec_cmd(osd .. "--output-volume -1"), { locked = true, repeating = true })
+
+-- Requires playerctl
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd(osd .. "--playerctl next"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(osd .. "--playerctl prev"), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(osd .. "--playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd(osd .. "--playerctl play-pause"), { locked = true })
+
 -- Launch apps
 hl.bind(launchMod .. " + F", hl.dsp.exec_cmd("firefox"))
 hl.bind(launchMod .. " + G", hl.dsp.exec_cmd("chat-gpt"))
@@ -246,6 +270,16 @@ hl.bind("ALT + mouse:273", hl.dsp.window.resize(), { mouse = true })
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
+
+-- Blur behind the volume/media OSD so it lifts off the wallpaper (macOS-style).
+-- ignore_alpha skips blurring the fully transparent area outside the pill, so
+-- only the panel itself is frosted.
+hl.layer_rule({
+    name  = "blur-swayosd",
+    match = { namespace = "^swayosd$" },
+    blur = true,
+    ignore_alpha = 0.2,
+})
 
 hl.window_rule({
     name  = "no-border-when-floating",

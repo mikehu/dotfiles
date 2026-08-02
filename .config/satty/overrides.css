@@ -1,0 +1,21 @@
+/* Satty ships minimal builtin CSS; this file overrides it.
+ * Discover selectors live with:  GTK_DEBUG=interactive satty --filename <img>
+ *
+ * Default GTK4 button icons are 16px, which reads small on the 3440x1440
+ * panel at scale 1. Bump the icons and give the buttons room to match. */
+
+.toolbar button {
+    min-width: 36px;
+    min-height: 36px;
+    padding: 4px;
+}
+
+.toolbar button image {
+    -gtk-icon-size: 24px;
+}
+
+/* The colour/size swatch row at the bottom gets the same treatment. */
+.toolbar-bottom button {
+    min-width: 32px;
+    min-height: 32px;
+}

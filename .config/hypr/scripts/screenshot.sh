@@ -5,7 +5,10 @@
 #   hl.bind("SUPER + SHIFT + 4",        hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh region file"))
 #   hl.bind("SUPER + CTRL + SHIFT + 4", hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh region clipboard"))
 #
-# Usage: screenshot.sh <full|region|window> <file|clipboard>
+# Usage: screenshot.sh <full|region|window> <file|clipboard|annotate>
+#
+# annotate opens the capture in satty for markup; saving there writes to
+# ~/Pictures/Screenshots and copies to the clipboard.
 
 mode="${1:-region}"
 dest="${2:-clipboard}"
@@ -32,12 +35,17 @@ case "$mode" in
         grim_args=(-g "$geom")
         ;;
     *)
-        echo "usage: $0 <full|region|window> <file|clipboard>" >&2
+        echo "usage: $0 <full|region|window> <file|clipboard|annotate>" >&2
         exit 1
         ;;
 esac
 
-if [[ "$dest" == clipboard ]]; then
+if [[ "$dest" == annotate ]]; then
+    dir="$HOME/Pictures/Screenshots"
+    mkdir -p "$dir"
+    # Output path, copy command and early-exit come from ~/.config/satty/config.toml.
+    grim "${grim_args[@]}" - | satty --filename -
+elif [[ "$dest" == clipboard ]]; then
     grim "${grim_args[@]}" - | wl-copy
     notify-send "Screenshot" "Copied to clipboard" 2>/dev/null
 else
