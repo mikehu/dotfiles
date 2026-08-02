@@ -1,9 +1,9 @@
 #!/bin/bash
 # macOS-style screenshots for Hyprland, built on grim + slurp. Mirrors the macOS
 # Screenshot shortcuts (Ctrl = "to clipboard instead of file"). Bound from
-# keybinds.conf, e.g.:
-#   bind = SHIFT $meta,   4, exec, ~/.config/hypr/scripts/screenshot.sh region file
-#   bind = SHIFT $navMod, 4, exec, ~/.config/hypr/scripts/screenshot.sh region clipboard
+# hyprland.lua, e.g.:
+#   hl.bind("SUPER + SHIFT + 4",        hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh region file"))
+#   hl.bind("SUPER + CTRL + SHIFT + 4", hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh region clipboard"))
 #
 # Usage: screenshot.sh <full|region|window> <file|clipboard>
 

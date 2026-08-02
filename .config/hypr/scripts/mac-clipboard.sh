@@ -1,8 +1,8 @@
 #!/bin/bash
 # Translate macOS-style Super+<key> shortcuts into the right Ctrl combo for the
 # focused window. GUI apps use Ctrl+<key>; terminals use Ctrl+Shift+<key> (so
-# Super+C copies instead of sending SIGINT). Bound from keybinds.conf, e.g.:
-#   bind = SUPER, C, exec, ~/.config/hypr/scripts/mac-clipboard.sh copy
+# Super+C copies instead of sending SIGINT). Bound from hyprland.lua, e.g.:
+#   hl.bind("SUPER + C", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-clipboard.sh copy"))
 #
 # Usage: mac-clipboard.sh <copy|paste|cut|select-all>
 
