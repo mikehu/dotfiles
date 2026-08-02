@@ -6,6 +6,12 @@ return {
 		config = function()
 			require("nvim-treesitter").setup({})
 
+			-- MIGRATION SEAM: parser installation is the only thing keeping this
+			-- plugin irreducible — Neovim 0.12 has native highlighting/folding but
+			-- still ships no built-in parser installer. When core adds one, delete
+			-- this install() block (the FileType highlight autocmd below already
+			-- runs on core vim.treesitter and needs no changes). textobjects is the
+			-- remaining companion that still requires this plugin.
 			require("nvim-treesitter").install({
 				"bash",
 				"c",
