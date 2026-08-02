@@ -12,7 +12,9 @@ set_wallpaper() {
 adopt_colors() {
     local filepath=$1
     local filename=$(basename "$filepath")
-    sleep 0.5 && wallust run -q -s "$filepath" && makoctl reload
+    # hyprctl reload: colors.lua is pulled in via dofile, which Hyprland's config
+    # watcher doesn't track (the old hyprlang `source` did), so reload explicitly.
+    sleep 0.5 && wallust run -q -s "$filepath" && makoctl reload && hyprctl reload
     notify-send "Applied desktop experience:" "$filename"
 }
 

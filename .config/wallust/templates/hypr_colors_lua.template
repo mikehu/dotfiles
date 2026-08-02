@@ -1,0 +1,20 @@
+-- generated from wallust
+hl.config({
+    general = {
+        col = {
+            active_border = { colors = { "rgb({{color2 | saturate(0.6) | strip}})", "rgb({{color3 | saturate(0.6) | strip}})", "rgb({{color4 | saturate(0.6) | strip}})", "rgb({{color6 | saturate(0.6) | strip}})" } },
+            inactive_border = "rgba({{color8 | strip}}aa)",
+            nogroup_border = "rgba({{background | strip}}dd)",
+            nogroup_border_active = { colors = { "rgb({{color10 | saturate(0.6) | strip}})", "rgb({{color8 | saturate(0.6) | strip}})" }, angle = 90 },
+        },
+    },
+
+    group = {
+        groupbar = {
+            col = {
+                active = { colors = { "rgb({{color2 | saturate(0.6) | strip}})", "rgb({{color3 | saturate(0.6) | strip}})", "rgb({{color4 | saturate(0.6) | strip}})", "rgb({{color6 | saturate(0.6) | strip}})" } },
+                inactive = "rgba({{background | strip}}dd)",
+            },
+        },
+    },
+})
