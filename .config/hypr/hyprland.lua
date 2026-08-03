@@ -55,7 +55,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("~/.config/hypr/scripts/apply-gtk-theme.sh")
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("awww-daemon")
-	hl.exec_cmd("wl-paste --type text --watch cliphist store") -- text only
 	hl.exec_cmd(terminal)
 	hl.exec_cmd("~/.config/hypr/scripts/apply-desktop-experience.sh")
 	hl.exec_cmd("hypridle")
@@ -212,10 +211,18 @@ hl.bind(meh .. " + Escape", hl.dsp.exec_cmd(menu))
 hl.bind(meh .. " + Q", hl.dsp.exec_cmd(menu .. " -m menus:power"))
 
 -- macOS-style clipboard: Super+C/V/X = copy/paste/cut (Ctrl+Shift+* inside terminals).
--- Add more (e.g. select-all on A) by extending mac-clipboard.sh.
-hl.bind(meta .. " + C", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-clipboard.sh copy"))
-hl.bind(meta .. " + V", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-clipboard.sh paste"))
-hl.bind(meta .. " + X", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-clipboard.sh cut"))
+-- Add more (e.g. select-all on A) by extending mac-keys.sh.
+hl.bind(meta .. " + C", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-keys.sh copy"))
+hl.bind(meta .. " + V", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-keys.sh paste"))
+hl.bind(meta .. " + X", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-keys.sh cut"))
+hl.bind(meta .. " + A", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-keys.sh select-all"))
+-- Tab management: GUI apps get CTRL+T/CTRL+W, terminals CTRL+SHIFT+T/W, which
+-- is what ghostty binds new-tab/close to.
+hl.bind(meta .. " + T", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-keys.sh new-tab"))
+hl.bind(meta .. " + W", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-keys.sh close-tab"))
+-- Cmd+Left/Right = start/end of line
+hl.bind(meta .. " + left", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-keys.sh line-start"))
+hl.bind(meta .. " + right", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-keys.sh line-end"))
 
 -- macOS-style screenshots (grim + slurp). Ctrl variant = clipboard vs. file.
 --   Cmd+Shift+3 / +4 / +5      -> full / region / window  to file
@@ -318,7 +325,7 @@ hl.window_rule({
 	border_size = 0,
 })
 
-for _, class in ipairs({ "^(1Password)$", "^(Tandem)$", "^(Rofi|rofi)$", "^(Volume Control)$", "^(kitty-float)$" }) do
+for _, class in ipairs({ "^(1Password)$", "^(Tandem)$", "^(Volume Control)$", "^(kitty-float)$" }) do
 	hl.window_rule({
 		name = "float-" .. class,
 		match = { class = class },
@@ -326,11 +333,6 @@ for _, class in ipairs({ "^(1Password)$", "^(Tandem)$", "^(Rofi|rofi)$", "^(Volu
 	})
 end
 
-hl.window_rule({
-	name = "rofi-stay-focused",
-	match = { class = "^(Rofi|rofi)$" },
-	stay_focused = true,
-})
 
 hl.window_rule({
 	-- Ignore maximize requests from all apps. You'll probably like this.
