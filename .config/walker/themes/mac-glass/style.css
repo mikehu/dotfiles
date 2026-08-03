@@ -38,9 +38,9 @@ scrollbar {
   border: 1px solid alpha(@theme_fg_color, 0.12);
   border-radius: 16px;
   padding: 12px;
-  box-shadow:
-    0 19px 38px rgba(0, 0, 0, 0.30),
-    0 15px 12px rgba(0, 0, 0, 0.22);
+  /* No box-shadow. Hyprland's blur uses ignore_alpha as a hard cutoff, so a
+     soft shadow gradient always bands where it crosses the threshold. The
+     hairline border plus the frosted panel give enough separation. */
 }
 
 .search-container {
