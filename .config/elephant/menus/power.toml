@@ -1,0 +1,49 @@
+# Power menu for walker, replacing `rofi -show p -modi p:rofi-power-menu`.
+# Elephant exposes any file here as the provider "menus:<name>". Bound in
+# hyprland.lua as `walker -m menus:power`, and included in walker's default
+# provider set so entries are searchable from the main window.
+#
+# TOML rather than Lua: the list is static, and keywords are documented for
+# this format. Single-quoted values are TOML literal strings, so the embedded
+# double quotes survive.
+
+name = "power"
+name_pretty = "Power"
+icon = "system-shutdown-symbolic"
+
+[[entries]]
+text = "Lock"
+keywords = ["power", "lock", "screen"]
+icon = "system-lock-screen-symbolic"
+actions = { "lock" = "loginctl lock-session" }
+
+[[entries]]
+text = "Suspend"
+keywords = ["power", "sleep", "suspend"]
+icon = "system-suspend-symbolic"
+actions = { "suspend" = "systemctl suspend" }
+
+# Verbatim from Hyprland's 0.56 example config: hyprshutdown closes apps
+# gracefully before exiting; the fallback is the raw dispatcher. `hyprctl
+# dispatch exit` is pre-0.55 syntax and now fails to parse, silently when run
+# from a menu action where stderr goes nowhere.
+[[entries]]
+text = "Log out"
+keywords = ["power", "logout", "log off", "sign out", "exit"]
+icon = "system-log-out-symbolic"
+actions = { "logout" = "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'" }
+
+# Reboot/shutdown schedule the systemctl action detached with nohup, THEN close
+# windows via hyprshutdown. Chaining them cannot work: hyprshutdown exits
+# Hyprland and the shell running the chain dies with the session.
+[[entries]]
+text = "Reboot"
+keywords = ["power", "restart", "reboot"]
+icon = "system-reboot-symbolic"
+actions = { "reboot" = 'nohup bash -c "sleep 2 && systemctl reboot --no-wall" >/dev/null 2>&1 & hyprshutdown' }
+
+[[entries]]
+text = "Shut down"
+keywords = ["power", "shutdown", "poweroff", "halt", "turn off"]
+icon = "system-shutdown-symbolic"
+actions = { "shutdown" = 'nohup bash -c "sleep 2 && systemctl poweroff --no-wall" >/dev/null 2>&1 & hyprshutdown' }

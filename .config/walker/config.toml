@@ -13,7 +13,10 @@ max_results = 256
 
 # The old `rofi -show combi` was window + drun + emoji. Windows and apps make
 # sense in one flat list; emoji is noisy there, so it lives behind ":".
-default = ["desktopapplications", "windows"]
+# menus:power included so "reboot"/"lock"/"shutdown" are findable from the
+# main window. Omarchy keeps menus out of the default set and reaches them
+# through a separate menu tree instead.
+default = ["desktopapplications", "windows", "menus:power", "websearch"]
 
 [[providers.prefixes]]
 prefix = "/"
