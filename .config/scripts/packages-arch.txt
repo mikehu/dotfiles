@@ -1,0 +1,158 @@
+# Official-repo packages, explicitly installed. Generated from `pacman -Qqen`
+# and grouped by purpose.
+#
+# Install:  sudo pacman -S --needed $(awk '!/^[[:space:]]*#/ && NF {print $1}' packages-arch.txt)
+# Refresh:  pacman -Qqen   (compare against this list)
+#
+# AUR packages live in packages-arch-aur.txt.
+
+# ── Base system / boot ────────────────────────────────────────────────
+base
+base-devel
+linux
+linux-firmware
+linux-headers
+intel-ucode
+grub
+grub-btrfs
+efibootmgr
+os-prober
+btrfs-progs
+plymouth
+sudo
+man-db
+
+# ── Graphics / NVIDIA ─────────────────────────────────────────────────
+nvidia-open-dkms
+nvidia-utils
+lib32-nvidia-utils
+
+# ── Hyprland desktop ──────────────────────────────────────────────────
+hyprland
+hypridle
+hyprlock
+hyprsunset
+hyprshutdown
+waybar
+mako
+swayosd
+awww                      # wallpaper daemon (replaces swww)
+wallust                   # palette generation from wallpaper
+xdg-desktop-portal-hyprland
+wl-clipboard
+grim
+slurp
+satty                     # screenshot annotation
+
+# ── Audio ─────────────────────────────────────────────────────────────
+pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
+wireplumber
+pamixer
+pavucontrol
+
+# ── Terminal / shell ──────────────────────────────────────────────────
+ghostty
+zsh
+zsh-autosuggestions
+zsh-completions
+tmux
+stow
+
+# ── CLI tooling ───────────────────────────────────────────────────────
+bat
+btop
+eza
+fzf
+ripgrep
+zoxide
+tldr
+difftastic
+lazygit
+git
+neovim
+tree-sitter-cli
+inotify-tools
+pacman-contrib            # checkupdates + paccache, used by setup-arch.sh
+reflector
+
+# ── Languages / runtimes ──────────────────────────────────────────────
+nodejs-lts-iron
+npm
+python-pip
+python-pipx
+rust
+luarocks
+
+# ── Networking / sharing ──────────────────────────────────────────────
+networkmanager
+openssh
+syncthing
+ufw
+nfs-utils
+cifs-utils
+smbclient
+gvfs-mtp
+libmtp
+
+# ── Filesystems ───────────────────────────────────────────────────────
+ntfs-3g
+fuse2
+
+# ── Desktop apps ──────────────────────────────────────────────────────
+thunar
+tumbler                   # thunar thumbnails
+firefox                   # bound to CTRL+ALT+F; Zen is the flatpak default
+vlc
+imagemagick
+steam
+flatpak
+
+# ── Virtualisation ────────────────────────────────────────────────────
+qemu-desktop
+virt-manager
+
+# ── Fonts ─────────────────────────────────────────────────────────────
+otf-droid-nerd            # DroidSansM Nerd Font: waybar, mako, walker
+otf-font-awesome
+ttf-fira-code
+ttf-firacode-nerd
+ttf-nerd-fonts-symbols
+ttf-nerd-fonts-symbols-mono
+noto-fonts-emoji
+terminus-font
+
+# ── Qt / theming support ──────────────────────────────────────────────
+qt5-wayland
+qt5ct
+qt5-graphicaleffects
+qt5-multimedia
+qt5-quickcontrols
+qt5-quickcontrols2
+qt5-svg
+
+# ── Misc ──────────────────────────────────────────────────────────────
+pass
+timeshift
+k9s
+htop
+vim
+spotifyd
+pfetch-rs
+
+# ── REVIEW: likely stale on this machine ──────────────────────────────
+# Kept here so a rebuild is a decision rather than an omission. Each is
+# superseded by something already in the list above.
+#
+# kitty                   # superseded by ghostty (waybar float now uses ghostty)
+# swaylock                # superseded by hyprlock
+# redshift                # superseded by hyprsunset; its config was deleted
+# sddm                    # installed but disabled; session is tty1 autologin
+# webkit2gtk-4.1          # pulled in for something long gone
+# argyllcms / colord / xiccd   # colour calibration, unused
+# wayvnc                  # remote desktop, unused
+# xorg-server-xephyr      # nested X server, unused
+# libsixel
+# gst-libav / gst-plugins-good  # kept only if vlc/gst playback needs them

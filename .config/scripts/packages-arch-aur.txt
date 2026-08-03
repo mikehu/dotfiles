@@ -1,0 +1,54 @@
+# AUR packages, explicitly installed. Generated from `pacman -Qqem`.
+#
+# Install:  yay -S --needed $(awk '!/^[[:space:]]*#/ && NF {print $1}' packages-arch-aur.txt)
+# Refresh:  pacman -Qqem
+#
+# Run as your user, NOT root -- yay refuses to build as root.
+# yay itself must be bootstrapped first:
+#   git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+
+yay
+
+# ── Launcher (replaces rofi) ──────────────────────────────────────────
+# walker queries the elephant daemon over a unix socket. Providers are
+# separate packages -- install only the ones you use.
+walker
+elephant
+elephant-desktopapplications
+elephant-windows
+elephant-menus            # power menu (~/.config/elephant/menus/)
+elephant-clipboard        # replaces cliphist
+elephant-symbols          # emoji/symbols, ":" prefix
+elephant-calc             # "=" prefix, libqalculate-backed
+elephant-files            # "." prefix
+elephant-websearch        # "@" prefix, engines in websearch.toml
+elephant-providerlist     # "/" prefix
+elephant-runner
+
+# ── Desktop ───────────────────────────────────────────────────────────
+waybar-updates            # pending-update count in waybar
+wallust                   # (also in repos on some mirrors)
+rose-pine-gtk-theme-full
+apple-fonts
+apple_cursor
+otf-noto-sans-cjk
+nonicons-git
+
+# ── Apps ──────────────────────────────────────────────────────────────
+1password
+1password-cli
+slack-desktop
+spotify-player-full-pipe
+claude-code
+oh-my-posh
+nerdfix
+
+# ── Backup ────────────────────────────────────────────────────────────
+timeshift-autosnap        # btrfs snapshot on pacman transactions
+
+# ── REVIEW: likely stale on this machine ──────────────────────────────
+# wlogout                 # superseded by walker's menus:power
+# tofi                    # another launcher, superseded by walker
+# miniconda3              # python env manager, unused if using pipx/venv
+# phonon-qt5-gstreamer    # KDE multimedia backend, pulled in by something
+# ttf-ms-fonts            # only needed for MS Office document fidelity
