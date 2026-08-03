@@ -105,7 +105,7 @@
     "format": "  {nr_failed}"
   },
   "custom/updates": {
-    "format": "{icon}{}",
+    "format": "{icon}{text}",
     "format-icons": {
       "pending-updates": " ",
       "updated": " "
@@ -113,7 +113,7 @@
     "return-type": "json",
     "exec-if": "which waybar-updates",
     "exec": "waybar-updates",
-    "on-click": "kitty --class=\"kitty-float\" -o remember_window_size=no -o initial_window_width=1200 -o initial_window_height=960 sh -c \"yay; read -n 1 -s -r -p 'Press any key to close...'\""
+    "on-click": "ghostty --gtk-single-instance=false --class=com.mitchellh.ghostty-float -e sh -c \"yay; read -n 1 -s -r -p 'Press any key to close...'\""
   },
   "network": {
     "format":"   {bandwidthUpBytes}  {bandwidthDownBytes}",

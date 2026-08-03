@@ -329,7 +329,7 @@ hl.window_rule({
 	border_size = 0,
 })
 
-for _, class in ipairs({ "^(1Password)$", "^(Tandem)$", "^(Volume Control)$", "^(kitty-float)$" }) do
+for _, class in ipairs({ "^(1Password)$", "^(Tandem)$", "^(Volume Control)$", "^(com\\.mitchellh\\.ghostty-float)$" }) do
 	hl.window_rule({
 		name = "float-" .. class,
 		match = { class = class },
@@ -337,6 +337,15 @@ for _, class in ipairs({ "^(1Password)$", "^(Tandem)$", "^(Volume Control)$", "^
 	})
 end
 
+
+-- Floating scratch terminal (waybar's update button). Needs
+-- --gtk-single-instance=false, or ghostty hands the window to the running
+-- instance and it inherits that instance's class.
+hl.window_rule({
+	name = "float-terminal-size",
+	match = { class = "^(com\\.mitchellh\\.ghostty-float)$" },
+	size = "1200 800",
+})
 
 hl.window_rule({
 	-- Ignore maximize requests from all apps. You'll probably like this.
