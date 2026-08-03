@@ -49,7 +49,10 @@
   "hyprland/window": {
     "separate-outputs": true,
     "icon": true,
-    "icon-size": 16
+    "icon-size": 16,
+    // Terminals set the title to the running command, which can be arbitrarily
+    // long. Ellipsize it; the full title is still on the tooltip.
+    "max-length": 60
   },
   "hyprland/workspaces": {
     "all-outputs": true,
