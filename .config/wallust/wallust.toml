@@ -96,6 +96,7 @@ check_contrast = true
 
 [templates]
 hypr = { template = "hypr_colors_lua.template", target = "~/.config/hypr/colors.lua", new_engine = true }
+walker = { template = "walker_colors.template", target = "~/.config/walker/themes/mac-glass/colors.css", new_engine = true }
 waybar = { template = "waybar_colors.template", target = "~/.config/waybar/colors.css", new_engine = true }
 rofi = { template = "rofi_colors.template", target = "~/.config/rofi/colors.rasi", new_engine = true }
 mako = { template = "mako_config.template", target = "~/.config/mako/config", new_engine = true }

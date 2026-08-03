@@ -1,0 +1,40 @@
+# Walker: replaces rofi. Queries the elephant daemon over a Unix socket, so the
+# elephant.service user unit must be running (`elephant service enable`).
+
+theme = "mac-glass"
+force_keyboard_focus = true # keep focus in walker while it is open
+selection_wrap = true       # wrap when moving past the top/bottom of the list
+
+[placeholders]
+"default" = { input = "Search...", list = "No results" }
+
+[providers]
+max_results = 256
+
+# The old `rofi -show combi` was window + drun + emoji. Windows and apps make
+# sense in one flat list; emoji is noisy there, so it lives behind ":".
+default = ["desktopapplications", "windows"]
+
+[[providers.prefixes]]
+prefix = "/"
+provider = "providerlist"
+
+[[providers.prefixes]]
+prefix = "."
+provider = "files"
+
+[[providers.prefixes]]
+prefix = ":"
+provider = "symbols"
+
+[[providers.prefixes]]
+prefix = "="
+provider = "calc"
+
+[[providers.prefixes]]
+prefix = "@"
+provider = "websearch"
+
+[[providers.prefixes]]
+prefix = "$"
+provider = "clipboard"
