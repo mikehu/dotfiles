@@ -126,6 +126,10 @@ hl.config({
 	misc = {
 		force_default_wallpaper = 0,
 		disable_hyprland_logo = true,
+		-- Honour xdg-activation requests, so opening a URL (walker websearch,
+		-- a link from any app) raises the browser instead of silently adding a
+		-- tab to an unfocused window.
+		focus_on_activate = true,
 	},
 
 	ecosystem = {

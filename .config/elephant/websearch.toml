@@ -1,16 +1,17 @@
 # Web search engines for walker. Typing a query offers "Search: <query>";
 # the prefixed engines are triggered inline, e.g. "!gh hyprland".
 #
-# Opened with xdg-open, which currently resolves to firefox.desktop even though
-# Zen is the daily browser -- see `xdg-settings get default-web-browser`.
-# Fixing that system-wide is preferable to overriding `command` here, since it
-# also affects links opened from every other app.
+# Opens via xdg-open, which now resolves to Zen.
+#
+# Brand icons resolve because ~/.icons/WhiteSur-dark/index.theme inherits
+# rose-pine-icons (a Papirus fork, ~117k icons). WhiteSur alone has ~6.4k and
+# no brand icons, and a missing icon renders as GTK's crossed-out fallback.
 
 [[entries]]
 default = true
 name = "Google"
 url = "https://www.google.com/search?q=%TERM%"
-icon = "google-chrome"
+icon = "google"
 
 [[entries]]
 name = "DuckDuckGo"
