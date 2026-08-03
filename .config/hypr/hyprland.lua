@@ -4,28 +4,25 @@
 --
 -- Types/autocomplete: point your Lua LSP at /usr/share/hypr/stubs/hl.meta.lua
 
-
 ------------------
 ---- MONITORS ----
 ------------------
 
 hl.monitor({
-    output   = "DP-3",
-    mode     = "3440x1440@99.99Hz",
-    position = "auto",
-    scale    = 1,
+	output = "DP-3",
+	mode = "3440x1440@99.99Hz",
+	position = "auto",
+	scale = 1,
 })
-
 
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
 
-local terminal    = "ghostty"
-local browser     = "flatpak run app.zen_browser.zen"
+local terminal = "ghostty"
+local browser = "flatpak run app.zen_browser.zen"
 local fileManager = "thunar"
-local menu        = "rofi"
-
+local menu = "walker"
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
@@ -42,91 +39,107 @@ hl.env("XCURSOR_SIZE", "24")
 hl.env("XCURSOR_THEME", "macOS-BigSur")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_THEME", "macOS-BigSur")
-hl.env("GTK_THEME", "rose-pine-gtk")
 
+-- No GTK_THEME here on purpose. rose-pine is a GTK3 theme; its gtk-4.0/gtk.css is
+-- a colors-only libadwaita recolor with no widget rules. GTK_THEME makes libadwaita
+-- stand down and load that file *instead of* its own stylesheet, which leaves GTK4
+-- popovers/menus with no background, padding or shadow. GTK3 apps pick the theme up
+-- from gsettings (apply-gtk-theme.sh) via the portal, and GTK4 gets the recolor
+-- layered on top of Adwaita from ~/.config/gtk-4.0/gtk.css.
 
 -------------------
 ---- AUTOSTART ----
 -------------------
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("~/.config/hypr/scripts/apply-gtk-theme.sh")
-    hl.exec_cmd("waybar")
-    hl.exec_cmd("awww-daemon")
-    hl.exec_cmd("wl-paste --type text --watch cliphist store") -- text only
-    hl.exec_cmd(terminal)
-    hl.exec_cmd("~/.config/hypr/scripts/apply-desktop-experience.sh")
-    hl.exec_cmd("hypridle")
-    hl.exec_cmd("swayosd-server") -- on-screen display for volume/mute
-    hl.exec_cmd("hyprsunset")     -- night-light, profiles in hyprsunset.conf
+	hl.exec_cmd("~/.config/hypr/scripts/apply-gtk-theme.sh")
+	hl.exec_cmd("waybar")
+	hl.exec_cmd("awww-daemon")
+	hl.exec_cmd("wl-paste --type text --watch cliphist store") -- text only
+	hl.exec_cmd(terminal)
+	hl.exec_cmd("~/.config/hypr/scripts/apply-desktop-experience.sh")
+	hl.exec_cmd("hypridle")
+	hl.exec_cmd("swayosd-server") -- on-screen display for volume/mute
+	hl.exec_cmd("hyprsunset") -- night-light, profiles in hyprsunset.conf
+	-- elephant.service is WantedBy=graphical-session.target, which nothing
+	-- activates here: this session is a bare tty autologin into
+	-- start-hyprland, with no uwsm. The target also has RefuseManualStart=yes,
+	-- so start the service directly.
+	hl.exec_cmd("systemctl --user start elephant.service")
+	hl.exec_cmd("walker --gapplication-service") -- launcher daemon (needs elephant.service)
 end)
-
 
 -----------------------
 ---- LOOK AND FEEL ----
 -----------------------
 
 hl.config({
-    general = {
-        gaps_in  = 10,
-        gaps_out = 20,
+	general = {
+		gaps_in = 10,
+		gaps_out = 20,
 
-        border_size = 2,
+		border_size = 2,
 
-        resize_on_border = false,
-        allow_tearing    = false,
+		resize_on_border = false,
+		allow_tearing = false,
 
-        layout = "master",
-    },
+		layout = "master",
+	},
 
-    decoration = {
-        rounding       = 10,
-        rounding_power = 2.0,
+	decoration = {
+		rounding = 10,
+		rounding_power = 2.0,
 
-        active_opacity     = 1.0,
-        inactive_opacity   = 0.9,
-        fullscreen_opacity = 1.0,
+		active_opacity = 1.0,
+		inactive_opacity = 0.9,
+		fullscreen_opacity = 1.0,
 
-        dim_inactive = true,
-        dim_strength = 0.2,
+		dim_inactive = true,
+		dim_strength = 0.2,
 
-        blur = {
-            enabled  = true,
-            size     = 5,
-            passes   = 2,
-            vibrancy = 0.282,
-        },
-    },
+		blur = {
+			enabled = true,
+			-- Smaller radius reads as glass; a large radius averages
+			-- low-detail backgrounds into a flat wash.
+			size = 4,
+			passes = 2,
+			vibrancy = 0.4,
+			noise = 0.02,
+			-- Frosted-glass lightness comes from brightening what is BEHIND
+			-- the panel, not from lightening the panel (which would kill
+			-- contrast against the near-white text).
+			brightness = 1.25,
+		},
+	},
 
-    animations = {
-        enabled = true,
-    },
+	animations = {
+		enabled = true,
+	},
 
-    dwindle = {
-        preserve_split = true,
-    },
+	dwindle = {
+		preserve_split = true,
+	},
 
-    master = {
-        new_status = "slave",
-    },
+	master = {
+		new_status = "slave",
+	},
 
-    misc = {
-        force_default_wallpaper = 0,
-        disable_hyprland_logo   = true,
-    },
+	misc = {
+		force_default_wallpaper = 0,
+		disable_hyprland_logo = true,
+	},
 
-    ecosystem = {
-        no_update_news  = true,
-        no_donation_nag = true,
-    },
+	ecosystem = {
+		no_update_news = true,
+		no_donation_nag = true,
+	},
 })
 
 -- Colors are generated by wallust into colors.lua on each wallpaper change.
 -- Guarded: a missing/short-lived file must not take down the whole config.
 pcall(function()
-    dofile(os.getenv("HOME") .. "/.config/hypr/colors.lua")
+	dofile(os.getenv("HOME") .. "/.config/hypr/colors.lua")
 end)
-
 
 --------------------
 ---- ANIMATIONS ----
@@ -134,37 +147,36 @@ end)
 
 hl.curve("spring", { type = "bezier", points = { { 0.12, 0.88 }, { 0.24, 1.12 } } })
 
-hl.animation({ leaf = "windows",          enabled = true, speed = 2, bezier = "spring" })
-hl.animation({ leaf = "windowsOut",       enabled = true, speed = 2, bezier = "default", style = "popin 80%" })
-hl.animation({ leaf = "border",           enabled = true, speed = 8, bezier = "default" })
-hl.animation({ leaf = "borderangle",      enabled = true, speed = 6, bezier = "default" })
-hl.animation({ leaf = "fade",             enabled = true, speed = 4, bezier = "default" })
-hl.animation({ leaf = "workspaces",       enabled = true, speed = 2, bezier = "default" })
+hl.animation({ leaf = "windows", enabled = true, speed = 2, bezier = "spring" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 2, bezier = "default", style = "popin 80%" })
+hl.animation({ leaf = "border", enabled = true, speed = 8, bezier = "default" })
+hl.animation({ leaf = "borderangle", enabled = true, speed = 6, bezier = "default" })
+hl.animation({ leaf = "fade", enabled = true, speed = 4, bezier = "default" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 2, bezier = "default" })
 hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 2, bezier = "default", style = "fade" })
-
 
 ---------------
 ---- INPUT ----
 ---------------
 
 hl.config({
-    input = {
-        kb_layout  = "us",
-        kb_variant = "",
-        kb_model   = "",
-        kb_options = "",
-        kb_rules   = "",
+	input = {
+		kb_layout = "us",
+		kb_variant = "",
+		kb_model = "",
+		kb_options = "",
+		kb_rules = "",
 
-        sensitivity  = 0, -- -1.0 - 1.0, 0 means no modification.
-        accel_profile = "flat",
+		sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
+		accel_profile = "flat",
 
-        repeat_delay = 200,
-        repeat_rate  = 60,
+		repeat_delay = 200,
+		repeat_rate = 60,
 
-        touchpad = {
-            natural_scroll = false,
-        },
-    },
+		touchpad = {
+			natural_scroll = false,
+		},
+	},
 })
 
 -- Per-device sensitivity. The old devices.conf targeted "logitech-usb-receiver-1/-2",
@@ -175,30 +187,29 @@ hl.config({
 -- hl.device({ name = "logitech-pro-x-1",           sensitivity = -0.4 })
 -- hl.device({ name = "machina-machina-orbit-mouse", sensitivity = -0.4 })
 
-
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
 
-local meta      = "SUPER"
-local navMod    = "SUPER + CTRL"
+local meta = "SUPER"
+local navMod = "SUPER + CTRL"
 local launchMod = "CTRL + ALT"
 -- NB: these were Shift_L&Alt_L / Control_L&Shift_L&Alt_L in the old hyprlang
 -- config, but that never actually bound side-specific keys -- hyprlang
 -- substring-matched the uppercased string, so they resolved to plain
 -- SHIFT+ALT and CTRL+SHIFT+ALT. Lua parses *_L as keysyms instead, which
 -- silently drops them from the modmask, so spell the modifiers out.
-local moveMod   = "SHIFT + ALT"
-local meh       = "CTRL + SHIFT + ALT"
+local moveMod = "SHIFT + ALT"
+local meh = "CTRL + SHIFT + ALT"
 
 hl.bind(meta .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(meta .. " + Q", hl.dsp.window.close())
 hl.bind(meta .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(meta .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(navMod .. " + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/restart-waybar.sh"))
-hl.bind(meta .. " + SHIFT + V", hl.dsp.exec_cmd("cliphist list | " .. menu .. " -dmenu | cliphist decode | wl-copy"))
-hl.bind(meh .. " + Escape", hl.dsp.exec_cmd("pkill " .. menu .. " || " .. menu .. " -show combi"))
-hl.bind(meh .. " + Q", hl.dsp.exec_cmd(menu .. " -show p -modi p:rofi-power-menu"))
+hl.bind(meta .. " + SHIFT + V", hl.dsp.exec_cmd(menu .. " -m clipboard"))
+hl.bind(meh .. " + Escape", hl.dsp.exec_cmd(menu))
+hl.bind(meh .. " + Q", hl.dsp.exec_cmd(menu .. " -m menus:power"))
 
 -- macOS-style clipboard: Super+C/V/X = copy/paste/cut (Ctrl+Shift+* inside terminals).
 -- Add more (e.g. select-all on A) by extending mac-clipboard.sh.
@@ -210,10 +221,11 @@ hl.bind(meta .. " + X", hl.dsp.exec_cmd("~/.config/hypr/scripts/mac-clipboard.sh
 --   Cmd+Shift+3 / +4 / +5      -> full / region / window  to file
 --   Cmd+Ctrl+Shift+3 / +4 / +5 -> same, to clipboard
 for key, mode in pairs({ ["3"] = "full", ["4"] = "region", ["5"] = "window" }) do
-    hl.bind(meta .. " + SHIFT + " .. key,
-        hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh " .. mode .. " file"))
-    hl.bind(navMod .. " + SHIFT + " .. key,
-        hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh " .. mode .. " clipboard"))
+	hl.bind(meta .. " + SHIFT + " .. key, hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh " .. mode .. " file"))
+	hl.bind(
+		navMod .. " + SHIFT + " .. key,
+		hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh " .. mode .. " clipboard")
+	)
 end
 
 -- Annotate a region in satty (markup, then save + copy)
@@ -245,15 +257,15 @@ hl.bind(launchMod .. " + G", hl.dsp.exec_cmd("chat-gpt"))
 -- Move focus / swap window (vim keys)
 local directions = { h = "left", l = "right", k = "up", j = "down" }
 for key, dir in pairs(directions) do
-    hl.bind(navMod .. " + " .. key, hl.dsp.focus({ direction = dir }))
-    hl.bind(moveMod .. " + " .. key, hl.dsp.window.swap({ direction = dir }))
+	hl.bind(navMod .. " + " .. key, hl.dsp.focus({ direction = dir }))
+	hl.bind(moveMod .. " + " .. key, hl.dsp.window.swap({ direction = dir }))
 end
 
 -- Switch workspaces / move active window to a workspace
 for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
-    hl.bind(navMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-    hl.bind(moveMod .. " + " .. key, hl.dsp.window.move({ workspace = i }))
+	local key = i % 10 -- 10 maps to key 0
+	hl.bind(navMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
+	hl.bind(moveMod .. " + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
 -- Relative workspace switching
@@ -266,7 +278,6 @@ hl.bind(meta .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind("ALT + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind("ALT + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
-
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
@@ -275,35 +286,55 @@ hl.bind("ALT + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- ignore_alpha skips blurring the fully transparent area outside the pill, so
 -- only the panel itself is frosted.
 hl.layer_rule({
-    name  = "blur-swayosd",
-    match = { namespace = "^swayosd$" },
-    blur = true,
-    ignore_alpha = 0.2,
+	name = "blur-swayosd",
+	match = { namespace = "^swayosd$" },
+	blur = true,
+	ignore_alpha = 0.2,
+})
+
+-- Same treatment for mako notifications (layer namespace "notifications").
+hl.layer_rule({
+	name = "blur-notifications",
+	match = { namespace = "^notifications$" },
+	blur = true,
+	ignore_alpha = 0.2,
+})
+
+-- ...and the walker launcher. Its theme keeps .box-wrapper at 55% alpha so
+-- there is something for this to show through.
+-- ignore_alpha sits above the box-shadow's peak opacity (~0.30) but below the
+-- panel's 0.55, so the panel is frosted while the shadow is left alone.
+-- At 0.2 the shadow itself got blurred, drawing a hard-edged rectangle.
+hl.layer_rule({
+	name = "blur-walker",
+	match = { namespace = "^walker$" },
+	blur = true,
+	ignore_alpha = 0.4,
 })
 
 hl.window_rule({
-    name  = "no-border-when-floating",
-    match = { float = true },
-    border_size = 0,
+	name = "no-border-when-floating",
+	match = { float = true },
+	border_size = 0,
 })
 
 for _, class in ipairs({ "^(1Password)$", "^(Tandem)$", "^(Rofi|rofi)$", "^(Volume Control)$", "^(kitty-float)$" }) do
-    hl.window_rule({
-        name  = "float-" .. class,
-        match = { class = class },
-        float = true,
-    })
+	hl.window_rule({
+		name = "float-" .. class,
+		match = { class = class },
+		float = true,
+	})
 end
 
 hl.window_rule({
-    name  = "rofi-stay-focused",
-    match = { class = "^(Rofi|rofi)$" },
-    stay_focused = true,
+	name = "rofi-stay-focused",
+	match = { class = "^(Rofi|rofi)$" },
+	stay_focused = true,
 })
 
 hl.window_rule({
-    -- Ignore maximize requests from all apps. You'll probably like this.
-    name  = "suppress-maximize-events",
-    match = { class = ".*" },
-    suppress_event = "maximize",
+	-- Ignore maximize requests from all apps. You'll probably like this.
+	name = "suppress-maximize-events",
+	match = { class = ".*" },
+	suppress_event = "maximize",
 })
