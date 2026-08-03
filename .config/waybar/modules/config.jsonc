@@ -2,12 +2,12 @@
   "custom/launcher": {
     "format": " 󰣇 ",
     "tooltip": false,
-    "on-click": "rofi -show combi"
+    "on-click": "walker"
   },
   "custom/power": {
     "format": " ⏻ ",
     "tooltip": false,
-    "on-click": "wlogout"
+    "on-click": "walker -m menus:power"
   },
   "idle_inhibitor": {
     "format": "{icon}",
@@ -27,7 +27,7 @@
     "format": "",
     "interval": 86400,
     "tooltip": false,
-    "on-click": "cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+    "on-click": "walker -m clipboard"
   },
   "mpris": {
     "ignored-players": ["firefox"],
