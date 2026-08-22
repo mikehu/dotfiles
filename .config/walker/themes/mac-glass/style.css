@@ -32,10 +32,12 @@ scrollbar {
 
 /* The frosted panel. Translucent on purpose so the blur-walker layer rule in
    hyprland.lua has something to show through -- GTK cannot blur what is
-   behind its own surface. Hairline border mirrors mako/swayosd. */
+   behind its own surface. Hairline border mirrors mako/swayosd -- neutral hue,
+   but carried at enough alpha to read as an edge against the frosted panel
+   rather than disappearing into it. */
 .box-wrapper {
   background: alpha(@window_bg_color, 0.55);
-  border: 1px solid alpha(@theme_fg_color, 0.12);
+  border: 1px solid alpha(@theme_fg_color, 0.3);
   border-radius: 16px;
   padding: 12px;
   /* No box-shadow. Hyprland's blur uses ignore_alpha as a hard cutoff, so a
@@ -172,7 +174,7 @@ row:selected .item-box {
 
 popover {
   background: alpha(@window_bg_color, 0.95);
-  border: 1px solid alpha(@theme_fg_color, 0.12);
+  border: 1px solid alpha(@theme_fg_color, 0.3);
   border-radius: 12px;
   padding: 10px;
 }
