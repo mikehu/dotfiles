@@ -13,6 +13,15 @@
 mode="${1:-region}"
 dest="${2:-clipboard}"
 
+# Selection UI, macOS-style: thin white border, darkened surround, live pixel
+# readout in the same font as waybar and walker. slurp has no config file, so
+# this lives here and is shared by both call sites below. The selection itself
+# stays undimmed because slurp's default selection fill (-s) is transparent --
+# -b only tints what falls outside it. The readout font is monospace so the
+# digits don't reflow while dragging. Dotted borders aren't possible; slurp
+# strokes solid, so -w is the only way to make the edge lighter.
+slurp_args=(-w 1 -c '#FFFFFFFF' -b '#00000080' -d -F 'DroidSansM Nerd Font')
+
 case "$mode" in
     full)
         # Whole focused monitor. Use -o (not -g) so HiDPI scaling stays correct.
@@ -20,7 +29,7 @@ case "$mode" in
         grim_args=(-o "$out")
         ;;
     region)
-        geom="$(slurp)" || exit 1          # Esc / cancel -> abort
+        geom="$(slurp "${slurp_args[@]}")" || exit 1   # Esc / cancel -> abort
         grim_args=(-g "$geom")
         ;;
     window)
@@ -31,7 +40,7 @@ case "$mode" in
             | jq -r --argjson ws "$ws" '.[]
                 | select(.workspace.id == $ws and .hidden == false and .mapped == true)
                 | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' \
-            | slurp)" || exit 1
+            | slurp "${slurp_args[@]}")" || exit 1
         grim_args=(-g "$geom")
         ;;
     *)
