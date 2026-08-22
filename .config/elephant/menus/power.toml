@@ -33,17 +33,20 @@ keywords = ["power", "logout", "log off", "sign out", "exit"]
 icon = "system-log-out-symbolic"
 actions = { "logout" = "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'" }
 
-# Reboot/shutdown schedule the systemctl action detached with nohup, THEN close
-# windows via hyprshutdown. Chaining them cannot work: hyprshutdown exits
-# Hyprland and the shell running the chain dies with the session.
+# Plain systemctl for reboot/shutdown. Omarchy schedules these detached with
+# `nohup ... & hyprshutdown` so apps close gracefully first, but that relies on
+# uwsm managing session teardown. Here the session is a bare tty autologin: when
+# hyprshutdown exits Hyprland the scope is torn down and the pending child is
+# killed before it fires, so the machine never reboots. systemd's own shutdown
+# sequence handles app termination, bounded by DefaultTimeoutStopSec=5s.
 [[entries]]
 text = "Reboot"
 keywords = ["power", "restart", "reboot"]
 icon = "system-reboot-symbolic"
-actions = { "reboot" = 'nohup bash -c "sleep 2 && systemctl reboot --no-wall" >/dev/null 2>&1 & hyprshutdown' }
+actions = { "reboot" = "systemctl reboot" }
 
 [[entries]]
 text = "Shut down"
 keywords = ["power", "shutdown", "poweroff", "halt", "turn off"]
 icon = "system-shutdown-symbolic"
-actions = { "shutdown" = 'nohup bash -c "sleep 2 && systemctl poweroff --no-wall" >/dev/null 2>&1 & hyprshutdown' }
+actions = { "shutdown" = "systemctl poweroff" }
