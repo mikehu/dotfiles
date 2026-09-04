@@ -9,24 +9,21 @@ Capture deferred work as a durable, searchable note — or resume one later — 
 
 Follow-ups live **per-repo** at `$FOLLOWUPS = <repo-root>/.agents/artifacts/follow-ups/`. One `.md` file per follow-up.
 
-`<repo-root>` must be the **durable** root — the one shared by every worktree of the repo — and is emphatically *not* `git rev-parse --show-toplevel`. Worktrees are transient by policy (deleted after merge) and `.agents/` is typically gitignored, so it can't ride the branch out via a PR either. Anything written into a worktree is lost unconditionally when that worktree is pruned. Resolve the root like this, once per invocation:
+`<repo-root>` must be the **durable** root — the one shared by every worktree of the repo — and is emphatically *not* `git rev-parse --show-toplevel`. Worktrees are transient by policy (deleted after merge) and `.agents/` is typically gitignored, so it can't ride the branch out via a PR either. Anything written into a worktree is lost unconditionally when that worktree is pruned.
+
+Do not resolve this by hand. Run the shared resolver:
 
 ```sh
-common=$(git rev-parse --path-format=absolute --git-common-dir) || exit 1
-REPO=$(dirname "$common")
-# Trust that only if it still resolves to this same repo. Rejects submodules
-# (common dir lives under .git/modules/...) and sibling bare clones, where
-# dirname would otherwise escape into an unrelated parent directory.
-[ "$(git -C "$REPO" rev-parse --path-format=absolute --git-common-dir 2>/dev/null)" = "$common" ] \
-  || REPO=$(git rev-parse --show-toplevel)
-FOLLOWUPS="$REPO/.agents/artifacts/follow-ups"
+FOLLOWUPS=$(~/.agents/skills/follow-up/scripts/follow-ups-dir.sh) || exit 1
 ```
 
-`--git-common-dir` is shared across every worktree of a repo, so this resolves to the same directory whether you're in the main checkout, in `.claude/worktrees/<branch>/`, or in a worktree sibling of a `.bare` clone.
+It resolves the root via `--git-common-dir`, which is shared across every worktree of a repo, so you get the same directory whether you're in the main checkout, in `.claude/worktrees/<branch>/`, or in a worktree sibling of a `.bare` clone. It falls back to the current working tree only where no shared root exists (submodules, sibling bare clones), and exits non-zero with a message when there's no usable location at all.
+
+That script is the **single source of truth** — the `warmup` skill calls it too. If the resolution logic ever needs to change, change it there and nowhere else; a second copy is how capture-writes-here / list-reads-there loss starts.
 
 Two rules that matter more than they look:
 
-- **Run this in every lane.** Capture writing to the main checkout while Resume/List/Clean read the worktree is worse than the original bug — it hides the loss in both directions.
+- **Run the resolver in every lane.** Capture writing to the main checkout while Resume/List/Clean read the worktree is worse than the original bug — it hides the loss in both directions.
 - **Never substitute `--show-toplevel`** as a convenience, even when it looks equivalent. It is equivalent right up until the session that isn't, and the failure is silent.
 
 ## Pick the intent
