@@ -22,5 +22,6 @@ gui:
       - default
 git:
   branchPrefix: "mikehu/"
-  pagers:
-    - externalDiffCommand: "difft --color=always --display inline"
+  diffRenderers:
+    - command: "difft --color=always --display inline"
+      type: extDiff
