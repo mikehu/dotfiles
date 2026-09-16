@@ -3,6 +3,9 @@
 # In your config, you can drop keys you don't care about
 # The absent keys will fallback to their default values
 
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+config-version = 2
+
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
@@ -42,6 +45,19 @@ key-mapping.preset = 'qwerty'
 # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Workspaces that stay alive with no windows. Required under config-version 2:
+# v1 inferred these from binding right-hand sides, v2 defaults to [].
+# See: https://nikitabobko.github.io/AeroSpace/guide#persistent-workspaces
+persistent-workspaces = [
+  '👨🏻‍💻',
+  '💼',
+  '💬',
+  '🍿',
+  '🎨',
+  '🎛️',
+  '🖥️',
+]
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
