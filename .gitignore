@@ -26,3 +26,6 @@ lazy-lock.json
 
 # ...except the machine-generated sync bucket
 .agents/skills/synced/
+
+# ...and per-machine working notes (follow-ups)
+.agents/artifacts/
