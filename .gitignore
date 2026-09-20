@@ -23,3 +23,6 @@ lazy-lock.json
 # unignore .agents
 !.agents/
 !.agents/skills/
+
+# ...except the machine-generated sync bucket
+.agents/skills/synced/
