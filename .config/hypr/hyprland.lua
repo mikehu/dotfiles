@@ -337,6 +337,18 @@ for _, class in ipairs({ "^(1Password)$", "^(Tandem)$", "^(Volume Control)$", "^
 	})
 end
 
+-- Battle.net's launcher and its patch-notes window tile badly under master.
+-- umu hands every Faugus app the same class (steam_app_default, from
+-- GAMEID=umu-default), so the title matcher is what stops this from also
+-- floating actual games launched through Faugus.
+hl.window_rule({
+	name = "float-battlenet",
+	match = { class = "^(steam_app_default)$", title = "^(Battle\\.net.*)$" },
+	float = true,
+	size = "1600 1000",
+	center = true,
+})
+
 
 -- Floating scratch terminal (waybar's update button). Needs
 -- --gtk-single-instance=false, or ghostty hands the window to the running
