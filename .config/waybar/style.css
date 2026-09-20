@@ -196,6 +196,16 @@ window#waybar.empty #window {
   color: @orange;
 }
 
+/* Updated, but the running system is stale until reboot. */
+#custom-updates.reboot-required {
+  color: @yellow;
+}
+
+/* Reboot is not optional: modules or the nvidia stack are already broken. */
+#custom-updates.reboot-critical {
+  color: @red;
+}
+
 /* CPU */
 #cpu {
   border-top-left-radius: 9999px;

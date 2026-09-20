@@ -17,6 +17,7 @@
 set -uo pipefail
 
 FETCH="$HOME/.config/scripts/arch-news-fetch.sh"
+REBOOT="$HOME/.config/scripts/waybar-reboot-required.sh"
 TOOLTIP="${XDG_CACHE_HOME:-$HOME/.cache}/arch-news/tooltip.pango"
 TICK_SECONDS=600
 STALE_SECONDS=21600 # 6h
@@ -31,14 +32,46 @@ refresh_if_stale() {
   "$FETCH" >/dev/null 2>&1 || true
 }
 
+# A fully-updated system that has not rebooted is not running what is on disk,
+# so the green check is a lie until the reboot happens. Fold that state in here
+# rather than adding a second module: pending updates and a pending reboot are
+# the same "your system is out of sync" story, one step apart.
+reboot_overlay() { # payload -> payload
+  local reboot state tip
+  reboot=$("$REBOOT" --status 2>/dev/null) || { printf '%s\n' "$1"; return; }
+  state=$(jq -r '.state' <<<"$reboot" 2>/dev/null) || { printf '%s\n' "$1"; return; }
+  tip=$(jq -r '.tooltip' <<<"$reboot" 2>/dev/null)
+
+  case $state in
+    # Something is already broken (orphaned modules, nvidia mismatch). This
+    # outranks pending updates -- you cannot fix it by updating harder.
+    critical)
+      jq -c --arg tip "$tip" \
+        '.alt = "reboot-critical" | .class = "reboot-critical"
+         | .tooltip = ($tip + "\n\n" + .tooltip)' <<<"$1" ||
+        printf '%s\n' "$1"
+      ;;
+    # Nothing broken yet, just stale. Only displaces "updated" -- if real
+    # updates are pending, that icon is the more useful thing to show.
+    pending)
+      jq -c --arg tip "$tip" \
+        'if .alt == "updated" then .alt = "reboot-required" | .class = "reboot-required" else . end
+         | .tooltip = ($tip + "\n\n" + .tooltip)' <<<"$1" ||
+        printf '%s\n' "$1"
+      ;;
+    *) printf '%s\n' "$1" ;;
+  esac
+}
+
 emit() { # payload
-  local news
+  local news payload
+  payload=$(reboot_overlay "$1")
   news=$(cat "$TOOLTIP" 2>/dev/null || true)
   if [[ -n $news ]]; then
-    jq -c --arg news "$news" '.tooltip += "\n\n" + $news' <<<"$1" ||
-      printf '%s\n' "$1"
+    jq -c --arg news "$news" '.tooltip += "\n\n" + $news' <<<"$payload" ||
+      printf '%s\n' "$payload"
   else
-    printf '%s\n' "$1"
+    printf '%s\n' "$payload"
   fi
 }
 

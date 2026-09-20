@@ -113,12 +113,15 @@
     "format": "{icon}{text}",
     "format-icons": {
       "pending-updates": " ",
-      "updated": " "
+      "updated": " ",
+      "reboot-required": "󰑓 ",
+      "reboot-critical": "󰜉 "
     },
     "return-type": "json",
     "exec-if": "which waybar-updates",
     "exec": "$HOME/.config/scripts/waybar-updates-news.sh",
-    "on-click": "ghostty --gtk-single-instance=false --class=com.mitchellh.ghostty-float -e sh -c \"yay --noconfirm; read -n 1 -s -r -p 'Press any key to close...'\""
+    "on-click": "ghostty --gtk-single-instance=false --class=com.mitchellh.ghostty-float -e sh -c \"yay --noconfirm; read -n 1 -s -r -p 'Press any key to close...'\"",
+    "on-click-right": "ghostty --gtk-single-instance=false --class=com.mitchellh.ghostty-float -e sh -c \"$HOME/.config/scripts/waybar-reboot-required.sh --details\""
   },
   "network": {
     "format":"   {bandwidthUpBytes}  {bandwidthDownBytes}",
