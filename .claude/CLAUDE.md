@@ -4,8 +4,12 @@
   concision.
 
 - When writing something intended for human consumption, (comment, commit message, reply to prompt)
-  use as few words as possible. Pick every word meticulously to reduce the volume to a strict
-  minimum. Be down to the point. Less is more.
+  use as few words as possible. Cut sentences, not comprehension — fewer words, not rarer ones. Be
+  down to the point. Less is more.
+
+- Plain words over elaborate ones — in replies and in comments. A technical term earns its place
+  only when it's precise and plain phrasing would lose meaning: "we sort first so the scan can stop
+  early", not "the ordering invariant permits early termination".
 
 - Avoid superlatives and praise. Stop telling me I am absolutely right. Give me the cold hard truth.
 
@@ -54,8 +58,12 @@
 
 - Let the reader of the code breathe. Add empty lines between logical blocks of code.
 
-- Add a small, to the point, comment to explain *what* the block does and *why*. Use examples when
-  possible. Propose ASCII drawings to explain complete systems.
+- Comments default to none — prefer a better name. Inline: only what the code can't carry
+  (invariant, ordering requirement, workaround + link). Never narrate the lines below, restate a
+  name, or describe your edit ("now also handles X"). Exception: docblocks on exported surface state
+  the contract; example if unobvious. Don't delete existing comments unless wrong.
+
+- Propose ASCII drawings to explain complete systems.
 
 - Program to levels of abstraction. Lower-level mechanics (e.g., raw hardware I/O, sector parsing,
   direct socket streams) must be encapsulated in a dedicated driver/abstraction layer. Expose clean,
