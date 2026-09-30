@@ -11,7 +11,7 @@ return {
 
 		vim.g.neominimap = {
 			auto_enable = false,
-			exclude_filetypes = { "help", "oil", "noice", "kulala" },
+			exclude_filetypes = { "help", "oil", "noice" },
 			float = {
 				minimap_width = 12,
 				window_border = "rounded",
