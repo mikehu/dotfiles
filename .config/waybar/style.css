@@ -158,6 +158,21 @@ window#waybar.empty #window {
   background: transparent;
 }
 
+/* Bluetooth */
+#bluetooth {
+  border-radius: 9999px;
+  margin: 8px 5px 0;
+  padding: 3px 8px;
+  font-size: 12px;
+  background: alpha(@background, 0.4);
+  color: @foreground;
+}
+
+/* Adapter off / rfkill'd — grey it out rather than recolour. */
+#bluetooth.disabled {
+  color: @color8;
+}
+
 /* Pulseaudio */
 #pulseaudio {
   border-radius: 9999px;

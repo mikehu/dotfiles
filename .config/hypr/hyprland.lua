@@ -213,6 +213,11 @@ hl.bind(navMod .. " + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/restart-waybar
 hl.bind(meta .. " + SHIFT + V", hl.dsp.exec_cmd(menu .. " -m clipboard"))
 hl.bind(meh .. " + Escape", hl.dsp.exec_cmd(menu))
 hl.bind(meh .. " + Q", hl.dsp.exec_cmd(menu .. " -m menus:power"))
+-- Bluetooth popover (same floating scratch terminal as waybar's bluetooth pill).
+hl.bind(
+	meh .. " + B",
+	hl.dsp.exec_cmd("ghostty --gtk-single-instance=false --class=com.mitchellh.ghostty-float -e bluetui")
+)
 
 -- macOS-style clipboard: Super+C/V/X = copy/paste/cut (Ctrl+Shift+* inside terminals).
 -- Add more (e.g. select-all on A) by extending mac-keys.sh.
