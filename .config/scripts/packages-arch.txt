@@ -52,6 +52,7 @@ pipewire-pulse
 wireplumber
 pamixer
 pavucontrol
+wiremix
 
 # ── Terminal / shell ──────────────────────────────────────────────────
 ghostty

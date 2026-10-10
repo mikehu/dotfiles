@@ -99,7 +99,7 @@
     "scroll-step": 2.5, // %, can be a float
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-    "on-double-click": "pavucontrol"
+    "on-double-click": "ghostty --gtk-single-instance=false --class=com.mitchellh.ghostty-float -e wiremix -v output"
   },
   "custom/failed-units": {
     "format": "  {}",

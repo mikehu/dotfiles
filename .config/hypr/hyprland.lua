@@ -218,6 +218,10 @@ hl.bind(
 	meh .. " + B",
 	hl.dsp.exec_cmd("ghostty --gtk-single-instance=false --class=com.mitchellh.ghostty-float -e bluetui")
 )
+hl.bind(
+	meh .. " + A",
+	hl.dsp.exec_cmd("ghostty --gtk-single-instance=false --class=com.mitchellh.ghostty-float -e wiremix -v output")
+)
 
 -- macOS-style clipboard: Super+C/V/X = copy/paste/cut (Ctrl+Shift+* inside terminals).
 -- Add more (e.g. select-all on A) by extending mac-keys.sh.
