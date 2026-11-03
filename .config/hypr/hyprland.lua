@@ -346,13 +346,22 @@ for _, class in ipairs({ "^(1Password)$", "^(Tandem)$", "^(Volume Control)$", "^
 	})
 end
 
+for class, workspace in pairs({ ["^(zen)$"] = 2, ["^(steam)$"] = 3 }) do
+	hl.window_rule({
+		name = "workspace-" .. class,
+		match = { class = class },
+		workspace = tostring(workspace),
+	})
+end
+
 -- Battle.net's launcher and its patch-notes window tile badly under master.
 -- umu hands every Faugus app the same class (steam_app_default, from
 -- GAMEID=umu-default), so the title matcher is what stops this from also
 -- floating actual games launched through Faugus.
 hl.window_rule({
-	name = "float-battlenet",
+	name = "battlenet",
 	match = { class = "^(steam_app_default)$", title = "^(Battle\\.net.*)$" },
+	workspace = "4",
 	float = true,
 	size = "1600 1000",
 	center = true,
