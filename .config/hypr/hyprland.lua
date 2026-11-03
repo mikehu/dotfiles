@@ -10,7 +10,7 @@
 
 hl.monitor({
 	output = "DP-3",
-	mode = "3440x1440@99.99Hz",
+	mode = "5120x2160@165",
 	position = "auto",
 	scale = 1,
 })
