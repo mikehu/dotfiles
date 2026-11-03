@@ -119,8 +119,8 @@
     },
     "return-type": "json",
     "exec-if": "which waybar-updates",
-    "exec": "$HOME/.config/scripts/waybar-updates-news.sh",
-    "on-click": "ghostty --gtk-single-instance=false --class=com.mitchellh.ghostty-float -e sh -c \"yay --noconfirm; read -n 1 -s -r -p 'Press any key to close...'\"",
+    "exec": "$HOME/.config/scripts/waybar-updates-news.sh --flatpak",
+    "on-click": "ghostty --gtk-single-instance=false --class=com.mitchellh.ghostty-float -e sh -c \"yay --noconfirm; flatpak update -y; read -n 1 -s -r -p 'Press any key to close...'\"",
     "on-click-right": "ghostty --gtk-single-instance=false --class=com.mitchellh.ghostty-float -e sh -c \"$HOME/.config/scripts/waybar-reboot-required.sh --details\""
   },
   "network": {
