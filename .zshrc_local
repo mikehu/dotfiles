@@ -17,6 +17,8 @@ alias t='~/.config/scripts/tmux-sessionizer.sh'
 alias psync='~/.config/scripts/sync-pass-with-op.sh'
 alias tun='~/.config/scripts/ssh-tunnels.sh -u root'
 alias kcrs='~/.config/scripts/remote-kubeconfig-copy.sh -h nx-lxc.local -u root'
+# run from another tty; tty1 must be the active VT before Hyprland starts or it can't grab the GPU
+alias hyprrestart='pkill -x Hyprland; sleep 1; sudo chvt 1 && sudo systemctl restart getty@tty1'
 
 # agent skills symlink (until .agents/skills/ is natively supported)
 ln -sfn ~/.agents/skills ~/.claude/skills

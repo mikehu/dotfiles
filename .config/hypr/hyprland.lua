@@ -130,6 +130,14 @@ hl.config({
 		-- a link from any app) raises the browser instead of silently adding a
 		-- tab to an unfocused window.
 		focus_on_activate = true,
+		-- lets a relaunched hyprlock take over if the lock client dies
+		allow_session_lock_restore = true,
+	},
+
+	-- Workaround: hardware cursors are in the crash path when the only monitor
+	-- disconnects (https://github.com/hyprwm/Hyprland/discussions/14857)
+	cursor = {
+		no_hardware_cursors = 1,
 	},
 
 	ecosystem = {
@@ -295,9 +303,9 @@ hl.bind(navMod .. " + right", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(meta .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(meta .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
--- Move/resize windows with ALT + LMB/RMB and dragging
-hl.bind("ALT + mouse:272", hl.dsp.window.drag(), { mouse = true })
-hl.bind("ALT + mouse:273", hl.dsp.window.resize(), { mouse = true })
+-- Move/resize windows with SUPER + LMB/RMB and dragging
+hl.bind(meta .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(meta .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
@@ -356,12 +364,12 @@ for class, workspace in pairs({ ["^(zen)$"] = 2, ["^(steam)$"] = 3 }) do
 end
 
 -- Battle.net's launcher and its patch-notes window tile badly under master.
--- umu hands every Faugus app the same class (steam_app_default, from
--- GAMEID=umu-default), so the title matcher is what stops this from also
--- floating actual games launched through Faugus.
+-- umu's class is steam_app_<GAMEID>, and Faugus's GAMEID varies (umu-default,
+-- faugus<hash>), so match any steam_app_*; the title matcher is what stops this
+-- from also floating actual games launched through Faugus.
 hl.window_rule({
 	name = "battlenet",
-	match = { class = "^(steam_app_default)$", title = "^(Battle\\.net.*)$" },
+	match = { class = "^(steam_app_.*)$", title = "^(Battle\\.net.*)$" },
 	workspace = "4",
 	float = true,
 	size = "1600 1000",
@@ -372,7 +380,7 @@ hl.window_rule({
 -- fullscreen it, so it tiles like any other window.
 hl.window_rule({
 	name = "wow-fullscreen",
-	match = { class = "^(steam_app_default)$", title = "^(World of Warcraft)$" },
+	match = { class = "^(steam_app_.*)$", title = "^(World of Warcraft)$" },
 	workspace = "4",
 	fullscreen = true,
 })
@@ -384,6 +392,13 @@ hl.window_rule({
 	name = "float-terminal-size",
 	match = { class = "^(com\\.mitchellh\\.ghostty-float)$" },
 	size = "1200 800",
+})
+
+-- Games rarely set their own idle inhibitor; hypridle honors Hyprland's.
+hl.window_rule({
+	name = "idle-inhibit-fullscreen",
+	match = { class = ".*" },
+	idle_inhibit = "fullscreen",
 })
 
 hl.window_rule({
