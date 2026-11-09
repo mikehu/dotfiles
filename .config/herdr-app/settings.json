@@ -1,0 +1,14 @@
+{
+  "zoom": 1.0,
+  "sounds": {
+    "enabled": true
+  },
+  "font": "Fira Code",
+  "font_size": 14.0,
+  "font_ligatures": false,
+  "minimum_contrast": 1.0,
+  "theme": {
+    "light": "paper",
+    "dark": "rose-pine"
+  }
+}
