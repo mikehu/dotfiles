@@ -108,6 +108,8 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always $realpath'
 # switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
+# account for --border in FZF_DEFAULT_OPTS (default pad 2 only covers prompt + info)
+zstyle ':fzf-tab:*' fzf-pad 4
 
 # oh my posh
 eval "$(oh-my-posh init zsh --config ~/.config/theme.omp.toml)"
