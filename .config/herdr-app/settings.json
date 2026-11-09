@@ -5,7 +5,7 @@
   },
   "font": "Fira Code",
   "font_size": 14.0,
-  "font_ligatures": false,
+  "font_ligatures": true,
   "minimum_contrast": 1.0,
   "theme": {
     "light": "paper",
