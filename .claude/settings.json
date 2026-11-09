@@ -17,7 +17,6 @@
   "model": "opus[1m]",
   "disableClaudeAiConnectors": true,
   "disableBundledSkills": true,
-  "disableWorkflows": true,
   "disableArtifact": true,
   "enabledPlugins": {
     "explanatory-output-style@claude-plugins-official": true,
