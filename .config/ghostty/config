@@ -5,7 +5,7 @@ font-family = "Fira Code"
 font-style = "Light"
 font-family-bold = "Fira Code"
 font-style-bold = "SemiBold"
-font-size = 13
+font-size = 14
 font-feature = +cv16, +cv18, +cv29, +cv30, +ss02, +ss06, +ss07, +zero, +onum
 
 # macOS thicken font
