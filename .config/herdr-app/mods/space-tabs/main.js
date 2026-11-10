@@ -82,9 +82,9 @@ export default class Tabs extends View {
       const color = shared("space.colors")?.[s.id] ?? "ansi6";
       // Theme colors (ansi names), not the spaces mod's fixed palette.
       const fill = s.name === "~" ? t.dim : color.startsWith("#") ? color : t[color];
-      return h_flex().id("space-chip").h(29).px(8).mr(6).gap(7).flex_none().items_center().rounded(7).text_size(12.8).text_color(t.foreground)
-        .hover(s => s.bg(t.hover)).on_mouse_down("left", stop).on_click(() => run("mod.open", { name: "picker" }))
-        .child(h_flex().size(18).flex_none().rounded(5).bg(fill).items_center().justify_center().text_size(10.5).font_bold().text_color(t.background).child([...s.name][0]?.toUpperCase() ?? "?"))
+      return h_flex().id("space-chip").h(20).px(6).mt(1).mr(6).flex_none().items_center().rounded(5).bg(fill)
+        .text_size(12).font_semibold().text_color(t.background)
+        .hover(s => s.opacity(0.88)).on_mouse_down("left", stop).on_click(() => run("mod.open", { name: "picker" }))
         .child(div().max_w(160).truncate().child(s.name));
     };
     const panel = find(root, "panel"), body = find(root, "panel-body");
