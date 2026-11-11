@@ -21,7 +21,7 @@ const BINDINGS = [
   ["c", "new tab", "tab.new", {}],
   ["n", "next tab", "tab.next", {}],
   ["p", "prev tab", "tab.prev", {}],
-  ["s", "picker", "mod.open", { name: "picker" }],
+  ["s", "picker", "mod.open", { name: "tab-picker" }],
   ["t", "open folder", "mod.open", { name: "sessionizer" }],
   ["1-9", "tab N", null, null],
 ];

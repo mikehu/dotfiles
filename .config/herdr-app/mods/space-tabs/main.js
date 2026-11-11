@@ -84,7 +84,7 @@ export default class Tabs extends View {
       const fill = s.name === "~" ? t.dim : color.startsWith("#") ? color : t[color];
       return h_flex().id("space-chip").h(20).px(6).mt(1).mr(6).flex_none().items_center().rounded(5).bg(fill)
         .text_size(12).font_semibold().text_color(t.background)
-        .hover(s => s.opacity(0.88)).on_mouse_down("left", stop).on_click(() => run("mod.open", { name: "picker" }))
+        .hover(s => s.opacity(0.88)).on_mouse_down("left", stop).on_click(() => run("mod.open", { name: "tab-picker" }))
         .child(div().max_w(160).truncate().child(s.name));
     };
     const panel = find(root, "panel"), body = find(root, "panel-body");
