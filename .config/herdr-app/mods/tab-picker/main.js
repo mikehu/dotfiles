@@ -7,7 +7,7 @@
 
 import { View, div, svg } from "gpui-kit";
 import { v_flex, h_flex, InputState, Input } from "gpui-base";
-import { agents, spaces, terminals, panes, home, run, hc, theme, settings, props, closeOverlay, openOverlay, shared, setShared } from "herdr";
+import { agents, spaces, terminals, panes, home, run, hc, theme, settings, props, closeOverlay, openOverlay, shared, setShared, nextCommand } from "herdr";
 
 const MARK = { ansi6: "#22a99a", ansi3: "#e3814f", ansi4: "#5b8def", ansi5: "#8b7cf6", ansi2: "#3fae6a", ansi1: "#d9649a" };
 
@@ -73,6 +73,14 @@ export default class Picker extends View {
     this.showEarlier = false;
     this.machines = [];
     this.handle = cx.focus_handle();
+    // cmd-j/k are global pane keys; keys.json's "mod:tab-picker" section sends them here instead.
+    cx.spawn(async (cx) => {
+      for (;;) {
+        const command = await nextCommand();
+        this.move(command === "down" ? 1 : -1);
+        cx.notify();
+      }
+    });
     cx.spawn(async (cx) => {
       try {
         const r = await hc(["machine", "ls", "--json"]);
@@ -80,6 +88,11 @@ export default class Picker extends View {
       } catch {}
       cx.notify();
     });
+  }
+
+  move(by) {
+    const n = this.rows().filter((r) => r.kind !== "head").length;
+    this.at = ((this.at ?? 0) + by + n) % n;
   }
 
   close() {
@@ -258,9 +271,10 @@ export default class Picker extends View {
       .text_size(13)
       .on_key_down((e, cx) => {
         const k = e.key;
+        const ctrl = e.modifiers.control;
         if (k === "escape") return this.close();
-        if (k === "down") this.at = (this.at + 1) % pickable.length;
-        else if (k === "up") this.at = (this.at + pickable.length - 1) % pickable.length;
+        if (k === "down" || (ctrl && (k === "j" || k === "n"))) this.move(1);
+        else if (k === "up" || (ctrl && (k === "k" || k === "p"))) this.move(-1);
         else if (k === "d" && e.modifiers.control) {
           if (sel?.kind === "ctx") {
             this.close();
