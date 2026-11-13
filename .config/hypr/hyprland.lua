@@ -394,6 +394,14 @@ hl.window_rule({
 	size = "1200 800",
 })
 
+-- Herdr draws an opaque window (no app-side background alpha), so fade the
+-- whole window; Hyprland's blur fills in behind.
+hl.window_rule({
+	name = "herdr-opacity",
+	match = { class = "^(herdr-app)$" },
+	opacity = "0.9",
+})
+
 -- Games rarely set their own idle inhibitor; hypridle honors Hyprland's.
 hl.window_rule({
 	name = "idle-inhibit-fullscreen",
